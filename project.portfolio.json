@@ -1,0 +1,56 @@
+{
+  "title": "Bereket Fide",
+  "slug": "bereketfide",
+  "summary": "Bereket Fide markasi icin planlanan, urun katalogu, kurumsal tanitim, bilgi merkezi ve iletisim akislari iceren modern web platformu.",
+  "description": "Referans reposu baz alinarak olusturulan bu proje, Bereket Fide icin basak-altin tonlu gorsel dil, urun odakli bilgi mimarisi, yonetim paneli ve teknik SEO altyapisini ayni mimari mantikta kurmak uzere baslatildi.",
+  "category": "CORPORATE WEBSITE",
+  "services": [
+    "Frontend Development",
+    "Backend Development",
+    "Admin Panel",
+    "Technical SEO"
+  ],
+  "techs": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "next-intl",
+    "React Query",
+    "Zod",
+    "React Hook Form",
+    "Zustand",
+    "Node.js",
+    "Fastify",
+    "MySQL",
+    "Drizzle ORM"
+  ],
+  "features": [
+    "Multilingual corporate website structure",
+    "Product catalog and category pages",
+    "Corporate content and policy pages",
+    "Contact and demand collection forms",
+    "Admin panel for content management",
+    "Technical SEO foundation",
+    "Reusable token-based theme system"
+  ],
+  "designHighlights": [
+    "Wheat-gold and natural neutral color direction",
+    "Structured for product-first corporate presentation",
+    "SEO-first content model with scalable admin architecture"
+  ],
+  "featured": false,
+  "displayOrder": 100,
+  "clientName": "Bereket Fide",
+  "status": "active",
+  "startDate": "2026-03-14",
+  "completeDate": null,
+  "completionTimeLabel": "In Progress",
+  "repoUrl": null,
+  "websiteUrl": "https://www.bereketfide.com.tr",
+  "demoUrl": null,
+  "featuredImage": "/assets/imgs/work/img-1.png",
+  "featuredImageAlt": "Bereket Fide corporate website and product catalog project cover",
+  "resumeTitle": "Bereket Fide",
+  "resumeSubtitle": "Corporate Website, Product Catalog & Admin Platform",
+  "excludeFromPortfolio": false
+}

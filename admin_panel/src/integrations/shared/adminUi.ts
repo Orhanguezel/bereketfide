@@ -1,0 +1,239 @@
+// =============================================================
+// FILE: src/integrations/shared/adminUi.ts
+// FINAL — Admin UI copy (site_settings.ui_admin) normalizer
+// =============================================================
+
+import { parseJsonObject, uiText } from '@/integrations/shared';
+import type { AdminNavCopy } from '@/navigation/sidebar/sidebar-items';
+
+export type AdminUiCommonCopy = {
+  actions: {
+    create: string;
+    edit: string;
+    delete: string;
+    save: string;
+    cancel: string;
+    refresh: string;
+    search: string;
+    filter: string;
+    close: string;
+    back: string;
+    confirm: string;
+  };
+  states: {
+    loading: string;
+    error: string;
+    empty: string;
+    updating: string;
+    saving: string;
+  };
+};
+
+export type AdminUiPageCopy = Record<string, string>;
+
+export type AdminUiCopy = {
+  app_name: string;
+  app_version?: string;
+  developer_branding?: {
+    name: string;
+    url: string;
+    full_name: string;
+  };
+  nav: AdminNavCopy;
+  common: AdminUiCommonCopy;
+  pages: Record<string, AdminUiPageCopy>;
+};
+
+const emptyCommon: AdminUiCommonCopy = {
+  actions: {
+    create: '',
+    edit: '',
+    delete: '',
+    save: '',
+    cancel: '',
+    refresh: '',
+    search: '',
+    filter: '',
+    close: '',
+    back: '',
+    confirm: '',
+  },
+  states: {
+    loading: '',
+    error: '',
+    empty: '',
+    updating: '',
+    saving: '',
+  },
+};
+
+const emptyNav: AdminNavCopy = {
+  labels: {
+    general: '',
+    content: '',
+    bereket_fide: '',
+    bereket_content: '',
+    marketing: '',
+    communication: '',
+    system: '',
+  },
+  items: {
+    dashboard: '',
+    site_settings: '',
+    custom_pages: '',
+    categories: '',
+    subcategories: '',
+    products: '',
+    sparepart: '',
+    services: '',
+    sliders: '',
+    menu_items: '',
+    footer_sections: '',
+    faqs: '',
+    offers: '',
+    catalog_requests: '',
+    contacts: '',
+    reviews: '',
+    mail: '',
+    users: '',
+    email_templates: '',
+    notifications: '',
+    storage: '',
+    db: '',
+    audit: '',
+
+    reports: '',
+    support: '',
+    telegram: '',
+    chat: '',
+    bereket_projects: '',
+    bereket_categories: '',
+    bereket_gallery: '',
+    bereket_offers: '',
+    bereket_blog: '',
+    bereket_blog_comments: '',
+    bereket_corporate: '',
+    bereket_legal: '',
+    bereket_settings: '',
+    newsletter: '',
+    cache: '',
+  },
+};
+
+export function normalizeAdminUiCopy(raw: unknown): AdminUiCopy {
+  const o = parseJsonObject(raw);
+  const navRaw = parseJsonObject(o.nav);
+  const labelsRaw = parseJsonObject(navRaw.labels);
+  const itemsRaw = parseJsonObject(navRaw.items);
+
+  const labels: AdminNavCopy['labels'] = {
+    general: uiText(labelsRaw.general),
+    content: uiText(labelsRaw.content),
+    bereket_fide: uiText(labelsRaw.bereket_fide),
+    bereket_content: uiText(labelsRaw.bereket_content),
+    marketing: uiText(labelsRaw.marketing),
+    communication: uiText(labelsRaw.communication),
+    system: uiText(labelsRaw.system),
+  };
+
+  const items: AdminNavCopy['items'] = {
+    dashboard: uiText(itemsRaw.dashboard),
+    site_settings: uiText(itemsRaw.site_settings),
+    custom_pages: uiText(itemsRaw.custom_pages),
+    categories: uiText(itemsRaw.categories),
+    subcategories: uiText(itemsRaw.subcategories),
+    products: uiText(itemsRaw.products),
+    sparepart: uiText(itemsRaw.sparepart),
+    services: uiText(itemsRaw.services),
+    sliders: uiText(itemsRaw.sliders),
+    menu_items: uiText(itemsRaw.menu_items),
+    footer_sections: uiText(itemsRaw.footer_sections),
+    faqs: uiText(itemsRaw.faqs),
+    offers: uiText(itemsRaw.offers),
+    catalog_requests: uiText(itemsRaw.catalog_requests),
+    contacts: uiText(itemsRaw.contacts),
+    reviews: uiText(itemsRaw.reviews),
+    mail: uiText(itemsRaw.mail),
+    users: uiText(itemsRaw.users),
+    email_templates: uiText(itemsRaw.email_templates),
+    notifications: uiText(itemsRaw.notifications),
+    storage: uiText(itemsRaw.storage),
+    db: uiText(itemsRaw.db),
+    audit: uiText(itemsRaw.audit),
+
+    reports: uiText(itemsRaw.reports),
+    support: uiText(itemsRaw.support),
+    telegram: uiText(itemsRaw.telegram),
+    chat: uiText(itemsRaw.chat),
+    bereket_projects: uiText(itemsRaw.bereket_projects),
+    bereket_categories: uiText(itemsRaw.bereket_categories),
+    bereket_gallery: uiText(itemsRaw.bereket_gallery),
+    bereket_offers: uiText(itemsRaw.bereket_offers),
+    bereket_blog: uiText(itemsRaw.bereket_blog),
+    bereket_blog_comments: uiText(itemsRaw.bereket_blog_comments),
+    bereket_corporate: uiText(itemsRaw.bereket_corporate),
+    bereket_legal: uiText(itemsRaw.bereket_legal),
+    bereket_settings: uiText(itemsRaw.bereket_settings),
+    newsletter: uiText(itemsRaw.newsletter),
+    cache: uiText(itemsRaw.cache),
+  };
+
+  const commonRaw = parseJsonObject(o.common);
+  const actionsRaw = parseJsonObject(commonRaw.actions);
+  const statesRaw = parseJsonObject(commonRaw.states);
+
+  const common: AdminUiCommonCopy = {
+    actions: {
+      create: uiText(actionsRaw.create),
+      edit: uiText(actionsRaw.edit),
+      delete: uiText(actionsRaw.delete),
+      save: uiText(actionsRaw.save),
+      cancel: uiText(actionsRaw.cancel),
+      refresh: uiText(actionsRaw.refresh),
+      search: uiText(actionsRaw.search),
+      filter: uiText(actionsRaw.filter),
+      close: uiText(actionsRaw.close),
+      back: uiText(actionsRaw.back),
+      confirm: uiText(actionsRaw.confirm),
+    },
+    states: {
+      loading: uiText(statesRaw.loading),
+      error: uiText(statesRaw.error),
+      empty: uiText(statesRaw.empty),
+      updating: uiText(statesRaw.updating),
+      saving: uiText(statesRaw.saving),
+    },
+  };
+
+  const pagesRaw = parseJsonObject(o.pages);
+  const pages: Record<string, AdminUiPageCopy> = {};
+  for (const [k, v] of Object.entries(pagesRaw)) {
+    const row = parseJsonObject(v);
+    const out: AdminUiPageCopy = {};
+    for (const [rk, rv] of Object.entries(row)) {
+      out[rk] = uiText(rv);
+    }
+    pages[k] = out;
+  }
+
+  const devRaw = parseJsonObject(o.developer_branding);
+
+  return {
+    app_name: uiText(o.app_name),
+    app_version: uiText(o.app_version),
+    developer_branding: devRaw ? {
+      name: uiText(devRaw.name),
+      url: uiText(devRaw.url),
+      full_name: uiText(devRaw.full_name),
+    } : undefined,
+    nav: {
+      labels: { ...emptyNav.labels, ...labels },
+      items: { ...emptyNav.items, ...items },
+    },
+    common: {
+      actions: { ...emptyCommon.actions, ...common.actions },
+      states: { ...emptyCommon.states, ...common.states },
+    },
+    pages,
+  };
+}

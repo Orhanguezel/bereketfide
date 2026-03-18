@@ -1,0 +1,420 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "services": "Activities",
+    "about": "About",
+    "gallery": "Gallery",
+    "blog": "News",
+    "contact": "Contact",
+    "offer": "Get Quote",
+    "login": "Log in",
+    "register": "Sign up",
+    "tagline": "Turkey's leading construction firm",
+    "logout": "Log Out",
+    "profile": "My Profile"
+  },
+  "footer": {
+    "description": "Reliable construction and architecture solutions for residential, commercial and mixed-use projects.",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "sections": {
+      "explore": "Explore",
+      "company": "Company",
+      "legal": "Legal",
+      "quickLinks": "Quick Links"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "contactUs": "Contact Us",
+    "backToTop": "Back to Top",
+    "requestOffer": "Get Quote",
+    "offerCtaTitle": "Let Us Prepare a Free Site Visit and Quote for Your Project",
+    "offerCtaDescription": "For your residential, commercial or mixed-use projects, let us align project scope, timeline and budget expectations together and prepare a tailored quote.",
+    "freeOfObligation": "Free and non-binding",
+    "send": "Send",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "company": "Company",
+    "message": "Message",
+    "subject": "Subject",
+    "required": "Required field",
+    "success": "Success",
+    "noResults": "No results found",
+    "relatedProducts": "Related Projects",
+    "relatedGallery": "Related Galleries",
+    "relatedArticles": "Related Articles",
+    "search": "Search",
+    "searchIn": "Search {company}",
+    "closeMenu": "Close menu",
+    "clearFilters": "Clear filters",
+    "allLabel": "All",
+    "save": "Save",
+    "sending": "Sending...",
+    "guest": "Guest"
+  },
+  "home": {
+    "hero": {
+      "title": "Your Trusted Partner in Construction and Architecture",
+      "subtitle": "From design to delivery, we offer quality, on-time and transparent construction services for residential, commercial and mixed-use developments.",
+      "cta": "Explore Our Projects",
+      "ctaSecondary": "Get a Quote",
+      "badge": "Vista Construction",
+      "workflowLabel": "Project Process",
+      "workflowTitle": "Planning and execution tailored to your project",
+      "workflowBadgeTitle": "Transparent",
+      "workflowBadgeSubtitle": "Process and communication",
+      "metrics": {
+        "prototypeTitle": "Feasibility",
+        "prototypeDesc": "Feasibility, concept design and initial cost estimation",
+        "productionTitle": "Execution",
+        "productionDesc": "Quality control, schedule tracking and open communication",
+        "engineeringTitle": "Engineering",
+        "engineeringDesc": "Structural analysis, geotechnical survey and technical solutions"
+      },
+      "steps": {
+        "oneTitle": "1. Project requirements review",
+        "oneDesc": "We clarify location, intended use, area, budget and timeline expectations together.",
+        "twoTitle": "2. Design and engineering",
+        "twoDesc": "We prepare architectural design, structural plans and engineering solutions.",
+        "threeTitle": "3. Execution and delivery",
+        "threeDesc": "We manage the entire process from permits to handover, ensuring quality and schedule compliance."
+      },
+      "stats": {
+        "stepsValue": "3+",
+        "stepsLabel": "Core project phases",
+        "b2bValue": "15+",
+        "b2bLabel": "Years of industry experience"
+      }
+    },
+    "projects": {
+      "title": "Featured Projects",
+      "subtitle": "A selection from our completed and ongoing residential, commercial and mixed-use developments"
+    },
+    "latestProjects": {
+      "title": "Latest Projects",
+      "subtitle": "Discover our most recent projects"
+    },
+    "services": {
+      "title": "Our Activity Areas",
+      "subtitle": "Comprehensive solutions from architectural design to construction, project management to handover"
+    },
+    "whyUs": {
+      "title": "Why Vista Construction?",
+      "subtitle": "We make a difference in every project with a construction philosophy centered on quality, trust and on-time delivery",
+      "quality": "High Quality",
+      "qualityDesc": "Full compliance with quality standards at every stage, from material selection to workmanship",
+      "experience": "Experience",
+      "experienceDesc": "Your reliable partner with over 15 years of industry experience and 100+ completed projects",
+      "custom": "Custom Solutions",
+      "customDesc": "A design and execution approach unique to each project — not standard, but tailored to you",
+      "delivery": "On-Time Delivery",
+      "deliveryDesc": "Timeline commitment and transparent process management from project start to handover"
+    },
+    "brands": {
+      "title": "Trusted Brands",
+      "subtitle": "World-leading brands we collaborate with in our projects"
+    },
+    "gallery": {
+      "title": "Gallery",
+      "subtitle": "Selected photographs from our completed projects and construction process"
+    },
+    "blog": {
+      "title": "News and Insights",
+      "subtitle": "Current content from construction industry news, architecture trends and our project experiences",
+      "featuredLabel": "Featured Insight",
+      "spotlightTitle": "Sustainable Construction: Green Building Certification and LEED Standards",
+      "spotlightBodyPrimary": "Sustainable construction is becoming an increasingly important standard in terms of energy efficiency, water conservation and healthy indoor environments. LEED (Leadership in Energy and Environmental Design) certification is an international reference system that certifies buildings as environmentally friendly.",
+      "spotlightBodySecondary": "At Vista Construction, we aim to integrate sustainable material selection and energy-efficient design principles into every project we undertake. Achieving sustainability goals is not possible without proper planning from the start — which is why we plan an eco-conscious approach for each project from day one.",
+      "insightLabel": "What this covers",
+      "insightText": "Green building standards, certification process and the value it adds to your project",
+      "archiveLabel": "More Content",
+      "archiveSubtitle": "Other content on construction, architecture and project management"
+    },
+    "newsletter": {
+      "title": "Subscribe to Our Newsletter",
+      "subtitle": "Stay informed about new projects and industry developments.",
+      "placeholder": "Your email address",
+      "subscribe": "Subscribe",
+      "success": "Successfully subscribed!",
+      "error": "An error occurred, please try again."
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "subtitle": "Share your project idea, quote request or questions with us"
+    }
+  },
+  "projects": {
+    "title": "Our Projects",
+    "description": "Our completed and ongoing residential, commercial and mixed-use projects deliver quality, aesthetics and functionality together.",
+    "categories": "Categories",
+    "allCategories": "All Projects",
+    "search": "Search Projects...",
+    "noProjects": "No projects found in this category.",
+    "specs": "Project Details",
+    "requestOffer": "Get Information About This Project",
+    "filters": {
+      "type": "Project Type",
+      "location": "Location",
+      "architects": "Architects",
+      "city": "City",
+      "year": "Year",
+      "materials": "Materials",
+      "area": "Area",
+      "floors": "Floors",
+      "client": "Client",
+      "status": "Status",
+      "all": "All",
+      "search": "Search",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "mixed": "Mixed Use",
+      "completed": "Completed",
+      "ongoing": "Ongoing"
+    },
+    "detail": {
+      "location": "Location",
+      "area": "Area",
+      "year": "Year",
+      "type": "Type",
+      "status": "Status",
+      "client": "Client",
+      "architect": "Architect",
+      "floors": "Number of Floors",
+      "units": "Number of Units"
+    },
+    "results": "results",
+    "images": "Images",
+    "emptyStateNote": "Sample projects are shown below until the live project feed becomes available.",
+    "comments": {
+      "title": "Conversation",
+      "viewing": "Viewing",
+      "commentingAs": "Commenting as ",
+      "loginLink": "Log in",
+      "signupLink": "Sign up",
+      "namePlaceholder": "Your name (optional)",
+      "commentPlaceholder": "Be the first to comment...",
+      "uploadingImage": "Uploading image...",
+      "photoVideo": "Photo / Video",
+      "submitComment": "Comment",
+      "successMessage": "Your comment has been submitted and is pending approval.",
+      "loadingComments": "Loading comments...",
+      "emptyTitle": "No one seems to have shared their thoughts on this topic yet",
+      "emptySubtitle": "Leave a comment so your voice will be heard first.",
+      "captchaLoading": "Security verification is loading...",
+      "captchaPending": "Complete the verification box to submit your comment.",
+      "captchaLoadFailed": "Security verification could not be loaded. Disable ad blockers and refresh the page.",
+      "captchaVerifyFailed": "Security verification failed.",
+      "captchaRequired": "Complete the security verification before submitting your comment.",
+      "captchaBypass": "Local development mode: security verification is bypassed."
+    },
+    "viewProject": "View Project",
+    "allProjects": "All Projects"
+  },
+  "services": {
+    "title": "Our Activity Areas",
+    "description": "Comprehensive construction and architecture activities from architectural design to construction, from survey and restoration to project management.",
+    "viewAll": "All Activities",
+    "noServices": "No activities found.",
+    "requestService": "Get a Quote for This Activity",
+    "items": {
+      "residential": "Residential Projects",
+      "commercial": "Commercial Projects",
+      "restoration": "Restoration",
+      "projectManagement": "Project Management",
+      "architecturalDesign": "Architectural Design",
+      "interiorDesign": "Interior Design"
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "description": "A photo gallery compiled from our completed projects, construction processes and architectural details.",
+    "viewAll": "View All Images",
+    "noGalleries": "No galleries found."
+  },
+  "blog": {
+    "title": "News",
+    "description": "Construction industry news, architecture trends, project updates and sector insights.",
+    "noPosts": "No posts found.",
+    "readMore": "Read More",
+    "publishedAt": "Published",
+    "categories": "Categories",
+    "engagement": {
+      "title": "Comments",
+      "subtitle": "Feedback on this article",
+      "likeButton": "Like",
+      "emptyTitle": "No comments yet",
+      "emptyText": "You can leave the first comment and add your perspective.",
+      "formLabel": "Leave a Comment",
+      "formTitle": "What do you think about this article?",
+      "formDescription": "You can share your opinion, experience or an additional note.",
+      "namePlaceholder": "Full Name",
+      "emailPlaceholder": "example@email.com",
+      "commentPlaceholder": "Write your comment...",
+      "moderationNote": "Submitted comments are reviewed before publication.",
+      "submit": "Submit Comment",
+      "submitSuccess": "Your comment has been received and will be published after review.",
+      "submitError": "Comment could not be submitted. Please try again."
+    },
+    "share": {
+      "label": "Share",
+      "copyLink": "Copy Link",
+      "copied": "Link copied.",
+      "copyError": "Link could not be copied.",
+      "buttonTitle": "Share on"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Contact our team for your project idea, quote request or questions and let us find the best solution together.",
+    "form": {
+      "title": "Send a Message",
+      "namePlaceholder": "Your Full Name",
+      "emailPlaceholder": "example@email.com",
+      "phonePlaceholder": "+90 5XX XXX XX XX",
+      "companyPlaceholder": "Company Name (optional)",
+      "subjectPlaceholder": "Subject",
+      "messagePlaceholder": "Write your message here...",
+      "submit": "Send",
+      "success": "Your message has been sent successfully. We will get back to you shortly.",
+      "error": "Failed to send message. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Working Hours"
+    },
+    "response": {
+      "title": "How We Respond",
+      "items": {
+        "one": "We review your request and clarify project scope, location, intended use and budget expectations.",
+        "two": "If needed, we request additional project details, technical specifications or further information.",
+        "three": "We then provide a tailored quote, feasibility assessment and project plan as soon as possible."
+      }
+    }
+  },
+  "offer": {
+    "title": "Quote Request",
+    "description": "Let us prepare a tailored site visit and quote based on your project type, location, area, budget and timeline expectations.",
+    "benefits": {
+      "title": "What We Clarify in the Quote",
+      "items": {
+        "one": "Project type: residential, commercial, mixed-use or restoration",
+        "two": "Scope: architectural design, construction, project management or full turnkey",
+        "three": "Budget range, timeline expectations, location and technical requirements"
+      }
+    },
+    "form": {
+      "productInterest": "Service of Interest",
+      "quantity": "Area (m²)",
+      "deadline": "Target Delivery Date",
+      "details": "Project Details",
+      "detailsPlaceholder": "Tell us about your project (location, intended use, budget range, etc.)",
+      "attachFile": "Attach File (preliminary design, site plan, technical specification, etc.)",
+      "submit": "Request Quote",
+      "success": "Your quote request has been received. Our team will contact you shortly.",
+      "error": "Failed to submit request. Please try again."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Vista Construction delivers reliable, quality and on-time construction services for residential and commercial projects from design to handover.",
+    "intro": "Our team carefully manages every project with architectural design, engineering solutions and an experienced on-site implementation team. Customer satisfaction, quality and on-time delivery are our core values.",
+    "sections": {
+      "expertiseTitle": "Our Areas of Expertise",
+      "expertiseItems": {
+        "one": "Residential projects: villas, apartment buildings, residences and mass housing",
+        "two": "Commercial projects: offices, shopping centers and mixed-use buildings",
+        "three": "Restoration, renovation and structural strengthening projects"
+      },
+      "processTitle": "How We Work",
+      "processItems": {
+        "one": "Understanding project requirements and client expectations",
+        "two": "Managing architectural design, engineering and permit processes",
+        "three": "Quality-controlled, on-time and complete project delivery"
+      },
+      "sectorsTitle": "Who We Serve",
+      "sectorsItems": {
+        "one": "Individual property investors and families",
+        "two": "Commercial real estate developers and institutions",
+        "three": "Public projects and urban transformation applications"
+      },
+      "stats": {
+        "experience": "Years of Experience",
+        "projects": "Completed Projects",
+        "team": "Expert Team"
+      }
+    }
+  },
+  "auth": {
+    "loginTitle": "Log In to Your Vista Construction Account",
+    "loginSubtitle": "Track your projects, view quote status, and access exclusive content tailored to you.",
+    "registerTitle": "Create Your Vista Construction Account",
+    "registerSubtitle": "Track your projects, view quote status, and access exclusive content tailored to you.",
+    "continueWithGoogle": "Continue with Google",
+    "orUseEmail": "or use your email",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "continueWithEmail": "Continue with email",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "hasAccount": "Already have a free account or paid plan?",
+    "logIn": "Log In",
+    "termsAgreement": "By continuing, you agree to the <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>.",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "step": "Step {current} / {total}",
+    "errors": {
+      "user_exists": "This email is already registered. Try logging in instead.",
+      "invalid_credentials": "Invalid email or password.",
+      "invalid_email": "Please enter a valid email address.",
+      "weak_password": "Password must be at least 6 characters.",
+      "account_disabled": "Your account has been disabled.",
+      "too_many_attempts": "Too many attempts. Please wait a moment.",
+      "google_oauth_not_configured": "Google sign-in is currently unavailable.",
+      "generic": "An error occurred. Please try again."
+    },
+    "profile": {
+      "title": "My Profile",
+      "subtitle": "View and update your account information.",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "changePassword": "Change Password",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "saved": "Your information has been updated successfully.",
+      "passwordChanged": "Your password has been changed successfully.",
+      "memberSince": "Member since",
+      "role": "Account type",
+      "roles": {
+        "admin": "Administrator",
+        "moderator": "Moderator",
+        "user": "User"
+      },
+      "notLoggedIn": "You need to log in to view this page.",
+      "goToLogin": "Log In"
+    }
+  },
+  "legal": {
+    "title": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
+  "seo": {
+    "defaultTitle": "Vista Construction | Reliable Construction and Architecture Services",
+    "defaultDescription": "Quality, on-time and reliable construction solutions for residential, commercial and mixed-use projects. Bring your dream project to life with Vista Construction.",
+    "keywords": "construction, architecture, residential projects, commercial projects, villa, apartment, project management, turnkey"
+  }
+}

@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` CHAR(36) NOT NULL,
+  `target_type` VARCHAR(50) NOT NULL DEFAULT 'project' COMMENT 'project, blog, service etc.',
+  `target_id` VARCHAR(100) NOT NULL COMMENT 'ID of the entity being commented on',
+  `parent_id` CHAR(36) DEFAULT NULL COMMENT 'For reply threads',
+  `author_name` VARCHAR(255) NOT NULL,
+  `author_email` VARCHAR(255) DEFAULT NULL,
+  `content` TEXT NOT NULL,
+  `image_url` VARCHAR(500) DEFAULT NULL,
+  `is_approved` TINYINT(1) NOT NULL DEFAULT 0,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `ip_address` VARCHAR(45) DEFAULT NULL,
+  `user_agent` VARCHAR(500) DEFAULT NULL,
+  `likes_count` INT NOT NULL DEFAULT 0,
+  `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (`id`),
+  KEY `idx_comment_target` (`target_type`, `target_id`),
+  KEY `idx_comment_parent` (`parent_id`),
+  KEY `idx_comment_approved` (`is_approved`),
+  KEY `idx_comment_created` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -1,0 +1,50 @@
+{
+  "title": "Vista İnşaat",
+  "fullName": "Vista İnşaat — Kurumsal Web Sitesi",
+  "category": "CORPORATE WEBSITE",
+  "summary": "Vista İnşaat markası için geliştirilen Next.js tabanlı kurumsal tanıtım ve teklif toplama platformu. ArchDaily ilhamlı editorial tasarım, TR/EN çok dilli yapı, teknik SEO altyapısı, proje portföyü, galeri, blog ve iletişim/teklif formu içermektedir.",
+  "techs": [
+    "Next.js 16",
+    "TypeScript",
+    "Tailwind CSS v4",
+    "next-intl",
+    "React Query",
+    "Zod",
+    "React Hook Form",
+    "Zustand",
+    "Embla Carousel",
+    "Radix UI"
+  ],
+  "features": [
+    "TR/EN multilingual (next-intl)",
+    "Proje portföyü (liste + detay + galeri)",
+    "Hizmetler katalogu",
+    "Galeri sistemi",
+    "Blog / Haberler",
+    "İletişim ve teklif formu",
+    "Technical SEO (canonical, hreflang, JSON-LD, sitemap)",
+    "Token tabanlı tema sistemi (vista-construction)",
+    "Dark / Light mode",
+    "SEO monitoring (SeoIssueBeacon)",
+    "Newsletter"
+  ],
+  "websiteUrl": "https://www.vistainsaat.com",
+  "domainTarget": "https://www.vistainsaat.com",
+  "devPort": 3030,
+  "status": "in-development",
+  "relation": "Vista İnşaat kurumsal web sitesi; vistainsaat-backend API üzerinden çalışır",
+  "featured": false,
+  "theme": {
+    "template": "vista-construction",
+    "intent": "premium-editorial-neutral-gold",
+    "palette": {
+      "brand": "#b8a98a",
+      "dark": "#1e1c1a",
+      "light": "#f5f5f4"
+    },
+    "fonts": {
+      "heading": "Syne",
+      "body": "DM Sans"
+    }
+  }
+}

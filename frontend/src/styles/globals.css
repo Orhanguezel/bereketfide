@@ -1,0 +1,608 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+/* ─────────────────────────────────────────────
+   KATMAN 1: Primitive Tokenlar
+   Template: bereket-harvest
+   Intent:   clean-natural-wheat-gold
+   ───────────────────────────────────────────── */
+
+:root,
+html[data-theme-template='bereket-harvest'] {
+  /* Altın — logo paleti (başak/buğday) */
+  --gold-50: #faf9f6;
+  --gold-100: #f5f2eb;
+  --gold-200: #e8dcc8;
+  --gold-300: #dccfaf;
+  --gold-400: #d4a843; /* ← Açık altın / vurgu */
+  --gold-500: #b8862d; /* ← Ana marka rengi (logo orta altın) */
+  --gold-600: #9e7324;
+  --gold-700: #8b6914; /* ← Koyu altın / hover */
+  --gold-800: #6b4f0e;
+  --gold-900: #4e3a0a;
+  --gold-950: #2e2207;
+
+  /* Yeşil — doğa/fide paleti */
+  --green-50: #f0f5eb;
+  --green-100: #dce8d4;
+  --green-200: #b8d4a8;
+  --green-300: #7ab85c;
+  --green-400: #4a9032;
+  --green-500: #2d7a3a;
+  --green-600: #1a3a0e; /* ← Koyu yeşil (nav, dark sections) */
+  --green-700: #162d0c; /* ← Footer */
+  --green-800: #112208;
+  --green-900: #0c1805;
+
+  /* Antrasit / Volkanik Nötr */
+  --anthracite-0: #ffffff;
+  --anthracite-50: #f5f5f4;
+  --anthracite-100: #e8e7e5;
+  --anthracite-200: #d4d2c8;
+  --anthracite-300: #b8b5b0;
+  --anthracite-400: #7a8574;
+  --anthracite-500: #6b6864;
+  --anthracite-600: #3d4a38;
+  --anthracite-700: #3c3a37;
+  --anthracite-800: #2e2c29;
+  --anthracite-900: #1a2e12;
+  --anthracite-950: #141311;
+
+  /* Status */
+  --status-success: #2d7a3a;
+  --status-success-strong: #1a5c2a;
+  --status-warning: #d4a843;
+  --status-danger: #c23a2a;
+
+  /* Section arka plan token'ları */
+  --section-bg-light: #faf9f6;
+  --section-bg-green-light: #f0f5eb;
+  --section-bg-white: #ffffff;
+  --section-bg-dark: #1a3a0e;
+  --section-bg-dark-deep: #162d0c;
+
+  /* Tipografi */
+  --font-heading: 'Syne', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  /* Spacing & Layout */
+  --section-py: clamp(4rem, 8vw, 7rem);
+  --container-px: clamp(1rem, 4vw, 2rem);
+  --container-max: 1200px;
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Status semantic */
+  --color-success: var(--status-success);
+  --color-success-dark: var(--status-success-strong);
+}
+
+/* ─────────────────────────────────────────────
+   KATMAN 2 + 3: Surface Ara Tokenlar & Semantic
+   Light Mode
+   ───────────────────────────────────────────── */
+
+html[data-theme-mode='light'],
+:root:not([data-theme-mode]) {
+  /* Surface ara tokenlar */
+  --surface-base: var(--gold-50);
+  --surface-raised: var(--anthracite-0);
+  --surface-muted: var(--green-50);
+  --surface-dark: var(--green-600);
+  --surface-dark-strong: var(--green-700);
+
+  --text-strong: var(--anthracite-900);
+  --text-body: var(--anthracite-600);
+  --text-muted: var(--anthracite-400);
+  --text-inverse: #e8e6dc;
+  --text-soft-inverse: #d0cdc4;
+
+  --border-subtle: var(--anthracite-200);
+  --border-strong: var(--anthracite-300);
+
+  /* Glass */
+  --color-glass-bg: rgb(255 255 255 / 0.06);
+  --color-glass-bg-strong: rgb(255 255 255 / 0.1);
+  --color-glass-border: rgb(255 255 255 / 0.14);
+  --color-glass-hover: rgb(255 255 255 / 0.1);
+
+  /* Misc */
+  --color-border-on-dark: rgb(255 255 255 / 0.12);
+  --color-dark-link-hover: var(--text-inverse);
+
+  /* Hero glow — altın tonu */
+  --color-hero-glow-brand: color-mix(in srgb, var(--gold-400) 16%, transparent);
+  --color-hero-glow-muted: rgb(255 255 255 / 0.06);
+
+  /* Semantic tokenlar */
+  --color-bg: var(--surface-base);
+  --color-bg-secondary: var(--surface-raised);
+  --color-bg-muted: var(--surface-muted);
+  --color-bg-dark: var(--surface-dark);
+
+  --color-text-primary: var(--text-strong);
+  --color-text-secondary: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-on-dark: var(--text-inverse);
+
+  --color-border: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  /* Brand — altın (logo uyumlu) */
+  --color-brand: var(--gold-500);
+  --color-brand-light: var(--gold-400);
+  --color-brand-dark: var(--gold-700);
+  --color-accent: var(--green-600);
+  --color-on-brand: #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+   KATMAN 2 + 3: Surface Ara Tokenlar & Semantic
+   Dark Mode
+   ───────────────────────────────────────────── */
+
+html[data-theme-mode='dark'] {
+  /* Surface ara tokenlar — sıcak siyah tonları */
+  --surface-base: #0f0e0d;
+  --surface-raised: #1a1816;
+  --surface-muted: #201e1b;
+  --surface-dark: #0a0908;
+  --surface-dark-strong: #000000;
+
+  --text-strong: #f0ece6;
+  --text-body: #c8c2b8;
+  --text-muted: #8c8880;
+  --text-inverse: #f5f4f2;
+  --text-soft-inverse: #c4bfb8;
+
+  --border-subtle: #2a2825;
+  --border-strong: #3a3835;
+
+  /* Glass — altın tonlu */
+  --color-glass-bg: rgb(255 240 210 / 0.04);
+  --color-glass-bg-strong: rgb(255 240 210 / 0.08);
+  --color-glass-border: rgb(255 240 210 / 0.1);
+  --color-glass-hover: rgb(255 240 210 / 0.08);
+
+  /* Misc */
+  --color-border-on-dark: rgb(255 255 255 / 0.1);
+  --color-dark-link-hover: #ffffff;
+
+  /* Hero glow — dark'ta altın daha belirgin */
+  --color-hero-glow-brand: color-mix(in srgb, var(--gold-500) 20%, transparent);
+  --color-hero-glow-muted: rgb(184 169 138 / 0.08);
+
+  /* Semantic tokenlar */
+  --color-bg: var(--surface-base);
+  --color-bg-secondary: var(--surface-raised);
+  --color-bg-muted: var(--surface-muted);
+  --color-bg-dark: var(--surface-dark);
+
+  --color-text-primary: var(--text-strong);
+  --color-text-secondary: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-on-dark: var(--text-inverse);
+
+  --color-border: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  /* Brand — dark'ta biraz açık altın */
+  --color-brand: var(--gold-400);
+  --color-brand-light: var(--gold-300);
+  --color-brand-dark: var(--gold-600);
+  --color-accent: var(--gold-500);
+  --color-on-brand: var(--anthracite-950);
+}
+
+/* ─────────────────────────────────────────────
+   Base Reset
+   ───────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-color: var(--color-text-muted) var(--color-bg-secondary);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  background-color: var(--color-bg-secondary);
+}
+*::-webkit-scrollbar-thumb {
+  border: 3px solid var(--color-bg-secondary);
+  border-radius: 999px;
+  background-color: var(--color-text-muted);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--text-strong);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────
+   Accessibility
+   ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   KATMAN 4: Surface Utility Sınıfları
+   ───────────────────────────────────────────── */
+
+/* Genel layout */
+.section-py {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Standart kart yüzeyleri */
+.surface-card {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.surface-card-muted {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-primary);
+}
+
+/* Cam efekti — koyu section içi */
+.surface-glass-dark {
+  border: 1px solid var(--color-glass-border);
+  background-color: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+}
+
+/* Gölgeler */
+.shadow-hero-panel {
+  box-shadow: 0 30px 80px rgb(20 19 17 / 0.42);
+}
+.shadow-dark-panel {
+  box-shadow: 0 24px 70px rgb(20 19 17 / 0.24);
+}
+.shadow-card {
+  box-shadow: 0 4px 24px rgb(20 19 17 / 0.08);
+}
+
+/* ─── Koyu Section Yüzeyleri ─── */
+
+.surface-dark-shell {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg-dark);
+}
+
+/* bereket-harvest: altın radial glow, sıcak antrasit gradient */
+.surface-dark-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgb(184 169 138 / 0.14), transparent 30%),
+    linear-gradient(135deg, rgb(15 14 13 / 0.97), rgb(26 24 22 / 0.94));
+  pointer-events: none;
+}
+
+.surface-dark-heading {
+  color: var(--color-text-on-dark) !important;
+}
+.surface-dark-text {
+  color: var(--text-soft-inverse) !important;
+}
+.surface-dark-panel {
+  color: var(--color-text-on-dark) !important;
+}
+
+.surface-dark-link {
+  color: var(--text-soft-inverse);
+}
+.surface-dark-link:hover {
+  color: var(--color-dark-link-hover);
+}
+.surface-dark-border {
+  border-color: var(--color-border-on-dark);
+}
+
+.surface-glass-hover:hover {
+  border-color: var(--color-brand-light);
+  background-color: var(--color-glass-hover);
+}
+
+/* ─── Marka CTA Yüzeyi (Altın) ─── */
+
+/* bereket-harvest: altın gradient, koyu metin */
+.surface-brand-cta {
+  border: 1px solid rgb(184 169 138 / 0.3);
+  background: linear-gradient(135deg, rgb(158 143 111 / 0.95), rgb(139 121 98 / 0.95));
+  color: var(--anthracite-950);
+  box-shadow: 0 20px 60px rgb(184 169 138 / 0.18);
+}
+
+.surface-brand-cta-subtle {
+  color: rgb(20 19 17 / 0.68);
+}
+
+/* ─── Hero Glow ─── */
+
+.surface-hero-glow-brand {
+  background-color: var(--color-hero-glow-brand);
+}
+.surface-hero-glow-muted {
+  background-color: var(--color-hero-glow-muted);
+}
+
+/* ─── Medya Overlay (Proje Kartları) ─── */
+
+/* bereket-harvest: sıcak siyah overlay, soğuk değil */
+.media-overlay {
+  background: linear-gradient(180deg, rgb(20 19 17 / 0.04), rgb(20 19 17 / 0.82));
+}
+
+.media-overlay-title {
+  color: var(--color-text-on-dark);
+}
+.media-overlay-text {
+  color: var(--text-soft-inverse);
+}
+
+/* ─── Form Alanları ─── */
+
+.field-input {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+}
+
+.field-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.field-input:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ─── Butonlar ─── */
+
+.btn-primary {
+  background-color: var(--color-brand);
+  color: var(--color-on-brand);
+  transition: background-color 150ms ease;
+}
+.btn-primary:hover {
+  background-color: var(--color-brand-dark);
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+.btn-secondary:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.btn-contrast {
+  border: 1px solid var(--color-glass-border);
+  background-color: transparent;
+  color: var(--color-brand);
+}
+.btn-contrast:hover {
+  opacity: 0.88;
+}
+
+/* ─── Chip / Badge ─── */
+
+.chip-muted {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-secondary);
+}
+
+.chip-brand {
+  border: 1px solid var(--color-brand);
+  background-color: var(--color-brand);
+  color: var(--color-on-brand);
+}
+
+.chip-outline {
+  border: 1px solid var(--color-border-strong);
+  background-color: transparent;
+  color: var(--color-text-primary);
+}
+
+/* ─── FAB ─── */
+
+.fab-brand {
+  background-color: var(--color-brand);
+  color: var(--color-on-brand);
+}
+.fab-success {
+  background-color: var(--color-success);
+  color: var(--color-on-brand);
+}
+
+/* ─── Prose (Zengin Metin) ─── */
+
+.prose-theme {
+  color: var(--color-text-secondary);
+}
+
+.prose-theme :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-text-primary);
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.prose-theme :where(p, li, strong, em, blockquote) {
+  color: inherit;
+}
+.prose-theme :where(a) {
+  color: var(--color-brand);
+}
+.prose-theme :where(a:hover) {
+  color: var(--color-brand-dark);
+}
+.prose-theme :where(code) {
+  color: var(--color-text-primary);
+}
+.prose-theme :where(ul, ol) {
+  color: inherit;
+}
+
+/* ─────────────────────────────────────────────
+   Animasyon & Motion
+   ───────────────────────────────────────────── */
+
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translate3d(34px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.motion-fade-up {
+  animation: fade-up-in 860ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.motion-slide-right {
+  animation: slide-in-right 920ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.motion-float-soft {
+  animation: float-soft 5.8s ease-in-out 1.2s infinite;
+}
+.motion-pulse {
+  animation: whatsapp-pulse 2s infinite;
+}
+
+.motion-delay-1 {
+  animation-delay: 120ms;
+}
+.motion-delay-2 {
+  animation-delay: 220ms;
+}
+.motion-delay-3 {
+  animation-delay: 320ms;
+}
+.motion-delay-4 {
+  animation-delay: 420ms;
+}
+
+/* Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Misc
+   ───────────────────────────────────────────── */
+
+.disable-transitions * {
+  transition: none !important;
+}

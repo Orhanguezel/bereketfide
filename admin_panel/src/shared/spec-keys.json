@@ -1,0 +1,84 @@
+{
+  "project": [
+    {
+      "id": "type",
+      "keys": { "tr": "Tip", "en": "Type" },
+      "labels": { "tr": "Tip", "en": "Type" }
+    },
+    {
+      "id": "location",
+      "keys": { "tr": "Konum", "en": "Location" },
+      "labels": { "tr": "Konum", "en": "Location" }
+    },
+    {
+      "id": "year",
+      "keys": { "tr": "Yıl", "en": "Year" },
+      "labels": { "tr": "Yıl", "en": "Year" }
+    },
+    {
+      "id": "area",
+      "keys": { "tr": "Alan", "en": "Area" },
+      "labels": { "tr": "Alan", "en": "Area" }
+    },
+    {
+      "id": "status",
+      "keys": { "tr": "Durum", "en": "Status" },
+      "labels": { "tr": "Durum", "en": "Status" }
+    },
+    {
+      "id": "architects",
+      "keys": { "tr": "Mimarlar", "en": "Architects" },
+      "labels": { "tr": "Mimarlar", "en": "Architects" }
+    },
+    {
+      "id": "lead_architect",
+      "keys": { "tr": "Sorumlu Mimar", "en": "Lead Architect" },
+      "labels": { "tr": "Sorumlu Mimar", "en": "Lead Architect" }
+    },
+    {
+      "id": "manufacturers",
+      "keys": { "tr": "Üreticiler", "en": "Manufacturers" },
+      "labels": { "tr": "Üreticiler", "en": "Manufacturers" }
+    },
+    {
+      "id": "project_team",
+      "keys": { "tr": "Proje Ekibi", "en": "Project Team" },
+      "labels": { "tr": "Proje Ekibi", "en": "Project Team" }
+    },
+    {
+      "id": "landscape_architecture",
+      "keys": { "tr": "Peyzaj Mimarisi", "en": "Landscape Architecture" },
+      "labels": { "tr": "Peyzaj Mimarisi", "en": "Landscape Architecture" }
+    },
+    {
+      "id": "interior_design",
+      "keys": { "tr": "İç Mimari", "en": "Interior Design" },
+      "labels": { "tr": "İç Mimari", "en": "Interior Design" }
+    },
+    {
+      "id": "engineering",
+      "keys": { "tr": "Mühendislik", "en": "Engineering" },
+      "labels": { "tr": "Mühendislik", "en": "Engineering" }
+    },
+    {
+      "id": "general_construction",
+      "keys": { "tr": "Genel İnşaat", "en": "General Construction" },
+      "labels": { "tr": "Genel İnşaat", "en": "General Construction" }
+    },
+    {
+      "id": "city",
+      "keys": { "tr": "Şehir", "en": "City" },
+      "labels": { "tr": "Şehir", "en": "City" }
+    },
+    {
+      "id": "country",
+      "keys": { "tr": "Ülke", "en": "Country" },
+      "labels": { "tr": "Ülke", "en": "Country" }
+    },
+    {
+      "id": "contractor",
+      "keys": { "tr": "Yüklenici", "en": "Contractor" },
+      "labels": { "tr": "Yüklenici", "en": "Contractor" }
+    }
+  ]
+}
