@@ -74,10 +74,10 @@ VALUES (
   'bereketfide__logo',
   '*',
   JSON_OBJECT(
-    'logo_url',         '/uploads/logo/ChatGPT Image 17 Mar 2026 23_51_59.png',
+    'logo_url',         '/uploads/logo/logo-23_51_59.png',
     'logo_alt',         'Bereket Fide Logo',
-    'favicon_url',      '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie 3).png',
-    'logo_dark_url',    '/uploads/logo/ChatGPT Image 17 Mar 2026 23_58_23 (Kopie).png'
+    'favicon_url',      '/uploads/logo/logo-23_59_55-kopie-3.png',
+    'logo_dark_url',    '/uploads/logo/logo-23_58_23-kopie.png'
   ),
   NOW(3), NOW(3)
 )
@@ -92,11 +92,11 @@ VALUES (
   'bereketfide__site_logo',
   '*',
   JSON_OBJECT(
-    'logo_url',              '/uploads/logo/ChatGPT Image 17 Mar 2026 23_51_59.png',
+    'logo_url',              '/uploads/logo/logo-23_51_59.png',
     'logo_alt',              'Bereket Fide',
-    'logo_dark_url',         '/uploads/logo/ChatGPT Image 17 Mar 2026 23_58_23 (Kopie).png',
-    'favicon_url',           '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie 3).png',
-    'apple_touch_icon_url',  '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie).png'
+    'logo_dark_url',         '/uploads/logo/logo-23_58_23-kopie.png',
+    'favicon_url',           '/uploads/logo/logo-23_59_55-kopie-3.png',
+    'apple_touch_icon_url',  '/uploads/logo/logo-23_59_55-kopie.png'
   ),
   NOW(3), NOW(3)
 )
@@ -111,7 +111,7 @@ VALUES (
   'bereketfide__site_favicon',
   '*',
   JSON_OBJECT(
-    'url', '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie 3).png',
+    'url', '/uploads/logo/logo-23_59_55-kopie-3.png',
     'alt', 'Bereket Fide Favicon'
   ),
   NOW(3), NOW(3)
@@ -127,7 +127,7 @@ VALUES (
   'bereketfide__site_apple_touch_icon',
   '*',
   JSON_OBJECT(
-    'url', '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie).png',
+    'url', '/uploads/logo/logo-23_59_55-kopie.png',
     'alt', 'Bereket Fide Apple Touch Icon'
   ),
   NOW(3), NOW(3)
