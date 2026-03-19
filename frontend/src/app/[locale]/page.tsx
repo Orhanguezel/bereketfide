@@ -199,9 +199,9 @@ export default async function HomePage({
   const configuredHomeStats = normalizeHomeStats(homeStatsSetting?.value);
 
   const homeBackgrounds = configuredHomeBackgrounds.length ? configuredHomeBackgrounds : [
-    { url: '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', alt: 'Bereket Fide 1' },
-    { url: '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', alt: 'Bereket Fide 2' },
-    { url: '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37.jpeg', alt: 'Bereket Fide 3' }
+    { url: '/uploads/products/23.28.37 (1).jpeg', alt: 'Bereket Fide 1' },
+    { url: '/uploads/products/23.28.37 (3).jpeg', alt: 'Bereket Fide 2' },
+    { url: '/uploads/products/23.28.37.jpeg', alt: 'Bereket Fide 3' }
   ];
   const homeStats = configuredHomeStats.length
     ? configuredHomeStats

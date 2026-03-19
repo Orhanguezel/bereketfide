@@ -36,10 +36,10 @@ INSERT INTO `custom_pages`
   `sub_category_id`
 )
 VALUES
-  ('bb010001-5001-4001-9001-bbbbbbbb0001', 'blog', 1, 1, 10, 10, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '[]', '[]', NULL, NULL),
-  ('bb010002-5002-4002-9002-bbbbbbbb0002', 'blog', 1, 1, 20, 20, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '[]', '[]', NULL, NULL),
-  ('bb010003-5003-4003-9003-bbbbbbbb0003', 'blog', 1, 0, 30, 30, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '[]', '[]', NULL, NULL),
-  ('bb010004-5004-4004-9004-bbbbbbbb0004', 'blog', 1, 0, 40, 40, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '[]', '[]', NULL, NULL)
+  ('bb010001-5001-4001-9001-bbbbbbbb0001', 'blog', 1, 1, 10, 10, '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '[]', '[]', NULL, NULL),
+  ('bb010002-5002-4002-9002-bbbbbbbb0002', 'blog', 1, 1, 20, 20, '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '[]', '[]', NULL, NULL),
+  ('bb010003-5003-4003-9003-bbbbbbbb0003', 'blog', 1, 0, 30, 30, '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '[]', '[]', NULL, NULL),
+  ('bb010004-5004-4004-9004-bbbbbbbb0004', 'blog', 1, 0, 40, 40, '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '[]', '[]', NULL, NULL)
 ON DUPLICATE KEY UPDATE
   `module_key`   = VALUES(`module_key`),
   `is_published` = VALUES(`is_published`),

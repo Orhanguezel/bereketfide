@@ -268,7 +268,7 @@ VALUES (
   UUID(),
   'bereketfide__home_backgrounds',
   '*',
-  '[{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 1"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg","alt":"Bereket Fide Seraları 2"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37.jpeg","alt":"Bereket Fide Seraları 3"}]',
+  '[{"url":"/uploads/products/23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 1"},{"url":"/uploads/products/23.28.37 (3).jpeg","alt":"Bereket Fide Seraları 2"},{"url":"/uploads/products/23.28.37.jpeg","alt":"Bereket Fide Seraları 3"}]',
   NOW(3), NOW(3)
 )
 ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);

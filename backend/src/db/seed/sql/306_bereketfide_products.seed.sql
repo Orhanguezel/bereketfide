@@ -37,43 +37,43 @@ INSERT INTO `products`
 VALUES
   -- Aşısız Düz Domates (cccc0001)
   ('bf-prd-0001', 'bereketfide', 'cccc0001-4001-4001-8001-cccccccc0001', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.27.59.jpeg', 'bf-prd-img-0005',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.27.59.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.27.59 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.00.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.01.jpeg'),
+   '/uploads/products/23.27.59.jpeg', 'bf-prd-img-0005',
+   JSON_ARRAY('/uploads/products/23.27.59.jpeg','/uploads/products/23.27.59 (1).jpeg','/uploads/products/23.28.00.jpeg','/uploads/products/23.28.01.jpeg'),
    JSON_ARRAY(), 1, 1, 10, 'BF-DOM-001', 0, 5.00, 0),
   -- Aşılı Domates (cccc0001)
   ('bf-prd-0002', 'bereketfide', 'cccc0001-4001-4001-8001-cccccccc0001', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.04.jpeg', 'bf-prd-img-0008',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.04.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.05.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.06.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.06 (1).jpeg'),
+   '/uploads/products/23.28.04.jpeg', 'bf-prd-img-0008',
+   JSON_ARRAY('/uploads/products/23.28.04.jpeg','/uploads/products/23.28.05.jpeg','/uploads/products/23.28.06.jpeg','/uploads/products/23.28.06 (1).jpeg'),
    JSON_ARRAY(), 1, 1, 20, 'BF-DOM-A01', 0, 5.00, 0),
   -- Biber (cccc0002)
   ('bf-prd-0003', 'bereketfide', 'cccc0002-4002-4002-8002-cccccccc0002', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.07.jpeg', 'bf-prd-img-0015',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.07.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.07 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.07 (2).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.07 (3).jpeg'),
+   '/uploads/products/23.28.07.jpeg', 'bf-prd-img-0015',
+   JSON_ARRAY('/uploads/products/23.28.07.jpeg','/uploads/products/23.28.07 (1).jpeg','/uploads/products/23.28.07 (2).jpeg','/uploads/products/23.28.07 (3).jpeg'),
    JSON_ARRAY(), 1, 1, 30, 'BF-BIB-001', 0, 5.00, 0),
   -- Aşılı Biber (cccc0002)
   ('bf-prd-0004', 'bereketfide', 'cccc0002-4002-4002-8002-cccccccc0002', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.08.jpeg', 'bf-prd-img-0019',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.08.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.08 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.08 (2).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.08 (3).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.09.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.09 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.09 (2).jpeg'),
+   '/uploads/products/23.28.08.jpeg', 'bf-prd-img-0019',
+   JSON_ARRAY('/uploads/products/23.28.08.jpeg','/uploads/products/23.28.08 (1).jpeg','/uploads/products/23.28.08 (2).jpeg','/uploads/products/23.28.08 (3).jpeg','/uploads/products/23.28.09.jpeg','/uploads/products/23.28.09 (1).jpeg','/uploads/products/23.28.09 (2).jpeg'),
    JSON_ARRAY(), 1, 0, 40, 'BF-BIB-A01', 0, 5.00, 0),
   -- Salatalık (cccc0003)
   ('bf-prd-0005', 'bereketfide', 'cccc0003-4003-4003-8003-cccccccc0003', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.13.jpeg', 'bf-prd-img-0024',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.13.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.13 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.14.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.14 (1).jpeg'),
+   '/uploads/products/23.28.13.jpeg', 'bf-prd-img-0024',
+   JSON_ARRAY('/uploads/products/23.28.13.jpeg','/uploads/products/23.28.13 (1).jpeg','/uploads/products/23.28.14.jpeg','/uploads/products/23.28.14 (1).jpeg'),
    JSON_ARRAY(), 1, 1, 50, 'BF-SAL-001', 0, 5.00, 0),
   -- Hıyar (cccc0003)
   ('bf-prd-0006', 'bereketfide', 'cccc0003-4003-4003-8003-cccccccc0003', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15.jpeg', 'bf-prd-img-0033',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15 (2).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15 (3).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15 (4).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15 (5).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.15 (6).jpeg'),
+   '/uploads/products/23.28.15.jpeg', 'bf-prd-img-0033',
+   JSON_ARRAY('/uploads/products/23.28.15.jpeg','/uploads/products/23.28.15 (1).jpeg','/uploads/products/23.28.15 (2).jpeg','/uploads/products/23.28.15 (3).jpeg','/uploads/products/23.28.15 (4).jpeg','/uploads/products/23.28.15 (5).jpeg','/uploads/products/23.28.15 (6).jpeg'),
    JSON_ARRAY(), 1, 1, 55, 'BF-HIY-001', 0, 5.00, 0),
   -- Kavun (cccc0005)
   ('bf-prd-0007', 'bereketfide', 'cccc0005-4005-4005-8005-cccccccc0005', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.16.jpeg', 'bf-prd-img-0036',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.16.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.16 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.16 (2).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.17.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.17 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.17 (2).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.17 (3).jpeg'),
+   '/uploads/products/23.28.16.jpeg', 'bf-prd-img-0036',
+   JSON_ARRAY('/uploads/products/23.28.16.jpeg','/uploads/products/23.28.16 (1).jpeg','/uploads/products/23.28.16 (2).jpeg','/uploads/products/23.28.17.jpeg','/uploads/products/23.28.17 (1).jpeg','/uploads/products/23.28.17 (2).jpeg','/uploads/products/23.28.17 (3).jpeg'),
    JSON_ARRAY(), 1, 1, 60, 'BF-KAV-001', 0, 5.00, 0),
   -- Aşılı Karpuz (cccc0006)
   ('bf-prd-0008', 'bereketfide', 'cccc0006-4006-4006-8006-cccccccc0006', NULL, 0.00,
-   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.20.jpeg', 'bf-prd-img-0041',
-   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.20.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.22.jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.22 (1).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.22 (2).jpeg','/uploads/products/WhatsApp Image 2026-03-17 at 23.28.23.jpeg'),
+   '/uploads/products/23.28.20.jpeg', 'bf-prd-img-0041',
+   JSON_ARRAY('/uploads/products/23.28.20.jpeg','/uploads/products/23.28.22.jpeg','/uploads/products/23.28.22 (1).jpeg','/uploads/products/23.28.22 (2).jpeg','/uploads/products/23.28.23.jpeg'),
    JSON_ARRAY(), 1, 1, 70, 'BF-KAR-A01', 0, 5.00, 0)
 ON DUPLICATE KEY UPDATE
   `item_type` = VALUES(`item_type`),

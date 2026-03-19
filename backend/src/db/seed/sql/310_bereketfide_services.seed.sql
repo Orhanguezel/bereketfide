@@ -52,7 +52,7 @@ VALUES
 
 -- 3) Teknik Destek ve Danışmanlık (ürün resmi kullan)
 INSERT INTO services (id, module_key, is_active, is_featured, display_order, image_url, storage_asset_id)
-VALUES ('sv010001-0001-4001-9001-000000000003', 'bereketfide', 1, 0, 3, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.33.jpeg', NULL);
+VALUES ('sv010001-0001-4001-9001-000000000003', 'bereketfide', 1, 0, 3, '/uploads/products/23.28.33.jpeg', NULL);
 
 INSERT INTO services_i18n (service_id, locale, title, slug, description, content, alt, tags, meta_title, meta_description)
 VALUES
@@ -69,7 +69,7 @@ VALUES
 
 -- 4) Lojistik ve Güvenli Teslimat (ürün resmi kullan)
 INSERT INTO services (id, module_key, is_active, is_featured, display_order, image_url, storage_asset_id)
-VALUES ('sv010001-0001-4001-9001-000000000004', 'bereketfide', 1, 1, 4, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.34.jpeg', NULL);
+VALUES ('sv010001-0001-4001-9001-000000000004', 'bereketfide', 1, 1, 4, '/uploads/products/23.28.34.jpeg', NULL);
 
 INSERT INTO services_i18n (service_id, locale, title, slug, description, content, alt, tags, meta_title, meta_description)
 VALUES
@@ -86,7 +86,7 @@ VALUES
 
 -- 5) Sözleşmeli Üretim (ürün resmi kullan)
 INSERT INTO services (id, module_key, is_active, is_featured, display_order, image_url, storage_asset_id)
-VALUES ('sv010001-0001-4001-9001-000000000005', 'bereketfide', 1, 0, 5, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.35.jpeg', NULL);
+VALUES ('sv010001-0001-4001-9001-000000000005', 'bereketfide', 1, 0, 5, '/uploads/products/23.28.35.jpeg', NULL);
 
 INSERT INTO services_i18n (service_id, locale, title, slug, description, content, alt, tags, meta_title, meta_description)
 VALUES
@@ -103,7 +103,7 @@ VALUES
 
 -- 6) Özel Çeşit Denemeleri ve Islah (ürün resmi kullan)
 INSERT INTO services (id, module_key, is_active, is_featured, display_order, image_url, storage_asset_id)
-VALUES ('sv010001-0001-4001-9001-000000000006', 'bereketfide', 1, 0, 6, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.36.jpeg', NULL);
+VALUES ('sv010001-0001-4001-9001-000000000006', 'bereketfide', 1, 0, 6, '/uploads/products/23.28.36.jpeg', NULL);
 
 INSERT INTO services_i18n (service_id, locale, title, slug, description, content, alt, tags, meta_title, meta_description)
 VALUES

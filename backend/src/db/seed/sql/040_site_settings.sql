@@ -531,10 +531,10 @@ VALUES
  '{"video_desktop":"/uploads/video/2d7f.mp4","headline_tr":"Kaliteli Fide Üretimi","headline_en":"Quality Seedling Production","subheadline_tr":"Modern seralarımızda aşılı ve standart fide üretimi yapıyoruz","subheadline_en":"We produce grafted and standard seedlings","cta_text_tr":"Ürünlerimiz","cta_text_en":"Our Products","cta_url":"/urunler"}',
  NOW(3), NOW(3)),
 (UUID(), 'home_backgrounds', '*',
- '[{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 1"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg","alt":"Bereket Fide Seraları 2"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 3"}]',
+ '[{"url":"/uploads/products/23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 1"},{"url":"/uploads/products/23.28.37 (3).jpeg","alt":"Bereket Fide Seraları 2"},{"url":"/uploads/products/23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 3"}]',
  NOW(3), NOW(3)),
 (UUID(), 'bereketfide__home_backgrounds', '*',
- '[{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 1"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg","alt":"Bereket Fide Seraları 2"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 3"}]',
+ '[{"url":"/uploads/products/23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 1"},{"url":"/uploads/products/23.28.37 (3).jpeg","alt":"Bereket Fide Seraları 2"},{"url":"/uploads/products/23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 3"}]',
  NOW(3), NOW(3))
 ON DUPLICATE KEY UPDATE
   `value`      = VALUES(`value`),

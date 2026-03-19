@@ -79,7 +79,7 @@ export default async function AboutPage({
 
   const content = normalizeRichContent(page?.content);
   const org = organizationJsonLd(locale);
-  const imageSrc = absoluteAssetUrl(page?.image_url || page?.featured_image) || '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.30.jpeg';
+  const imageSrc = absoluteAssetUrl(page?.image_url || page?.featured_image) || '/uploads/products/23.28.30.jpeg';
 
   const breadcrumbs = [
     { label: companyName, href: localizedPath(locale, '/') },

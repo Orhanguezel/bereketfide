@@ -36,7 +36,7 @@ INSERT INTO `custom_pages`
   `sub_category_id`
 )
 VALUES
-  ('bc010001-5001-4001-9001-cccccccc0001', 'bereketfide_about', 1, 0, 10, 10, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.30.jpeg', NULL, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.30.jpeg', NULL, '[]', '[]', NULL, NULL),
+  ('bc010001-5001-4001-9001-cccccccc0001', 'bereketfide_about', 1, 0, 10, 10, '/uploads/products/23.28.30.jpeg', NULL, '/uploads/products/23.28.30.jpeg', NULL, '[]', '[]', NULL, NULL),
   ('bc010002-5002-4002-9002-cccccccc0002', 'bereketfide_legal', 1, 0, 20, 20, NULL, NULL, NULL, NULL, '[]', '[]', NULL, NULL),
   ('bc010003-5003-4003-9003-cccccccc0003', 'bereketfide_legal', 1, 0, 30, 30, NULL, NULL, NULL, NULL, '[]', '[]', NULL, NULL),
   ('bc010004-5004-4004-9004-cccccccc0004', 'bereketfide_legal', 1, 0, 40, 40, NULL, NULL, NULL, NULL, '[]', '[]', NULL, NULL),

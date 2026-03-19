@@ -82,9 +82,9 @@ ON DUPLICATE KEY UPDATE
 INSERT INTO `gallery_images`
 (`id`, `gallery_id`, `storage_asset_id`, `image_url`, `display_order`, `is_cover`)
 VALUES
-  ('gi-g1-0001', 'kg010001-8001-4001-9001-eeeeeeee0001', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 1, 1),
-  ('gi-g1-0002', 'kg010001-8001-4001-9001-eeeeeeee0001', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', 2, 0),
-  ('gi-g2-0001', 'kg010002-8002-4002-9002-eeeeeeee0002', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', 1, 1)
+  ('gi-g1-0001', 'kg010001-8001-4001-9001-eeeeeeee0001', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/23.28.37 (3).jpeg', 1, 1),
+  ('gi-g1-0002', 'kg010001-8001-4001-9001-eeeeeeee0001', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/23.28.37 (1).jpeg', 2, 0),
+  ('gi-g2-0001', 'kg010002-8002-4002-9002-eeeeeeee0002', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/23.28.37 (1).jpeg', 1, 1)
 ON DUPLICATE KEY UPDATE
   `image_url` = VALUES(`image_url`),
   `display_order` = VALUES(`display_order`),
