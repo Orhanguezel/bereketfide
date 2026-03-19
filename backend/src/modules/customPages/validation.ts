@@ -25,7 +25,10 @@ const LOCALE_LIKE = z
   .transform((s) => normalizeLocale(s) || s.toLowerCase());
 
 const UUID36 = z.string().length(36);
-const URL2000 = z.string().trim().max(2000).url('Geçersiz URL');
+const URL2000 = z.string().trim().max(2000).refine(
+  (v) => v.startsWith('/') || v.startsWith('http://') || v.startsWith('https://'),
+  { message: 'Geçersiz URL (tam URL veya / ile başlayan path olmalı)' },
+);
 
 const SLUG = z
   .string()

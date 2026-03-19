@@ -261,7 +261,9 @@
     "title": "Galerie",
     "description": "Eine Fotogalerie aus unseren abgeschlossenen Projekten, Bauprozessen und architektonischen Details.",
     "viewAll": "Alle Bilder",
+    "backToList": "Zur Galerie",
     "noGalleries": "Noch keine Galerien vorhanden.",
+    "results": "Galerien",
     "photos": "Fotos",
     "emptyStateNote": "Bis Live-Projektbilder verfügbar sind, werden unten Beispiel-Galerietitel angezeigt."
   },
@@ -438,6 +440,18 @@
       "google_oauth_not_configured": "Anmeldung mit Google ist derzeit nicht verfügbar.",
       "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
     }
+  },
+  "catalog": {
+    "title": "Kataloge",
+    "description": "Sehen Sie sich unsere aktuellen Produktkataloge an und öffnen Sie sie als PDF.",
+    "viewCatalog": "Katalog ansehen",
+    "openCatalog": "Katalog öffnen",
+    "downloadCatalog": "PDF herunterladen",
+    "backToCatalogs": "← Zurück zu den Katalogen",
+    "sidebarTitle": "Weitere Kataloge",
+    "sidebarCtaTitle": "Unsere Kataloge ansehen",
+    "sidebarCtaDesc": "Greifen Sie hier auf unsere aktuellen Produktkataloge zu.",
+    "noFile": "Für diesen Katalog wurde noch keine Datei hinzugefügt."
   },
   "legal": {
     "title": "Rechtliches",

@@ -65,9 +65,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: `/hizmetler/${slug}`,
-    title: service.meta_title || (locale.startsWith('en')
-      ? `${service.title} | Bereket Fide Activities`
-      : `${service.title} | Bereket Fide Faaliyetleri`),
+    title: service.meta_title || service.title,
     description: service.meta_description || service.description,
     ogImage: absoluteAssetUrl(service.image_url) || undefined,
   });
@@ -101,30 +99,32 @@ export default async function ServiceDetailPage({
   return (
     <>
       <style>{`
-        .sd-title{font-family:var(--font-heading);font-size:28px;font-weight:700;color:var(--color-text-primary);line-height:1.25;margin:4px 0 16px}
-        .sd-hero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--color-bg-muted);margin-top:16px}
-        .sd-desc{font-size:16px;color:var(--color-text-secondary);line-height:1.7;margin-top:16px;max-width:720px}
-        .sd-content{margin-top:24px;font-size:15px;line-height:1.8;color:var(--color-text-secondary)}
-        .sd-content p{margin-bottom:16px}
-        .sd-content h2,.sd-content h3{font-family:var(--font-heading);color:var(--color-text-primary);margin:28px 0 12px}
-        .sd-content a{color:var(--color-brand);text-decoration:none}
+        .sd-title{font-family:var(--font-heading);font-size:36px;font-weight:800;color:var(--color-text-primary);line-height:1.2;margin:16px 0 24px}
+        .sd-hero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--color-bg-muted);border-radius:16px;box-shadow:0 12px 24px rgba(0,0,0,0.06);margin-bottom:32px}
+        .sd-desc{font-size:18px;color:var(--color-text-secondary);line-height:1.7;margin-top:0;margin-bottom:24px;font-weight:500;max-width:800px}
+        .sd-content{margin-top:32px;font-size:16px;line-height:1.8;color:var(--color-text-secondary)}
+        .sd-content p{margin-bottom:20px}
+        .sd-content h2,.sd-content h3{font-family:var(--font-heading);color:var(--color-text-primary);margin:32px 0 16px;font-weight:700}
+        .sd-content a{color:var(--color-brand);text-decoration:none;font-weight:500}
         .sd-content a:hover{text-decoration:underline}
-        .sd-content img{max-width:100%;height:auto;margin:16px 0}
-        .sd-content ul,.sd-content ol{margin:12px 0;padding-left:24px}
-        .sd-content li{margin-bottom:8px}
-        .sd-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px}
-        .sd-tag{padding:4px 12px;border-radius:2px;border:1px solid var(--color-border);font-size:12px;color:var(--color-text-secondary)}
-        .sd-sidebar-card{border:1px solid var(--color-border);padding:20px;margin-bottom:20px}
-        .sd-sidebar-card h3{font-family:var(--font-heading);font-size:18px;font-weight:700;color:var(--color-text-primary);margin:0 0 16px}
-        .sd-sidebar-project{display:flex;gap:12px;text-decoration:none;margin-bottom:14px}
+        .sd-content img{border-radius:12px;max-width:100%;height:auto;margin:24px 0}
+        .sd-content ul,.sd-content ol{margin:16px 0;padding-left:24px}
+        .sd-content li{margin-bottom:10px}
+        .sd-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+        .sd-tag{padding:6px 14px;border-radius:24px;border:1px solid var(--color-border);font-size:13px;font-weight:600;color:var(--color-text-secondary);background:var(--color-surface);transition:all .2s ease}
+        .sd-tag:hover{border-color:var(--color-brand);color:var(--color-brand)}
+        .sd-sidebar-card{background:var(--color-surface);border:1px solid var(--color-border);padding:28px 24px;border-radius:16px;margin-bottom:24px;transition:box-shadow .3s ease}
+        .sd-sidebar-card:hover{box-shadow:0 12px 24px rgba(0,0,0,0.06)}
+        .sd-sidebar-card h3{font-family:var(--font-heading);font-size:18px;font-weight:800;color:var(--color-text-primary);margin:0 0 20px;text-transform:uppercase;letter-spacing:0.05em}
+        .sd-sidebar-project{display:flex;gap:16px;text-decoration:none;margin-bottom:20px;align-items:center}
         .sd-sidebar-project:last-child{margin-bottom:0}
-        .sd-sidebar-project-thumb{position:relative;width:80px;height:60px;flex-shrink:0;overflow:hidden;background:var(--color-bg-muted)}
-        .sd-sidebar-project-title{font-size:14px;font-weight:600;color:var(--color-text-primary);line-height:1.3}
+        .sd-sidebar-project-thumb{position:relative;width:90px;height:68px;flex-shrink:0;overflow:hidden;background:var(--color-bg-muted);border-radius:8px}
+        .sd-sidebar-project-title{font-size:15px;font-weight:700;color:var(--color-text-primary);line-height:1.4;transition:color .2s ease}
         .sd-sidebar-project:hover .sd-sidebar-project-title{color:var(--color-brand)}
-        .sd-sidebar-item{display:block;padding:8px 0;font-size:14px;color:var(--color-text-secondary);text-decoration:none;border-bottom:1px solid var(--color-border)}
+        .sd-sidebar-item{display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--color-text-secondary);text-decoration:none;border-bottom:1px solid var(--color-border);transition:all .2s ease}
         .sd-sidebar-item:last-child{border-bottom:none}
-        .sd-sidebar-item:hover{color:var(--color-brand)}
-        @media(min-width:1024px){.sd-layout{display:grid;grid-template-columns:1fr 340px;gap:40px}}
+        .sd-sidebar-item:hover{color:var(--color-brand);padding-left:4px}
+        @media(min-width:1024px){.sd-layout{display:grid;grid-template-columns:1fr 380px;gap:60px}}
       `}</style>
 
       <JsonLd
@@ -159,6 +159,11 @@ export default async function ServiceDetailPage({
         <div className="sd-layout">
           {/* LEFT COLUMN */}
           <div>
+            {/* Description */}
+            {service.description && (
+              <p className="sd-desc">{service.description}</p>
+            )}
+
             {/* Hero image - only if exists */}
             {imageSrc && (
               <div className="sd-hero">
@@ -179,10 +184,6 @@ export default async function ServiceDetailPage({
               </div>
             )}
 
-            {/* Description */}
-            {service.description && (
-              <p className="sd-desc">{service.description}</p>
-            )}
 
             {/* Content */}
             {content && (
@@ -206,43 +207,7 @@ export default async function ServiceDetailPage({
               </div>
             )}
 
-            {/* CTA */}
-            <div
-              style={{
-                marginTop: 40,
-                padding: '24px 28px',
-                background: 'var(--color-bg-dark)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: 16,
-              }}
-            >
-              <div>
-                <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-text-on-dark)', margin: 0 }}>
-                  {t('common.offerCtaTitle')}
-                </h3>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', marginTop: 4 }}>
-                  {t('common.offerCtaDescription')}
-                </p>
-              </div>
-              <Link
-                href={localizedPath(locale, '/teklif')}
-                style={{
-                  padding: '10px 24px',
-                  background: 'var(--color-brand)',
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: 14,
-                  textDecoration: 'none',
-                  borderRadius: 2,
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {t('common.requestOffer')}
-              </Link>
-            </div>
+
           </div>
 
           {/* RIGHT SIDEBAR */}
@@ -250,11 +215,11 @@ export default async function ServiceDetailPage({
             {/* Related projects */}
             {relatedProjects.length > 0 && (
               <div className="sd-sidebar-card">
-                <h3>{isEn ? 'Related Projects' : 'İlgili Projeler'}</h3>
+                <h3>{isEn ? 'Related Products' : 'İlgili Ürünler'}</h3>
                 {relatedProjects.map((p: any) => (
                   <Link
                     key={p.id ?? p.title}
-                    href={p.slug ? localizedPath(locale, `/projeler/${p.slug}`) : '#'}
+                    href={p.slug ? localizedPath(locale, `/urunler/${p.slug}`) : '#'}
                     className="sd-sidebar-project"
                   >
                     {absoluteAssetUrl(p.image_url) && (
@@ -279,10 +244,10 @@ export default async function ServiceDetailPage({
                   </Link>
                 ))}
                 <Link
-                  href={localizedPath(locale, '/projeler')}
+                  href={localizedPath(locale, '/urunler')}
                   style={{ fontSize: 13, color: 'var(--color-brand)', textDecoration: 'none', marginTop: 10, display: 'inline-block' }}
                 >
-                  {isEn ? 'All Projects »' : 'Tüm Projeler »'}
+                  {isEn ? 'All Products »' : 'Tüm Ürünler »'}
                 </Link>
               </div>
             )}
@@ -306,25 +271,15 @@ export default async function ServiceDetailPage({
             {/* Offer CTA sidebar */}
             <div
               className="sd-sidebar-card"
-              style={{ background: 'var(--color-bg-secondary)', borderColor: 'transparent' }}
+              style={{ background: 'var(--color-surface)', borderTop: '4px solid var(--color-brand)' }}
             >
-              <h3 style={{ fontSize: 16 }}>{t('common.offerCtaTitle')}</h3>
-              <p style={{ fontSize: 13, color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+              <h3 style={{ fontSize: 18, fontWeight: 800 }}>{t('common.offerCtaTitle')}</h3>
+              <p style={{ fontSize: 15, color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
                 {t('common.offerCtaDescription')}
               </p>
               <Link
                 href={localizedPath(locale, '/teklif')}
-                style={{
-                  display: 'inline-block',
-                  marginTop: 12,
-                  padding: '8px 20px',
-                  background: 'var(--color-brand)',
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  borderRadius: 2,
-                }}
+                className="mt-5 flex items-center justify-center rounded-lg bg-(--color-brand) px-5 py-3 text-sm font-bold uppercase tracking-wide text-white no-underline transition-opacity hover:opacity-85"
               >
                 {t('common.requestOffer')}
               </Link>
@@ -333,16 +288,7 @@ export default async function ServiceDetailPage({
             {/* All services link */}
             <Link
               href={localizedPath(locale, '/hizmetler')}
-              style={{
-                display: 'block',
-                textAlign: 'center',
-                padding: '12px',
-                fontSize: 14,
-                fontWeight: 600,
-                color: 'var(--color-brand)',
-                textDecoration: 'none',
-                border: '1px solid var(--color-border)',
-              }}
+              className="flex items-center justify-center rounded-lg border-2 border-(--color-brand) px-4 py-3.5 text-sm font-bold text-(--color-brand-text) no-underline transition-colors hover:bg-(--color-brand) hover:text-white"
             >
               {isEn ? '← All Activities' : '← Tüm Faaliyetler'}
             </Link>

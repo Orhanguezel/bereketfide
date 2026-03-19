@@ -17,8 +17,9 @@ export function NotificationBell() {
   const t = useAdminT('notifications');
   const tc = useAdminT('common');
   
-  const { data: unreadData } = useGetUnreadCountQuery(undefined, {
-    pollingInterval: 30000, // 30 seconds
+  const { data: unreadData, error: unreadError } = useGetUnreadCountQuery(undefined, {
+    pollingInterval: 60000,
+    skipPollingIfUnfocused: true,
   });
   
   const { data: notifications = [] } = useListNotificationsQuery(

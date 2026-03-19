@@ -24,4 +24,18 @@ export async function registerLibrary(app: FastifyInstance) {
 
   // files
   app.get(`${BASE}/:id/files`, { config: { public: true } }, listLibraryFilesPublic);
+
+  // download tracking
+  app.post(`${BASE}/:id/track-download`, { config: { public: true } }, async (req, reply) => {
+    const { id } = req.params as { id: string };
+    try {
+      const pool = (app as any).mysql?.pool || (app as any).db;
+      if (pool) {
+        await pool.query('UPDATE library SET download_count = download_count + 1 WHERE id = ?', [id]);
+      }
+      reply.send({ ok: true });
+    } catch {
+      reply.send({ ok: false });
+    }
+  });
 }

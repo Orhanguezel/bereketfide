@@ -18,7 +18,7 @@ export default function OpenGraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: 'linear-gradient(135deg, #0f0e0d 0%, #1a1816 60%, #201e1b 100%)',
+          background: 'linear-gradient(135deg, #0a1f0c 0%, #1b5e20 60%, #2e7d32 100%)',
           color: '#ffffff',
           padding: '56px',
           fontFamily: 'Arial, sans-serif',
@@ -38,7 +38,7 @@ export default function OpenGraphImage() {
               fontSize: 22,
               letterSpacing: 4,
               textTransform: 'uppercase',
-              color: '#b8a98a',
+              color: '#4caf50',
               fontWeight: 600,
             }}
           >
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
               display: 'flex',
               width: 80,
               height: 3,
-              background: '#b8a98a',
+              background: '#4caf50',
             }}
           />
         </div>
@@ -73,7 +73,7 @@ export default function OpenGraphImage() {
             style={{
               display: 'flex',
               fontSize: 28,
-              color: '#c8c2b8',
+              color: '#a5d6a7',
               maxWidth: 820,
             }}
           >
@@ -88,11 +88,11 @@ export default function OpenGraphImage() {
             alignItems: 'center',
             justifyContent: 'space-between',
             fontSize: 22,
-            color: '#8c8880',
+            color: '#66bb6a',
           }}
         >
           <div style={{ display: 'flex' }}>bereketfide.com.tr</div>
-          <div style={{ display: 'flex', color: '#b8a98a', fontWeight: 600 }}>
+          <div style={{ display: 'flex', color: '#4caf50', fontWeight: 600 }}>
             Kalite · Guven · Dogallik
           </div>
         </div>

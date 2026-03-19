@@ -15,9 +15,12 @@ export interface FooterSectionLike {
 
 export function buildDefaultMenu(locale: string, t: TranslateFn): MenuItemLike[] {
   return [
+    { title: t('home'), url: localizedPath(locale, '/') },
     { title: t('products'), url: localizedPath(locale, '/urunler') },
+    { title: t('blog'), url: localizedPath(locale, '/blog') },
+    { title: t('gallery'), url: localizedPath(locale, '/galeri') },
+    { title: t('news'), url: localizedPath(locale, '/haberler') },
     { title: t('about'), url: localizedPath(locale, '/hakkimizda') },
-    { title: t('blog'), url: localizedPath(locale, '/haberler') },
     { title: t('contact'), url: localizedPath(locale, '/iletisim') },
   ];
 }
@@ -55,8 +58,10 @@ export function buildDefaultFooterSections(
       title: footerT('sections.explore'),
       items: [
         { label: navT('products'), url: localizedPath(locale, '/urunler') },
+        { label: navT('blog'), url: localizedPath(locale, '/blog') },
+        { label: navT('gallery'), url: localizedPath(locale, '/galeri') },
+        { label: navT('news'), url: localizedPath(locale, '/haberler') },
         { label: navT('about'), url: localizedPath(locale, '/hakkimizda') },
-        { label: navT('blog'), url: localizedPath(locale, '/haberler') },
         { label: navT('contact'), url: localizedPath(locale, '/iletisim') },
       ],
     },

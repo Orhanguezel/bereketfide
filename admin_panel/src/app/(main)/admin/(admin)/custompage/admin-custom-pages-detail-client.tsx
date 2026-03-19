@@ -31,7 +31,7 @@ import { CustomPageForm, type CustomPageFormValues } from './_components/custom-
 
 function isUuidLike(v?: string) {
   if (!v) return false;
-  return /^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/i.test(v);
+  return /^[0-9a-z-]{36}$/i.test(v);
 }
 
 function getErrMessage(err: unknown, t: any): string {
@@ -236,6 +236,7 @@ export default function AdminCustomPageDetailClient({
 
       if (loc !== queryLocale) setActiveLocale(loc);
     } catch (err) {
+      console.error('[CustomPage Save Error]', JSON.stringify((err as any)?.data ?? err, null, 2));
       toast.error(getErrMessage(err, t));
     }
   };

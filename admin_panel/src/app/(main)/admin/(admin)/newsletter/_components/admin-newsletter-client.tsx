@@ -144,7 +144,7 @@ export default function AdminNewsletterClient() {
       closeEdit();
     } catch (err: any) {
       if (err instanceof SyntaxError) {
-        toast.error('Geçersiz JSON formatı.');
+        toast.error(t('invalidJson'));
       } else {
         toast.error(err?.data?.error?.message || err?.message || t('messages.saveError'));
       }

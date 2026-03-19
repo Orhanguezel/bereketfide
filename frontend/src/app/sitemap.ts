@@ -105,7 +105,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes = [
     { path: '', changeFrequency: 'weekly' as const, priority: 1.0 },
-    { path: '/projeler', changeFrequency: 'weekly' as const, priority: 0.9 },
+    { path: '/urunler', changeFrequency: 'weekly' as const, priority: 0.9 },
     { path: '/hizmetler', changeFrequency: 'weekly' as const, priority: 0.9 },
     { path: '/galeri', changeFrequency: 'weekly' as const, priority: 0.8 },
     { path: '/haberler', changeFrequency: 'weekly' as const, priority: 0.7 },
@@ -133,7 +133,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     for (const item of products) {
       entries.push({
-        url: localizedUrl(locale, `/projeler/${item.slug}`),
+        url: localizedUrl(locale, `/urunler/${item.slug}`),
         lastModified: resolveLastModified(item),
         changeFrequency: 'weekly',
         priority: 0.8,

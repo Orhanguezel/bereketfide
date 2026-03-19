@@ -107,7 +107,8 @@ function buildLocalesOptions(appLocales: any[] | undefined, _defaultLocale: any)
   // Hiç aktif dil yoksa fallback
   if (!mapped.length) {
     return [
-      { value: 'tr', label: 'Türkçe (tr)', isDefault: true, isActive: true },
+      { value: 'tr', label: 'Türkçe (tr)', isDefault: true, isActive: true }, // fallback — dil listesi boşsa
+
     ];
   }
 
@@ -408,7 +409,7 @@ export default function AdminSiteSettingsClient() {
                     {t('admin.siteSettings.tabs.brandMedia')}
                   </TabsTrigger>
                   <TabsTrigger value="api" className="whitespace-nowrap text-xs sm:text-sm">
-                    API & Servisler
+                    {t('admin.siteSettings.tabs.apiServices')}
                   </TabsTrigger>
                   <TabsTrigger value="locales" className="whitespace-nowrap text-xs sm:text-sm">
                     {t('admin.siteSettings.tabs.locales')}

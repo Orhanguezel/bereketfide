@@ -36,6 +36,18 @@ type Filters = {
   locale: string;
 };
 
+function normalizeModuleKey(value?: string): string {
+  const key = String(value || '').trim();
+  if (!key) return '';
+
+  const aliases: Record<string, string> = {
+    bereketfide_blog: 'blog',
+    bereket_blog: 'blog',
+  };
+
+  return aliases[key] || key;
+}
+
 function labelOfModuleKey(k: string, t: any) {
   const map: Record<string, string> = {
     blog: t('admin.customPage.moduleLabels.blog'),
@@ -73,10 +85,18 @@ export default function AdminCustomPagesClient({
 
   const [filters, setFilters] = React.useState<Filters>({
     search: '',
-    moduleKey: initialModuleKey.trim(),
+    moduleKey: normalizeModuleKey(initialModuleKey),
     publishedFilter: 'all',
     locale: '',
   });
+
+  React.useEffect(() => {
+    const nextModuleKey = normalizeModuleKey(initialModuleKey);
+    setFilters((prev) => {
+      if (prev.moduleKey === nextModuleKey) return prev;
+      return { ...prev, moduleKey: nextModuleKey };
+    });
+  }, [initialModuleKey]);
 
   // initial locale in state (no URL sync)
   React.useEffect(() => {
@@ -165,7 +185,7 @@ export default function AdminCustomPagesClient({
     setFilters((p) => ({
       ...p,
       search: next.search,
-      moduleKey: next.moduleKey === '__all__' ? '' : next.moduleKey,
+      moduleKey: next.moduleKey === '__all__' ? '' : normalizeModuleKey(next.moduleKey),
       publishedFilter: next.publishedFilter as any,
       locale: next.locale,
     }));

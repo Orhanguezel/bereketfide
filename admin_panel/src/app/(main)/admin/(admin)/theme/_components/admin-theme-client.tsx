@@ -65,7 +65,7 @@ function ColorField({
 
 /* ── Preview Card ── */
 
-function ThemePreview({ colors }: { colors: ColorTokens }) {
+function ThemePreview({ colors, t }: { colors: ColorTokens; t: (key: string, params?: any, fallback?: string) => string }) {
   return (
     <div
       className="rounded-lg border overflow-hidden"
@@ -73,41 +73,41 @@ function ThemePreview({ colors }: { colors: ColorTokens }) {
     >
       {/* Nav */}
       <div className="px-4 py-2 flex items-center justify-between" style={{ backgroundColor: colors.navBg, color: colors.navFg }}>
-        <span className="text-sm font-bold">Bereket Fide</span>
+        <span className="text-sm font-bold">{t('preview.brandName')}</span>
         <div className="flex gap-2 text-xs">
-          <span>Anasayfa</span>
-          <span>Ürünler</span>
-          <span>İletişim</span>
+          <span>{t('preview.navHome')}</span>
+          <span>{t('preview.navProducts')}</span>
+          <span>{t('preview.navContact')}</span>
         </div>
       </div>
 
       {/* Body */}
       <div className="p-4 space-y-3" style={{ backgroundColor: colors.surfaceBase }}>
         <div className="rounded-md p-3" style={{ backgroundColor: colors.surfaceRaised, border: `1px solid ${colors.border}` }}>
-          <div className="text-sm font-semibold" style={{ color: colors.textStrong }}>Başlık Metni</div>
-          <div className="text-xs mt-1" style={{ color: colors.textBody }}>Gövde metin örneği</div>
-          <div className="text-xs mt-1" style={{ color: colors.textMuted }}>Soluk metin</div>
+          <div className="text-sm font-semibold" style={{ color: colors.textStrong }}>{t('preview.headingText')}</div>
+          <div className="text-xs mt-1" style={{ color: colors.textBody }}>{t('preview.bodyText')}</div>
+          <div className="text-xs mt-1" style={{ color: colors.textMuted }}>{t('preview.mutedText')}</div>
         </div>
 
         <div className="flex gap-2">
           <div className="rounded-md px-3 py-1.5 text-xs text-white" style={{ backgroundColor: colors.primary }}>
-            Ana Buton
+            {t('preview.primaryButton')}
           </div>
           <div className="rounded-md px-3 py-1.5 text-xs" style={{ backgroundColor: colors.accent, color: colors.textStrong }}>
-            Vurgu
+            {t('preview.accent')}
           </div>
         </div>
 
         {/* Dark section preview */}
         <div className="rounded-md p-3" style={{ backgroundColor: colors.surfaceDarkBg }}>
-          <div className="text-xs font-semibold" style={{ color: colors.surfaceDarkHeading }}>Koyu Bölüm</div>
-          <div className="text-xs mt-1" style={{ color: colors.surfaceDarkText }}>Koyu bölüm metin</div>
+          <div className="text-xs font-semibold" style={{ color: colors.surfaceDarkHeading }}>{t('preview.darkSection')}</div>
+          <div className="text-xs mt-1" style={{ color: colors.surfaceDarkText }}>{t('preview.darkSectionText')}</div>
         </div>
       </div>
 
       {/* Footer */}
       <div className="px-4 py-2 text-xs" style={{ backgroundColor: colors.footerBg, color: colors.footerFg }}>
-        © Bereket Fide
+        {t('preview.copyright')}
       </div>
     </div>
   );
@@ -148,9 +148,9 @@ export default function AdminThemeClient() {
         radius: draft.radius,
         darkMode: draft.darkMode,
       }).unwrap();
-      toast.success(t('saved') || 'Tema kaydedildi');
+      toast.success(t('saved'));
     } catch {
-      toast.error(t('saveError') || 'Kayıt başarısız');
+      toast.error(t('saveError'));
     }
   };
 
@@ -158,9 +158,9 @@ export default function AdminThemeClient() {
     try {
       const result = await resetTheme().unwrap();
       setDraft(result);
-      toast.success(t('reset') || 'Varsayılana sıfırlandı');
+      toast.success(t('reset'));
     } catch {
-      toast.error(t('resetError') || 'Sıfırlama başarısız');
+      toast.error(t('resetError'));
     }
   };
 
@@ -179,17 +179,17 @@ export default function AdminThemeClient() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-base">{t('title') || 'Tema Ayarları'}</CardTitle>
-              <CardDescription>{t('description') || 'Frontend renk, tipografi ve görünüm ayarlarını yönetin.'}</CardDescription>
+              <CardTitle className="text-base">{t('title')}</CardTitle>
+              <CardDescription>{t('description')}</CardDescription>
             </div>
             <div className="flex gap-2">
               <Button variant="outline" size="sm" onClick={handleReset} disabled={saving || resetting}>
                 <RotateCcw className="mr-2 size-4" />
-                {t('resetButton') || 'Sıfırla'}
+                {t('resetButton')}
               </Button>
               <Button size="sm" onClick={handleSave} disabled={saving || resetting}>
                 <Save className="mr-2 size-4" />
-                {saving ? (t('saving') || 'Kaydediliyor...') : (t('saveButton') || 'Kaydet')}
+                {saving ? t('saving') : t('saveButton')}
               </Button>
             </div>
           </div>
@@ -203,15 +203,15 @@ export default function AdminThemeClient() {
             <TabsList>
               <TabsTrigger value="colors">
                 <Palette className="mr-2 size-4" />
-                {t('colorsTab') || 'Renkler'}
+                {t('colorsTab') }
               </TabsTrigger>
               <TabsTrigger value="typography">
                 <Type className="mr-2 size-4" />
-                {t('typographyTab') || 'Tipografi'}
+                {t('typographyTab') }
               </TabsTrigger>
               <TabsTrigger value="general">
                 <CircleDot className="mr-2 size-4" />
-                {t('generalTab') || 'Genel'}
+                {t('generalTab') }
               </TabsTrigger>
             </TabsList>
 
@@ -242,30 +242,30 @@ export default function AdminThemeClient() {
             <TabsContent value="typography" className="space-y-4 mt-4">
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-sm">{t('fonts') || 'Font Ailesi'}</CardTitle>
+                  <CardTitle className="text-sm">{t('fonts') }</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label>{t('fontHeading') || 'Başlık Fontu'}</Label>
+                    <Label>{t('fontHeading') }</Label>
                     <Input
                       value={draft.typography.fontHeading}
                       onChange={(e) => setDraft((p) => p ? { ...p, typography: { ...p.typography, fontHeading: e.target.value } } : p)}
                       placeholder="Syne, system-ui, sans-serif"
                     />
                     <div className="text-2xl font-bold mt-2" style={{ fontFamily: draft.typography.fontHeading }}>
-                      Bereket Fide Başlık Önizleme
+                      {t('fontHeadingPreview')}
                     </div>
                   </div>
                   <Separator />
                   <div className="space-y-2">
-                    <Label>{t('fontBody') || 'Gövde Fontu'}</Label>
+                    <Label>{t('fontBody') }</Label>
                     <Input
                       value={draft.typography.fontBody}
                       onChange={(e) => setDraft((p) => p ? { ...p, typography: { ...p.typography, fontBody: e.target.value } } : p)}
                       placeholder="DM Sans, system-ui, sans-serif"
                     />
                     <div className="text-sm mt-2" style={{ fontFamily: draft.typography.fontBody }}>
-                      Bu bir gövde metin önizlemesidir. Bereket Fide olarak, kaliteli fide üretimi yapıyoruz.
+                      {t('fontBodyPreview')}
                     </div>
                   </div>
                 </CardContent>
@@ -276,7 +276,7 @@ export default function AdminThemeClient() {
             <TabsContent value="general" className="space-y-4 mt-4">
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-sm">{t('borderRadius') || 'Köşe Yuvarlaklığı'}</CardTitle>
+                  <CardTitle className="text-sm">{t('borderRadius') }</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Select
@@ -312,14 +312,14 @@ export default function AdminThemeClient() {
 
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-sm">{t('darkModeLabel') || 'Tema Modu'}</CardTitle>
+                  <CardTitle className="text-sm">{t('darkModeLabel') }</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex gap-2">
                     {([
-                      { value: 'light', icon: Sun, label: 'Açık' },
-                      { value: 'dark', icon: Moon, label: 'Koyu' },
-                      { value: 'system', icon: Monitor, label: 'Sistem' },
+                      { value: 'light', icon: Sun, label: t('darkModeLight') },
+                      { value: 'dark', icon: Moon, label: t('darkModeDark') },
+                      { value: 'system', icon: Monitor, label: t('darkModeSystem') },
                     ] as const).map(({ value, icon: Icon, label }) => (
                       <Button
                         key={value}
@@ -342,10 +342,10 @@ export default function AdminThemeClient() {
         <div className="space-y-4">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm">{t('preview') || 'Canlı Önizleme'}</CardTitle>
+              <CardTitle className="text-sm">{t('preview') }</CardTitle>
             </CardHeader>
             <CardContent>
-              <ThemePreview colors={draft.colors} />
+              <ThemePreview colors={draft.colors} t={t} />
             </CardContent>
           </Card>
         </div>

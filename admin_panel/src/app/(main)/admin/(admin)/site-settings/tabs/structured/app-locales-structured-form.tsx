@@ -6,6 +6,8 @@
 
 import React from "react";
 
+import { useAdminTranslations } from "@/i18n";
+import { usePreferencesStore } from "@/stores/preferences/preferences-provider";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -91,6 +93,8 @@ export const AppLocalesStructuredForm: React.FC<AppLocalesStructuredFormProps> =
   onChange,
   disabled,
 }) => {
+  const adminLocale = usePreferencesStore((s) => s.adminLocale);
+  const t = useAdminTranslations(adminLocale || undefined);
   const items = appLocalesObjToForm(value);
   const [addValue, setAddValue] = React.useState("");
 
@@ -129,7 +133,7 @@ export const AppLocalesStructuredForm: React.FC<AppLocalesStructuredFormProps> =
     <div className="space-y-4">
       <Alert variant="default" className="py-2">
         <AlertDescription className="text-sm">
-          Desteklenen dilleri yönetin. Varsayılan dil yalnızca bir tane olabilir.
+          {t('admin.siteSettings.structured.appLocales.description')}
         </AlertDescription>
       </Alert>
 
@@ -151,7 +155,7 @@ export const AppLocalesStructuredForm: React.FC<AppLocalesStructuredFormProps> =
                 onCheckedChange={(v) => update(i, { is_default: v })}
                 disabled={disabled}
               />
-              <Label className="text-[10px] w-16">Varsayılan</Label>
+              <Label className="text-[10px] w-16">{t('admin.siteSettings.structured.appLocales.defaultLabel')}</Label>
             </div>
 
             <div className="flex items-center gap-2">
@@ -160,7 +164,7 @@ export const AppLocalesStructuredForm: React.FC<AppLocalesStructuredFormProps> =
                 onCheckedChange={(v) => update(i, { is_active: v })}
                 disabled={disabled}
               />
-              <Label className="text-[10px] w-8">Aktif</Label>
+              <Label className="text-[10px] w-8">{t('admin.siteSettings.structured.appLocales.activeLabel')}</Label>
             </div>
 
             <Button
@@ -170,7 +174,7 @@ export const AppLocalesStructuredForm: React.FC<AppLocalesStructuredFormProps> =
               className="h-7 w-7 shrink-0 text-destructive hover:text-destructive"
               onClick={() => remove(i)}
               disabled={disabled || item.is_default}
-              title={item.is_default ? "Varsayılan dil silinemez" : "Sil"}
+              title={item.is_default ? t('admin.siteSettings.structured.appLocales.defaultCannotDelete') : t('admin.siteSettings.structured.appLocales.delete')}
             >
               <Trash2 className="h-3.5 w-3.5" />
             </Button>
@@ -183,7 +187,7 @@ export const AppLocalesStructuredForm: React.FC<AppLocalesStructuredFormProps> =
         <div className="flex items-center gap-2">
           <Select value={addValue} onValueChange={(v) => add(v)} disabled={disabled}>
             <SelectTrigger className="w-60 h-8">
-              <SelectValue placeholder="Dil seçin..." />
+              <SelectValue placeholder={t('admin.siteSettings.structured.appLocales.selectLocale')} />
             </SelectTrigger>
             <SelectContent>
               {availableToAdd.map((l) => (
@@ -194,7 +198,7 @@ export const AppLocalesStructuredForm: React.FC<AppLocalesStructuredFormProps> =
               ))}
             </SelectContent>
           </Select>
-          <span className="text-xs text-muted-foreground">Yeni dil ekle</span>
+          <span className="text-xs text-muted-foreground">{t('admin.siteSettings.structured.appLocales.addNew')}</span>
         </div>
       )}
     </div>

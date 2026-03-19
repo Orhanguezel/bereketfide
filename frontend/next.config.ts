@@ -41,6 +41,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/:locale/projeler',
+        destination: '/:locale/urunler',
+        permanent: true,
+      },
+      {
+        source: '/:locale/projeler/:slug',
+        destination: '/:locale/urunler/:slug',
+        permanent: true,
+      },
+      {
         source: '/',
         destination: '/tr',
         permanent: true,

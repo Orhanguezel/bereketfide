@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { Pencil, RefreshCcw, Plus, ChevronRight } from 'lucide-react';
+import { RefreshCcw, Plus, ChevronRight } from 'lucide-react';
 import { useAdminTranslations } from '@/i18n';
 import { usePreferencesStore } from '@/stores/preferences/preferences-provider';
 
@@ -16,7 +16,6 @@ import type { SiteSetting, SettingValue } from '@/integrations/shared';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 /* ----------------------------- config ----------------------------- */
 
@@ -25,6 +24,7 @@ const GENERAL_KEYS = [
   'hero',
   'hero_video',
   'hero_config',
+  'home_backgrounds',
   'seo_pages',
   'contact_info',
   'socials',
@@ -35,77 +35,6 @@ const GENERAL_KEYS = [
 
 type GeneralKey = (typeof GENERAL_KEYS)[number];
 
-const KEY_LABELS: Record<string, Record<GeneralKey, string>> = {
-  tr: {
-    app_locales: 'Dil Ayarları',
-    hero: 'Anasayfa Hero',
-    hero_video: 'Hero Video',
-    hero_config: 'Hero İçerik (Başlık, Buton)',
-    seo_pages: 'Sayfa SEO Ayarları',
-    contact_info: 'İletişim Bilgileri',
-    socials: 'Sosyal Medya',
-    businessHours: 'Çalışma Saatleri',
-    company_profile: 'Firma Bilgileri',
-    ui_header: 'Menü Başlıkları',
-  },
-  en: {
-    app_locales: 'Language Settings',
-    hero: 'Homepage Hero',
-    hero_video: 'Hero Video',
-    hero_config: 'Hero Content (Title, Button)',
-    seo_pages: 'Page SEO Settings',
-    contact_info: 'Contact Info',
-    socials: 'Social Media',
-    businessHours: 'Business Hours',
-    company_profile: 'Company Profile',
-    ui_header: 'Menu Labels',
-  },
-  de: {
-    app_locales: 'Spracheinstellungen',
-    hero: 'Homepage Hero',
-    hero_video: 'Hero-Video',
-    hero_config: 'Hero-Inhalt (Titel, Button)',
-    seo_pages: 'Seiten-SEO-Einstellungen',
-    contact_info: 'Kontaktinformationen',
-    socials: 'Soziale Medien',
-    businessHours: 'Öffnungszeiten',
-    company_profile: 'Firmenprofil',
-    ui_header: 'Menü-Beschriftungen',
-  },
-};
-
-const KEY_DESCRIPTIONS: Record<string, Record<GeneralKey, string>> = {
-  tr: {
-    app_locales: 'Desteklenen diller ve varsayılan dil',
-    hero: 'Hero videoları, başlık ve buton ayarları',
-    seo_pages: 'Her sayfanın başlık, açıklama ve OG görseli',
-    contact_info: 'Telefon, e-posta, adres, harita',
-    socials: 'Instagram, Facebook, LinkedIn, YouTube, X',
-    businessHours: 'Haftalık açılış-kapanış saatleri',
-    company_profile: 'Firma adı, slogan, hakkında metni',
-    ui_header: 'Navigasyon menüsü ve buton etiketleri',
-  },
-  en: {
-    app_locales: 'Supported languages and default language',
-    hero: 'Hero videos, headline and button settings',
-    seo_pages: 'Title, description and OG image per page',
-    contact_info: 'Phone, email, address, map',
-    socials: 'Instagram, Facebook, LinkedIn, YouTube, X',
-    businessHours: 'Weekly opening & closing hours',
-    company_profile: 'Company name, slogan, about text',
-    ui_header: 'Navigation menu and button labels',
-  },
-  de: {
-    app_locales: 'Unterstützte Sprachen und Standardsprache',
-    hero: 'Hero-Videos, Überschrift und Button-Einstellungen',
-    seo_pages: 'Titel, Beschreibung und OG-Bild pro Seite',
-    contact_info: 'Telefon, E-Mail, Adresse, Karte',
-    socials: 'Instagram, Facebook, LinkedIn, YouTube, X',
-    businessHours: 'Wöchentliche Öffnungs- und Schließzeiten',
-    company_profile: 'Firmenname, Slogan, Über-uns-Text',
-    ui_header: 'Navigationsmenü und Schaltflächenbeschriftungen',
-  },
-};
 
 const DEFAULTS_BY_KEY: Record<GeneralKey, SettingValue> = {
   app_locales: [
@@ -113,6 +42,8 @@ const DEFAULTS_BY_KEY: Record<GeneralKey, SettingValue> = {
     { code: 'en', label: 'English', is_default: false, is_active: true },
   ],
   hero: { video_desktop: '', video_mobile: '', headline_tr: '', headline_en: '' },
+  hero_video: { desktop: '', mobile: '' },
+  hero_config: { headline: '', sub_headline: '', button_text: '', button_link: '' },
   seo_pages: {},
   contact_info: { phone: '', email: '', address: '', company_name: '' },
   socials: { instagram: '', facebook: '', linkedin: '', youtube: '', x: '' },
@@ -133,6 +64,7 @@ const DEFAULTS_BY_KEY: Record<GeneralKey, SettingValue> = {
     nav_contact: 'Contact',
     cta_label: 'Get Offer',
   },
+  home_backgrounds: [],
 };
 
 function isGeneralKey(k: string): k is GeneralKey {
@@ -140,12 +72,12 @@ function isGeneralKey(k: string): k is GeneralKey {
 }
 
 /** Summarise a JSON value as a short human-readable string */
-function summariseValue(v: SettingValue | undefined): string {
+function summariseValue(v: SettingValue | undefined, recordCountLabel: string): string {
   if (v === null || v === undefined) return '';
   if (typeof v === 'string') return v;
   if (typeof v === 'number' || typeof v === 'boolean') return String(v);
   if (Array.isArray(v)) {
-    return `${v.length} kayıt`;
+    return recordCountLabel.replace('{count}', String(v.length));
   }
   if (typeof v === 'object') {
     const entries = Object.entries(v as Record<string, unknown>);
@@ -210,8 +142,6 @@ export const GeneralSettingsTab: React.FC<GeneralSettingsTabProps> = ({ locale, 
 
   const adminLocale = usePreferencesStore((s) => s.adminLocale) || 'tr';
   const t = useAdminTranslations(adminLocale || undefined);
-  const labels = KEY_LABELS[adminLocale] || KEY_LABELS.tr;
-  const descriptions = KEY_DESCRIPTIONS[adminLocale] || KEY_DESCRIPTIONS.tr;
 
   const withPrefix = React.useCallback((key: string) => `${settingPrefix || ''}${key}`, [settingPrefix]);
   const stripPrefix = React.useCallback(
@@ -278,7 +208,7 @@ export const GeneralSettingsTab: React.FC<GeneralSettingsTabProps> = ({ locale, 
       {/* Settings list */}
       <div className="space-y-2">
         {rows.map((r) => {
-          const summary = summariseValue(r.value);
+          const summary = summariseValue(r.value, t('admin.siteSettings.general.recordCount'));
 
           return (
             <Link
@@ -292,14 +222,14 @@ export const GeneralSettingsTab: React.FC<GeneralSettingsTabProps> = ({ locale, 
             >
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">{labels[r.key]}</span>
+                  <span className="text-sm font-medium">{t(`admin.siteSettings.general.keyLabels.${r.key}`)}</span>
                   {!r.hasValue ? (
                     <Badge variant="outline" className="text-[10px] text-muted-foreground">
                       {t('admin.siteSettings.general.sourceNone')}
                     </Badge>
                   ) : null}
                 </div>
-                <p className="mt-0.5 text-xs text-muted-foreground">{descriptions[r.key]}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">{t(`admin.siteSettings.general.keyDescriptions.${r.key}`)}</p>
                 {summary ? (
                   <p className="mt-1 truncate text-xs text-foreground/70">{summary}</p>
                 ) : null}

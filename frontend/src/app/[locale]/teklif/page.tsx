@@ -26,11 +26,9 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: '/teklif',
-    title: projectName 
+    title: projectName
         ? `${projectName} - ${t('title')}`
-        : (seo?.title || (locale.startsWith('en')
-          ? `${t('title')} - Bereket Fide Quote & Product Evaluation`
-          : `${t('title')} - Teklif ve Ürün Değerlendirme`)),
+        : (seo?.title || t('title')),
     description: seo?.description || t('description'),
     ogImage: seo?.og_image || undefined,
     noIndex: seo?.no_index || Boolean(projectName),
@@ -62,7 +60,9 @@ export default async function OfferPage({
           description={t('offer.description')}
         />
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <OfferFormClient locale={locale} preselectedProduct={product} />
+          <div className="surface-card rounded-xl p-6">
+            <OfferFormClient locale={locale} preselectedProduct={product} />
+          </div>
           <aside>
             <InfoListPanel
               title={t('offer.benefits.title')}

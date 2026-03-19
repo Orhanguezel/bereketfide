@@ -114,12 +114,12 @@ export function AppSidebar({
   return (
     <Sidebar {...props} variant={variant} collapsible={collapsible}>
       <SidebarHeader>
-        <Link prefetch={false} href="/admin/dashboard" className="flex items-center gap-3 px-3 py-4 hover:bg-sidebar-accent/50 transition-colors">
-          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+        <Link prefetch={false} href="/admin/dashboard" className="flex items-center gap-3 px-3 py-4 hover:bg-sidebar-accent/50 transition-colors overflow-hidden">
+          <div className="flex aspect-square size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <LayoutDashboard className="size-5" />
           </div>
-          <div className="flex flex-col gap-0.5 leading-none">
-            <span className="font-bold text-lg tracking-tight">{label || 'BEREKET FIDE'}</span>
+          <div className="flex flex-col gap-0.5 leading-none min-w-0 group-data-[collapsible=icon]:hidden">
+            <span className="font-bold text-lg tracking-tight truncate">{label || 'BEREKET FIDE'}</span>
             <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">Admin Panel</span>
           </div>
         </Link>

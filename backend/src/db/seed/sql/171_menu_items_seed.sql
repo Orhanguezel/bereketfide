@@ -32,6 +32,7 @@ WHERE `menu_item_id` NOT IN (
   'f2570596-db46-4028-902c-d6fe2c9a8312',
   'ceed431a-aafb-4aba-bf1f-6217b3960c01',
   '33333333-4444-5555-6666-777777777777',
+  '666c6ddf-658b-4c0f-8a9e-0b104708dd07',
   '555c6ddf-658b-4c0f-8a9e-0b104708dd07',
   '455c6ddf-658b-4c0f-8a9e-0b104708dd07',
   -- ORGANISATION submenus
@@ -66,6 +67,7 @@ WHERE `menu_item_id` NOT IN (
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1113',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1114',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1115',
+  'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1118',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1117',
   -- FOOTER: SERVICES
@@ -94,6 +96,7 @@ WHERE `id` NOT IN (
   'f2570596-db46-4028-902c-d6fe2c9a8312',
   'ceed431a-aafb-4aba-bf1f-6217b3960c01',
   '33333333-4444-5555-6666-777777777777',
+  '666c6ddf-658b-4c0f-8a9e-0b104708dd07',
   '555c6ddf-658b-4c0f-8a9e-0b104708dd07',
   '455c6ddf-658b-4c0f-8a9e-0b104708dd07',
   -- ORGANISATION submenus
@@ -128,6 +131,7 @@ WHERE `id` NOT IN (
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1113',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1114',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1115',
+  'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1118',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116',
   'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1117',
   -- FOOTER: SERVICES
@@ -162,8 +166,9 @@ VALUES
 ('f2570596-db46-4028-902c-d6fe2c9a8312', NULL, 'header', NULL, 'custom', NULL, NULL, 3, 1), -- Products
 ('ceed431a-aafb-4aba-bf1f-6217b3960c01', NULL, 'header', NULL, 'custom', NULL, NULL, 6, 1), -- Library
 ('33333333-4444-5555-6666-777777777777', NULL, 'header', NULL, 'custom', NULL, NULL, 7, 1), -- News
-('555c6ddf-658b-4c0f-8a9e-0b104708dd07', NULL, 'header', NULL, 'custom', NULL, NULL, 8, 1), -- Blog
-('455c6ddf-658b-4c0f-8a9e-0b104708dd07', NULL, 'header', NULL, 'custom', NULL, NULL, 9, 1), -- Contact
+('666c6ddf-658b-4c0f-8a9e-0b104708dd07', NULL, 'header', NULL, 'custom', NULL, NULL, 8, 1), -- Gallery
+('555c6ddf-658b-4c0f-8a9e-0b104708dd07', NULL, 'header', NULL, 'custom', NULL, NULL, 9, 1), -- Blog
+('455c6ddf-658b-4c0f-8a9e-0b104708dd07', NULL, 'header', NULL, 'custom', NULL, NULL, 10, 1), -- Contact
 
 -- ------------------------
 -- ABOUT SUBMENUS
@@ -214,8 +219,9 @@ VALUES
 ('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1113', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 3, 1), -- Products
 ('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1114', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 4, 1), -- Library
 ('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1115', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 5, 1), -- News
-('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 6, 1), -- Blog
-('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1117', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 7, 1), -- Contact
+('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1118', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 6, 1), -- Gallery
+('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 7, 1), -- Blog
+('b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1117', NULL, 'footer', '59583ef1-0ba1-4c7c-b806-84fd204b52b9', 'custom', NULL, NULL, 8, 1), -- Contact
 
 -- ------------------------
 -- FOOTER: SERVICES (2 links)
@@ -263,7 +269,8 @@ VALUES
 (UUID(),'f2570596-db46-4028-902c-d6fe2c9a8312','tr','Ürünler','/product','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'ceed431a-aafb-4aba-bf1f-6217b3960c01','tr','Kütüphane','/library','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'33333333-4444-5555-6666-777777777777','tr','Haberler','/news','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
-(UUID(),'555c6ddf-658b-4c0f-8a9e-0b104708dd07','tr','Blog','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'666c6ddf-658b-4c0f-8a9e-0b104708dd07','tr','Galeri','/galeri','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'555c6ddf-658b-4c0f-8a9e-0b104708dd07','tr','Bilgi Bankası','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'455c6ddf-658b-4c0f-8a9e-0b104708dd07','tr','İletişim','/contact','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 
 (UUID(),'aaaa1111-2222-3333-4444-555555555555','tr','Hakkımızda','/about/bereketfide-su-sogutma-kuleleri','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
@@ -302,7 +309,8 @@ VALUES
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1113','tr','Ürünler','/product','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1114','tr','Kütüphane','/library','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1115','tr','Haberler','/news','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
-(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116','tr','Blog','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1118','tr','Galeri','/galeri','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116','tr','Bilgi Bankası','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1117','tr','İletişim','/contact','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 
 -- FOOTER: SERVICES (TR)
@@ -339,7 +347,8 @@ VALUES
 (UUID(),'f2570596-db46-4028-902c-d6fe2c9a8312','en','Products','/product','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'ceed431a-aafb-4aba-bf1f-6217b3960c01','en','Library','/library','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'33333333-4444-5555-6666-777777777777','en','News','/news','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
-(UUID(),'555c6ddf-658b-4c0f-8a9e-0b104708dd07','en','Blog','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'666c6ddf-658b-4c0f-8a9e-0b104708dd07','en','Gallery','/galeri','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'555c6ddf-658b-4c0f-8a9e-0b104708dd07','en','Knowledge Base','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'455c6ddf-658b-4c0f-8a9e-0b104708dd07','en','Contact','/contact','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 
 (UUID(),'aaaa1111-2222-3333-4444-555555555555','en','About','/about/bereketfide-water-cooling-towers','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
@@ -376,7 +385,8 @@ VALUES
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1113','en','Products','/product','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1114','en','Library','/library','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1115','en','News','/news','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
-(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116','en','Blog','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1118','en','Gallery','/galeri','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116','en','Knowledge Base','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1117','en','Contact','/contact','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 
 -- FOOTER: SERVICES (EN)
@@ -413,7 +423,8 @@ VALUES
 (UUID(),'f2570596-db46-4028-902c-d6fe2c9a8312','de','Produkte','/product','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'ceed431a-aafb-4aba-bf1f-6217b3960c01','de','Bibliothek','/library','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'33333333-4444-5555-6666-777777777777','de','Nachrichten','/news','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
-(UUID(),'555c6ddf-658b-4c0f-8a9e-0b104708dd07','de','Blog','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'666c6ddf-658b-4c0f-8a9e-0b104708dd07','de','Galerie','/galeri','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'555c6ddf-658b-4c0f-8a9e-0b104708dd07','de','Wissensdatenbank','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'455c6ddf-658b-4c0f-8a9e-0b104708dd07','de','Kontakt','/contact','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 
 (UUID(),'aaaa1111-2222-3333-4444-555555555555','de','Über uns','/about/bereketfide-wasserkuehltuerme','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
@@ -450,7 +461,8 @@ VALUES
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1113','de','Produkte','/product','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1114','de','Bibliothek','/library','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1115','de','Nachrichten','/news','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
-(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116','de','Blog','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1118','de','Galerie','/galeri','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
+(UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1116','de','Wissensdatenbank','/blog','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 (UUID(),'b0d7d0c1-2c5d-4a9c-9d7f-0e2a6c6f1117','de','Kontakt','/contact','2024-01-01 00:00:00.000','2024-01-01 00:00:00.000'),
 
 -- FOOTER: SERVICES (DE)

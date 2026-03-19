@@ -130,18 +130,18 @@ export const ContactInfoStructuredForm: React.FC<ContactInfoStructuredFormProps>
       </Alert>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {field("company_name", "Firma Adı", { colSpan2: true })}
-        {field("phone", "Telefon")}
-        {field("phone_2", "Telefon 2")}
-        {field("email", "E-posta")}
-        {field("email_2", "E-posta 2")}
-        {field("address", "Adres", { colSpan2: true, textarea: true })}
-        {field("city", "Şehir")}
-        {field("country", "Ülke")}
-        {field("working_hours", "Çalışma Saatleri", { colSpan2: true })}
-        {field("maps_embed_url", "Google Maps Embed URL", { colSpan2: true })}
-        {field("maps_lat", "Enlem (Latitude)")}
-        {field("maps_lng", "Boylam (Longitude)")}
+        {field("company_name", t("admin.siteSettings.structured.contact.labels.companyName"), { colSpan2: true })}
+        {field("phone", t("admin.siteSettings.structured.contact.labels.phone"))}
+        {field("phone_2", t("admin.siteSettings.structured.contact.labels.phone2"))}
+        {field("email", t("admin.siteSettings.structured.contact.labels.email"))}
+        {field("email_2", t("admin.siteSettings.structured.contact.labels.email2"))}
+        {field("address", t("admin.siteSettings.structured.contact.labels.address"), { colSpan2: true, textarea: true })}
+        {field("city", t("admin.siteSettings.structured.contact.labels.city"))}
+        {field("country", t("admin.siteSettings.structured.contact.labels.country"))}
+        {field("working_hours", t("admin.siteSettings.structured.contact.labels.workingHours"), { colSpan2: true })}
+        {field("maps_embed_url", t("admin.siteSettings.structured.contact.labels.mapsEmbedUrl"), { colSpan2: true })}
+        {field("maps_lat", t("admin.siteSettings.structured.contact.labels.mapsLat"))}
+        {field("maps_lng", t("admin.siteSettings.structured.contact.labels.mapsLng"))}
       </div>
     </div>
   );

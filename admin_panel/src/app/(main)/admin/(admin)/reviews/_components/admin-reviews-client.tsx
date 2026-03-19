@@ -460,8 +460,8 @@ export default function AdminReviewsClient() {
                 {filters.targetType ? (
                   <div className="text-xs">
                     {filters.targetType === 'custom_page'
-                      ? 'Filter: Blog yorumları'
-                      : `Filter: ${filters.targetType}`}
+                      ? t('filterBlogComments')
+                      : t('filterType', { type: filters.targetType })}
                   </div>
                 ) : null}
               </div>

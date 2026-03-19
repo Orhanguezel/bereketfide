@@ -33,6 +33,7 @@ import { registerOffer } from '@/modules/offer/router';
 import { registerGallery } from '@/modules/gallery/router';
 import { registerServices } from '@/modules/services/router';
 import { registerNotifications } from '@/modules/notifications/router';
+import { registerReferences } from '@/modules/references/router';
 
 // ✅ Audit single entry
 import { registerAudit } from '@/modules/audit/router';
@@ -58,6 +59,7 @@ import { registerNewsletterAdmin } from '@/modules/newsletter/admin.routes';
 import { registerCommentsAdmin } from '@/modules/comments/admin.routes';
 import { registerThemeAdmin } from '@/modules/theme/admin.routes';
 import { registerTheme } from '@/modules/theme/router';
+import { registerReferencesAdmin } from '@/modules/references/admin.routes';
 
 import {
   jsonSchemaTransform,
@@ -213,10 +215,15 @@ export async function createApp() {
       await api.register(async (i) => registerGalleryAdmin(i), { prefix: '/admin' });
       await api.register(async (i) => registerDashboardAdmin(i), { prefix: '/admin' });
       await api.register(async (i) => registerServicesAdmin(i), { prefix: '/admin' });
+      await api.register(async (i) => registerReferencesAdmin(i), { prefix: '/admin' });
       await api.register(async (i) => registerEmailTemplatesAdmin(i), { prefix: '/admin' });
       await api.register(async (i) => registerNewsletterAdmin(i), { prefix: '/admin' });
       await api.register(async (i) => registerCommentsAdmin(i), { prefix: '/admin' });
       await api.register(async (i) => registerThemeAdmin(i), { prefix: '/admin' });
+
+      // --- AI Content Assist
+      const { aiContentAssist } = await import('@/modules/ai/content');
+      api.post('/admin/ai/content', aiContentAssist);
 
       // --- Public modüller: /api/...
       await registerAuth(api);
@@ -233,6 +240,7 @@ export async function createApp() {
       await registerOffer(api);
       await registerGallery(api);
       await registerServices(api);
+      await registerReferences(api);
       await registerTheme(api);
     },
     { prefix: '/api' },

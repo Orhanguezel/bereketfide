@@ -6,11 +6,18 @@
     "services": "Activities",
     "about": "About",
     "gallery": "Gallery",
-    "blog": "News",
+    "blog": "Knowledge Base",
+    "news": "News",
     "contact": "Contact",
     "offer": "Get Quote",
     "login": "Log in",
     "register": "Sign up",
+    "offerWidgetLine1": "Get",
+    "offerWidgetLine2": "Quote",
+    "trendingSearches": "Trending Searches:",
+    "trendSeedling": "Seedling",
+    "trendGrafted": "Grafted",
+    "trendTomato": "Tomato",
     "residential": "Vegetable Seedlings",
     "commercial": "Fruit Seedlings",
     "mixed": "Ornamental Plants",
@@ -27,7 +34,9 @@
     "profile": "My Profile",
     "logout": "Log Out",
     "searchPlaceholder": "Search products, services or pages...",
-    "viewAll": "View All →"
+    "viewAll": "View All →",
+    "viewAllProducts": "View all products",
+    "viewAllNews": "View all news"
   },
   "footer": {
     "description": "Reliable production and supply solutions for vegetable, fruit and ornamental plant seedlings.",
@@ -62,8 +71,8 @@
       "daysAgo": "{days} days ago"
     },
     "requestOffer": "Request Offer",
-    "offerCtaTitle": "Let Us Prepare a Free Site Visit and Quote for Your Project",
-    "offerCtaDescription": "For your residential, commercial or mixed-use projects, let us align project scope, timeline and budget expectations together and prepare a tailored quote.",
+    "offerCtaTitle": "Let Us Prepare a Free Quote for Your Seedling Order",
+    "offerCtaDescription": "For your vegetable, fruit or ornamental plant seedlings, let us align variety, quantity and delivery expectations together and prepare a tailored quote.",
     "freeOfObligation": "Free and non-binding",
     "send": "Send",
     "name": "Full Name",
@@ -75,92 +84,92 @@
     "required": "Required field",
     "success": "Success",
     "noResults": "No results found",
-    "relatedProducts": "Related Projects",
+    "relatedProducts": "Related Products",
     "relatedGallery": "Related Galleries",
     "relatedArticles": "Related Articles"
   },
   "home": {
     "hero": {
-      "title": "Your Trusted Partner in Construction and Architecture",
-      "subtitle": "From design to delivery, we offer quality, on-time and transparent construction services for residential, commercial and mixed-use developments.",
-      "cta": "Explore Our Projects",
+      "title": "Your Trusted Partner in Quality Seedling and Seed Production",
+      "subtitle": "From seed to harvest, we offer quality, healthy and productive seedling production services for vegetables, fruits and ornamental plants.",
+      "cta": "Explore Our Products",
       "ctaSecondary": "Get a Quote",
       "badge": "Bereket Fide",
-      "newProjectBadge": "New Project",
-      "workflowLabel": "Project Process",
-      "workflowTitle": "Planning and execution tailored to your project",
+      "newProjectBadge": "New Product",
+      "workflowLabel": "Production Process",
+      "workflowTitle": "Planning and production tailored to your needs",
       "workflowBadgeTitle": "Transparent",
       "workflowBadgeSubtitle": "Process and communication",
       "metrics": {
-        "prototypeTitle": "Feasibility",
-        "prototypeDesc": "Feasibility, concept design and initial cost estimation",
-        "productionTitle": "Execution",
-        "productionDesc": "Quality control, schedule tracking and open communication",
-        "engineeringTitle": "Engineering",
-        "engineeringDesc": "Structural analysis, geotechnical survey and technical solutions"
+        "prototypeTitle": "Seed Selection",
+        "prototypeDesc": "Analyzing climate, soil conditions and determining the most suitable varieties",
+        "productionTitle": "Production",
+        "productionDesc": "Quality control, growth monitoring and healthy seedling cultivation",
+        "engineeringTitle": "Technical Support",
+        "engineeringDesc": "Planting guidance, irrigation planning and agricultural consulting"
       },
       "steps": {
-        "oneTitle": "1. Project requirements review",
-        "oneDesc": "We clarify location, intended use, area, budget and timeline expectations together.",
-        "twoTitle": "2. Design and engineering",
-        "twoDesc": "We prepare architectural design, structural plans and engineering solutions.",
-        "threeTitle": "3. Execution and delivery",
-        "threeDesc": "We manage the entire process from permits to handover, ensuring quality and schedule compliance."
+        "oneTitle": "1. Needs analysis",
+        "oneDesc": "We clarify location, climate conditions, soil structure and production goals together.",
+        "twoTitle": "2. Seedling production",
+        "twoDesc": "We manage seed sowing, germination and seedling cultivation processes according to selected varieties.",
+        "threeTitle": "3. Delivery and support",
+        "threeDesc": "We manage packaging and delivery of healthy seedlings, ensuring quality and technical support."
       },
       "stats": {
         "stepsValue": "3+",
-        "stepsLabel": "Core project phases",
+        "stepsLabel": "Core production phases",
         "b2bValue": "15+",
-        "b2bLabel": "Years of industry experience"
+        "b2bLabel": "Years of agricultural experience"
       }
     },
     "projects": {
-      "title": "Featured Projects",
-      "subtitle": "A selection from our completed and ongoing residential, commercial and mixed-use developments"
+      "title": "Featured Products",
+      "subtitle": "A selection of our high-quality vegetable, fruit and ornamental plant seedlings"
     },
     "latestProjects": {
-      "title": "Latest Projects",
-      "subtitle": "Discover our most recent projects"
+      "title": "Latest Products",
+      "subtitle": "Discover our most recent varieties"
     },
     "services": {
       "title": "Our Activity Areas",
-      "subtitle": "Comprehensive solutions from architectural design to construction, project management to handover"
+      "subtitle": "Comprehensive solutions from seed selection to seedling production, technical consulting to delivery"
     },
     "whyUs": {
       "title": "Why Bereket Fide?",
-      "subtitle": "We make a difference in every project with a construction philosophy centered on quality, trust and on-time delivery",
+      "subtitle": "We make a difference in every order with a production philosophy centered on quality, trust and on-time delivery",
       "quality": "High Quality",
-      "qualityDesc": "Full compliance with quality standards at every stage, from material selection to workmanship",
+      "qualityDesc": "Full compliance with quality standards at every stage, from seed selection to delivery",
       "experience": "Experience",
-      "experienceDesc": "Your reliable partner with over 15 years of industry experience and 100+ completed projects",
+      "experienceDesc": "Your reliable partner with over 15 years of agricultural experience and thousands of happy customers",
       "custom": "Custom Solutions",
-      "customDesc": "A design and execution approach unique to each project — not standard, but tailored to you",
+      "customDesc": "A production approach unique to each region and climate — not standard, but tailored to you",
       "delivery": "On-Time Delivery",
-      "deliveryDesc": "Timeline commitment and transparent process management from project start to handover"
+      "deliveryDesc": "Timeline commitment and transparent process management from order to delivery"
     },
     "brands": {
-      "title": "Trusted Brands",
-      "subtitle": "World-leading brands we collaborate with in our projects"
+      "title": "Companies We Collaborate With",
+      "subtitle": "Trusted companies we work with across our production and supply processes"
     },
     "gallery": {
       "title": "Gallery",
-      "subtitle": "Selected photographs from our completed projects and construction process"
+      "subtitle": "Selected photographs from our greenhouses, production processes and varieties"
     },
     "blog": {
-      "title": "News and Insights",
-      "subtitle": "Current content from construction industry news, architecture trends and our project experiences",
+      "title": "Knowledge Base",
+      "subtitle": "Practical content on seedling production, production techniques and agricultural know-how",
       "featuredLabel": "Featured Insight",
-      "spotlightTitle": "Sustainable Construction: Green Building Certification and LEED Standards",
-      "spotlightBodyPrimary": "Sustainable construction is becoming an increasingly important standard in terms of energy efficiency, water conservation and healthy indoor environments. LEED (Leadership in Energy and Environmental Design) certification is an international reference system that certifies buildings as environmentally friendly.",
-      "spotlightBodySecondary": "At Bereket Fide, we aim to integrate sustainable material selection and energy-efficient design principles into every project we undertake. Achieving sustainability goals is not possible without proper planning from the start — which is why we plan an eco-conscious approach for each project from day one.",
+      "spotlightTitle": "Sustainable Agriculture: Organic Seedling Production and Certification Standards",
+      "spotlightBodyPrimary": "Sustainable agriculture is becoming an increasingly important standard in terms of soil health, water conservation and natural production methods. Organic seedling certification is an important reference system that certifies production as environmentally friendly.",
+      "spotlightBodySecondary": "At Bereket Fide, we aim to integrate sustainable seed selection and eco-friendly production principles into every variety we grow. Achieving productivity goals is not possible without proper planning from the start — which is why we plan an eco-conscious approach for each cycle from day one.",
       "insightLabel": "What this covers",
-      "insightText": "Green building standards, certification process and the value it adds to your project",
+      "insightText": "Organic standards, certification process and the value it adds to your harvest",
       "archiveLabel": "More Content",
-      "archiveSubtitle": "Other content on construction, architecture and project management"
+      "archiveSubtitle": "Other content on agriculture, seedling production and plant care"
     },
     "newsletter": {
       "title": "Subscribe to Our Newsletter",
-      "subtitle": "Stay informed about new projects and industry developments.",
+      "subtitle": "Stay informed about new varieties and seasonal agricultural developments.",
       "placeholder": "Your email address",
       "subscribe": "Subscribe",
       "success": "Successfully subscribed!",
@@ -168,57 +177,57 @@
     },
     "contact": {
       "title": "Get in Touch",
-      "subtitle": "Share your project idea, quote request or questions with us"
+      "subtitle": "Share your request, quote request or questions with us"
     }
   },
   "projects": {
-    "title": "Projects",
-    "description": "Explore our latest portfolio of residential, commercial and mixed-use projects.",
-    "viewProject": "View Project",
-    "allProjects": "All Projects",
+    "title": "Products",
+    "description": "Explore our wide range of high-quality vegetable, fruit and ornamental plant seedlings.",
+    "viewProject": "View Product",
+    "allProjects": "All Products",
     "results": "results",
     "images": "Images",
-    "emptyStateNote": "Sample project titles are shown below until the live project feed becomes available.",
+    "emptyStateNote": "Sample product data is shown below until the live feed becomes available.",
     "categories": "Categories",
-    "allCategories": "All Projects",
-    "search": "Search Projects...",
-    "noProjects": "No projects found in this category.",
-    "specs": "Project Details",
-    "requestOffer": "Get Information About This Project",
+    "allCategories": "All Products",
+    "search": "Search Products...",
+    "noProjects": "No products found in this category.",
+    "specs": "Product Details",
+    "requestOffer": "Get Information About This Product",
     "manufacturers": "Manufacturers",
-    "saveProject": "Save Project",
-    "loveTitle": "Projects You'll Love",
-    "getQuoteTitle": "Get a Quote for Your Project",
-    "getQuoteDesc": "Contact us for a free site survey and quote.",
+    "saveProject": "Save Product",
+    "loveTitle": "Products You'll Love",
+    "getQuoteTitle": "Get a Quote for Your Order",
+    "getQuoteDesc": "Contact us for a free quote on your seedling needs.",
     "filters": {
-      "type": "Project Type",
+      "type": "Product Type",
       "location": "Location",
       "architects": "Architects",
       "city": "City",
       "year": "Year",
-      "materials": "Materials",
-      "area": "Area",
-      "floors": "Floors",
+      "materials": "Variety",
+      "area": "Planting Area",
+      "floors": "Quantity",
       "client": "Client",
       "status": "Status",
       "all": "All",
       "search": "Search",
-      "residential": "Residential",
-      "commercial": "Commercial",
-      "mixed": "Mixed Use",
-      "completed": "Completed",
-      "ongoing": "Ongoing"
+      "residential": "Vegetable",
+      "commercial": "Fruit",
+      "mixed": "Ornamental",
+      "completed": "In Stock",
+      "ongoing": "In Production"
     },
     "detail": {
       "location": "Location",
-      "area": "Area",
+      "area": "Planting Area",
       "year": "Year",
       "type": "Type",
       "status": "Status",
       "client": "Client",
       "architect": "Architect",
-      "floors": "Number of Floors",
-      "units": "Number of Units"
+      "floors": "Quantity",
+      "units": "Units per Package"
     },
     "comments": {
       "title": "Conversation",
@@ -245,55 +254,63 @@
   },
   "services": {
     "title": "Our Activity Areas",
-    "description": "Comprehensive construction and architecture activities from architectural design to construction, from survey and restoration to project management.",
+    "description": "Comprehensive agricultural and production activities from seed selection to seedling cultivation, from technical consulting to delivery.",
     "viewAll": "All Activities",
     "noServices": "No activities found.",
     "learnMore": "LEARN MORE",
-    "emptyStateNote": "Sample service descriptions are shown below until live content becomes available.",
+    "emptyStateNote": "Sample activity descriptions are shown below until live content becomes available.",
     "requestService": "Get a Quote for This Activity",
     "items": {
-      "residential": "Residential Projects",
-      "commercial": "Commercial Projects",
-      "restoration": "Restoration",
-      "projectManagement": "Project Management",
-      "architecturalDesign": "Architectural Design",
-      "interiorDesign": "Interior Design"
+      "residential": "Vegetable Seedlings",
+      "commercial": "Fruit Seedlings",
+      "restoration": "Seed Varieties",
+      "projectManagement": "Order Tracking",
+      "architecturalDesign": "Production Consulting",
+      "interiorDesign": "Landscape Solutions"
     }
   },
   "gallery": {
     "title": "Gallery",
-    "description": "A photo gallery compiled from our completed projects, construction processes and architectural details.",
+    "description": "A photo gallery compiled from our greenhouses, production processes and varieties.",
     "viewAll": "View All Images",
+    "backToList": "Back to Gallery",
     "noGalleries": "No galleries found.",
+    "results": "galleries",
     "photos": "photos",
     "emptyStateNote": "Sample gallery topics are shown below until live project visuals become available."
   },
   "blog": {
+    "title": "Knowledge Base",
+    "description": "Cultivation tips, technical insights and practical agricultural knowledge from Bereket Fide.",
+    "viewPost": "Read Post",
+    "allPosts": "All Posts",
+    "all": "All",
+    "emptyStateNote": "No blog posts found yet.",
+    "noPosts": "No posts found.",
+    "readMore": "Read More",
+    "publishedAt": "Published At",
+    "categories": "Categories",
+    "loveTitle": "Articles You'll Love",
+    "share": {
+      "label": "Share",
+      "copyLink": "Copy Link",
+      "copied": "Link copied.",
+      "copyError": "Link could not be copied.",
+      "buttonTitle": "Share on"
+    }
+  },
+  "news": {
     "title": "News",
-    "description": "Architecture, construction technologies and latest developments from Bereket Fide.",
+    "description": "Agricultural technologies, production methods and latest developments from Bereket Fide.",
     "viewPost": "Read News",
     "allPosts": "All News",
     "all": "All",
-    "emptyStateNote": "Sample editorial topics are shown below until live news content becomes available.",
+    "emptyStateNote": "No news content available right now.",
     "noPosts": "No posts found.",
-    "loveTitle": "Architecture You'll Love",
-    "engagement": {
-      "title": "Comments",
-      "subtitle": "Feedback on this article",
-      "likeButton": "Like",
-      "emptyTitle": "No comments yet",
-      "emptyText": "You can leave the first comment and add your perspective.",
-      "formLabel": "Leave a Comment",
-      "formTitle": "What do you think about this article?",
-      "formDescription": "You can share your opinion, experience or an additional note.",
-      "namePlaceholder": "Full Name",
-      "emailPlaceholder": "example@email.com",
-      "commentPlaceholder": "Write your comment...",
-      "moderationNote": "Submitted comments are reviewed before publication.",
-      "submit": "Submit Comment",
-      "submitSuccess": "Your comment has been received and will be published after review.",
-      "submitError": "Comment could not be submitted. Please try again."
-    },
+    "readMore": "Read More",
+    "publishedAt": "Published At",
+    "categories": "Categories",
+    "loveTitle": "News You'll Love",
     "share": {
       "label": "Share",
       "copyLink": "Copy Link",
@@ -304,7 +321,7 @@
   },
   "contact": {
     "title": "Contact",
-    "description": "Contact our team for your project idea, quote request or questions and let us find the best solution together.",
+    "description": "Contact our team for your request, quote request or questions and let us find the best solution together.",
     "form": {
       "title": "Send a Message",
       "namePlaceholder": "Your Full Name",
@@ -327,30 +344,30 @@
     "response": {
       "title": "How We Respond",
       "items": {
-        "one": "We review your request and clarify project scope, location, intended use and budget expectations.",
-        "two": "If needed, we request additional project details, technical specifications or further information.",
-        "three": "We then provide a tailored quote, feasibility assessment and project plan as soon as possible."
+        "one": "We review your request and clarify variety, quantity and delivery expectations.",
+        "two": "If needed, we request additional details or technical specifications.",
+        "three": "We then provide a tailored quote and production plan as soon as possible."
       }
     }
   },
   "offer": {
     "title": "Quote Request",
-    "description": "Let us prepare a tailored site visit and quote based on your project type, location, area, budget and timeline expectations.",
+    "description": "Let us prepare a tailored quote based on your seedling variety, quantity and delivery expectations.",
     "benefits": {
       "title": "What We Clarify in the Quote",
       "items": {
-        "one": "Project type: residential, commercial, mixed-use or restoration",
-        "two": "Scope: architectural design, construction, project management or full turnkey",
-        "three": "Budget range, timeline expectations, location and technical requirements"
+        "one": "Product type: vegetable, fruit or ornamental plants",
+        "two": "Scope: seedling production, seed supply or production consulting",
+        "three": "Quantity, timeline expectations, location and technical requirements"
       }
     },
     "form": {
-      "productInterest": "Service of Interest",
-      "quantity": "Area (m²)",
+      "productInterest": "Product/Service of Interest",
+      "quantity": "Quantity/Area",
       "deadline": "Target Delivery Date",
-      "details": "Project Details",
-      "detailsPlaceholder": "Tell us about your project (location, intended use, budget range, etc.)",
-      "attachFile": "Attach File (preliminary design, site plan, technical specification, etc.)",
+      "details": "Talep Details",
+      "detailsPlaceholder": "Tell us about your needs (variety, quantity, planting time, etc.)",
+      "attachFile": "Attach File (technical specs, analysis report, etc.)",
       "submit": "Request Quote",
       "success": "Your quote request has been received. Our team will contact you shortly.",
       "error": "Failed to submit request. Please try again."
@@ -358,39 +375,39 @@
   },
   "about": {
     "title": "About Us",
-    "description": "Bereket Fide delivers reliable, quality and on-time construction services for residential and commercial projects from design to handover.",
-    "intro": "Our team carefully manages every project with architectural design, engineering solutions and an experienced on-site implementation team. Customer satisfaction, quality and on-time delivery are our core values.",
+    "description": "Bereket Fide delivers reliable, quality and on-time seedling production services from seed to delivery.",
+    "intro": "Our team carefully manages every order with agricultural engineers and an experienced on-site production team. Customer satisfaction, quality and healthy production are our core values.",
     "sections": {
       "expertiseTitle": "Our Areas of Expertise",
       "expertiseItems": {
-        "one": "Residential projects: villas, apartment buildings, residences and mass housing",
-        "two": "Commercial projects: offices, shopping centers and mixed-use buildings",
-        "three": "Restoration, renovation and structural strengthening projects"
+        "one": "Vegetable seedlings: tomatoes, peppers, eggplants, cucumbers and more",
+        "two": "Fruit seedlings: strawberries, melons, watermelons and fruit saplings",
+        "three": "Ornamental plants and landscape solutions"
       },
       "processTitle": "How We Work",
       "processItems": {
-        "one": "Understanding project requirements and client expectations",
-        "two": "Managing architectural design, engineering and permit processes",
-        "three": "Quality-controlled, on-time and complete project delivery"
+        "one": "Understanding production requirements and client expectations",
+        "two": "Managing seed selection, grafting and germination processes",
+        "three": "Quality-controlled, on-time and healthy seedling delivery"
       },
       "sectorsTitle": "Who We Serve",
       "sectorsItems": {
-        "one": "Individual property investors and families",
-        "two": "Commercial real estate developers and institutions",
-        "three": "Public projects and urban transformation applications"
+        "one": "Individual growers and farmers",
+        "two": "Industrial agricultural enterprises and cooperatives",
+        "three": "Landscape firms and municipality projects"
       },
       "stats": {
         "experience": "Years of Experience",
-        "projects": "Completed Projects",
+        "projects": "Completed Orders",
         "team": "Expert Team"
       }
     }
   },
   "auth": {
     "loginTitle": "Log In to Your Bereket Fide Account",
-    "loginSubtitle": "Track your projects, view quote status, and access exclusive content tailored to you.",
+    "loginSubtitle": "Track your orders, view quote status, and access exclusive content tailored to you.",
     "registerTitle": "Create Your Bereket Fide Account",
-    "registerSubtitle": "Track your projects, view quote status, and access exclusive content tailored to you.",
+    "registerSubtitle": "Track your orders, view quote status, and access exclusive content tailored to you.",
     "continueWithGoogle": "Continue with Google",
     "orUseEmail": "or use your email",
     "email": "Email",
@@ -399,7 +416,7 @@
     "continueWithEmail": "Continue with email",
     "noAccount": "Don't have an account?",
     "signUp": "Sign Up",
-    "hasAccount": "Already have a free account or paid plan?",
+    "hasAccount": "Already have an account?",
     "logIn": "Log In",
     "termsAgreement": "By continuing, you agree to the <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>.",
     "termsOfService": "Terms of Service",
@@ -439,14 +456,26 @@
       "generic": "An error occurred. Please try again."
     }
   },
+  "catalog": {
+    "title": "Catalogs",
+    "description": "Browse our current product catalogs and view them as PDF files.",
+    "viewCatalog": "View Catalog",
+    "openCatalog": "Open Catalog",
+    "downloadCatalog": "Download PDF",
+    "backToCatalogs": "← Back to Catalogs",
+    "sidebarTitle": "Other Catalogs",
+    "sidebarCtaTitle": "Browse Our Catalogs",
+    "sidebarCtaDesc": "Access our current product catalogs from here.",
+    "noFile": "No file has been added for this catalog yet."
+  },
   "legal": {
     "title": "Legal",
     "privacy": "Privacy Policy",
-    "privacyDesc": "Overview of how Bereket Fide handles contact, quotation and technical project data.",
-    "privacyContent": "<p>Bereket Fide uses submitted contact and quotation data only to evaluate requests, prepare offers and maintain project communication.</p><p>We do not request unnecessary personal data and we limit access to project files, drawings and technical documents to relevant operational teams.</p><p>For data updates or removal requests, you can contact us via the communication details provided on the contact page.</p>",
+    "privacyDesc": "Overview of how Bereket Fide handles contact, quotation and technical product data.",
+    "privacyContent": "<p>Bereket Fide uses submitted contact and quotation data only to evaluate requests, prepare offers and maintain production communication.</p><p>We do not request unnecessary personal data and we limit access to product files and technical documents to relevant operational teams.</p><p>For data updates or removal requests, you can contact us via the communication details provided on the contact page.</p>",
     "terms": "Terms of Use",
     "termsDesc": "General terms for using the Bereket Fide website, technical content and quotation communication channels.",
-    "termsContent": "<p>Information published on this website is provided for general technical and commercial guidance. Final product scope, material selection and production conditions are clarified during project review.</p><p>Visuals, technical notes and descriptions on the site do not constitute a final binding offer on their own.</p><p>All quotation and delivery commitments become valid only after mutual confirmation within the commercial process.</p>"
+    "termsContent": "<p>Information published on this website is provided for general technical and commercial guidance. Final product scope, variety selection and production conditions are clarified during the order process.</p><p>Visuals, technical notes and descriptions on the site do not constitute a final binding offer on their own.</p><p>All quotation and delivery commitments become valid only after mutual confirmation within the commercial process.</p>"
   },
   "seo": {
     "defaultTitle": "Bereket Fide | Reliable Seedling and Seed Production Services",

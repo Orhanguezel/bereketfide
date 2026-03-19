@@ -70,7 +70,7 @@ const nextConfig = {
       "default-src 'self'",
       "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      `img-src 'self' blob: data: https://res.cloudinary.com ${frontendUrl} ${apiBase}`,
+      `img-src 'self' blob: data: https://res.cloudinary.com ${frontendUrl} ${apiBase} http://localhost:8086 http://127.0.0.1:8086`,
       `connect-src 'self' ${apiBase} ${frontendUrl} https://cdn.jsdelivr.net https://api.cloudinary.com`,
       "font-src 'self' https://fonts.gstatic.com data:",
       "object-src 'none'",

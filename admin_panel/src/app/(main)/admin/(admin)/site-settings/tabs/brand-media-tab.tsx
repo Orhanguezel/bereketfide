@@ -7,7 +7,8 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { useAdminT } from '@/app/(main)/admin/_components/common/useAdminT';
+import { useAdminTranslations } from '@/i18n';
+import { usePreferencesStore } from '@/stores/preferences/preferences-provider';
 
 import {
   useGetSiteSettingAdminByKeyQuery,
@@ -31,19 +32,21 @@ type LogoData = {
   apple_touch_icon_url: string;
 };
 
+type MediaField = keyof LogoData;
+
 type MediaItem = {
-  field: keyof LogoData;
-  label: string;
+  field: MediaField;
+  labelKey: string;
   aspect: '4x3' | '1x1' | '16x9';
   fit: 'contain' | 'cover';
   folder: string;
 };
 
 const MEDIA_ITEMS: MediaItem[] = [
-  { field: 'logo_url', label: 'Logo', aspect: '1x1', fit: 'contain', folder: 'logo' },
-  { field: 'logo_dark_url', label: 'Logo (Dark)', aspect: '1x1', fit: 'contain', folder: 'logo' },
-  { field: 'favicon_url', label: 'Favicon', aspect: '1x1', fit: 'contain', folder: 'logo' },
-  { field: 'apple_touch_icon_url', label: 'Apple Touch Icon', aspect: '1x1', fit: 'contain', folder: 'logo' },
+  { field: 'logo_url', labelKey: 'logo_url', aspect: '1x1', fit: 'contain', folder: 'logo' },
+  { field: 'logo_dark_url', labelKey: 'logo_dark_url', aspect: '1x1', fit: 'contain', folder: 'logo' },
+  { field: 'favicon_url', labelKey: 'favicon_url', aspect: '1x1', fit: 'contain', folder: 'logo' },
+  { field: 'apple_touch_icon_url', labelKey: 'apple_touch_icon_url', aspect: '1x1', fit: 'contain', folder: 'logo' },
 ];
 
 /* ── helpers ── */
@@ -53,11 +56,11 @@ function coerce(v: any): any {
   return v;
 }
 
-function extractLogoData(raw: any): LogoData {
+function extractLogoData(raw: any, logoAlt: string): LogoData {
   const obj = coerce(raw?.value ?? raw) ?? {};
   return {
     logo_url: String(obj.logo_url ?? ''),
-    logo_alt: String(obj.logo_alt ?? 'Bereket Fide'),
+    logo_alt: String(obj.logo_alt ?? logoAlt),
     logo_dark_url: String(obj.logo_dark_url ?? ''),
     favicon_url: String(obj.favicon_url ?? ''),
     apple_touch_icon_url: String(obj.apple_touch_icon_url ?? ''),
@@ -72,8 +75,10 @@ export type BrandMediaTabProps = {
 };
 
 export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPrefix }) => {
-  const t = useAdminT();
+  const adminLocale = usePreferencesStore((s) => s.adminLocale);
+  const t = useAdminTranslations(adminLocale || undefined);
   const fullKey = `${settingPrefix || ''}site_logo`;
+  const logoAlt = t('admin.siteSettings.brandMedia.inline.logoAlt');
 
   const { data, isLoading, isFetching, refetch } = useGetSiteSettingAdminByKeyQuery(
     { key: fullKey, locale: '*' },
@@ -83,12 +88,12 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
   const [updateSetting, { isLoading: isSaving }] = useUpdateSiteSettingAdminMutation();
   const busy = isLoading || isFetching || isSaving;
 
-  const serverData = useMemo(() => extractLogoData(data), [data]);
+  const serverData = useMemo(() => extractLogoData(data, logoAlt), [data, logoAlt]);
   const [localData, setLocalData] = useState<LogoData | null>(null);
 
   React.useEffect(() => {
-    if (data) setLocalData(extractLogoData(data));
-  }, [data]);
+    if (data) setLocalData(extractLogoData(data, logoAlt));
+  }, [data, logoAlt]);
 
   const current = localData ?? serverData;
 
@@ -108,10 +113,10 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
         favicon_url: localData.favicon_url,
         logo_dark_url: localData.logo_dark_url,
       } as any }).unwrap();
-      toast.success('Logo ayarları kaydedildi');
+      toast.success(t('admin.siteSettings.brandMedia.inline.saved'));
       await refetch();
     } catch (err: any) {
-      toast.error(err?.data?.error?.message || 'Kaydetme hatası');
+      toast.error(err?.data?.error?.message || t('admin.siteSettings.brandMedia.inline.saveError'));
     }
   };
 
@@ -121,10 +126,10 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
     <Card>
       <CardHeader>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <CardTitle className="text-base">Logo & Favicon</CardTitle>
+          <CardTitle className="text-base">{t('admin.siteSettings.brandMedia.inline.title')}</CardTitle>
           <div className="flex items-center gap-2">
-            {busy && <Badge variant="outline">Yükleniyor</Badge>}
-            {isDirty && <Badge variant="default">Değişiklik var</Badge>}
+            {busy && <Badge variant="outline">{t('admin.siteSettings.brandMedia.inline.loading')}</Badge>}
+            {isDirty && <Badge variant="default">{t('admin.siteSettings.brandMedia.inline.dirty')}</Badge>}
             <Button
               type="button"
               size="sm"
@@ -132,7 +137,7 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
               disabled={busy || !isDirty}
             >
               <Save className="mr-2 h-3.5 w-3.5" />
-              Kaydet
+              {t('admin.siteSettings.brandMedia.inline.save')}
             </Button>
             <Button type="button" variant="ghost" size="icon" className="h-8 w-8" onClick={() => refetch()} disabled={busy}>
               <RefreshCcw className="h-4 w-4" />
@@ -145,11 +150,12 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {MEDIA_ITEMS.map((m) => {
             const value = current[m.field];
+            const label = t(`admin.siteSettings.brandMedia.inline.labels.${m.labelKey}`);
 
             return (
               <div key={m.field} className="rounded-md border p-2 space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium">{m.label}</span>
+                  <span className="text-xs font-medium">{label}</span>
                   {value && (
                     <button
                       type="button"
@@ -157,7 +163,7 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
                       onClick={() => updateField(m.field, '')}
                       disabled={busy}
                     >
-                      Kaldır
+                      {t('admin.siteSettings.brandMedia.inline.remove')}
                     </button>
                   )}
                 </div>
@@ -166,7 +172,7 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
                   <div className="relative aspect-square w-full max-w-30 mx-auto overflow-hidden rounded border bg-muted/20">
                     <img
                       src={value}
-                      alt={m.label}
+                      alt={label}
                       className="h-full w-full object-contain p-1"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
@@ -175,7 +181,7 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
                   </div>
                 ) : (
                   <div className="flex aspect-square w-full max-w-30 mx-auto items-center justify-center rounded border bg-muted/20">
-                    <span className="text-[10px] text-muted-foreground">Görsel yok</span>
+                    <span className="text-[10px] text-muted-foreground">{t('admin.siteSettings.brandMedia.inline.noImage')}</span>
                   </div>
                 )}
 
@@ -204,8 +210,8 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
                     <button
                       type="button"
                       className="shrink-0 rounded p-0.5 hover:bg-muted"
-                      title="Kopyala"
-                      onClick={() => { navigator.clipboard.writeText(value); toast.success('URL kopyalandı'); }}
+                      title={t('admin.siteSettings.brandMedia.inline.copy')}
+                      onClick={() => { navigator.clipboard.writeText(value); toast.success(t('admin.siteSettings.brandMedia.inline.urlCopied')); }}
                     >
                       <Copy className="size-3 text-muted-foreground" />
                     </button>
@@ -214,7 +220,7 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
                       target="_blank"
                       rel="noopener noreferrer"
                       className="shrink-0 rounded p-0.5 hover:bg-muted"
-                      title="Yeni sekmede aç"
+                      title={t('admin.siteSettings.brandMedia.inline.openNewTab')}
                     >
                       <ExternalLink className="size-3 text-muted-foreground" />
                     </a>
@@ -229,7 +235,7 @@ export const BrandMediaTab: React.FC<BrandMediaTabProps> = ({ locale, settingPre
           <div className="flex justify-end pt-4">
             <Button type="button" onClick={handleSave} disabled={busy}>
               <Save className="mr-2 h-3.5 w-3.5" />
-              Kaydet
+              {t('admin.siteSettings.brandMedia.inline.save')}
             </Button>
           </div>
         )}

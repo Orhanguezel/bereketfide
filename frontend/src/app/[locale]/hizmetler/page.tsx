@@ -40,7 +40,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: '/hizmetler',
-    title: seo?.title || `${t('services.title')} - ${t('seo.defaultTitle')}`,
+    title: seo?.title || t('services.title'),
     description: seo?.description || t('services.description'),
     ogImage: seo?.og_image || undefined,
     noIndex: seo?.no_index,

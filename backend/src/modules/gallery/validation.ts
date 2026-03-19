@@ -35,7 +35,7 @@ export const galleryImageCreateSchema = z.object({
   id: z.string().uuid().optional(),
   gallery_id: z.string().uuid(),
   storage_asset_id: emptyToNull(z.string().max(64).optional().nullable()),
-  image_url: emptyToNull(z.string().url().optional().nullable()),
+  image_url: emptyToNull(z.string().refine((v) => !v || v.startsWith('/') || v.startsWith('http'), { message: 'Geçersiz URL' }).optional().nullable()),
   display_order: z.coerce.number().int().min(0).optional().default(0),
   is_cover: boolLike.optional(),
 
@@ -56,7 +56,7 @@ export const galleryBulkImagesSchema = z.object({
   images: z.array(
     z.object({
       storage_asset_id: z.string().max(64),
-      image_url: z.string().url(),
+      image_url: z.string().refine((v) => !v || v.startsWith('/') || v.startsWith('http'), { message: 'Geçersiz URL' }),
       display_order: z.coerce.number().int().min(0).optional().default(0),
       is_cover: boolLike.optional(),
     }),

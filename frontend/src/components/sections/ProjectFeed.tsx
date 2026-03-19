@@ -135,14 +135,14 @@ export function ProjectFeed({
             const area = specs.alan || specs.area || '';
             const year = specs.yıl || specs.year || '';
             const manufacturers = specs.üreticiler || specs.manufacturers || '';
-            const projectHref = localePath(locale, `/projeler/${project.slug}`);
+            const projectHref = localePath(locale, `/urunler/${project.slug}`);
 
             return (
               <article key={project.id} className="border-b border-(--color-border) pb-10">
                 {/* Title + time */}
                 <Link href={projectHref}>
                   <h2
-                    className="text-xl font-bold text-(--color-text-primary) hover:text-(--color-brand) lg:text-2xl"
+                    className="text-xl font-bold text-(--color-text-primary) hover:text-(--color-brand-text) lg:text-2xl"
                     style={{ fontFamily: 'var(--font-heading)' }}
                   >
                     {project.title}
@@ -171,7 +171,7 @@ export function ProjectFeed({
                 {/* Category tags + location */}
                 <div className="mt-3 flex flex-wrap items-center gap-x-1.5 text-xs font-semibold uppercase tracking-wide">
                   {categoryName && (
-                    <span className="text-(--color-brand)">{categoryName}</span>
+                    <span className="text-(--color-brand-text)">{categoryName}</span>
                   )}
                   {categoryName && location && (
                     <span className="text-(--color-text-muted)">·</span>
@@ -186,7 +186,7 @@ export function ProjectFeed({
                   {architects && (
                     <div className="flex items-center gap-1.5">
                       <span className="text-xs text-(--color-text-muted)">{t('projects.filters.architects')}:</span>
-                      <span className="font-medium text-(--color-brand)">{architects}</span>
+                      <span className="font-medium text-(--color-brand-text)">{architects}</span>
                     </div>
                   )}
                   {area && (
@@ -198,7 +198,7 @@ export function ProjectFeed({
                   {year && (
                     <div className="flex items-center gap-1.5">
                       <span className="text-xs text-(--color-text-muted)">{t('projects.filters.year')}:</span>
-                      <span className="font-medium text-(--color-brand)">{year}</span>
+                      <span className="font-medium text-(--color-brand-text)">{year}</span>
                     </div>
                   )}
                   {manufacturers && (
@@ -217,7 +217,7 @@ export function ProjectFeed({
                   />
                   <Link
                     href={projectHref}
-                    className="text-xs font-medium text-(--color-brand) hover:underline"
+                    className="text-xs font-medium text-(--color-brand-text) hover:underline"
                   >
                     {finalReadMore} »
                   </Link>
@@ -253,7 +253,7 @@ export function ProjectFeed({
                     return (
                       <Link
                         key={p.id}
-                        href={localePath(locale, `/projeler/${p.slug}`)}
+                        href={localePath(locale, `/urunler/${p.slug}`)}
                         className="group flex gap-3"
                       >
                         {img && (
@@ -267,7 +267,7 @@ export function ProjectFeed({
                             />
                           </div>
                         )}
-                        <h4 className="text-sm font-semibold leading-snug text-(--color-text-primary) group-hover:text-(--color-brand)">
+                        <h4 className="text-sm font-semibold leading-snug text-(--color-text-primary) group-hover:text-(--color-brand-text)">
                           {p.title}
                           {p.specifications?.mimarlar ? ` / ${p.specifications.mimarlar}` : ''}
                         </h4>
@@ -294,6 +294,24 @@ export function ProjectFeed({
                 className="mt-3 inline-block bg-(--color-brand) px-4 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
               >
                 {t('nav.offer')}
+              </Link>
+            </div>
+
+            <div className="bg-(--color-bg-muted) p-5">
+              <p
+                className="text-sm font-bold text-(--color-text-primary)"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                {t('catalog.sidebarCtaTitle')}
+              </p>
+              <p className="mt-1 text-xs text-(--color-text-secondary)">
+                {t('catalog.sidebarCtaDesc')}
+              </p>
+              <Link
+                href={localePath(locale, '/kataloglar')}
+                className="mt-3 inline-block bg-(--color-brand) px-4 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
+              >
+                {t('catalog.viewCatalog')}
               </Link>
             </div>
           </div>

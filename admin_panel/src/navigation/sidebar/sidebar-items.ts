@@ -100,13 +100,16 @@ export type AdminNavItemKey =
   | 'theme'
   | 'bereket_projects'
   | 'bereket_categories'
+  | 'references'
   | 'bereket_gallery'
   | 'bereket_offers'
   | 'bereket_blog'
+  | 'bereket_news'
   | 'bereket_blog_comments'
   | 'bereket_corporate'
   | 'bereket_legal'
   | 'bereket_settings'
+  | 'library'
   | 'newsletter'
   | 'email_templates'
   | 'cache';
@@ -137,6 +140,7 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
     items: [
       { key: 'bereket_projects', url: '/admin/products?type=bereketfide', icon: Layers },
       { key: 'bereket_categories', url: '/admin/categories?module=bereketfide', icon: Folders },
+      { key: 'references', url: '/admin/references', icon: BookOpen },
       { key: 'bereket_gallery', url: '/admin/gallery', icon: Images },
       { key: 'services', url: '/admin/services', icon: Briefcase },
       { key: 'bereket_offers', url: '/admin/offer?module=bereketfide', icon: DollarSign },
@@ -147,10 +151,12 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
     id: 4,
     key: 'bereket_content',
     items: [
-      { key: 'bereket_blog', url: '/admin/custompage?module=bereketfide_blog', icon: Newspaper },
+      { key: 'bereket_blog', url: '/admin/custompage?module=blog', icon: Newspaper },
+      { key: 'bereket_news', url: '/admin/custompage?module=news', icon: Newspaper },
       { key: 'bereket_blog_comments', url: '/admin/comments', icon: MessageSquare },
       { key: 'bereket_corporate', url: '/admin/custompage?module=bereketfide_about', icon: FileText },
       { key: 'bereket_legal', url: '/admin/custompage?module=bereketfide_legal', icon: FileSearch },
+      { key: 'library', url: '/admin/library', icon: BookOpen },
     ],
   },
   {
@@ -214,13 +220,16 @@ const FALLBACK_TITLES: Record<AdminNavItemKey, string> = {
   theme: 'Tema Ayarları',
   bereket_projects: 'Ürünler',
   bereket_categories: 'Kategoriler',
+  references: 'İş Birliği Firmaları',
   bereket_gallery: 'Galeri',
   bereket_offers: 'Teklifler',
   bereket_blog: 'Haberler',
+  bereket_news: 'Bilgi Bankası',
   bereket_blog_comments: 'Haber Yorumları',
   bereket_corporate: 'Kurumsal Sayfalar',
   bereket_legal: 'Yasal Sayfalar',
   bereket_settings: 'Site Ayarları',
+  library: 'Kataloglar',
   newsletter: 'Bülten Aboneleri',
   cache: 'Cache Yönetimi',
 };

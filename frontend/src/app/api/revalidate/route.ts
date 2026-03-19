@@ -10,7 +10,7 @@ const ALLOWED_ORIGINS = [
 ].filter(Boolean);
 
 function corsHeaders(origin?: string | null) {
-  const matched = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  const matched = (origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]) || '*';
   return {
     'Access-Control-Allow-Origin': matched,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',

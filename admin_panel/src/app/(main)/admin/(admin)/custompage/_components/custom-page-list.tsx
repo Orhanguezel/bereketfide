@@ -59,6 +59,46 @@ const normLocale = (v: unknown): string =>
 
 const safeText = (v: unknown) => (v === null || v === undefined ? '' : String(v));
 
+const safeEncodeAssetUrl = (value: string): string => {
+  try {
+    return encodeURI(decodeURI(value));
+  } catch {
+    try {
+      return encodeURI(value);
+    } catch {
+      return value;
+    }
+  }
+};
+
+const toRelativeAssetPath = (value: string): string => {
+  try {
+    const parsed = new URL(value);
+    const full = `${parsed.pathname || ''}${parsed.search || ''}${parsed.hash || ''}`;
+    const uploadIdx = full.indexOf('/uploads/');
+    if (uploadIdx >= 0) return full.slice(uploadIdx);
+    const mediaIdx = full.indexOf('/media/');
+    if (mediaIdx >= 0) return full.slice(mediaIdx);
+    return value;
+  } catch {
+    return value;
+  }
+};
+
+const resolveAdminMediaUrl = (raw: string | undefined | null): string | null => {
+  const s = safeText(raw).trim();
+  if (!s) return null;
+  if (s.startsWith('data:')) return s;
+  if (/^https?:\/\//i.test(s)) return safeEncodeAssetUrl(toRelativeAssetPath(s));
+  if (s === '/uploads' || s.startsWith('/uploads/')) return safeEncodeAssetUrl(s);
+  if (s === '/media' || s.startsWith('/media/')) return safeEncodeAssetUrl(s);
+  const uploadIdx = s.indexOf('/uploads/');
+  if (uploadIdx >= 0) return safeEncodeAssetUrl(s.slice(uploadIdx));
+  const mediaIdx = s.indexOf('/media/');
+  if (mediaIdx >= 0) return safeEncodeAssetUrl(s.slice(mediaIdx));
+  return safeEncodeAssetUrl(s);
+};
+
 export const CustomPageList: React.FC<CustomPageListProps> = ({
   items,
   loading,
@@ -85,7 +125,7 @@ export const CustomPageList: React.FC<CustomPageListProps> = ({
   });
 
   const getThumbUrl = (p: CustomPageDto): string | null =>
-    p.featured_image || p.image_url || (p.images?.length ? p.images[0] : null) || null;
+    resolveAdminMediaUrl(p.featured_image || p.image_url || (p.images?.length ? p.images[0] : null) || null);
 
   const renderThumb = (p: CustomPageDto, size = 40) => {
     const url = getThumbUrl(p);

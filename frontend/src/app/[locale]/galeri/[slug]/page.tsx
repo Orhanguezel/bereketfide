@@ -40,8 +40,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: `/galeri/${slug}`,
-    title:
-      gallery.meta_title || `${gallery.title} - ${t('seo.defaultTitle')}`,
+    title: gallery.meta_title || gallery.title,
     description:
       gallery.meta_description ||
       gallery.description ||
@@ -58,7 +57,6 @@ export default async function GalleryDetailPage({
 }) {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale });
-  const isEn = locale.startsWith('en');
   const [gallery, profile] = await Promise.all([
     fetchGallery(slug, locale),
     fetchSetting('company_profile', locale),
@@ -161,6 +159,24 @@ export default async function GalleryDetailPage({
       />
       <Breadcrumbs items={breadcrumbs} />
 
+      <div style={{ marginTop: 8 }}>
+        <Link
+          href={localizedPath(locale, '/galeri')}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            color: 'var(--color-brand)',
+            fontSize: 14,
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
+        >
+          <span aria-hidden="true">←</span>
+          {t('gallery.backToList')}
+        </Link>
+      </div>
+
       {/* Title + count */}
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap', marginTop: 16 }}>
         <h1
@@ -226,7 +242,7 @@ export default async function GalleryDetailPage({
         />
         <RelatedLinks
           title={t('common.relatedProducts')}
-          hrefBase={localizedPath(locale, '/projeler')}
+          hrefBase={localizedPath(locale, '/urunler')}
           items={related.products}
         />
         <RelatedLinks

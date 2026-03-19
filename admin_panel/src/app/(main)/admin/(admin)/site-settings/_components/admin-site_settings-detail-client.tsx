@@ -96,6 +96,10 @@ import {
   heroFormToObj,
 } from '../tabs/structured/hero-structured-form';
 
+import {
+  BackgroundsStructuredForm,
+} from '../tabs/structured/home-backgrounds-structured-form';
+
 /* ----------------------------- helpers (same behavior as /pages) ----------------------------- */
 
 const toShortLocale = (v: unknown): string =>
@@ -116,6 +120,7 @@ function isSeoKey(key: string) {
 const GENERAL_KEYS = [
   'app_locales',
   'hero',
+  'home_backgrounds',
   'seo_pages',
   'contact_info',
   'socials',
@@ -217,13 +222,32 @@ const HeroStructuredRenderer: React.FC<StructuredRenderProps> = ({
 }) => {
   const data = React.useMemo(() => {
     const v = coerceSettingValue(value);
-    return heroObjToForm(v && typeof v === 'object' ? v : {});
+    return heroObjToForm(v && typeof v === "object" ? v : {});
   }, [value]);
 
   return (
     <HeroStructuredForm
       value={data}
       onChange={(next) => setValue(heroFormToObj(next))}
+      disabled={!!disabled}
+    />
+  );
+};
+
+const BackgroundsStructuredRenderer: React.FC<StructuredRenderProps> = ({
+  value,
+  setValue,
+  disabled,
+}) => {
+  const data = React.useMemo(() => {
+    const v = coerceSettingValue(value);
+    return Array.isArray(v) ? v : [];
+  }, [value]);
+
+  return (
+    <BackgroundsStructuredForm
+      value={data}
+      onChange={(next) => setValue(next)}
       disabled={!!disabled}
     />
   );
@@ -640,6 +664,7 @@ export default function SiteSettingsDetailClient({ id }: { id: string }) {
     if (isGeneralKey(settingKey)) {
       if (settingKey === 'app_locales') return AppLocalesStructuredRenderer;
       if (settingKey === 'hero') return HeroStructuredRenderer;
+      if (settingKey === 'home_backgrounds') return BackgroundsStructuredRenderer;
       if (settingKey === 'seo_pages') return SeoPagesStructuredRenderer;
       if (settingKey === 'contact_info') return ContactStructuredRenderer;
       if (settingKey === 'socials') return SocialsStructuredRenderer;
@@ -711,7 +736,7 @@ export default function SiteSettingsDetailClient({ id }: { id: string }) {
             disabled={busy || !localeOptions.length}
           >
             <SelectTrigger className="w-32 sm:w-40">
-              <SelectValue placeholder="Dil seçin" />
+              <SelectValue placeholder={t('admin.siteSettings.detail.inline.selectLocale')} />
             </SelectTrigger>
             <SelectContent>
               {localeOptions.map((o) => (
@@ -728,31 +753,31 @@ export default function SiteSettingsDetailClient({ id }: { id: string }) {
             size="icon"
             onClick={() => refetch()}
             disabled={busy}
-            title="Yenile"
+            title={t('admin.siteSettings.detail.inline.refresh')}
             className="h-8 w-8"
           >
             <RefreshCcw className="size-4" />
           </Button>
 
-          {busy ? <Badge variant="outline">Yükleniyor</Badge> : null}
+          {busy ? <Badge variant="outline">{t('admin.siteSettings.detail.inline.loading')}</Badge> : null}
         </div>
       </div>
 
       {!selectedLocale ? (
         <div className="rounded-md border p-4 text-sm text-muted-foreground">
-          Dil yükleniyor...
+          {t('admin.siteSettings.detail.inline.loadingLocale')}
         </div>
       ) : (
         <div className="space-y-3">
           {isFallback ? (
             <div className="rounded-md border bg-muted/30 p-3 text-sm text-muted-foreground">
-              Bu dil için henüz özel kayıt yok. Mevcut veri başka bir dilden gösteriliyor. Kaydettiğinizde bu dile özel kayıt oluşur.
+              {t('admin.siteSettings.detail.inline.fallbackInfo')}
             </div>
           ) : null}
 
           {!row && !busy ? (
             <div className="rounded-md border p-3 text-sm text-muted-foreground">
-              Henüz kayıt yok. Formu doldurup kaydedin.
+              {t('admin.siteSettings.detail.inline.noRecord')}
             </div>
           ) : null}
 

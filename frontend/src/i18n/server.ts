@@ -109,6 +109,25 @@ export async function fetchServices(locale: string): Promise<Record<string, unkn
   }
 }
 
+export async function fetchReferences(locale: string, limit: number = 12): Promise<Record<string, unknown>[]> {
+  try {
+    const params = new URLSearchParams();
+    params.set('locale', locale);
+    params.set('is_featured', '1');
+    params.set('limit', String(limit));
+    params.set('order', 'display_order.asc');
+
+    const res = await fetch(`${API_BASE_URL}/references?${params.toString()}`, {
+      next: { revalidate: 300 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : (data as any)?.items ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function fetchNews(locale: string, limit: number = 5): Promise<Record<string, unknown>[]> {
   try {
     const res = await fetch(

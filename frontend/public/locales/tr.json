@@ -1,16 +1,23 @@
 {
   "nav": {
     "home": "Ana Sayfa",
-    "products": "Ürünlerimiz",
+    "products": "Ürünler",
     "projects": "Ürünler",
     "services": "Faaliyetler",
     "about": "Hakkımızda",
     "gallery": "Galeri",
-    "blog": "Haberler",
+    "blog": "Bilgi Bankası",
+    "news": "Haberler",
     "contact": "İletişim",
     "offer": "Teklif Al",
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
+    "offerWidgetLine1": "Teklif",
+    "offerWidgetLine2": "Al",
+    "trendingSearches": "Trend Aramalar:",
+    "trendSeedling": "Fide",
+    "trendGrafted": "Aşılı",
+    "trendTomato": "Domates",
     "residential": "Sebze Fideleri",
     "commercial": "Meyve Fideleri",
     "mixed": "Süs Bitkileri",
@@ -27,7 +34,9 @@
     "profile": "Profilim",
     "logout": "Çıkış Yap",
     "searchPlaceholder": "Ürün, hizmet veya sayfa ara...",
-    "viewAll": "Tümünü Gör →"
+    "viewAll": "Tümünü Gör →",
+    "viewAllProducts": "Tüm ürünleri görüntüle",
+    "viewAllNews": "Tüm haberleri görüntüle"
   },
   "footer": {
     "description": "Sebze, meyve ve süs bitkisi fidelerinde güvenilir üretim ve tedarik çözümleri.",
@@ -74,6 +83,7 @@
     "subject": "Konu",
     "required": "Zorunlu alan",
     "success": "Başarılı",
+    "errorText": "Bir hata oluştu",
     "noResults": "Sonuç bulunamadı",
     "relatedProducts": "İlgili Ürünler",
     "relatedGallery": "İlgili Galeriler",
@@ -139,24 +149,38 @@
       "deliveryDesc": "Siparişten teslimat kadar termin taahhüdü ve şeffaf süreç yönetimi"
     },
     "brands": {
-      "title": "Referans Markalar",
-      "subtitle": "Fide üretimimizde birlikte çalıştığımız güvenilir markalar"
+      "title": "İş Birliği Yaptığımız Firmalar",
+      "subtitle": "Üretim ve tedarik süreçlerimizde birlikte çalıştığımız güvenilir firmalar"
     },
     "gallery": {
       "title": "Galeri",
       "subtitle": "Seralarımızdan, üretim süreçlerimizden ve fide çeşitlerimizden seçilen fotoğraflar"
     },
     "blog": {
-      "title": "Haberler ve İçerikler",
-      "subtitle": "Tarım sektörü, fide üretim teknikleri ve deneyimlerimizden derlenen güncel içerikler",
-      "featuredLabel": "Öne Çıkan İçerik",
-      "spotlightTitle": "Sürdürülebilir Tarım: Organik Fide Üretimi ve Sertifikasyon Standartları",
-      "spotlightBodyPrimary": "Sürdürülebilir tarım, toprak sağlığı, su tasarrufu ve doğal üretim yöntemleri açısından giderek daha önemli bir standart haline gelmektedir. Organik fide sertifikasyonu, üretimin çevre dostu olduğunu belgeleyen önemli bir referans sistemdir.",
-      "spotlightBodySecondary": "Bereket Fide olarak, sürdürülebilir tohum seçimi ve doğa dostu üretim ilkelerini her çeşidimize entegre etmeyi hedefliyoruz. Doğru planlama yapılmadan verimlilik hedeflerine ulaşmak mümkün değil; bu nedenle her üretim döngüsü için çevre dostu yaklaşımı baştan planlarız.",
-      "insightLabel": "Bu yazıda ne var?",
-      "insightText": "Organik üretim standartları, sertifikasyon süreci ve ürünlerinize kattığı değer",
-      "archiveLabel": "Diğer İçerikler",
-      "archiveSubtitle": "Tarım sektörü, fide üretimi ve bitki bakımı hakkındaki diğer içerikler"
+      "title": "Bilgi Bankası",
+      "description": "Fide yetiştiriciliği, teknik ipuçları ve tarımsal bilgilendirmeler.",
+      "viewPost": "Yazıyı Oku",
+      "allPosts": "Tüm Yazılar",
+      "all": "Tümü",
+      "emptyStateNote": "Henüz blog yazısı bulunmuyor.",
+      "noPosts": "Henüz yazı bulunmuyor.",
+      "readMore": "Devamını Oku",
+      "publishedAt": "Yayın Tarihi",
+      "categories": "Kategoriler",
+      "loveTitle": "İlginizi Çekecek Yazılar"
+    },
+    "news": {
+      "title": "Haberler",
+      "description": "Tarım teknolojileri, üretim yöntemleri ve Bereket Fide'den güncel gelişmeler.",
+      "viewPost": "Haberi Oku",
+      "allPosts": "Tüm Haberler",
+      "all": "Tümü",
+      "emptyStateNote": "Şu anda yayında olan haber bulunmuyor.",
+      "noPosts": "Henüz yazı bulunmuyor.",
+      "readMore": "Devamını Oku",
+      "publishedAt": "Yayın Tarihi",
+      "categories": "Kategoriler",
+      "loveTitle": "İlginizi Çekecek Haberler"
     },
     "newsletter": {
       "title": "Bültenimize Abone Olun",
@@ -264,39 +288,44 @@
     "title": "Galeri",
     "description": "Seralarımızdan, üretim süreçlerimizden ve fide çeşitlerimizden derlenen fotoğraf galerisi.",
     "viewAll": "Tüm Görseller",
+    "backToList": "Galeriye Dön",
     "noGalleries": "Henüz galeri bulunmuyor.",
+    "results": "galeri",
     "photos": "fotoğraf",
-    "emptyStateNote": "Canlı ürün görselleri gelene kadar aşağıda örnek galeri başlıkları gösterilmektedir."
+    "emptyStateNote": "Canlı galeri içerikleri gelene kadar aşağıda örnek görseller gösterilmektedir."
   },
   "blog": {
+    "title": "Bilgi Bankası",
+    "description": "Fide yetiştiriciliği, teknik ipuçları ve tarımsal bilgilendirmeler.",
+    "viewPost": "Yazıyı Oku",
+    "allPosts": "Tüm Yazılar",
+    "all": "Tümü",
+    "emptyStateNote": "Henüz blog yazısı bulunmuyor.",
+    "noPosts": "Henüz yazı bulunmuyor.",
+    "readMore": "Devamını Oku",
+    "publishedAt": "Yayın Tarihi",
+    "categories": "Kategoriler",
+    "loveTitle": "İlginizi Çekecek Yazılar",
+    "share": {
+      "label": "Paylaş",
+      "copyLink": "Linki Kopyala",
+      "copied": "Link kopyalandı.",
+      "copyError": "Link kopyalanamadı.",
+      "buttonTitle": "Paylaş:"
+    }
+  },
+  "news": {
     "title": "Haberler",
-    "description": "Tarım teknolojileri, fide üretim yöntemleri ve Bereket Fide'den güncel gelişmeler.",
+    "description": "Tarım teknolojileri, üretim yöntemleri ve Bereket Fide'den güncel gelişmeler.",
     "viewPost": "Haberi Oku",
     "allPosts": "Tüm Haberler",
     "all": "Tümü",
-    "emptyStateNote": "Canlı haber içeriği gelene kadar aşağıda örnek editoryal başlıklar gösterilmektedir.",
+    "emptyStateNote": "Şu anda yayında olan haber bulunmuyor.",
     "noPosts": "Henüz yazı bulunmuyor.",
     "readMore": "Devamını Oku",
     "publishedAt": "Yayın Tarihi",
     "categories": "Kategoriler",
     "loveTitle": "İlginizi Çekecek Haberler",
-    "engagement": {
-      "title": "Yorumlar",
-      "subtitle": "Bu içerik hakkındaki görüşler",
-      "likeButton": "Beğen",
-      "emptyTitle": "Henüz yorum yok",
-      "emptyText": "İlk yorumu bırakarak içeriğe katkı sağlayabilirsiniz.",
-      "formLabel": "Yorum Gönder",
-      "formTitle": "Bu içerik hakkında ne düşünüyorsunuz?",
-      "formDescription": "Görüşünüzü, deneyiminizi veya eklemek istediğiniz notu paylaşabilirsiniz.",
-      "namePlaceholder": "Ad Soyad",
-      "emailPlaceholder": "ornek@email.com",
-      "commentPlaceholder": "Yorumunuzu yazın...",
-      "moderationNote": "Gönderilen yorumlar yayınlanmadan önce kontrol edilir.",
-      "submit": "Yorumu Gönder",
-      "submitSuccess": "Yorumunuz alındı. Onay sonrası yayına alınacaktır.",
-      "submitError": "Yorum gönderilemedi. Lütfen tekrar deneyin."
-    },
     "share": {
       "label": "Paylaş",
       "copyLink": "Linki Kopyala",
@@ -330,30 +359,30 @@
     "response": {
       "title": "İletişim Sürecimiz",
       "items": {
-        "one": "Talebinizi inceliyor; proje kapsamı, lokasyon, kullanım amacı ve bütçe beklentilerini netleştiriyoruz.",
-        "two": "Gerekirse proje detayları, teknik şartname veya ek bilgi talep ediyoruz.",
-        "three": "Size özel teklif, fizibilite değerlendirmesi ve proje planını en kısa sürede sunuyoruz."
+        "one": "Talebinizi inceliyor; ürün kapsamı, lokasyon, kullanım amacı ve bütçe beklentilerini netleştiriyoruz.",
+        "two": "Gerekirse ürün detayları, teknik şartname veya ek bilgi talep ediyoruz.",
+        "three": "Size özel teklif, fizibilite değerlendirmesi ve ürün planını en kısa sürede sunuyoruz."
       }
     }
   },
   "offer": {
     "title": "Teklif Talebi",
-    "description": "Proje tipi, lokasyon, alan, bütçe ve termin beklentilerinize göre size özel keşif ve teklif hazırlayalım.",
+    "description": "Ürün tipi, lokasyon, alan, bütçe ve termin beklentilerinize göre size özel keşif ve teklif hazırlayalım.",
     "benefits": {
       "title": "Teklifte Neleri Netleştiriyoruz?",
       "items": {
-        "one": "Proje tipi: konut, ticari, karma kullanım veya restorasyon",
-        "two": "Kapsam: mimari tasarım, inşaat, proje yönetimi veya komple anahtar teslim",
+        "one": "Ürün tipi: sebze, meyve veya süs bitkisi",
+        "two": "Kapsam: fide üretimi, tohum tedariki veya üretim danışmanlığı",
         "three": "Bütçe aralığı, termin beklentisi, lokasyon ve teknik gereksinimler"
       }
     },
     "form": {
-      "productInterest": "İlgilenilen Hizmet",
-      "quantity": "Alan (m²)",
-      "deadline": "Hedef Termin",
-      "details": "Proje Detayları",
-      "detailsPlaceholder": "Projeniz hakkında bize bilgi verin (lokasyon, kullanım amacı, bütçe aralığı vb.)",
-      "attachFile": "Dosya Ekle (ön proje, vaziyet planı, teknik şartname vb.)",
+      "productInterest": "İlgilenilen Ürün/Hizmet",
+      "quantity": "Miktar/Alan",
+      "deadline": "Hedef Teslimat",
+      "details": "Talep Detayları",
+      "detailsPlaceholder": "İhtiyacınız hakkında bize bilgi verin (çeşit, miktar, dikim zamanı vb.)",
+      "attachFile": "Dosya Ekle (teknik şartname, analiz raporu vb.)",
       "submit": "Teklif İste",
       "success": "Teklif talebiniz alındı. Ekibimiz en kısa sürede sizinle iletişime geçecek.",
       "error": "Talep gönderilemedi. Lütfen tekrar deneyin."
@@ -361,39 +390,39 @@
   },
   "about": {
     "title": "Hakkımızda",
-    "description": "Bereket Fide, konut ve ticari projelerde tasarımdan teslimata güvenilir, kaliteli ve zamanında inşaat hizmetleri sunar.",
-    "intro": "Ekibimiz; mimari tasarım, mühendislik çözümleri ve sahada deneyimli uygulama kadrosuyla her projeyi özenle yönetir. Müşteri memnuniyeti, kalite ve zamanında teslim temel değerlerimizdir.",
+    "description": "Bereket Fide, sebze ve meyve fidelerinde tohumdan teslimata güvenilir, kaliteli ve zamanında üretim hizmetleri sunar.",
+    "intro": "Ekibimiz; ziraat mühendisleri ve sahada deneyimli üretim kadrosuyla her siparişi özenle yönetir. Müşteri memnuniyeti, kalite ve sağlıklı üretim temel değerlerimizdir.",
     "sections": {
       "expertiseTitle": "Uzmanlık Alanlarımız",
       "expertiseItems": {
-        "one": "Konut projeleri: villa, apartman, rezidans ve toplu konut",
-        "two": "Ticari projeler: ofis, alışveriş merkezi ve karma kullanım yapıları",
-        "three": "Restorasyon, tadilat ve güçlendirme projeleri"
+        "one": "Sebze fideleri: domates, biber, patlıcan, hıyar ve diğerleri",
+        "two": "Meyve fideleri: çilek, kavun, karpuz ve meyve fidanları",
+        "three": "Süs bitkileri ve peyzaj çözümleri"
       },
       "processTitle": "Çalışma Modelimiz",
       "processItems": {
-        "one": "Proje gereksinimlerini ve müşteri beklentilerini anlama",
-        "two": "Mimari tasarım, mühendislik ve izin süreçlerini yönetme",
-        "three": "Kalite kontrolü ile zamanında ve eksiksiz teslim"
+        "one": "Üretim gereksinimlerini ve müşteri beklentilerini anlama",
+        "two": "Tohum seçimi, aşılama ve çimlendirme süreçlerini yönetme",
+        "three": "Kalite kontrolü ile zamanında ve sağlıklı teslimat"
       },
       "sectorsTitle": "Faaliyet Gösterdiğimiz Alanlar",
       "sectorsItems": {
-        "one": "Bireysel konut yatırımcıları ve aileler",
-        "two": "Ticari gayrimenkul geliştiricileri ve kurumlar",
-        "three": "Kamu projeleri ve kentsel dönüşüm uygulamaları"
+        "one": "Bireysel üreticiler ve çiftçiler",
+        "two": "Endüstriyel tarım işletmeleri ve kooperatifler",
+        "three": "Peyzaj firmaları ve belediye projeleri"
       },
       "stats": {
         "experience": "Yıllık Deneyim",
-        "projects": "Tamamlanan Proje",
+        "projects": "Tamamlanan Sipariş",
         "team": "Uzman Kadro"
       }
     }
   },
   "auth": {
     "loginTitle": "Bereket Fide Hesabınıza Giriş Yapın",
-    "loginSubtitle": "Projelerinizi takip edin, teklif durumunuzu görüntüleyin ve size özel içeriklere erişin.",
+    "loginSubtitle": "Siparişlerinizi takip edin, teklif durumunuzu görüntüleyin ve size özel içeriklere erişin.",
     "registerTitle": "Bereket Fide Hesabınızı Oluşturun",
-    "registerSubtitle": "Projelerinizi takip edin, teklif durumunuzu görüntüleyin ve size özel içeriklere erişin.",
+    "registerSubtitle": "Siparişlerinizi takip edin, teklif durumunuzu görüntüleyin ve size özel içeriklere erişin.",
     "continueWithGoogle": "Google ile devam et",
     "orUseEmail": "veya e-posta adresinizi kullanın",
     "email": "E-posta",
@@ -402,7 +431,7 @@
     "continueWithEmail": "E-posta ile devam et",
     "noAccount": "Hesabınız yok mu?",
     "signUp": "Kayıt Ol",
-    "hasAccount": "Zaten bir hesabınız veya planınız var mı?",
+    "hasAccount": "Zaten bir hesabınız var mı?",
     "logIn": "Giriş Yap",
     "termsAgreement": "Devam ederek, <terms>Kullanım Koşulları</terms> ve <privacy>Gizlilik Politikası</privacy>'nı kabul etmiş olursunuz.",
     "termsOfService": "Kullanım Koşulları",
@@ -442,18 +471,30 @@
       "generic": "Bir hata oluştu. Lütfen tekrar deneyin."
     }
   },
+  "catalog": {
+    "title": "Kataloglar",
+    "description": "Ürün gruplarımıza ait güncel katalogları görüntüleyin ve PDF olarak inceleyin.",
+    "viewCatalog": "Kataloğu İncele",
+    "openCatalog": "Kataloğu Aç",
+    "downloadCatalog": "PDF İndir",
+    "backToCatalogs": "← Kataloglara Dön",
+    "sidebarTitle": "Diğer Kataloglar",
+    "sidebarCtaTitle": "Kataloglarımızı İnceleyin",
+    "sidebarCtaDesc": "Güncel ürün kataloglarımıza buradan ulaşın.",
+    "noFile": "Bu katalog için henüz dosya eklenmedi."
+  },
   "legal": {
     "title": "Yasal",
     "privacy": "Gizlilik Politikası",
-    "privacyDesc": "Bereket Fide ile paylaşılan iletişim, teklif ve teknik proje verilerinin nasıl ele alındığına dair özet bilgi.",
-    "privacyContent": "<p>Bereket Fide, iletişim ve teklif formları üzerinden iletilen verileri yalnızca talepleri değerlendirmek, teklif hazırlamak ve proje iletişimini sürdürmek amacıyla kullanır.</p><p>Gereksiz kişisel veri talep etmeyiz; proje dosyaları, çizimler ve teknik dokümanlara erişimi ilgili operasyon ekipleriyle sınırlı tutarız.</p><p>Veri güncelleme veya silme talepleri için iletişim sayfasındaki kanallar üzerinden bize ulaşabilirsiniz.</p>",
+    "privacyDesc": "Bereket Fide ile paylaşılan iletişim, teklif ve teknik ürün verilerinin nasıl ele alındığına dair özet bilgi.",
+    "privacyContent": "<p>Bereket Fide, iletişim ve teklif formları üzerinden iletilen verileri yalnızca talepleri değerlendirmek, teklif hazırlamak ve iletişimini sürdürmek amacıyla kullanır.</p><p>Gereksiz kişisel veri talep etmeyiz; ürün dosyaları ve teknik dokümanlara erişimi ilgili operasyon ekipleriyle sınırlı tutarız.</p><p>Veri güncelleme veya silme talepleri için iletişim sayfasındaki kanallar üzerinden bize ulaşabilirsiniz.</p>",
     "terms": "Kullanım Koşulları",
     "termsDesc": "Bereket Fide web sitesi, teknik içerikler ve teklif iletişim kanallarının kullanımına dair genel koşullar.",
-    "termsContent": "<p>Bu sitede yer alan bilgiler genel teknik ve ticari yönlendirme amacıyla sunulur. Nihai ürün kapsamı, malzeme seçimi ve üretim koşulları proje değerlendirme sürecinde netleştirilir.</p><p>Sitedeki görseller, teknik notlar ve açıklamalar tek başına bağlayıcı nihai teklif niteliğinde değildir.</p><p>Teklif, termin ve teslim kapsamındaki taahhütler ancak ticari süreçte karşılıklı teyit sonrasında geçerli olur.</p>"
+    "termsContent": "<p>Bu sitede yer alan bilgiler genel teknik ve ticari yönlendirme amacıyla sunulur. Nihai ürün kapsamı, çeşit seçimi ve üretim koşulları sipariş sürecinde netleştirilir.</p><p>Sitedeki görseller, teknik notlar ve açıklamalar tek başına bağlayıcı nihai teklif niteliğinde değildir.</p><p>Teklif, termin ve teslim kapsamındaki taahhütler ancak ticari süreçte karşılıklı teyit sonrasında geçerli olur.</p>"
   },
   "seo": {
-    "defaultTitle": "Bereket Fide | Güvenilir İnşaat ve Mimarlık Hizmetleri",
-    "defaultDescription": "Konut, ticari ve karma kullanım projelerinde kaliteli, zamanında ve güvenilir inşaat çözümleri. Bereket Fide ile hayalinizdeki projeyi hayata geçirin.",
-    "keywords": "inşaat, mimarlık, konut projeleri, ticari projeler, villa, apartman, proje yönetimi, anahtar teslim"
+    "defaultTitle": "Bereket Fide | Güvenilir Fide ve Tohum Üretimi",
+    "defaultDescription": "Sebze, meyve ve süs bitkisi fidelerinde kaliteli, sağlıklı ve güvenilir üretim çözümleri. Bereket Fide ile bereketli bir hasada hazırlanın.",
+    "keywords": "fide, tohum, sebze fideleri, meyve fideleri, aşılı fide, domates fidesi, sera, tarım"
   }
 }

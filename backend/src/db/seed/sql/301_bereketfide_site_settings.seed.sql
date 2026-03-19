@@ -74,10 +74,10 @@ VALUES (
   'bereketfide__logo',
   '*',
   JSON_OBJECT(
-    'logo_url',         '',
+    'logo_url',         '/uploads/logo/ChatGPT Image 17 Mar 2026 23_51_59.png',
     'logo_alt',         'Bereket Fide Logo',
-    'favicon_url',      '',
-    'logo_dark_url',    ''
+    'favicon_url',      '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie 3).png',
+    'logo_dark_url',    '/uploads/logo/ChatGPT Image 17 Mar 2026 23_58_23 (Kopie).png'
   ),
   NOW(3), NOW(3)
 )
@@ -92,11 +92,11 @@ VALUES (
   'bereketfide__site_logo',
   '*',
   JSON_OBJECT(
-    'logo_url',              '',
+    'logo_url',              '/uploads/logo/ChatGPT Image 17 Mar 2026 23_51_59.png',
     'logo_alt',              'Bereket Fide',
-    'logo_dark_url',         '',
-    'favicon_url',           '',
-    'apple_touch_icon_url',  ''
+    'logo_dark_url',         '/uploads/logo/ChatGPT Image 17 Mar 2026 23_58_23 (Kopie).png',
+    'favicon_url',           '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie 3).png',
+    'apple_touch_icon_url',  '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie).png'
   ),
   NOW(3), NOW(3)
 )
@@ -111,7 +111,7 @@ VALUES (
   'bereketfide__site_favicon',
   '*',
   JSON_OBJECT(
-    'url', '',
+    'url', '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie 3).png',
     'alt', 'Bereket Fide Favicon'
   ),
   NOW(3), NOW(3)
@@ -127,7 +127,7 @@ VALUES (
   'bereketfide__site_apple_touch_icon',
   '*',
   JSON_OBJECT(
-    'url', '',
+    'url', '/uploads/logo/ChatGPT Image 17 Mar 2026 23_59_55 (Kopie).png',
     'alt', 'Bereket Fide Apple Touch Icon'
   ),
   NOW(3), NOW(3)
@@ -177,6 +177,42 @@ VALUES (
 ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);
 
 -- =============================================================
+-- HOME STATS — TR
+-- =============================================================
+INSERT INTO `site_settings` (`id`, `key`, `locale`, `value`, `created_at`, `updated_at`)
+VALUES (
+  UUID(),
+  'bereketfide__home_stats',
+  'tr',
+  JSON_ARRAY(
+    JSON_OBJECT('value', 376, 'label', 'Mutlu Müşteri'),
+    JSON_OBJECT('value', 20, 'label', 'Çeşit Fidan'),
+    JSON_OBJECT('value', 16, 'label', 'Yıllık deneyim'),
+    JSON_OBJECT('value', 31, 'label', 'Tamamlanan Proje')
+  ),
+  NOW(3), NOW(3)
+)
+ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);
+
+-- =============================================================
+-- HOME STATS — EN
+-- =============================================================
+INSERT INTO `site_settings` (`id`, `key`, `locale`, `value`, `created_at`, `updated_at`)
+VALUES (
+  UUID(),
+  'bereketfide__home_stats',
+  'en',
+  JSON_ARRAY(
+    JSON_OBJECT('value', 376, 'label', 'Happy Customers'),
+    JSON_OBJECT('value', 20, 'label', 'Seedling Varieties'),
+    JSON_OBJECT('value', 16, 'label', 'Years of Experience'),
+    JSON_OBJECT('value', 31, 'label', 'Completed Projects')
+  ),
+  NOW(3), NOW(3)
+)
+ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);
+
+-- =============================================================
 -- CONTACT INFO — EN
 -- =============================================================
 INSERT INTO `site_settings` (`id`, `key`, `locale`, `value`, `created_at`, `updated_at`)
@@ -214,12 +250,25 @@ VALUES (
     'brand_name',       'Bereket Fide',
     'brand_tagline_tr', 'Bereketli Hasatlar İçin Kaliteli Fideler',
     'brand_tagline_en', 'Quality Seedlings for Bountiful Harvests',
-    'primary_color',    '#F27A1A',
-    'accent_color',     '#4CAF50',
-    'dark_color',       '#1A1A1A',
-    'font_family',      'Inter',
-    'font_display',     'Outfit'
+    'primary_color',    '#27823b',
+    'accent_color',     '#69ba83',
+    'dark_color',       '#2b2b2b',
+    'font_family',      'Outfit',
+    'font_display',     'Syne'
   ),
+  NOW(3), NOW(3)
+)
+ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);
+
+-- =============================================================
+-- HOME BACKGROUNDS — global (locale='*')
+-- =============================================================
+INSERT INTO `site_settings` (`id`, `key`, `locale`, `value`, `created_at`, `updated_at`)
+VALUES (
+  UUID(),
+  'bereketfide__home_backgrounds',
+  '*',
+  '[{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg","alt":"Bereket Fide Seraları 1"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg","alt":"Bereket Fide Seraları 2"},{"url":"/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37.jpeg","alt":"Bereket Fide Seraları 3"}]',
   NOW(3), NOW(3)
 )
 ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);

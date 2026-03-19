@@ -15,38 +15,38 @@ html[data-theme-template='bereket-harvest'] {
   --gold-200: #e8dcc8;
   --gold-300: #dccfaf;
   --gold-400: #d4a843; /* ← Açık altın / vurgu */
-  --gold-500: #b8862d; /* ← Ana marka rengi (logo orta altın) */
+  --gold-500: #b8862d; /* ← Logo marka rengi (dekoratif kullanım) */
+  --gold-550: #946e1c; /* ← WCAG AA uyumlu marka rengi (beyaz metin/arka plan: ≥4.5:1) */
   --gold-600: #9e7324;
   --gold-700: #8b6914; /* ← Koyu altın / hover */
   --gold-800: #6b4f0e;
   --gold-900: #4e3a0a;
   --gold-950: #2e2207;
 
-  /* Yeşil — doğa/fide paleti */
-  --green-50: #f0f5eb;
-  --green-100: #dce8d4;
-  --green-200: #b8d4a8;
-  --green-300: #7ab85c;
-  --green-400: #4a9032;
-  --green-500: #2d7a3a;
-  --green-600: #1a3a0e; /* ← Koyu yeşil (nav, dark sections) */
-  --green-700: #162d0c; /* ← Footer */
-  --green-800: #112208;
-  --green-900: #0c1805;
+  /* Yeşil — Kullanıcı referanslı parlak Kelly Green paleti */
+  --green-50: #f0f9f4;
+  --green-100: #dcf2e6;
+  --green-200: #bce5cf;
+  --green-300: #8fd2b0;
+  --green-400: #5cb989;
+  --green-500: #319760; /* ← Referans resimdeki parlak yeşil */
+  --green-600: #267a4e;
+  --green-700: #1f613f;
+  --green-800: #1b4d34;
+  --green-900: #163f2b;
 
-  /* Antrasit / Volkanik Nötr */
-  --anthracite-0: #ffffff;
-  --anthracite-50: #f5f5f4;
-  --anthracite-100: #e8e7e5;
-  --anthracite-200: #d4d2c8;
-  --anthracite-300: #b8b5b0;
-  --anthracite-400: #7a8574;
-  --anthracite-500: #6b6864;
-  --anthracite-600: #3d4a38;
-  --anthracite-700: #3c3a37;
-  --anthracite-800: #2e2c29;
-  --anthracite-900: #1a2e12;
-  --anthracite-950: #141311;
+  /* Toprak / Antrasit / Mineral Nötr (Humintech footer style) */
+  --soil-50: #f6f6f6;
+  --soil-100: #e7e7e7;
+  --soil-200: #d1d1d1;
+  --soil-300: #b0b0b0;
+  --soil-400: #888888;
+  --soil-500: #6d6d6d;
+  --soil-600: #5d5d5d;
+  --soil-700: #4a4a4a;
+  --soil-800: #333333;
+  --soil-900: #2b2b2b; /* ← Premium Toprak/Footer rengi */
+  --soil-950: #1a1a1a;
 
   /* Status */
   --status-success: #2d7a3a;
@@ -56,10 +56,10 @@ html[data-theme-template='bereket-harvest'] {
 
   /* Section arka plan token'ları */
   --section-bg-light: #faf9f6;
-  --section-bg-green-light: #f0f5eb;
+  --section-bg-green-light: var(--green-50);
   --section-bg-white: #ffffff;
-  --section-bg-dark: #1a3a0e;
-  --section-bg-dark-deep: #162d0c;
+  --section-bg-dark: var(--soil-900);
+  --section-bg-dark-deep: var(--soil-950);
 
   /* Tipografi */
   --font-heading: 'Syne', system-ui, sans-serif;
@@ -90,10 +90,10 @@ html[data-theme-mode='light'],
 :root:not([data-theme-mode]) {
   /* Surface ara tokenlar */
   --surface-base: var(--gold-50);
-  --surface-raised: var(--anthracite-0);
+  --surface-raised: #ffffff;
   --surface-muted: var(--green-50);
-  --surface-dark: var(--green-600);
-  --surface-dark-strong: var(--green-700);
+  --surface-dark: var(--soil-900);
+  --surface-dark-strong: var(--soil-950);
 
   --text-strong: var(--anthracite-900);
   --text-body: var(--anthracite-600);
@@ -132,10 +132,12 @@ html[data-theme-mode='light'],
   --color-border: var(--border-subtle);
   --color-border-strong: var(--border-strong);
 
-  /* Brand — altın (logo uyumlu) */
-  --color-brand: var(--gold-500);
+  /* Brand — altın (WCAG AA uyumlu) */
+  --color-brand: var(--gold-550); /* ← AA uyumlu: beyaz metin üzerinde ≥4.5:1 */
   --color-brand-light: var(--gold-400);
   --color-brand-dark: var(--gold-700);
+  --color-brand-text: var(--gold-700); /* Küçük metin için koyu varyant */
+  --color-brand-logo: var(--gold-500); /* Logo için orijinal açık altın */
   --color-accent: var(--green-600);
   --color-on-brand: #ffffff;
 }
@@ -194,6 +196,7 @@ html[data-theme-mode='dark'] {
   --color-brand: var(--gold-400);
   --color-brand-light: var(--gold-300);
   --color-brand-dark: var(--gold-600);
+  --color-brand-text: var(--gold-400); /* Dark modda açık altın metin (koyu arka plan üzerinde yeterli kontrast) */
   --color-accent: var(--gold-500);
   --color-on-brand: var(--anthracite-950);
 }
@@ -318,7 +321,7 @@ h6 {
 .surface-dark-shell {
   position: relative;
   overflow: hidden;
-  background-color: var(--color-bg-dark);
+  background-color: var(--soil-900);
 }
 
 /* bereket-harvest: altın radial glow, sıcak antrasit gradient */
@@ -501,6 +504,29 @@ h6 {
   color: inherit;
 }
 
+/* ─── Premium Redesign Utilities ─── */
+
+.premium-bg-parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  will-change: transform;
+}
+
+.glass-premium {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* ─────────────────────────────────────────────
    Animasyon & Motion
    ───────────────────────────────────────────── */
@@ -508,7 +534,7 @@ h6 {
 @keyframes fade-up-in {
   from {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, 40px, 0);
   }
   to {
     opacity: 1;
@@ -533,7 +559,7 @@ h6 {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -6px, 0);
+    transform: translate3d(0, -10px, 0);
   }
 }
 
@@ -542,7 +568,7 @@ h6 {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
@@ -550,38 +576,30 @@ h6 {
 }
 
 .motion-fade-up {
-  animation: fade-up-in 860ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up-in 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .motion-slide-right {
   animation: slide-in-right 920ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .motion-float-soft {
-  animation: float-soft 5.8s ease-in-out 1.2s infinite;
+  animation: float-soft 5s ease-in-out infinite;
 }
 .motion-pulse {
   animation: whatsapp-pulse 2s infinite;
 }
 
-.motion-delay-1 {
-  animation-delay: 120ms;
-}
-.motion-delay-2 {
-  animation-delay: 220ms;
-}
-.motion-delay-3 {
-  animation-delay: 320ms;
-}
-.motion-delay-4 {
-  animation-delay: 420ms;
-}
+.motion-delay-1 { animation-delay: 150ms; }
+.motion-delay-2 { animation-delay: 300ms; }
+.motion-delay-3 { animation-delay: 450ms; }
+.motion-delay-4 { animation-delay: 600ms; }
 
 /* Scroll Reveal */
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 26px, 0);
+  transform: translate3d(0, 30px, 0);
   transition:
-    opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1000ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -606,3 +624,12 @@ h6 {
 .disable-transitions * {
   transition: none !important;
 }
+
+.section-spacing {
+  @apply py-24 lg:py-40;
+}
+
+.container-tight {
+  @apply mx-auto max-w-6xl px-6;
+}
+

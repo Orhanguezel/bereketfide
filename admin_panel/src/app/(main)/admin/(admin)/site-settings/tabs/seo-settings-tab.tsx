@@ -26,18 +26,20 @@ import { AdminImageUploadField } from '@/app/(main)/admin/_components/common/Adm
 
 /* ── page config ── */
 
-const PAGE_CONFIG: { key: string; label: string; path: string }[] = [
-  { key: 'home', label: 'Anasayfa', path: '/' },
-  { key: 'projeler', label: 'Projeler', path: '/projeler' },
-  { key: 'hizmetler', label: 'Hizmetler', path: '/hizmetler' },
-  { key: 'galeri', label: 'Galeri', path: '/galeri' },
-  { key: 'haberler', label: 'Haberler', path: '/haberler' },
-  { key: 'hakkimizda', label: 'Hakkımızda', path: '/hakkimizda' },
-  { key: 'iletisim', label: 'İletişim', path: '/iletisim' },
-  { key: 'teklif', label: 'Teklif', path: '/teklif' },
-  { key: 'legal_privacy', label: 'Gizlilik Politikası', path: '/legal/privacy' },
-  { key: 'legal_terms', label: 'Kullanım Koşulları', path: '/legal/terms' },
-];
+const PAGE_KEYS = [
+  { key: 'home', path: '/' },
+  { key: 'urunler', path: '/urunler' },
+  { key: 'hizmetler', path: '/hizmetler' },
+  { key: 'galeri', path: '/galeri' },
+  { key: 'haberler', path: '/haberler' },
+  { key: 'blog', path: '/blog' },
+  { key: 'hakkimizda', path: '/hakkimizda' },
+  { key: 'iletisim', path: '/iletisim' },
+  { key: 'teklif', path: '/teklif' },
+  { key: 'kataloglar', path: '/kataloglar' },
+  { key: 'legal_privacy', path: '/legal/privacy' },
+  { key: 'legal_terms', path: '/legal/terms' },
+] as const;
 
 type PageSeo = {
   title: string;
@@ -56,7 +58,7 @@ function coerce(v: any): any {
 function extractPages(raw: any): Record<string, PageSeo> {
   const obj = coerce(raw?.value ?? raw) ?? {};
   const result: Record<string, PageSeo> = {};
-  for (const cfg of PAGE_CONFIG) {
+  for (const cfg of PAGE_KEYS) {
     const p = obj[cfg.key];
     result[cfg.key] = {
       title: String(p?.title ?? ''),
@@ -108,7 +110,7 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
     });
   };
 
-  const expandAll = () => setExpandedKeys(new Set(PAGE_CONFIG.map((c) => c.key)));
+  const expandAll = () => setExpandedKeys(new Set(PAGE_KEYS.map((c) => c.key)));
   const collapseAll = () => setExpandedKeys(new Set());
 
   const updatePage = (key: string, patch: Partial<PageSeo>) => {
@@ -122,10 +124,10 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
     if (!localPages) return;
     try {
       await updateSetting({ key: fullKey, locale, value: localPages as any }).unwrap();
-      toast.success('SEO ayarları kaydedildi');
+      toast.success(t('admin.siteSettings.seo.inline.saved'));
       await refetch();
     } catch (err: any) {
-      toast.error(err?.data?.error?.message || 'Kaydetme hatası');
+      toast.error(err?.data?.error?.message || t('admin.siteSettings.seo.inline.saveError'));
     }
   };
 
@@ -136,14 +138,14 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <CardTitle className="text-base">Sayfa SEO Ayarları</CardTitle>
+            <CardTitle className="text-base">{t('admin.siteSettings.seo.inline.title')}</CardTitle>
             <CardDescription>
-              Her sayfanın arama motoru başlığı, açıklaması ve sosyal medya görseli.
+              {t('admin.siteSettings.seo.inline.description')}
             </CardDescription>
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="secondary">{locale}</Badge>
-            {isDirty && <Badge variant="default">Değişiklik var</Badge>}
+            {isDirty && <Badge variant="default">{t('admin.siteSettings.seo.inline.dirty')}</Badge>}
             <Button
               type="button"
               size="sm"
@@ -151,27 +153,28 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
               disabled={busy || !isDirty}
             >
               <Save className="mr-2 h-3.5 w-3.5" />
-              Kaydet
+              {t('admin.siteSettings.seo.inline.save')}
             </Button>
           </div>
         </div>
       </CardHeader>
 
       <CardContent className="space-y-2">
-        {busy && !localPages && <Badge variant="outline">Yükleniyor...</Badge>}
+        {busy && !localPages && <Badge variant="outline">{t('admin.siteSettings.seo.inline.loading')}</Badge>}
 
         <div className="flex gap-2 pb-2">
           <Button type="button" variant="ghost" size="sm" onClick={expandAll}>
-            <ChevronDown className="mr-1 h-3.5 w-3.5" /> Tümünü Aç
+            <ChevronDown className="mr-1 h-3.5 w-3.5" /> {t('admin.siteSettings.seo.inline.expandAll')}
           </Button>
           <Button type="button" variant="ghost" size="sm" onClick={collapseAll}>
-            <ChevronUp className="mr-1 h-3.5 w-3.5" /> Tümünü Kapat
+            <ChevronUp className="mr-1 h-3.5 w-3.5" /> {t('admin.siteSettings.seo.inline.collapseAll')}
           </Button>
         </div>
 
-        {PAGE_CONFIG.map((cfg) => {
+        {PAGE_KEYS.map((cfg) => {
           const page = pages[cfg.key] || { title: '', description: '', og_image: '', no_index: false };
           const isExpanded = expandedKeys.has(cfg.key);
+          const pageLabel = t(`admin.siteSettings.seo.pageLabels.${cfg.key}`);
 
           return (
             <div key={cfg.key} className="rounded-md border">
@@ -185,7 +188,7 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
                   <Globe className="h-4 w-4 text-muted-foreground" />
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium">{cfg.label}</span>
+                      <span className="text-sm font-medium">{pageLabel}</span>
                       <span className="text-xs text-muted-foreground">{cfg.path}</span>
                       {page.no_index && (
                         <Badge variant="destructive" className="text-[10px] px-1 py-0">noindex</Badge>
@@ -213,33 +216,33 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
                     {/* Left: Form */}
                     <div className="space-y-3">
                       <div className="space-y-1.5">
-                        <Label className="text-xs text-muted-foreground">Başlık (title)</Label>
+                        <Label className="text-xs text-muted-foreground">{t('admin.siteSettings.seo.inline.fieldTitle')}</Label>
                         <Input
                           value={page.title}
                           onChange={(e) => updatePage(cfg.key, { title: e.target.value })}
                           disabled={busy}
                           className="h-8"
-                          placeholder="Sayfa başlığı"
+                          placeholder={t('admin.siteSettings.seo.inline.placeholderTitle')}
                         />
                       </div>
 
                       <div className="space-y-1.5">
-                        <Label className="text-xs text-muted-foreground">Açıklama (description)</Label>
+                        <Label className="text-xs text-muted-foreground">{t('admin.siteSettings.seo.inline.fieldDescription')}</Label>
                         <Textarea
                           value={page.description}
                           onChange={(e) => updatePage(cfg.key, { description: e.target.value })}
                           disabled={busy}
                           rows={3}
                           className="text-sm"
-                          placeholder="Sayfa açıklaması"
+                          placeholder={t('admin.siteSettings.seo.inline.placeholderDescription')}
                         />
                         <p className="text-[10px] text-muted-foreground">
-                          {page.description.length}/155 karakter
+                          {t('admin.siteSettings.seo.inline.charCount', { count: page.description.length })}
                         </p>
                       </div>
 
                       <AdminImageUploadField
-                        label="OG Görsel"
+                        label={t('admin.siteSettings.seo.inline.ogImage')}
                         folder={`seo/${cfg.key}`}
                         bucket="public"
                         metadata={{ module_key: 'seo', page: cfg.key, locale }}
@@ -254,30 +257,28 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
                           onCheckedChange={(v) => updatePage(cfg.key, { no_index: v })}
                           disabled={busy}
                         />
-                        <Label className="text-xs">noindex (arama motorlarından gizle)</Label>
+                        <Label className="text-xs">{t('admin.siteSettings.seo.inline.noindex')}</Label>
                       </div>
                     </div>
 
                     {/* Right: Google Preview */}
                     <div className="space-y-2">
-                      <Label className="text-xs text-muted-foreground">Google Arama Önizlemesi</Label>
+                      <Label className="text-xs text-muted-foreground">{t('admin.siteSettings.seo.inline.googlePreview')}</Label>
                       <div className="rounded-md border bg-background p-4">
                         <div className="space-y-1">
                           <p className="text-xs text-muted-foreground truncate">
                             www.bereketfide.com.tr › {locale}{cfg.path === '/' ? '' : cfg.path}
                           </p>
                           <p className="text-sm font-medium text-[#1a0dab] truncate">
-                            {page.title
-                              ? `${page.title} | Bereket Fide`
-                              : 'Bereket Fide'}
+                            {page.title || t('admin.siteSettings.seo.inline.siteName')}
                           </p>
                           <p className="text-xs text-muted-foreground line-clamp-2">
-                            {page.description || 'Açıklama girilmemiş.'}
+                            {page.description || t('admin.siteSettings.seo.inline.noDescription')}
                           </p>
                         </div>
                       </div>
 
-                      <Label className="text-xs text-muted-foreground">Sosyal Medya Önizlemesi</Label>
+                      <Label className="text-xs text-muted-foreground">{t('admin.siteSettings.seo.inline.socialPreview')}</Label>
                       <div className="overflow-hidden rounded-md border bg-background">
                         <div className="aspect-video bg-muted flex items-center justify-center">
                           {page.og_image ? (
@@ -290,16 +291,16 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
                               }}
                             />
                           ) : (
-                            <span className="text-xs text-muted-foreground">OG görsel belirtilmemiş</span>
+                            <span className="text-xs text-muted-foreground">{t('admin.siteSettings.seo.inline.noOgImage')}</span>
                           )}
                         </div>
                         <div className="p-3 space-y-0.5">
                           <p className="text-[10px] text-muted-foreground uppercase">bereketfide.com.tr</p>
                           <p className="text-sm font-medium truncate">
-                            {page.title ? `${page.title} | Bereket Fide` : 'Bereket Fide'}
+                            {page.title || t('admin.siteSettings.seo.inline.siteName')}
                           </p>
                           <p className="text-xs text-muted-foreground line-clamp-2">
-                            {page.description || 'Açıklama girilmemiş.'}
+                            {page.description || t('admin.siteSettings.seo.inline.noDescription')}
                           </p>
                         </div>
                       </div>
@@ -316,7 +317,7 @@ export const SeoSettingsTab: React.FC<SeoSettingsTabProps> = ({ locale, settingP
           <div className="flex justify-end pt-2">
             <Button type="button" onClick={handleSave} disabled={busy}>
               <Save className="mr-2 h-3.5 w-3.5" />
-              Tüm Değişiklikleri Kaydet
+              {t('admin.siteSettings.seo.inline.saveAll')}
             </Button>
           </div>
         )}

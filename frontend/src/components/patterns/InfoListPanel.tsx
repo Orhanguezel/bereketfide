@@ -10,15 +10,20 @@ export function InfoListPanel({
   accentText,
 }: InfoListPanelProps) {
   return (
-    <section className="surface-card rounded-2xl p-6">
-      <h2 className="text-lg font-semibold">{title}</h2>
-      <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--color-text-secondary)]">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
+    <section className="surface-card rounded-2xl p-8 border border-(--color-border) shadow-sm">
+      <h2 className="text-xl font-bold font-heading text-(--color-text-primary) border-b border-(--color-border) pb-4">{title}</h2>
+      <div className="mt-8 space-y-6">
+        {items.map((item, idx) => (
+          <div key={idx} className="flex gap-4 group">
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-(--color-brand)/10 text-(--color-brand) flex items-center justify-center font-bold text-sm transition-colors group-hover:bg-(--color-brand) group-hover:text-white">
+              {idx + 1}
+            </div>
+            <p className="text-sm leading-6 text-(--color-text-secondary) pt-1 group-hover:text-(--color-text-primary) transition-colors">{item}</p>
+          </div>
         ))}
-      </ul>
+      </div>
       {accentText ? (
-        <p className="mt-6 text-sm font-medium text-[var(--color-brand)]">{accentText}</p>
+        <p className="mt-8 text-sm font-bold text-(--color-brand) uppercase tracking-widest">{accentText}</p>
       ) : null}
     </section>
   );

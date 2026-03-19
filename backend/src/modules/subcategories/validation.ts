@@ -32,7 +32,7 @@ const baseSubCategorySchema = z
     slug: z.string().min(1).max(255),
 
     description: emptyToNull(z.string().optional().nullable()),
-    image_url: emptyToNull(z.string().url().optional().nullable()),
+    image_url: emptyToNull(z.string().refine((v) => !v || v.startsWith('/') || v.startsWith('http'), { message: 'Geçersiz URL' }).optional().nullable()),
     alt: emptyToNull(z.string().max(255).optional().nullable()),
     icon: emptyToNull(z.string().max(100).optional().nullable()),
 

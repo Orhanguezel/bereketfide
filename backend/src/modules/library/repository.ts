@@ -374,35 +374,32 @@ export async function listLibrary(params: {
   const skip = params.offset && params.offset >= 0 ? params.offset : 0;
 
   // category join: module_key filtresi için gerekli; aksi halde LEFT JOIN maliyetini artırmaz
-  const qBase = db
+  let qBase = db
     .select(baseSelect(iReq, iDef))
     .from(library)
     .leftJoin(iReq, and(eq(iReq.library_id, library.id), eq(iReq.locale, params.locale)))
-    .leftJoin(iDef, and(eq(iDef.library_id, library.id), eq(iDef.locale, params.defaultLocale)));
+    .leftJoin(iDef, and(eq(iDef.library_id, library.id), eq(iDef.locale, params.defaultLocale))) as any;
 
-  const qWithCat = params.module_key
-    ? qBase.leftJoin(c, eq(c.id, library.category_id))
-    : qBase.leftJoin(c, sql`1=0`);
+  if (params.module_key) {
+    qBase = qBase
+      .leftJoin(c, eq(c.id, library.category_id))
+      .leftJoin(ciReq, and(eq(ciReq.category_id, c.id), eq(ciReq.locale, params.locale)))
+      .leftJoin(ciDef, and(eq(ciDef.category_id, c.id), eq(ciDef.locale, params.defaultLocale)));
+  }
 
-  const qWithCatI18n = params.module_key
-    ? qWithCat
-        .leftJoin(ciReq, and(eq(ciReq.category_id, c.id), eq(ciReq.locale, params.locale)))
-        .leftJoin(ciDef, and(eq(ciDef.category_id, c.id), eq(ciDef.locale, params.defaultLocale)))
-    : qWithCat.leftJoin(ciReq, sql`1=0`).leftJoin(ciDef, sql`1=0`);
+  const rows = await qBase.where(whereExpr).orderBy(orderBy).limit(take).offset(skip);
 
-  const rows = await qWithCatI18n.where(whereExpr).orderBy(orderBy).limit(take).offset(skip);
-
-  const cntBase = db
+  let cntBase = db
     .select({ c: sql<number>`COUNT(1)` })
     .from(library)
     .leftJoin(iReq, and(eq(iReq.library_id, library.id), eq(iReq.locale, params.locale)))
-    .leftJoin(iDef, and(eq(iDef.library_id, library.id), eq(iDef.locale, params.defaultLocale)));
+    .leftJoin(iDef, and(eq(iDef.library_id, library.id), eq(iDef.locale, params.defaultLocale))) as any;
 
-  const cntWithCat = params.module_key
-    ? cntBase.leftJoin(c, eq(c.id, library.category_id))
-    : cntBase.leftJoin(c, sql`1=0`);
+  if (params.module_key) {
+    cntBase = cntBase.leftJoin(c, eq(c.id, library.category_id));
+  }
 
-  const cnt = await cntWithCat.where(whereExpr);
+  const cnt = await cntBase.where(whereExpr);
 
   const total = cnt[0]?.c ?? 0;
   return { items: rows as unknown as LibraryMerged[], total };

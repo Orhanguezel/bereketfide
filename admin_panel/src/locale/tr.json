@@ -861,14 +861,16 @@
         "bereket_gallery": "Galeri",
         "bereket_offers": "Teklifler",
         "bereketfide_blog": "Bereket Fide Haberler",
+        "bereket_blog": "Haberler",
+        "bereket_news": "Bilgi Bankası",
         "bereket_blog_comments": "Haber Yorumları",
         "bereket_corporate": "Kurumsal Sayfalar",
         "bereket_legal": "Yasal Sayfalar",
         "bereket_settings": "Site Ayarları",
-        "bereket_blog": "Haberler / Blog",
         "gallery": "Galeri",
         "cache": "Cache Yönetimi",
-        "theme": "Tema Ayarları"
+        "theme": "Tema Ayarları",
+        "references": "İş Birliği Firmaları"
       },
       "stats": {
         "deliveredOrders": "Teslim Edilen Sipariş",
@@ -1493,7 +1495,8 @@
         "deleteError": "Abone silinemedi.",
         "loadError": "Bülten aboneleri yüklenemedi."
       },
-      "confirmDelete": "Bu aboneyi silmek üzeresin.\n\nE-posta: {email}\nID: {id}\n\nDevam etmek istiyor musun?"
+      "confirmDelete": "Bu aboneyi silmek üzeresin.\n\nE-posta: {email}\nID: {id}\n\nDevam etmek istiyor musun?",
+      "invalidJson": "Geçersiz JSON formatı."
     },
     "email_templates": {
       "header": {
@@ -1542,7 +1545,11 @@
         "keyExists": "Bu anahtar/dil kombinasyonu zaten mevcut.",
         "invalidJson": "Geçersiz değişken formatı (JSON dizisi bekliyor)."
       },
-      "confirmDelete": "Bu e-posta şablonunu silmek üzeresin. Bu işlem geri alınamaz.\n\nAnahtar: {key}\nID: {id}\n\nDevam etmek istiyor musun?"
+      "confirmDelete": "Bu e-posta şablonunu silmek üzeresin. Bu işlem geri alınamaz.\n\nAnahtar: {key}\nID: {id}\n\nDevam etmek istiyor musun?",
+      "status": {
+        "active": "Aktif",
+        "inactive": "Pasif"
+      }
     },
     "reviews": {
       "header": {
@@ -1669,7 +1676,9 @@
           "commentRequired": "Yorum zorunlu.",
           "ratingRange": "Puan 0-5 arasında olmalı."
         }
-      }
+      },
+      "filterBlogComments": "Filtre: Blog yorumları",
+      "filterType": "Filtre: {type}"
     },
     "storage": {
       "title": "Dosya Yönetimi",
@@ -2388,7 +2397,8 @@
         "list": "Liste (Dil)",
         "globalList": "Liste (Global *)",
         "locales": "Diller",
-        "branding": "Marka"
+        "branding": "Marka",
+        "apiServices": "API & Servisler"
       },
       "filters": {
         "title": "Filtreler",
@@ -2493,6 +2503,14 @@
           "noRenderer": "Bu key için özel structured form tanımlı değil. Structured mod JSON editor olarak çalışır.",
           "label": "Structured JSON",
           "helperText": "Blur olduğunda parse edilir. Geçersiz JSON kaydedilmez."
+        },
+        "inline": {
+          "selectLocale": "Dil seçin",
+          "refresh": "Yenile",
+          "loading": "Yükleniyor",
+          "loadingLocale": "Dil yükleniyor...",
+          "fallbackInfo": "Bu dil için henüz özel kayıt yok. Mevcut veri başka bir dilden gösteriliyor. Kaydettiğinizde bu dile özel kayıt oluşur.",
+          "noRecord": "Henüz kayıt yok. Formu doldurup kaydedin."
         }
       },
       "general": {
@@ -2530,7 +2548,34 @@
         "missingGlobalError": "Varsayılan kayıt bulunamadı. Önce varsayılan değer oluşturmalısınız.",
         "globalBootstrapSuccess": "Eksik varsayılan ayarlar başarıyla oluşturuldu.",
         "loadingNote": "Ayarlar yükleniyor...",
-        "deleteTooltip": "\"Varsayılanı Sil\" tüm diller için geçerli olan ana kaydı siler. \"Özelleştirmeyi Sil\" yalnızca seçili dil için olan özel değeri kaldırır."
+        "deleteTooltip": "\"Varsayılanı Sil\" tüm diller için geçerli olan ana kaydı siler. \"Özelleştirmeyi Sil\" yalnızca seçili dil için olan özel değeri kaldırır.",
+        "keyLabels": {
+          "app_locales": "Dil Ayarları",
+          "hero": "Anasayfa Hero",
+          "hero_video": "Hero Video",
+          "hero_config": "Hero İçerik (Başlık, Buton)",
+          "home_backgrounds": "Anasayfa Arkaplanları",
+          "seo_pages": "Sayfa SEO Ayarları",
+          "contact_info": "İletişim Bilgileri",
+          "socials": "Sosyal Medya",
+          "businessHours": "Çalışma Saatleri",
+          "company_profile": "Firma Bilgileri",
+          "ui_header": "Menü Başlıkları"
+        },
+        "keyDescriptions": {
+          "app_locales": "Desteklenen diller ve varsayılan dil",
+          "hero": "Hero videoları, başlık ve buton ayarları",
+          "hero_video": "Hero video ayarları",
+          "hero_config": "Hero başlık ve buton ayarları",
+          "home_backgrounds": "Bölümler arası değişen parallax arkaplanlar",
+          "seo_pages": "Her sayfanın başlık, açıklama ve OG görseli",
+          "contact_info": "Telefon, e-posta, adres, harita",
+          "socials": "Instagram, Facebook, LinkedIn, YouTube, X",
+          "businessHours": "Haftalık açılış-kapanış saatleri",
+          "company_profile": "Firma adı, slogan, hakkında metni",
+          "ui_header": "Navigasyon menüsü ve buton etiketleri"
+        },
+        "recordCount": "{count} kayıt"
       },
       "cloudinary": {
         "title": "Cloudinary / Storage Ayarları",
@@ -2613,7 +2658,27 @@
         "updated": "{label} güncellendi.",
         "updateError": "{label} kaydedilirken hata oluştu.",
         "deleteConfirm": "\"{key}\" ({locale}) silinsin mi?",
-        "deleteError": "Silme sırasında hata oluştu."
+        "deleteError": "Silme sırasında hata oluştu.",
+        "inline": {
+          "logoAlt": "Bereket Fide",
+          "saved": "Logo ayarları kaydedildi",
+          "saveError": "Kaydetme hatası",
+          "title": "Logo & Favicon",
+          "loading": "Yükleniyor",
+          "dirty": "Değişiklik var",
+          "save": "Kaydet",
+          "remove": "Kaldır",
+          "noImage": "Görsel yok",
+          "copy": "Kopyala",
+          "urlCopied": "URL kopyalandı",
+          "openNewTab": "Yeni sekmede aç",
+          "labels": {
+            "logo_url": "Logo",
+            "logo_dark_url": "Logo (Dark)",
+            "favicon_url": "Favicon",
+            "apple_touch_icon_url": "Apple Touch Icon"
+          }
+        }
       },
       "api": {
         "title": "API & Entegrasyon Ayarları",
@@ -2635,7 +2700,42 @@
         "cookieConsentPlaceholder": "{\"consent_version\":1,\"defaults\":{\"necessary\":true,\"analytics\":false,\"marketing\":false},\"ui\":{\"enabled\":true}}",
         "cookieConsentHelp": "JSON girersen obje olarak saklanır. Düz metin girersen string olarak saklanır.",
         "saved": "API & entegrasyon ayarları kaydedildi.",
-        "saveError": "API ayarları kaydedilirken bir hata oluştu."
+        "saveError": "API ayarları kaydedilirken bir hata oluştu.",
+        "inline": {
+          "title": "API & 3. Taraf Servisler",
+          "loading": "Yükleniyor",
+          "save": "Kaydet",
+          "providerOrderLabel": "AI Provider Öncelik Sırası",
+          "providerOrderHelp": "Virgülle ayırın. İlk yanıt veren kullanılır.",
+          "saved": "API ayarları kaydedildi",
+          "saveError": "Kaydetme hatası",
+          "testSuccess": "Başarılı",
+          "testError": "Hata",
+          "connectionError": "Bağlantı hatası",
+          "testBusy": "Test...",
+          "test": "Test",
+          "sections": {
+            "googleOAuth": "Google OAuth",
+            "cloudinary": "Cloudinary",
+            "analytics": "Analytics",
+            "groq": "Groq (Ücretsiz)",
+            "openai": "OpenAI",
+            "anthropic": "Anthropic (Claude)",
+            "grok": "Grok / xAI"
+          },
+          "fields": {
+            "clientId": "Client ID",
+            "clientSecret": "Client Secret",
+            "cloudName": "Cloud Name",
+            "apiKey": "API Key",
+            "apiSecret": "API Secret",
+            "folder": "Klasör",
+            "unsignedPreset": "Unsigned Preset",
+            "gtmContainerId": "GTM Container ID",
+            "ga4MeasurementId": "GA4 Measurement ID",
+            "model": "Model"
+          }
+        }
       },
       "actions": {
         "edit": "Düzenle",
@@ -2707,6 +2807,44 @@
           "source": "Kaynak",
           "effective": "Effective (Özet)",
           "actions": "İşlemler"
+        },
+        "pageLabels": {
+          "home": "Anasayfa",
+          "hizmetler": "Hizmetler",
+          "galeri": "Galeri",
+          "haberler": "Haberler",
+          "hakkimizda": "Hakkımızda",
+          "iletisim": "İletişim",
+          "teklif": "Teklif",
+          "legal_privacy": "Gizlilik Politikası",
+          "legal_terms": "Kullanım Koşulları",
+          "urunler": "Ürünler",
+          "blog": "Bilgi Bankası",
+          "kataloglar": "Kataloglar"
+        },
+        "inline": {
+          "title": "Sayfa SEO Ayarları",
+          "description": "Her sayfanın arama motoru başlığı, açıklaması ve sosyal medya görseli.",
+          "dirty": "Değişiklik var",
+          "save": "Kaydet",
+          "loading": "Yükleniyor...",
+          "expandAll": "Tümünü Aç",
+          "collapseAll": "Tümünü Kapat",
+          "fieldTitle": "Başlık (title)",
+          "fieldDescription": "Açıklama (description)",
+          "placeholderTitle": "Sayfa başlığı",
+          "placeholderDescription": "Sayfa açıklaması",
+          "charCount": "{count}/155 karakter",
+          "ogImage": "OG Görsel",
+          "noindex": "noindex (arama motorlarından gizle)",
+          "googlePreview": "Google Arama Önizlemesi",
+          "socialPreview": "Sosyal Medya Önizlemesi",
+          "noOgImage": "OG görsel belirtilmemiş",
+          "noDescription": "Açıklama girilmemiş.",
+          "siteName": "Bereket Fide",
+          "saveAll": "Tüm Değişiklikleri Kaydet",
+          "saved": "SEO ayarları kaydedildi",
+          "saveError": "Kaydetme hatası"
         }
       },
       "structured": {
@@ -2738,7 +2876,16 @@
             "phone": "Telefon",
             "email": "E-posta",
             "whatsapp": "WhatsApp",
-            "address": "Adres"
+            "address": "Adres",
+            "companyName": "Firma Adı",
+            "phone2": "Telefon 2",
+            "email2": "E-posta 2",
+            "city": "Şehir",
+            "country": "Ülke",
+            "workingHours": "Çalışma Saatleri",
+            "mapsEmbedUrl": "Google Maps Embed URL",
+            "mapsLat": "Enlem (Latitude)",
+            "mapsLng": "Boylam (Longitude)"
           }
         },
         "socials": {
@@ -2761,11 +2908,14 @@
         "uiHeader": {
           "description": "Header navigasyon ve CTA label metinleri. Dil bazlı override için locale satırı kullan.",
           "labels": {
-            "navHome": "Menü: Home",
-            "navProducts": "Menü: Products",
-            "navServices": "Menü: Services",
-            "navContact": "Menü: Contact",
-            "ctaLabel": "CTA Label"
+            "navHome": "Ana Sayfa",
+            "navProducts": "Ürünler",
+            "navServices": "Hizmetler",
+            "navContact": "İletişim",
+            "ctaLabel": "CTA Butonu",
+            "navGallery": "Galeri",
+            "navNews": "Haberler",
+            "navAbout": "Hakkımızda"
           }
         },
         "businessHours": {
@@ -2787,7 +2937,19 @@
             "fri": "Cum",
             "sat": "Cmt",
             "sun": "Paz"
+          },
+          "errors": {
+            "timeFormat": "Saat formatı HH:MM olmalı (örn 09:00)"
           }
+        },
+        "appLocales": {
+          "description": "Desteklenen dilleri yönetin. Varsayılan dil yalnızca bir tane olabilir.",
+          "defaultLabel": "Varsayılan",
+          "activeLabel": "Aktif",
+          "defaultCannotDelete": "Varsayılan dil silinemez",
+          "delete": "Sil",
+          "selectLocale": "Dil seçin...",
+          "addNew": "Yeni dil ekle"
         }
       },
       "slider": {
@@ -2924,7 +3086,20 @@
         "sendTest": "Test mail gönder",
         "sendingTest": "Test maili gönderiliyor...",
         "saved": "SMTP ayarları kaydedildi.",
-        "testSent": "Test e-postası gönderildi. Gelen kutunu (ve spam) kontrol et."
+        "testSent": "Test e-postası gönderildi. Gelen kutunu (ve spam) kontrol et.",
+        "inline": {
+          "emailRequired": "E-posta adresi girin",
+          "testSuccess": "Test başarılı",
+          "testSent": "Test e-postası gönderildi",
+          "smtpError": "SMTP hatası",
+          "connectionError": "Bağlantı hatası",
+          "testLabel": "SMTP Test",
+          "sending": "Gönderiliyor...",
+          "sendTest": "Test Gönder"
+        }
+      },
+      "fallbacks": {
+        "turkishLocale": "Türkçe (tr)"
       }
     },
     "services": {
@@ -3507,14 +3682,18 @@
         "description": "Çok dilli kategori kayıtlarını listele, düzenle ve yönet."
       },
       "tabs": {
-        "list": "Liste"
+        "list": "Liste",
+        "content": "İçerik",
+        "seo": "SEO",
+        "image": "Görsel"
       },
       "filters": {
         "searchPlaceholder": "İsim veya slug ile ara...",
         "allLocales": "Tüm Diller",
         "allModules": "Tüm Modüller",
         "onlyActive": "Sadece aktif",
-        "onlyFeatured": "Sadece öne çıkan"
+        "onlyFeatured": "Sadece öne çıkan",
+        "locale": "Dil"
       },
       "modules": {
         "product": "Ürünler",
@@ -3553,22 +3732,84 @@
         "module": "Modül",
         "active": "Aktif",
         "featured": "Öne Çıkan",
-        "actions": "İşlemler"
+        "actions": "İşlemler",
+        "image": "Görsel"
       }
     },
     "library": {
       "header": {
-        "title": "Kütüphane Yönetimi",
-        "description": "Çok dilli kütüphane dosyalarını listele, düzenle ve yönet."
+        "title": "Kataloglar",
+        "description": "Katalog kayıtlarını yönetin. Dosya ekleyin, düzenleyin veya silin."
       },
       "filters": {
-        "search": "İsim veya slug ile ara..."
+        "search": "Ara",
+        "searchPlaceholder": "Katalog adı veya slug ara...",
+        "type": "Tip",
+        "typeAll": "Tümü",
+        "published": "Durum",
+        "publishedAll": "Tümü",
+        "publishedYes": "Yayında",
+        "publishedNo": "Taslak"
+      },
+      "columns": {
+        "name": "Ad",
+        "slug": "Slug",
+        "type": "Tip",
+        "locale": "Dil",
+        "status": "Durum",
+        "downloads": "İndirme",
+        "actions": "İşlemler",
+        "image": "Görsel"
+      },
+      "status": {
+        "published": "Yayında",
+        "draft": "Taslak"
       },
       "actions": {
-        "create": "Yeni Dosya Ekle",
-        "edit": "Dosyayı Düzenle",
+        "create": "Yeni Katalog",
+        "edit": "Düzenle",
+        "delete": "Sil",
         "save": "Kaydet",
         "cancel": "İptal"
+      },
+      "messages": {
+        "created": "Katalog oluşturuldu.",
+        "updated": "Katalog güncellendi.",
+        "deleted": "Katalog silindi.",
+        "deleteConfirm": "\"{name}\" katalogunu silmek istiyor musunuz?",
+        "error": "İşlem başarısız.",
+        "noRecords": "Henüz katalog kaydı yok."
+      },
+      "detail": {
+        "createTitle": "Yeni Katalog Oluştur",
+        "editTitle": "Katalog Düzenle",
+        "tabs": {
+          "content": "İçerik",
+          "seo": "SEO",
+          "image": "Görsel",
+          "files": "Dosyalar"
+        },
+        "fields": {
+          "name": "Katalog Adı",
+          "slug": "Slug",
+          "type": "Tip",
+          "description": "Açıklama",
+          "tags": "Etiketler",
+          "metaTitle": "Meta Başlık",
+          "metaDescription": "Meta Açıklama",
+          "published": "Yayında",
+          "featured": "Öne Çıkan",
+          "image": "Kapak Görseli"
+        },
+        "files": {
+          "title": "Dosyalar",
+          "add": "Dosya Ekle",
+          "name": "Dosya Adı",
+          "url": "URL",
+          "size": "Boyut",
+          "type": "Tür",
+          "noFiles": "Henüz dosya eklenmemiş."
+        }
       }
     },
     "products": {
@@ -3704,14 +3945,177 @@
       "fontBody": "Gövde Fontu",
       "borderRadius": "Köşe Yuvarlaklığı",
       "darkModeLabel": "Tema Modu",
-      "preview": "Canlı Önizleme",
+      "preview": {
+        "brandName": "Bereket Fide",
+        "navHome": "Anasayfa",
+        "navProducts": "Ürünler",
+        "navContact": "İletişim",
+        "headingText": "Başlık Metni",
+        "bodyText": "Gövde metin örneği",
+        "mutedText": "Soluk metin",
+        "primaryButton": "Ana Buton",
+        "accent": "Vurgu",
+        "darkSection": "Koyu Bölüm",
+        "darkSectionText": "Koyu bölüm metin",
+        "copyright": "© Bereket Fide"
+      },
       "saveButton": "Kaydet",
       "saving": "Kaydediliyor...",
-      "resetButton": "Varsayılana Sıfırla",
-      "saved": "Tema kaydedildi.",
-      "saveError": "Kayıt başarısız.",
-      "reset": "Tema varsayılana sıfırlandı.",
-      "resetError": "Sıfırlama başarısız."
+      "resetButton": "Sıfırla",
+      "saved": "Tema kaydedildi",
+      "saveError": "Kayıt başarısız",
+      "reset": "Varsayılana sıfırlandı",
+      "resetError": "Sıfırlama başarısız",
+      "fontHeadingPreview": "Bereket Fide Başlık Önizleme",
+      "fontBodyPreview": "Bu bir gövde metin önizlemesidir. Bereket Fide olarak, kaliteli fide üretimi yapıyoruz.",
+      "darkModeLight": "Açık",
+      "darkModeDark": "Koyu",
+      "darkModeSystem": "Sistem",
+      "previewTitle": "Canlı Önizleme"
+    },
+    "comments": {
+      "title": "Yorumlar",
+      "description": "Kullanıcı yorumlarını yönetin. Onaylayın, reddedin veya silin.",
+      "refresh": "Yenile",
+      "search": "Ara",
+      "searchPlaceholder": "Yazar, e-posta veya içerik ara...",
+      "approvalStatus": "Onay Durumu",
+      "approvalAll": "Tümü",
+      "approvalApproved": "Onaylı",
+      "approvalPending": "Onay Bekliyor",
+      "targetType": "Hedef Tipi",
+      "targetAll": "Tümü",
+      "targetProject": "Proje",
+      "targetNews": "Haber/Blog",
+      "targetService": "Hizmet",
+      "typeProject": "Proje",
+      "typeNews": "Haber",
+      "typeBlog": "Blog",
+      "typeService": "Hizmet",
+      "total": "Toplam {count} yorum",
+      "loading": "Yükleniyor...",
+      "noResults": "Yorum bulunamadı",
+      "colAuthor": "Yazar",
+      "colComment": "Yorum",
+      "colType": "Tip",
+      "colImage": "Resim",
+      "colApproval": "Onay",
+      "colActive": "Aktif",
+      "colDate": "Tarih",
+      "colAction": "İşlem",
+      "viewImage": "Resmi görüntüle",
+      "removeApproval": "Onayı Kaldır",
+      "approve": "Onayla",
+      "delete": "Sil",
+      "viewImageMobile": "Resmi Görüntüle",
+      "approvalRemoved": "Onay kaldırıldı",
+      "approved": "Onaylandı",
+      "deactivated": "Pasif yapıldı",
+      "activated": "Aktif yapıldı",
+      "deleted": "Yorum silindi",
+      "deleteError": "Silme hatası",
+      "genericError": "Hata oluştu",
+      "deleteDialogTitle": "Yorumu Sil",
+      "deleteDialogDescription": "{name} adlı kullanıcının yorumunu silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+      "cancel": "İptal"
+    },
+    "references": {
+      "header": {
+        "title": "İş Birliği Firmaları",
+        "description": "Carousel alanında gösterilen firma ve marka kayıtlarını yönetin.",
+        "filterLabel": "Filtreler",
+        "totalLabel": "Toplam kayıt",
+        "activeLocale": "Aktif dil",
+        "createButton": "Yeni firma",
+        "refreshButton": "Yenile",
+        "resetButton": "Sıfırla",
+        "searchLabel": "Arama",
+        "searchPlaceholder": "Başlık veya slug ile ara",
+        "statusLabel": "Durum",
+        "statusAll": "Tümü",
+        "statusActive": "Yayında",
+        "statusInactive": "Taslak",
+        "localeLabel": "Dil",
+        "localePlaceholder": "Dil seçin",
+        "localeUrlSync": "Seçilen dil URL ile senkron tutulur.",
+        "featuredOnly": "Sadece öne çıkanlar"
+      },
+      "list": {
+        "title": "Kayıtlar",
+        "actionsColumn": "İşlemler",
+        "activeStatus": "Yayında",
+        "inactiveStatus": "Taslak",
+        "deleteButton": "Sil",
+        "deleteConfirm": "{name} kaydını silmek istediğinize emin misiniz?",
+        "deleteError": "Liste işlemi sırasında hata oluştu.",
+        "deleted": "Kayıt silindi.",
+        "editButton": "Düzenle",
+        "featuredColumn": "Öne çıkan",
+        "featuredNo": "Hayır",
+        "featuredYes": "Evet",
+        "featuredUpdated": "Öne çıkan durumu güncellendi.",
+        "noImage": "Görsel yok",
+        "noRecords": "Kayıt bulunamadı.",
+        "statusColumn": "Yayın",
+        "statusUpdateError": "Durum güncellenemedi.",
+        "statusUpdated": "Durum güncellendi.",
+        "titleColumn": "Başlık",
+        "websiteColumn": "Web sitesi"
+      },
+      "formHeader": {
+        "activeLocale": "Aktif dil",
+        "backButton": "Geri",
+        "backToList": "Listeye dön",
+        "cancelButton": "İptal",
+        "createTitle": "Yeni firma",
+        "created": "Kayıt oluşturuldu.",
+        "createdNoId": "Kayıt oluştu ancak dönen ID okunamadı.",
+        "defaultError": "Kayıt kaydedilemedi.",
+        "description": "Carousel alanındaki firma bilgisini düzenleyin.",
+        "editTitle": "Firma detayı",
+        "goToSettings": "Site ayarlarına git",
+        "idNotFound": "Geçerli kayıt ID bulunamadı.",
+        "invalidIdDescription": "Bu parametre düzenlenebilir bir kayıt ID formatında değil.",
+        "invalidIdTitle": "Geçersiz kayıt ID",
+        "localeError": "Geçerli bir yönetim dili seçin.",
+        "noLocalesDescription": "Önce aktif dilleri site ayarlarından tanımlayın.",
+        "noLocalesTitle": "Aktif dil bulunamadı",
+        "notFoundDescription": "İstenen kayıt bulunamadı.",
+        "notFoundTitle": "Kayıt bulunamadı",
+        "retryButton": "Tekrar dene",
+        "saveButton": "Kaydet",
+        "titleSlugRequired": "Başlık ve slug zorunludur.",
+        "updated": "Kayıt güncellendi.",
+        "modeCreate": "Yeni",
+        "modeEdit": "Düzenleme"
+      },
+      "form": {
+        "createTitle": "Yeni firma oluştur",
+        "editTitle": "Firma bilgileri",
+        "description": "Frontend carousel alanında görünecek firmayı yönetin.",
+        "displayOrderLabel": "Sıralama",
+        "featuredLabel": "Öne çıkar",
+        "formTab": "Form",
+        "imageAltLabel": "Görsel alt metni",
+        "jsonHelperText": "Gelişmiş kullanım için JSON görünümü.",
+        "jsonLabel": "Ham form verisi",
+        "jsonTab": "JSON",
+        "localeLabel": "Dil",
+        "localePlaceholder": "Dil seçin",
+        "localeRequired": "Bir dil seçmelisiniz.",
+        "metaDescriptionLabel": "Meta açıklama",
+        "metaTitleLabel": "Meta başlık",
+        "publishedLabel": "Yayında",
+        "slugLabel": "Slug",
+        "summaryLabel": "Kısa açıklama",
+        "titleLabel": "Başlık",
+        "websiteUrlLabel": "Web sitesi URL",
+        "websiteUrlPlaceholder": "https://ornek.com"
+      },
+      "formImage": {
+        "coverLabel": "Logo / görsel",
+        "coverHelperText": "Carouselde kullanılacak firma logosunu veya görselini yükleyin."
+      }
     }
   },
   "notFound": {

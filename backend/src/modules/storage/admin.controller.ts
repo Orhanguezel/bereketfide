@@ -89,6 +89,10 @@ export const adminListAssets: RouteHandler<{ Querystring: unknown }> = async (
 
   const q = parsed.data as StorageListQuery;
   const { rows, total } = await listAndCount(q);
+  const mapped = rows.map((row) => ({
+    ...row,
+    url: publicUrlOf(row.bucket, row.path, row.url),
+  }));
 
   reply.header("x-total-count", String(total));
   reply.header("content-range", `*/${total}`);
@@ -97,7 +101,7 @@ export const adminListAssets: RouteHandler<{ Querystring: unknown }> = async (
     "x-total-count, content-range",
   );
 
-  return reply.send(rows);
+  return reply.send(mapped);
 };
 
 /** GET /admin/storage/assets/:id */

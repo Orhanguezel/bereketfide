@@ -117,6 +117,10 @@ const emptyNav: AdminNavCopy = {
     bereket_settings: '',
     newsletter: '',
     cache: '',
+    theme: '',
+    references: '',
+    bereket_news: '',
+    library: '',
   },
 };
 
@@ -176,6 +180,10 @@ export function normalizeAdminUiCopy(raw: unknown): AdminUiCopy {
     bereket_settings: uiText(itemsRaw.bereket_settings),
     newsletter: uiText(itemsRaw.newsletter),
     cache: uiText(itemsRaw.cache),
+    theme: uiText(itemsRaw.theme),
+    references: uiText(itemsRaw.references),
+    bereket_news: uiText(itemsRaw.bereket_news),
+    library: uiText(itemsRaw.library),
   };
 
   const commonRaw = parseJsonObject(o.common);

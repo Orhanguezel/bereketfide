@@ -18,7 +18,8 @@ import {
   Image as ImageIcon,
 } from 'lucide-react';
 
-import { useAdminT } from '@/app/(main)/admin/_components/common/useAdminT';
+import { useAdminTranslations } from '@/i18n';
+import { usePreferencesStore } from '@/stores/preferences/preferences-provider';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -90,7 +91,8 @@ function getErrMsg(e: unknown, fallback: string): string {
 }
 
 export default function AdminCommentsClient() {
-  const t = useAdminT();
+  const adminLocale = usePreferencesStore((s) => s.adminLocale);
+  const t = useAdminTranslations(adminLocale || undefined);
 
   const [search, setSearch] = React.useState('');
   const [approvedFilter, setApprovedFilter] = React.useState<ApprovedFilter>('all');
@@ -123,10 +125,10 @@ export default function AdminCommentsClient() {
         id: item.id,
         patch: { is_approved: !item.is_approved },
       }).unwrap();
-      toast.success(item.is_approved ? 'Onay kaldırıldı' : 'Onaylandı');
+      toast.success(item.is_approved ? t('admin.comments.approvalRemoved') : t('admin.comments.approved'));
       refetch();
     } catch (err) {
-      toast.error(getErrMsg(err, 'Hata oluştu'));
+      toast.error(getErrMsg(err, t('admin.comments.genericError')));
     }
   };
 
@@ -136,10 +138,10 @@ export default function AdminCommentsClient() {
         id: item.id,
         patch: { is_active: !item.is_active },
       }).unwrap();
-      toast.success(item.is_active ? 'Pasif yapıldı' : 'Aktif yapıldı');
+      toast.success(item.is_active ? t('admin.comments.deactivated') : t('admin.comments.activated'));
       refetch();
     } catch (err) {
-      toast.error(getErrMsg(err, 'Hata oluştu'));
+      toast.error(getErrMsg(err, t('admin.comments.genericError')));
     }
   };
 
@@ -152,12 +154,12 @@ export default function AdminCommentsClient() {
     if (!itemToDelete) return;
     try {
       await deleteComment({ id: itemToDelete.id }).unwrap();
-      toast.success('Yorum silindi');
+      toast.success(t('admin.comments.deleted'));
       setDeleteDialogOpen(false);
       setItemToDelete(null);
       refetch();
     } catch (err) {
-      toast.error(getErrMsg(err, 'Silme hatası'));
+      toast.error(getErrMsg(err, t('admin.comments.deleteError')));
     }
   };
 
@@ -165,10 +167,10 @@ export default function AdminCommentsClient() {
 
   const targetTypeLabel = (type: string) => {
     switch (type) {
-      case 'project': return 'Proje';
-      case 'news': return 'Haber';
-      case 'custom_page': return 'Blog';
-      case 'service': return 'Hizmet';
+      case 'project': return t('admin.comments.typeProject');
+      case 'news': return t('admin.comments.typeNews');
+      case 'custom_page': return t('admin.comments.typeBlog');
+      case 'service': return t('admin.comments.typeService');
       default: return type;
     }
   };
@@ -183,10 +185,10 @@ export default function AdminCommentsClient() {
               <div className="space-y-1.5">
                 <CardTitle className="flex items-center gap-2">
                   <MessageSquare className="size-5" />
-                  Yorumlar
+                  {t('admin.comments.title')}
                 </CardTitle>
                 <CardDescription>
-                  Kullanıcı yorumlarını yönetin. Onaylayın, reddedin veya silin.
+                  {t('admin.comments.description')}
                 </CardDescription>
               </div>
               <Button
@@ -196,7 +198,7 @@ export default function AdminCommentsClient() {
                 className="gap-2"
               >
                 <RefreshCcw className={`size-4 ${isFetching ? 'animate-spin' : ''}`} />
-                Yenile
+                {t('admin.comments.refresh')}
               </Button>
             </div>
           </CardHeader>
@@ -205,12 +207,12 @@ export default function AdminCommentsClient() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {/* Search */}
               <div className="space-y-2 sm:col-span-2">
-                <Label htmlFor="comment-search" className="text-sm">Ara</Label>
+                <Label htmlFor="comment-search" className="text-sm">{t('admin.comments.search')}</Label>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     id="comment-search"
-                    placeholder="Yazar, e-posta veya içerik ara..."
+                    placeholder={t('admin.comments.searchPlaceholder')}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     disabled={busy}
@@ -221,7 +223,7 @@ export default function AdminCommentsClient() {
 
               {/* Approved filter */}
               <div className="space-y-2">
-                <Label className="text-sm">Onay Durumu</Label>
+                <Label className="text-sm">{t('admin.comments.approvalStatus')}</Label>
                 <Select
                   value={approvedFilter}
                   onValueChange={(v) => setApprovedFilter(v as ApprovedFilter)}
@@ -231,16 +233,16 @@ export default function AdminCommentsClient() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Tümü</SelectItem>
-                    <SelectItem value="approved">Onaylı</SelectItem>
-                    <SelectItem value="unapproved">Onay Bekliyor</SelectItem>
+                    <SelectItem value="all">{t('admin.comments.approvalAll')}</SelectItem>
+                    <SelectItem value="approved">{t('admin.comments.approvalApproved')}</SelectItem>
+                    <SelectItem value="unapproved">{t('admin.comments.approvalPending')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Target type filter */}
               <div className="space-y-2">
-                <Label className="text-sm">Hedef Tipi</Label>
+                <Label className="text-sm">{t('admin.comments.targetType')}</Label>
                 <Select
                   value={targetTypeFilter || 'all'}
                   onValueChange={(v) => setTargetTypeFilter(v === 'all' ? '' : v)}
@@ -250,17 +252,17 @@ export default function AdminCommentsClient() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Tümü</SelectItem>
-                    <SelectItem value="project">Proje</SelectItem>
-                    <SelectItem value="news">Haber/Blog</SelectItem>
-                    <SelectItem value="service">Hizmet</SelectItem>
+                    <SelectItem value="all">{t('admin.comments.targetAll')}</SelectItem>
+                    <SelectItem value="project">{t('admin.comments.targetProject')}</SelectItem>
+                    <SelectItem value="news">{t('admin.comments.targetNews')}</SelectItem>
+                    <SelectItem value="service">{t('admin.comments.targetService')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
 
             <div className="flex items-center justify-between gap-2 text-sm text-muted-foreground">
-              <span>Toplam {items.length} yorum</span>
+              <span>{t('admin.comments.total', { count: items.length })}</span>
               {isFetching && (
                 <div className="flex items-center gap-2">
                   <Loader2 className="size-4 animate-spin" />
@@ -277,14 +279,14 @@ export default function AdminCommentsClient() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[180px]">Yazar</TableHead>
-                  <TableHead>Yorum</TableHead>
-                  <TableHead className="w-[100px]">Tip</TableHead>
-                  <TableHead className="w-[60px] text-center">Resim</TableHead>
-                  <TableHead className="w-[80px] text-center">Onay</TableHead>
-                  <TableHead className="w-[80px] text-center">Aktif</TableHead>
-                  <TableHead className="w-[140px]">Tarih</TableHead>
-                  <TableHead className="w-[80px] text-right">İşlem</TableHead>
+                  <TableHead className="w-45">{t('admin.comments.colAuthor')}</TableHead>
+                  <TableHead>{t('admin.comments.colComment')}</TableHead>
+                  <TableHead className="w-25">{t('admin.comments.colType')}</TableHead>
+                  <TableHead className="w-15 text-center">{t('admin.comments.colImage')}</TableHead>
+                  <TableHead className="w-20 text-center">{t('admin.comments.colApproval')}</TableHead>
+                  <TableHead className="w-20 text-center">{t('admin.comments.colActive')}</TableHead>
+                  <TableHead className="w-35">{t('admin.comments.colDate')}</TableHead>
+                  <TableHead className="w-20 text-right">{t('admin.comments.colAction')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -293,14 +295,14 @@ export default function AdminCommentsClient() {
                     <TableCell colSpan={8} className="h-24 text-center">
                       <div className="flex items-center justify-center gap-2">
                         <Loader2 className="size-5 animate-spin" />
-                        <span>Yükleniyor...</span>
+                        <span>{t('admin.comments.loading')}</span>
                       </div>
                     </TableCell>
                   </TableRow>
                 ) : items.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={8} className="h-24 text-center text-muted-foreground">
-                      Yorum bulunamadı
+                      {t('admin.comments.noResults')}
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -328,7 +330,7 @@ export default function AdminCommentsClient() {
                             href={item.image_url.startsWith('http') ? item.image_url : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:8086'}${item.image_url}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            title="Resmi görüntüle"
+                            title={t('admin.comments.viewImage')}
                           >
                             <ImageIcon className="size-4 text-primary mx-auto" />
                           </a>
@@ -342,7 +344,7 @@ export default function AdminCommentsClient() {
                           size="icon"
                           onClick={() => handleToggleApproved(item)}
                           disabled={busy}
-                          title={item.is_approved ? 'Onayı Kaldır' : 'Onayla'}
+                          title={item.is_approved ? t('admin.comments.removeApproval') : t('admin.comments.approve')}
                         >
                           {item.is_approved ? (
                             <CheckCircle2 className="size-4 text-green-600" />
@@ -367,7 +369,7 @@ export default function AdminCommentsClient() {
                           size="icon"
                           onClick={() => handleDeleteClick(item)}
                           disabled={busy}
-                          title="Sil"
+                          title={t('admin.comments.delete')}
                         >
                           <Trash2 className="size-4 text-destructive" />
                         </Button>
@@ -434,7 +436,7 @@ export default function AdminCommentsClient() {
                       rel="noopener noreferrer"
                       className="text-xs text-primary flex items-center gap-1"
                     >
-                      <ImageIcon className="size-3" /> Resmi Görüntüle
+                      <ImageIcon className="size-3" /> {t('admin.comments.viewImageMobile')}
                     </a>
                   )}
                   <div className="flex items-center justify-between">
@@ -446,7 +448,7 @@ export default function AdminCommentsClient() {
                       disabled={busy}
                       className="text-destructive"
                     >
-                      <Trash2 className="size-3.5 mr-1" /> Sil
+                      <Trash2 className="size-3.5 mr-1" /> {t('admin.comments.delete')}
                     </Button>
                   </div>
                 </CardContent>
@@ -460,15 +462,14 @@ export default function AdminCommentsClient() {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Yorumu Sil</AlertDialogTitle>
+            <AlertDialogTitle>{t('admin.comments.deleteDialogTitle')}</AlertDialogTitle>
             <AlertDialogDescription>
-              <strong>{itemToDelete?.author_name}</strong> adlı kullanıcının yorumunu silmek
-              istediğinize emin misiniz? Bu işlem geri alınamaz.
+              {t('admin.comments.deleteDialogDescription', { name: itemToDelete?.author_name || '' })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>İptal</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteConfirm}>Sil</AlertDialogAction>
+            <AlertDialogCancel>{t('admin.comments.cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm}>{t('admin.comments.delete')}</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

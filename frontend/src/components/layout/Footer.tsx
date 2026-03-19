@@ -88,7 +88,7 @@ export function Footer({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="surface-dark-text transition-colors hover:text-(--color-brand)"
+                    className="surface-dark-text transition-colors hover:text-(--color-brand-text)"
                   >
                     <svg className="size-5" viewBox="0 0 24 24" fill="currentColor">
                       <path d={path} />
@@ -102,9 +102,9 @@ export function Footer({
           {/* Dynamic sections */}
           {normalized.map((section) => (
             <div key={section.title} className="space-y-3">
-              <h4 className="surface-dark-text text-sm font-semibold uppercase tracking-wider">
+              <h3 className="surface-dark-text text-sm font-semibold uppercase tracking-wider">
                 {section.title}
-              </h4>
+              </h3>
               <ul className="space-y-1">
                 {section.items?.map((item) => (
                   <li key={item.url}>
@@ -138,6 +138,12 @@ export function Footer({
             >
               {t('terms')}
             </Link>
+            <span className="surface-dark-text inline-flex min-h-9 items-center py-1 text-xs ml-2 sm:ml-4 border-l border-gray-700 pl-4 sm:pl-6">
+              Design by{' '}
+              <a href="https://guezelwebdesign.com" target="_blank" rel="noopener noreferrer" className="ml-1 text-(--color-brand-light) hover:text-white transition-colors hover:underline font-medium tracking-wide">
+                GWD
+              </a>
+            </span>
           </div>
         </div>
       </div>

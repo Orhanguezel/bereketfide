@@ -11,7 +11,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 START TRANSACTION;
 
 -- =========================
--- 1) CUSTOM PAGES (BASE)
+-- 1) CLEANUP EXISTING NEWS
+-- =========================
+DELETE FROM `custom_pages` WHERE `module_key` = 'news';
+
+-- =========================
+-- 2) CUSTOM PAGES (BASE)
 -- =========================
 INSERT INTO `custom_pages`
 (
@@ -31,32 +36,36 @@ INSERT INTO `custom_pages`
   `sub_category_id`
 )
 VALUES
-  -- Röportaj: Tolkan Mimarlık (Röportajlar kategorisi)
+  -- Haber 1: Güneş Enerjisi
   ('nw010001-5001-4001-9001-nnnnnnnn0001', 'news', 1, 1, 10, 10,
-   '/uploads/news/tolgahan-sahin-tolkan-mimarlik.jpg', 'sa-news-0001-0001-0001-000000000001',
-   '/uploads/news/tolgahan-sahin-tolkan-mimarlik.jpg', 'sa-news-0001-0001-0001-000000000001',
-   JSON_ARRAY('/uploads/news/tolgahan-sahin-tolkan-mimarlik.jpg', '/uploads/news/tolkan-mimarlik-ofis-projesi.jpg', '/uploads/news/tolkan-mimarlik-roportaj-dergi.jpg'),
-   JSON_ARRAY('sa-news-0001-0001-0001-000000000001', 'sa-news-0002-0002-0002-000000000002', 'sa-news-0003-0003-0003-000000000003'),
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
+   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg'),
+   JSON_ARRAY('d0829871-469a-46ae-b243-b537aff49ec0', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315'),
    'nccc0001-4001-4001-8001-nncccccc0001', NULL),
-  -- Proje Haberleri
+  -- Haber 2: Dikim Rehberi
   ('nw010002-5002-4002-9002-nnnnnnnn0002', 'news', 1, 1, 20, 20,
-   '/uploads/news/istanbul-levent-ofis-kulesi.jpg', 'sa-news-0004-0004-0004-000000000004',
-   '/uploads/news/istanbul-levent-ofis-kulesi.jpg', 'sa-news-0004-0004-0004-000000000004', '[]', '[]',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
+   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg'), JSON_ARRAY('33bfb1c6-6eeb-44a0-a351-1ed0ffab0315'),
    'nccc0003-4003-4003-8003-nncccccc0003', NULL),
-  -- Sektör Haberleri
+  -- Haber 3: İnovasyon
   ('nw010003-5003-4003-9003-nnnnnnnn0003', 'news', 1, 0, 30, 30,
-   '/uploads/news/depreme-dayanikli-yapi.jpg', 'sa-news-0005-0005-0005-000000000005',
-   '/uploads/news/depreme-dayanikli-yapi.jpg', 'sa-news-0005-0005-0005-000000000005', '[]', '[]',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
+   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg'), JSON_ARRAY('d0829871-469a-46ae-b243-b537aff49ec0'),
    'nccc0002-4002-4002-8002-nncccccc0002', NULL),
-  -- Teknoloji
+  -- Haber 4: Üretim Kapasitesi
   ('nw010004-5004-4004-9004-nnnnnnnn0004', 'news', 1, 0, 40, 40,
-   '/uploads/news/akilli-sehir-altyapi.jpg', 'sa-news-0006-0006-0006-000000000006',
-   '/uploads/news/akilli-sehir-altyapi.jpg', 'sa-news-0006-0006-0006-000000000006', '[]', '[]',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
+   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg'), JSON_ARRAY('33bfb1c6-6eeb-44a0-a351-1ed0ffab0315'),
    'nccc0004-4004-4004-8004-nncccccc0004', NULL),
-  -- Sürdürülebilirlik
+  -- Haber 5: Genç Çiftçiler
   ('nw010005-5005-4005-9005-nnnnnnnn0005', 'news', 1, 1, 50, 50,
-   '/uploads/news/moduler-yapi-sistemleri.jpg', 'sa-news-0007-0007-0007-000000000007',
-   '/uploads/news/moduler-yapi-sistemleri.jpg', 'sa-news-0007-0007-0007-000000000007', '[]', '[]',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
+   '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
+   JSON_ARRAY('/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg'), JSON_ARRAY('d0829871-469a-46ae-b243-b537aff49ec0'),
    'nccc0005-4005-4005-8005-nncccccc0005', NULL)
 ON DUPLICATE KEY UPDATE
   `module_key`   = VALUES(`module_key`),
@@ -89,37 +98,37 @@ VALUES
     'nw020001-6001-4001-a001-nnnnnnnn0001',
     'nw010001-5001-4001-9001-nnnnnnnn0001',
     'tr',
-    'Modern Seralarımızda Güneş Enerjisi ile Sürdürülebilir Üretim',
-    'gunes-enerjisi-ile-surdurulebilir-fide-uretimi',
-    JSON_OBJECT('html', '<p>Bereket Fide olarak doğaya olan sorumluluğumuzun bilincindeyiz. Antalya Aksu’daki tesisimizde enerji ihtiyacımızı güneşten karşılıyoruz.</p>'),
-    'Güneş enerjisi ile çevreci fide üretimi.',
-    'Güneş Enerjisi | Bereket Fide',
-    'Modern seralarımızda güneş enerjisi kullanımı.',
-    'sürdürülebilir tarım, güneş enerjisi'
+    '2025 İlkbahar Sipariş Planlama Takvimi Yayında',
+    '2025-ilkbahar-siparis-planlama-takvimi',
+    JSON_OBJECT('html', '<p>Yeni sezon için sipariş planlama takvimimizi üreticilerimizle paylaşıyoruz. Bölgesel sevkiyat ve teslim süreçleri belirli periyotlarla ilerleyecektir.</p>'),
+    'Yeni sezon sipariş ve sevkiyat planlama duyurusu.',
+    'Sipariş Takvimi 2025 | Bereket Fide',
+    '2025 ilkbahar sezonu sipariş planlama ve teslim süreci duyurusu.',
+    'sipariş takvimi, sezon duyurusu, fide teslimatı'
   ),
   (
     'nw020002-6002-4002-a002-nnnnnnnn0002',
     'nw010002-5002-4002-9002-nnnnnnnn0002',
     'tr',
-    '2025 Sezonu Aşılı Fide Dikim Rehberi',
-    '2025-asili-fide-dikim-rehberi',
-    JSON_OBJECT('html', '<p>Aşılı fidelerden maksimum verim alabilmek için dikim rehberimizi inceleyin.</p>'),
-    'Aşılı fide dikim teknikleri.',
-    'Dikim Rehberi 2025 | Bereket Fide',
-    'Aşılı fide dikim ve bakım önerileri.',
-    'aşılı fide, dikim rehberi'
+    'Antalya Aksu Tesisimizde Sera Modernizasyonu Tamamlandı',
+    'antalya-aksu-sera-modernizasyonu-tamamlandi',
+    JSON_OBJECT('html', '<p>Üretim altyapımızı güçlendirmek amacıyla planlanan sera modernizasyon çalışmaları tamamlandı. Yeni sistemler ile iklim ve sulama kontrolü daha verimli hale getirildi.</p>'),
+    'Sera modernizasyon sürecimiz tamamlandı.',
+    'Sera Modernizasyonu | Bereket Fide',
+    'Antalya Aksu tesisimizde tamamlanan sera modernizasyon duyurusu.',
+    'sera modernizasyonu, tesis yatırımı, üretim altyapısı'
   ),
   (
     'nw020003-6003-4003-a003-nnnnnnnn0003',
     'nw010003-5003-4003-9003-nnnnnnnn0003',
     'tr',
-    'Fide Kalitesini Artıran İnovatif Yaklaşımlar',
-    'fide-kalitesi-inovasyon',
-    JSON_OBJECT('html', '<p>Üretim kalitemizi artırmak için en son teknolojileri kullanıyoruz.</p>'),
-    'Kaliteli fide üretimi için inovasyon.',
-    'İnovatif Fide Üretimi | Bereket Fide',
-    'Fide üretiminde kullanılan modern teknolojiler.',
-    'inovasyon, kaliteli fide'
+    'Bereket Fide Tarla Günleri Bu Ay Başlıyor',
+    'bereket-fide-tarla-gunleri-basliyor',
+    JSON_OBJECT('html', '<p>Üreticilerimizle sahada bir araya geleceğimiz tarla günü programımız bu ay başlıyor. Program kapsamında çeşit performansları ve sezon uygulamaları paylaşılacak.</p>'),
+    'Tarla günü etkinlik programı başlıyor.',
+    'Tarla Günleri | Bereket Fide',
+    'Üreticilerimizle sahada buluşacağımız tarla günü etkinlik duyurusu.',
+    'tarla günleri, etkinlik, üretici buluşması'
   ),
   (
     'nw020004-6004-4004-a004-nnnnnnnn0004',
@@ -175,37 +184,37 @@ VALUES
     'nw020006-6006-4006-a006-nnnnnnnn0006',
     'nw010001-5001-4001-9001-nnnnnnnn0001',
     'en',
-    'Sustainable Production with Solar Energy',
-    'sustainable-production-with-solar-energy',
-    JSON_OBJECT('html', '<p>We meet our energy needs from the sun at our facility in Antalya Aksu.</p>'),
-    'Eco-friendly seedling production with solar energy.',
-    'Solar Energy | Bereket Fide',
-    'Solar energy use in our greenhouses.',
-    'sustainable agriculture, solar energy'
+    '2025 Spring Order Planning Calendar Is Now Available',
+    '2025-spring-order-planning-calendar',
+    JSON_OBJECT('html', '<p>We are sharing our new season planning calendar with growers. Regional shipment and delivery operations will proceed according to scheduled periods.</p>'),
+    'New season order and shipment planning announcement.',
+    'Order Calendar 2025 | Bereket Fide',
+    'Announcement for the 2025 spring season order planning and delivery process.',
+    'order calendar, season announcement, seedling delivery'
   ),
   (
     'nw020007-6007-4007-a007-nnnnnnnn0007',
     'nw010002-5002-4002-9002-nnnnnnnn0002',
     'en',
-    '2025 Season Grafted Seedling Planting Guide',
-    '2025-grafted-seedling-planting-guide',
-    JSON_OBJECT('html', '<p>Check out our guide to get maximum yield from grafted seedlings.</p>'),
-    'Grafted seedling planting techniques.',
-    'Planting Guide 2025 | Bereket Fide',
-    'Grafted seedling planting and maintenance suggestions.',
-    'grafted seedling, planting guide'
+    'Greenhouse Modernization Completed at Our Antalya Aksu Facility',
+    'greenhouse-modernization-completed-at-antalya-aksu',
+    JSON_OBJECT('html', '<p>The greenhouse modernization program designed to strengthen our production infrastructure has been completed. New systems have improved climate and irrigation control efficiency.</p>'),
+    'Our greenhouse modernization process has been completed.',
+    'Greenhouse Modernization | Bereket Fide',
+    'Announcement for the completed greenhouse modernization at our Antalya Aksu facility.',
+    'greenhouse modernization, facility investment, production infrastructure'
   ),
   (
     'nw020008-6008-4008-a008-nnnnnnnn0008',
     'nw010003-5003-4003-9003-nnnnnnnn0003',
     'en',
-    'Innovative Approaches Enhancing Seedling Quality',
-    'seedling-quality-innovation',
-    JSON_OBJECT('html', '<p>We use the latest technologies to increase our production quality.</p>'),
-    'Innovation for quality seedling production.',
-    'Innovative Seedling Production | Bereket Fide',
-    'Modern technologies used in seedling production.',
-    'innovation, quality seedling'
+    'Bereket Fide Field Days Start This Month',
+    'bereket-fide-field-days-start-this-month',
+    JSON_OBJECT('html', '<p>Our field day program, where we meet growers on site, starts this month. Variety performance and seasonal practices will be shared during the program.</p>'),
+    'Our field day event schedule is starting.',
+    'Field Days | Bereket Fide',
+    'Announcement for our field day events with growers.',
+    'field days, event, grower meeting'
   ),
   (
     'nw020009-6009-4009-a009-nnnnnnnn0009',

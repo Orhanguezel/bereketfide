@@ -12,7 +12,19 @@ import { SeoIssueBeacon } from '@/components/monitoring/SeoIssueBeacon';
 import { fetchSetting } from '@/i18n/server';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 
-const NEWS_PLACEHOLDER = '/media/blog-placeholder.svg';
+function resolveNewsImage(post: any): string | null {
+  return absoluteAssetUrl(
+    post?.featured_image_url_resolved ||
+    post?.image_url_resolved ||
+    post?.cover_image_url_resolved ||
+    post?.featured_image ||
+    post?.image_url ||
+    post?.cover_image ||
+    post?.imageSrc ||
+    post?.featured_image_url ||
+    post?.cover_image_url,
+  ) || null;
+}
 
 type NewsCategory = {
   id: string;
@@ -78,8 +90,8 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: '/haberler',
-    title: seo?.title || `${t('blog.title')} - ${t('seo.defaultTitle')}`,
-    description: seo?.description || t('blog.description'),
+    title: seo?.title || t('news.title'),
+    description: seo?.description || t('news.description'),
     ogImage: seo?.og_image || undefined,
     noIndex: seo?.no_index || Boolean(category),
   });
@@ -142,22 +154,22 @@ export default async function NewsPage({
       <style>{`
         .nw-page-title{font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--color-text-primary);line-height:1.2;margin:0 0 16px}
         .nw-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-        .nw-chip{display:inline-block;padding:6px 16px;border:1px solid var(--color-border);font-size:13px;font-weight:500;color:var(--color-text-secondary);text-decoration:none;border-radius:2px;transition:all .15s}
-        .nw-chip:hover{border-color:var(--color-brand);color:var(--color-brand)}
-        .nw-chip-active{border-color:var(--color-brand);background:var(--color-brand);color:#fff}
-        .nw-chip-active:hover{background:var(--color-brand-dark);border-color:var(--color-brand-dark);color:#fff}
+        .nw-chip{display:inline-block;padding:6px 16px;border:1px solid #e5e5e5;font-size:13px;font-weight:600;color:#2B2B2B;text-decoration:none;border-radius:2px;transition:all .15s;background:#ffffff}
+        .nw-chip:hover{border-color:#b98e3d;color:#b98e3d}
+        .nw-chip-active{border-color:#b98e3d;background:#b98e3d;color:#fff}
+        .nw-chip-active:hover{background:#a37d35;border-color:#a37d35;color:#fff}
         .nw-featured{display:block;text-decoration:none;margin-bottom:32px}
         .nw-featured-img{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--color-bg-muted)}
         .nw-featured-title{font-family:var(--font-heading);font-size:22px;font-weight:700;color:var(--color-text-primary);line-height:1.3;margin:12px 0 4px}
-        .nw-featured:hover .nw-featured-title{color:var(--color-brand)}
-        .nw-featured-time{font-size:12px;color:var(--color-text-muted)}
+        .nw-featured:hover .nw-featured-title{color:#b98e3d}
+        .nw-featured-time{font-size:12px;color:#666666;font-weight:500}
         .nw-cat-badge{display:inline-block;padding:2px 8px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--color-brand);border:1px solid var(--color-brand);margin-bottom:6px}
         .nw-article{display:flex;gap:16px;text-decoration:none;padding:20px 0;border-top:1px solid var(--color-border)}
-        .nw-article:hover .nw-article-title{color:var(--color-brand)}
+        .nw-article:hover .nw-article-title{color:#b98e3d}
         .nw-article-body{flex:1;min-width:0}
         .nw-article-title{font-family:var(--font-heading);font-size:17px;font-weight:700;color:var(--color-text-primary);line-height:1.35;margin:0 0 6px;transition:color .15s}
         .nw-article-excerpt{font-size:14px;color:var(--color-text-secondary);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-        .nw-article-time{font-size:12px;color:var(--color-text-muted);margin-top:8px}
+        .nw-article-time{font-size:12px;color:#666666;margin-top:8px;font-weight:500}
         .nw-article-thumb{position:relative;width:200px;height:140px;flex-shrink:0;overflow:hidden;background:var(--color-bg-muted)}
         .nw-sidebar-card{border:1px solid var(--color-border);padding:20px;margin-bottom:20px}
         .nw-sidebar-card h3{font-family:var(--font-heading);font-size:18px;font-weight:700;color:var(--color-text-primary);margin:0 0 16px}
@@ -177,8 +189,8 @@ export default async function NewsPage({
         <JsonLd
           data={jsonld.graph([
             jsonld.collectionPage({
-              name: isEn ? 'Architecture News' : 'Mimarlık Haberleri',
-              description: t('blog.description'),
+              name: isEn ? 'News' : 'Haberler',
+              description: t('news.description'),
               url: localizedUrl(locale, '/haberler'),
               mainEntity: jsonld.itemList(
                 visiblePosts.slice(0, 12).map((item: any) => ({
@@ -197,12 +209,12 @@ export default async function NewsPage({
           activeCategory
             ? [
                 { label: companyName, href: localizedPath(locale, '/') },
-                { label: t('blog.title'), href: localizedPath(locale, '/haberler') },
+                { label: t('news.title') },
                 { label: activeCategory.name },
               ]
             : [
                 { label: companyName, href: localizedPath(locale, '/') },
-                { label: t('blog.title') },
+                { label: t('news.title') },
               ]
         } />
 
@@ -210,7 +222,7 @@ export default async function NewsPage({
         <h1 className="nw-page-title">
           {activeCategory
             ? activeCategory.name
-            : t('blog.title')}
+            : t('news.title')}
         </h1>
 
         {/* Category filter chips */}
@@ -220,7 +232,7 @@ export default async function NewsPage({
               href={localizedPath(locale, '/haberler')}
               className={`nw-chip${!activeCategory ? ' nw-chip-active' : ''}`}
             >
-              {t('blog.all')}
+              {t('news.all')}
             </Link>
             {categories.map((cat) => (
               <Link
@@ -243,7 +255,7 @@ export default async function NewsPage({
               reason="news-list-empty"
             />
             <p style={{ fontSize: 13, color: 'var(--color-text-muted)', marginBottom: 16 }}>
-              {t('blog.emptyStateNote')}
+              {t('news.emptyStateNote')}
             </p>
           </>
         )}
@@ -265,10 +277,10 @@ export default async function NewsPage({
                 {featured.created_at && (
                   <span className="nw-featured-time">{formatRelativeTime(featured.created_at, t, locale)}</span>
                 )}
-                {(featured.featured_image || featured.image_url || featured.imageSrc) && (
+                {resolveNewsImage(featured) && (
                   <div className="nw-featured-img">
                     <OptimizedImage
-                      src={absoluteAssetUrl(featured.featured_image || featured.image_url || featured.imageSrc) || NEWS_PLACEHOLDER}
+                      src={resolveNewsImage(featured)!}
                       alt={buildMediaAlt({
                         locale,
                         kind: 'blog',
@@ -284,9 +296,9 @@ export default async function NewsPage({
                     />
                   </div>
                 )}
-                {featured.description && (
+                {featured.summary && (
                   <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', lineHeight: 1.7, marginTop: 12, maxWidth: 720 }}>
-                    {featured.description}
+                    {featured.summary}
                   </p>
                 )}
                 {/* Thumbnail strip */}
@@ -295,7 +307,7 @@ export default async function NewsPage({
                     {featured.images.slice(0, 4).map((img: string, i: number) => (
                       <div key={i} className="nw-thumbstrip-item">
                         <OptimizedImage
-                          src={absoluteAssetUrl(img) || NEWS_PLACEHOLDER}
+                          src={absoluteAssetUrl(img) || img}
                           alt={`${featured.title} — ${i + 1}`}
                           fill
                           className="object-cover"
@@ -323,17 +335,17 @@ export default async function NewsPage({
                     <span className="nw-cat-badge">{post.category_name}</span>
                   )}
                   <h2 className="nw-article-title">{post.title}</h2>
-                  {post.description && (
-                    <p className="nw-article-excerpt">{post.description}</p>
+                  {post.summary && (
+                    <p className="nw-article-excerpt">{post.summary}</p>
                   )}
                   {post.created_at && (
                     <span className="nw-article-time">{formatRelativeTime(post.created_at, t, locale)}</span>
                   )}
                 </div>
-                {(post.featured_image || post.image_url || post.imageSrc) && (
+                {resolveNewsImage(post) && (
                   <div className="nw-article-thumb">
                     <OptimizedImage
-                      src={absoluteAssetUrl(post.featured_image || post.image_url || post.imageSrc) || NEWS_PLACEHOLDER}
+                      src={resolveNewsImage(post)!}
                       alt={buildMediaAlt({
                         locale,
                         kind: 'blog',
@@ -357,17 +369,17 @@ export default async function NewsPage({
             {/* Architecture You'll Love */}
             {sidebarPosts.length > 0 && (
               <div className="nw-sidebar-card">
-                <h3>{t('blog.loveTitle')}</h3>
+                <h3>{t('news.loveTitle')}</h3>
                 {sidebarPosts.map((sp: any) => (
                   <Link
                     key={sp.id ?? sp.title}
                     href={sp.slug ? localizedPath(locale, `/haberler/${sp.slug}`) : '#'}
                     className="nw-sidebar-item"
                   >
-                    {(sp.featured_image || sp.image_url || sp.imageSrc) && (
+                    {resolveNewsImage(sp) && (
                       <div className="nw-sidebar-thumb">
                         <OptimizedImage
-                          src={absoluteAssetUrl(sp.featured_image || sp.image_url || sp.imageSrc) || NEWS_PLACEHOLDER}
+                          src={resolveNewsImage(sp)!}
                           alt={sp.title}
                           fill
                           className="object-cover"
@@ -384,7 +396,7 @@ export default async function NewsPage({
             {/* Category list sidebar */}
             {categories.length > 0 && (
               <div className="nw-sidebar-card">
-                <h3>{t('blog.categories')}</h3>
+                <h3>{t('news.categories')}</h3>
                 {categories.map((cat) => (
                   <Link
                     key={cat.id}

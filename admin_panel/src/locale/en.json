@@ -1049,7 +1049,9 @@
           "commentRequired": "Comment is required.",
           "ratingRange": "Rating must be between 0 and 5."
         }
-      }
+      },
+      "filterBlogComments": "Filter: Blog comments",
+      "filterType": "Filter: {type}"
     },
     "customPage": {
       "title": "Custom Pages",
@@ -1283,13 +1285,16 @@
         "bereket_gallery": "Gallery",
         "bereket_offers": "Offers",
         "bereketfide_blog": "Bereket Fide News",
+        "bereket_blog": "News",
+        "bereket_news": "Knowledge Base",
         "bereket_blog_comments": "News Comments",
         "bereket_corporate": "Corporate Pages",
         "bereket_legal": "Legal Pages",
         "bereket_settings": "Site Settings",
         "gallery": "Gallery",
         "cache": "Cache Management",
-        "theme": "Theme Settings"
+        "theme": "Theme Settings",
+        "references": "Partner Companies"
       },
       "stats": {
         "deliveredOrders": "Delivered Orders",
@@ -1961,7 +1966,8 @@
         "list": "List (Language)",
         "globalList": "List (Global *)",
         "locales": "Locales",
-        "branding": "Branding"
+        "branding": "Branding",
+        "apiServices": "API & Services"
       },
       "filters": {
         "title": "Filters",
@@ -2066,6 +2072,14 @@
           "noRenderer": "No structured form is defined for this key. Structured mode works as a JSON editor.",
           "label": "Structured JSON",
           "helperText": "Parsed on blur. Invalid JSON will not be saved."
+        },
+        "inline": {
+          "selectLocale": "Select language",
+          "refresh": "Refresh",
+          "loading": "Loading",
+          "loadingLocale": "Loading language...",
+          "fallbackInfo": "No specific record for this language. Data is shown from another language. Saving will create a language-specific record.",
+          "noRecord": "No record yet. Fill in the form and save."
         }
       },
       "general": {
@@ -2103,7 +2117,34 @@
         "missingGlobalError": "No default record found. You need to create a default value first.",
         "globalBootstrapSuccess": "Missing default settings created successfully.",
         "loadingNote": "Loading settings...",
-        "deleteTooltip": "\"Delete Default\" removes the main record for all languages. \"Delete Customization\" only removes the custom value for the selected language."
+        "deleteTooltip": "\"Delete Default\" removes the main record for all languages. \"Delete Customization\" only removes the custom value for the selected language.",
+        "keyLabels": {
+          "app_locales": "Language Settings",
+          "hero": "Homepage Hero",
+          "hero_video": "Hero Video",
+          "hero_config": "Hero Content (Title, Button)",
+          "home_backgrounds": "Homepage Backgrounds",
+          "seo_pages": "Page SEO Settings",
+          "contact_info": "Contact Info",
+          "socials": "Social Media",
+          "businessHours": "Business Hours",
+          "company_profile": "Company Profile",
+          "ui_header": "Menu Labels"
+        },
+        "keyDescriptions": {
+          "app_locales": "Supported languages and default language",
+          "hero": "Hero videos, headline and button settings",
+          "hero_video": "Hero video settings",
+          "hero_config": "Hero headline and button settings",
+          "home_backgrounds": "Parallax backgrounds between sections",
+          "seo_pages": "Title, description and OG image per page",
+          "contact_info": "Phone, email, address, map",
+          "socials": "Instagram, Facebook, LinkedIn, YouTube, X",
+          "businessHours": "Weekly opening & closing hours",
+          "company_profile": "Company name, slogan, about text",
+          "ui_header": "Navigation menu and button labels"
+        },
+        "recordCount": "{count} records"
       },
       "cloudinary": {
         "title": "Cloudinary / Storage Settings",
@@ -2186,7 +2227,27 @@
         "updated": "{label} updated.",
         "updateError": "Failed to save {label}.",
         "deleteConfirm": "Delete \"{key}\" ({locale})?",
-        "deleteError": "Delete failed."
+        "deleteError": "Delete failed.",
+        "inline": {
+          "logoAlt": "Bereket Fide",
+          "saved": "Logo settings saved",
+          "saveError": "Save error",
+          "title": "Logo & Favicon",
+          "loading": "Loading",
+          "dirty": "Unsaved changes",
+          "save": "Save",
+          "remove": "Remove",
+          "noImage": "No image",
+          "copy": "Copy",
+          "urlCopied": "URL copied",
+          "openNewTab": "Open in new tab",
+          "labels": {
+            "logo_url": "Logo",
+            "logo_dark_url": "Logo (Dark)",
+            "favicon_url": "Favicon",
+            "apple_touch_icon_url": "Apple Touch Icon"
+          }
+        }
       },
       "api": {
         "title": "API & Integration Settings",
@@ -2208,7 +2269,42 @@
         "cookieConsentPlaceholder": "{\"consent_version\":1,\"defaults\":{\"necessary\":true,\"analytics\":false,\"marketing\":false},\"ui\":{\"enabled\":true}}",
         "cookieConsentHelp": "If you enter JSON, it's stored as object. If you enter plain text, it's stored as string.",
         "saved": "API & integration settings saved.",
-        "saveError": "An error occurred while saving API settings."
+        "saveError": "An error occurred while saving API settings.",
+        "inline": {
+          "title": "API & Third Party Services",
+          "loading": "Loading",
+          "save": "Save",
+          "providerOrderLabel": "AI Provider Priority Order",
+          "providerOrderHelp": "Comma-separated. First responder is used.",
+          "saved": "API settings saved",
+          "saveError": "Save error",
+          "testSuccess": "Success",
+          "testError": "Error",
+          "connectionError": "Connection error",
+          "testBusy": "Test...",
+          "test": "Test",
+          "sections": {
+            "googleOAuth": "Google OAuth",
+            "cloudinary": "Cloudinary",
+            "analytics": "Analytics",
+            "groq": "Groq (Free)",
+            "openai": "OpenAI",
+            "anthropic": "Anthropic (Claude)",
+            "grok": "Grok / xAI"
+          },
+          "fields": {
+            "clientId": "Client ID",
+            "clientSecret": "Client Secret",
+            "cloudName": "Cloud Name",
+            "apiKey": "API Key",
+            "apiSecret": "API Secret",
+            "folder": "Folder",
+            "unsignedPreset": "Unsigned Preset",
+            "gtmContainerId": "GTM Container ID",
+            "ga4MeasurementId": "GA4 Measurement ID",
+            "model": "Model"
+          }
+        }
       },
       "actions": {
         "edit": "Edit",
@@ -2280,6 +2376,44 @@
           "source": "Source",
           "effective": "Effective (Summary)",
           "actions": "Actions"
+        },
+        "pageLabels": {
+          "home": "Homepage",
+          "hizmetler": "Services",
+          "galeri": "Gallery",
+          "haberler": "News",
+          "hakkimizda": "About Us",
+          "iletisim": "Contact",
+          "teklif": "Quote",
+          "legal_privacy": "Privacy Policy",
+          "legal_terms": "Terms of Use",
+          "urunler": "Products",
+          "blog": "Knowledge Base",
+          "kataloglar": "Catalogs"
+        },
+        "inline": {
+          "title": "Page SEO Settings",
+          "description": "Search engine title, description, and social media image for each page.",
+          "dirty": "Unsaved changes",
+          "save": "Save",
+          "loading": "Loading...",
+          "expandAll": "Expand All",
+          "collapseAll": "Collapse All",
+          "fieldTitle": "Title",
+          "fieldDescription": "Description",
+          "placeholderTitle": "Page title",
+          "placeholderDescription": "Page description",
+          "charCount": "{count}/155 characters",
+          "ogImage": "OG Image",
+          "noindex": "noindex (hide from search engines)",
+          "googlePreview": "Google Search Preview",
+          "socialPreview": "Social Media Preview",
+          "noOgImage": "No OG image specified",
+          "noDescription": "No description entered.",
+          "siteName": "Bereket Fide",
+          "saveAll": "Save All Changes",
+          "saved": "SEO settings saved",
+          "saveError": "Save error"
         }
       },
       "structured": {
@@ -2311,7 +2445,16 @@
             "phone": "Phone",
             "email": "Email",
             "whatsapp": "WhatsApp",
-            "address": "Address"
+            "address": "Address",
+            "companyName": "Company Name",
+            "phone2": "Phone 2",
+            "email2": "Email 2",
+            "city": "City",
+            "country": "Country",
+            "workingHours": "Working Hours",
+            "mapsEmbedUrl": "Google Maps Embed URL",
+            "mapsLat": "Latitude",
+            "mapsLng": "Longitude"
           }
         },
         "socials": {
@@ -2334,11 +2477,14 @@
         "uiHeader": {
           "description": "Header navigation and CTA labels. Use a locale row for language-specific overrides.",
           "labels": {
-            "navHome": "Menu: Home",
-            "navProducts": "Menu: Products",
-            "navServices": "Menu: Services",
-            "navContact": "Menu: Contact",
-            "ctaLabel": "CTA Label"
+            "navHome": "Home Page",
+            "navProducts": "Products",
+            "navServices": "Services",
+            "navContact": "Contact",
+            "ctaLabel": "CTA Button",
+            "navGallery": "Gallery",
+            "navNews": "News",
+            "navAbout": "About Us"
           }
         },
         "businessHours": {
@@ -2360,7 +2506,19 @@
             "fri": "Fri",
             "sat": "Sat",
             "sun": "Sun"
+          },
+          "errors": {
+            "timeFormat": "Time format must be HH:MM (e.g. 09:00)"
           }
+        },
+        "appLocales": {
+          "description": "Manage supported languages. Only one language can be the default.",
+          "defaultLabel": "Default",
+          "activeLabel": "Active",
+          "defaultCannotDelete": "Default language cannot be deleted",
+          "delete": "Delete",
+          "selectLocale": "Select language...",
+          "addNew": "Add new language"
         }
       },
       "slider": {
@@ -2497,7 +2655,20 @@
         "sendTest": "Send test email",
         "sendingTest": "Sending test email...",
         "saved": "SMTP settings saved.",
-        "testSent": "Test email sent. Check your inbox (and spam)."
+        "testSent": "Test email sent. Check your inbox (and spam).",
+        "inline": {
+          "emailRequired": "Enter email address",
+          "testSuccess": "Test successful",
+          "testSent": "Test email sent",
+          "smtpError": "SMTP error",
+          "connectionError": "Connection error",
+          "testLabel": "SMTP Test",
+          "sending": "Sending...",
+          "sendTest": "Send Test"
+        }
+      },
+      "fallbacks": {
+        "turkishLocale": "Turkish (tr)"
       }
     },
     "services": {
@@ -3408,14 +3579,18 @@
         "description": "List, edit and manage multilingual category records."
       },
       "tabs": {
-        "list": "List"
+        "list": "List",
+        "content": "Content",
+        "seo": "SEO",
+        "image": "Image"
       },
       "filters": {
         "searchPlaceholder": "Search by name or slug...",
         "allLocales": "All Languages",
         "allModules": "All Modules",
         "onlyActive": "Only active",
-        "onlyFeatured": "Only featured"
+        "onlyFeatured": "Only featured",
+        "locale": "Locale"
       },
       "modules": {
         "product": "Products",
@@ -3454,22 +3629,84 @@
         "module": "Module",
         "active": "Active",
         "featured": "Featured",
-        "actions": "Actions"
+        "actions": "Actions",
+        "image": "Image"
       }
     },
     "library": {
       "header": {
-        "title": "Library Management",
-        "description": "List, edit and manage multilingual library files."
+        "title": "Catalogs",
+        "description": "Manage catalog records. Add, edit or delete files."
       },
       "filters": {
-        "search": "Search by name or slug..."
+        "search": "Search",
+        "searchPlaceholder": "Search catalog name or slug...",
+        "type": "Type",
+        "typeAll": "All",
+        "published": "Status",
+        "publishedAll": "All",
+        "publishedYes": "Published",
+        "publishedNo": "Draft"
+      },
+      "columns": {
+        "name": "Name",
+        "slug": "Slug",
+        "type": "Type",
+        "locale": "Locale",
+        "status": "Status",
+        "downloads": "Downloads",
+        "actions": "Actions",
+        "image": "Image"
+      },
+      "status": {
+        "published": "Published",
+        "draft": "Draft"
       },
       "actions": {
-        "create": "Add New File",
-        "edit": "Edit File",
+        "create": "New Catalog",
+        "edit": "Edit",
+        "delete": "Delete",
         "save": "Save",
         "cancel": "Cancel"
+      },
+      "messages": {
+        "created": "Catalog created.",
+        "updated": "Catalog updated.",
+        "deleted": "Catalog deleted.",
+        "deleteConfirm": "Delete catalog \"{name}\"?",
+        "error": "Operation failed.",
+        "noRecords": "No catalog records yet."
+      },
+      "detail": {
+        "createTitle": "Create New Catalog",
+        "editTitle": "Edit Catalog",
+        "tabs": {
+          "content": "Content",
+          "seo": "SEO",
+          "image": "Image",
+          "files": "Files"
+        },
+        "fields": {
+          "name": "Catalog Name",
+          "slug": "Slug",
+          "type": "Type",
+          "description": "Description",
+          "tags": "Tags",
+          "metaTitle": "Meta Title",
+          "metaDescription": "Meta Description",
+          "published": "Published",
+          "featured": "Featured",
+          "image": "Cover Image"
+        },
+        "files": {
+          "title": "Files",
+          "add": "Add File",
+          "name": "File Name",
+          "url": "URL",
+          "size": "Size",
+          "type": "Type",
+          "noFiles": "No files added yet."
+        }
       }
     },
     "products": {
@@ -3605,14 +3842,186 @@
       "fontBody": "Body Font",
       "borderRadius": "Border Radius",
       "darkModeLabel": "Theme Mode",
-      "preview": "Live Preview",
+      "preview": {
+        "brandName": "Bereket Fide",
+        "navHome": "Home",
+        "navProducts": "Products",
+        "navContact": "Contact",
+        "headingText": "Heading Text",
+        "bodyText": "Body text example",
+        "mutedText": "Muted text",
+        "primaryButton": "Primary Button",
+        "accent": "Accent",
+        "darkSection": "Dark Section",
+        "darkSectionText": "Dark section text",
+        "copyright": "© Bereket Fide"
+      },
       "saveButton": "Save",
       "saving": "Saving...",
-      "resetButton": "Reset to Default",
-      "saved": "Theme saved.",
-      "saveError": "Save failed.",
-      "reset": "Theme reset to defaults.",
-      "resetError": "Reset failed."
+      "resetButton": "Reset",
+      "saved": "Theme saved",
+      "saveError": "Save failed",
+      "reset": "Reset to defaults",
+      "resetError": "Reset failed",
+      "fontHeadingPreview": "Bereket Fide Heading Preview",
+      "fontBodyPreview": "This is a body text preview. At Bereket Fide, we produce quality seedlings.",
+      "darkModeLight": "Light",
+      "darkModeDark": "Dark",
+      "darkModeSystem": "System",
+      "previewTitle": "Live Preview"
+    },
+    "comments": {
+      "title": "Comments",
+      "description": "Manage user comments. Approve, reject or delete.",
+      "refresh": "Refresh",
+      "search": "Search",
+      "searchPlaceholder": "Search author, email or content...",
+      "approvalStatus": "Approval Status",
+      "approvalAll": "All",
+      "approvalApproved": "Approved",
+      "approvalPending": "Pending Approval",
+      "targetType": "Target Type",
+      "targetAll": "All",
+      "targetProject": "Project",
+      "targetNews": "News/Blog",
+      "targetService": "Service",
+      "typeProject": "Project",
+      "typeNews": "News",
+      "typeBlog": "Blog",
+      "typeService": "Service",
+      "total": "Total {count} comments",
+      "loading": "Loading...",
+      "noResults": "No comments found",
+      "colAuthor": "Author",
+      "colComment": "Comment",
+      "colType": "Type",
+      "colImage": "Image",
+      "colApproval": "Approval",
+      "colActive": "Active",
+      "colDate": "Date",
+      "colAction": "Action",
+      "viewImage": "View image",
+      "removeApproval": "Remove Approval",
+      "approve": "Approve",
+      "delete": "Delete",
+      "viewImageMobile": "View Image",
+      "approvalRemoved": "Approval removed",
+      "approved": "Approved",
+      "deactivated": "Deactivated",
+      "activated": "Activated",
+      "deleted": "Comment deleted",
+      "deleteError": "Delete error",
+      "genericError": "An error occurred",
+      "deleteDialogTitle": "Delete Comment",
+      "deleteDialogDescription": "Are you sure you want to delete the comment by {name}? This action cannot be undone.",
+      "cancel": "Cancel"
+    },
+    "email_templates": {
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    },
+    "newsletter": {
+      "invalidJson": "Invalid JSON format."
+    },
+    "references": {
+      "header": {
+        "title": "Partner Companies",
+        "description": "Manage the company and brand records shown in the homepage carousel.",
+        "filterLabel": "Filters",
+        "totalLabel": "Total records",
+        "activeLocale": "Active locale",
+        "createButton": "New company",
+        "refreshButton": "Refresh",
+        "resetButton": "Reset",
+        "searchLabel": "Search",
+        "searchPlaceholder": "Search by title or slug",
+        "statusLabel": "Status",
+        "statusAll": "All",
+        "statusActive": "Published",
+        "statusInactive": "Draft",
+        "localeLabel": "Locale",
+        "localePlaceholder": "Select locale",
+        "localeUrlSync": "Selected locale stays in sync with the URL.",
+        "featuredOnly": "Featured only"
+      },
+      "list": {
+        "title": "Records",
+        "actionsColumn": "Actions",
+        "activeStatus": "Published",
+        "inactiveStatus": "Draft",
+        "deleteButton": "Delete",
+        "deleteConfirm": "Are you sure you want to delete {name}?",
+        "deleteError": "An error occurred while loading the list.",
+        "deleted": "Record deleted.",
+        "editButton": "Edit",
+        "featuredColumn": "Featured",
+        "featuredNo": "No",
+        "featuredYes": "Yes",
+        "featuredUpdated": "Featured status updated.",
+        "noImage": "No image",
+        "noRecords": "No records found.",
+        "statusColumn": "Publish",
+        "statusUpdateError": "Status could not be updated.",
+        "statusUpdated": "Status updated.",
+        "titleColumn": "Title",
+        "websiteColumn": "Website"
+      },
+      "formHeader": {
+        "activeLocale": "Active locale",
+        "backButton": "Back",
+        "backToList": "Back to list",
+        "cancelButton": "Cancel",
+        "createTitle": "New company",
+        "created": "Record created.",
+        "createdNoId": "The record was created but no valid ID was returned.",
+        "defaultError": "Record could not be saved.",
+        "description": "Edit the company data shown inside the carousel.",
+        "editTitle": "Company detail",
+        "goToSettings": "Go to site settings",
+        "idNotFound": "A valid record ID could not be found.",
+        "invalidIdDescription": "This parameter is not a valid editable record ID.",
+        "invalidIdTitle": "Invalid record ID",
+        "localeError": "Select a valid admin locale.",
+        "noLocalesDescription": "Define active locales first in site settings.",
+        "noLocalesTitle": "No active locale found",
+        "notFoundDescription": "The requested record could not be found.",
+        "notFoundTitle": "Record not found",
+        "retryButton": "Retry",
+        "saveButton": "Save",
+        "titleSlugRequired": "Title and slug are required.",
+        "updated": "Record updated.",
+        "modeCreate": "New",
+        "modeEdit": "Edit"
+      },
+      "form": {
+        "createTitle": "Create company",
+        "editTitle": "Company information",
+        "description": "Manage the company shown in the frontend carousel.",
+        "displayOrderLabel": "Sort order",
+        "featuredLabel": "Featured",
+        "formTab": "Form",
+        "imageAltLabel": "Image alt text",
+        "jsonHelperText": "JSON view for advanced usage.",
+        "jsonLabel": "Raw form data",
+        "jsonTab": "JSON",
+        "localeLabel": "Locale",
+        "localePlaceholder": "Select locale",
+        "localeRequired": "You must select a locale.",
+        "metaDescriptionLabel": "Meta description",
+        "metaTitleLabel": "Meta title",
+        "publishedLabel": "Published",
+        "slugLabel": "Slug",
+        "summaryLabel": "Summary",
+        "titleLabel": "Title",
+        "websiteUrlLabel": "Website URL",
+        "websiteUrlPlaceholder": "https://example.com"
+      },
+      "formImage": {
+        "coverLabel": "Logo / image",
+        "coverHelperText": "Upload the logo or image used in the carousel."
+      }
     }
   },
   "notFound": {

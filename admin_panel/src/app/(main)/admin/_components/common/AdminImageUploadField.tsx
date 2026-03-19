@@ -64,6 +64,64 @@ export type AdminImageUploadFieldProps = {
 
 const norm = (v: unknown) => String(v ?? '').trim();
 
+const safeEncodeAssetUrl = (value: string): string => {
+  try {
+    return encodeURI(decodeURI(value));
+  } catch {
+    try {
+      return encodeURI(value);
+    } catch {
+      return value;
+    }
+  }
+};
+
+const toRelativeAssetPath = (value: string): string => {
+  try {
+    const parsed = new URL(value);
+    const full = `${parsed.pathname || ''}${parsed.search || ''}${parsed.hash || ''}`;
+    const uploadIdx = full.indexOf('/uploads/');
+    if (uploadIdx >= 0) return full.slice(uploadIdx);
+    const mediaIdx = full.indexOf('/media/');
+    if (mediaIdx >= 0) return full.slice(mediaIdx);
+    return value;
+  } catch {
+    return value;
+  }
+};
+
+const resolveAdminMediaUrl = (raw: string | undefined | null): string => {
+  const s = norm(raw);
+  if (!s) return '';
+  if (s.startsWith('data:')) return s;
+  if (/^https?:\/\//i.test(s)) return safeEncodeAssetUrl(toRelativeAssetPath(s));
+  if (s === '/uploads' || s.startsWith('/uploads/')) return safeEncodeAssetUrl(s);
+  if (s === '/media' || s.startsWith('/media/')) return safeEncodeAssetUrl(s);
+  const uploadIdx = s.indexOf('/uploads/');
+  if (uploadIdx >= 0) return safeEncodeAssetUrl(s.slice(uploadIdx));
+  const mediaIdx = s.indexOf('/media/');
+  if (mediaIdx >= 0) return safeEncodeAssetUrl(s.slice(mediaIdx));
+  return safeEncodeAssetUrl(s);
+};
+
+const encodeAssetPath = (raw: string | undefined | null): string =>
+  norm(raw)
+    .split('/')
+    .filter(Boolean)
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+
+const getAdminAssetPreviewUrl = (asset: { url?: string | null; bucket?: string | null; path?: string | null }): string => {
+  const direct = resolveAdminMediaUrl(asset.url);
+  if (direct) return direct;
+
+  const bucket = norm(asset.bucket);
+  const path = encodeAssetPath(asset.path);
+  if (bucket && path) return `/storage/${encodeURIComponent(bucket)}/${path}`;
+
+  return '';
+};
+
 const isSvgUrl = (raw: string | undefined | null): boolean => {
   const s = norm(raw);
   if (!s) return false;
@@ -403,8 +461,9 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
       );
     }
 
-    const svg = isSvgUrl(value);
-    const previewUrl = svg ? withCloudinarySanitizeIfSvg(value) : value;
+    const resolvedValue = resolveAdminMediaUrl(value);
+    const svg = isSvgUrl(resolvedValue);
+    const previewUrl = svg ? withCloudinarySanitizeIfSvg(resolvedValue) : resolvedValue;
 
     return (
       <div className="space-y-2">
@@ -460,11 +519,11 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
         <div className="rounded-md border bg-muted/50 p-2">
           <div className="mb-1 text-xs font-medium text-muted-foreground">URL:</div>
           <code className="block wrap-break-word text-xs font-mono leading-relaxed text-foreground">
-            {value}
+            {resolvedValue}
           </code>
         </div>
 
-        <UrlLine url={value} disabled={busy} />
+        <UrlLine url={resolvedValue} disabled={busy} />
       </div>
     );
   };
@@ -485,8 +544,9 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
         <div className="flex flex-col gap-2">
           {gallery.map((u, idx) => {
             const isCover = !!coverValue && norm(coverValue) === u;
-            const svg = isSvgUrl(u);
-            const previewUrl = svg ? withCloudinarySanitizeIfSvg(u) : u;
+            const resolvedUrl = resolveAdminMediaUrl(u);
+            const svg = isSvgUrl(resolvedUrl);
+            const previewUrl = svg ? withCloudinarySanitizeIfSvg(resolvedUrl) : resolvedUrl;
 
             return (
               <div
@@ -539,7 +599,7 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium" title={u}>
+                        <div className="truncate text-sm font-medium" title={resolvedUrl}>
                           {isCover ? 'Kapak' : `Görsel ${idx + 1}`}
                         </div>
                         {isCover ? (
@@ -578,7 +638,7 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
                       </div>
                     </div>
 
-                    <UrlLine url={u} disabled={busy} />
+                    <UrlLine url={resolvedUrl} disabled={busy} />
 
                     {!onChangeMultiple ? (
                       <div className="mt-2 text-xs text-muted-foreground">
@@ -710,12 +770,13 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
                       </div>
                     )}
                     {assetsData.items.map((asset) => {
-                      const url = asset.url || '';
+                      const assetValue = norm(asset.url);
+                      const url = getAdminAssetPreviewUrl(asset);
                       const name = asset.name || '';
                       const lower = (url + name).toLowerCase();
                       const isSelected = multiple
-                        ? gallery.includes(url) || librarySelected.includes(url)
-                        : value === url;
+                        ? gallery.includes(assetValue) || librarySelected.includes(assetValue)
+                        : value === assetValue;
                       const isVideo = /\.(mp4|webm|ogg|mov)(\?|$)/i.test(lower);
                       const isSvg = isSvgUrl(url);
                       const isIco = /\.ico(\?|$)/i.test(lower);
@@ -725,7 +786,7 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
                         <button
                           key={asset.id}
                           type="button"
-                          onClick={() => handleSelectFromLibrary(url)}
+                          onClick={() => handleSelectFromLibrary(assetValue)}
                           disabled={busy}
                           className={cn(
                             'group relative overflow-hidden rounded-lg border transition-all hover:border-primary',

@@ -261,17 +261,18 @@ export default function AdminOfferDetailClient({ id }: { id: string }) {
   const computed = React.useMemo(() => {
     const net = parseDecimal(form.net_total);
     const vatRate = parseDecimal(form.vat_rate);
+    const shipping = parseDecimal(form.shipping_total);
 
     let vatTotal: number | null = null;
     let grossTotal: number | null = null;
 
     if (net != null) {
       if (vatRate != null) vatTotal = Number((net * (vatRate / 100)).toFixed(2));
-      grossTotal = Number((net + (vatTotal ?? 0)).toFixed(2));
+      grossTotal = Number((net + (vatTotal ?? 0) + (shipping ?? 0)).toFixed(2));
     }
 
     return { vatTotal, grossTotal };
-  }, [form.net_total, form.vat_rate]);
+  }, [form.net_total, form.vat_rate, form.shipping_total]);
 
   // Sync computed totals
   React.useEffect(() => {
@@ -551,10 +552,10 @@ export default function AdminOfferDetailClient({ id }: { id: string }) {
                       <SelectItem value="quoted">Fiyatlandırıldı</SelectItem>
                       <SelectItem value="sent">Gönderildi</SelectItem>
                       <SelectItem value="accepted">Kabul Edildi</SelectItem>
-                      <SelectItem value="site_survey">Keşif</SelectItem>
-                      <SelectItem value="contract_signed">Sözleşme İmzalandı</SelectItem>
-                      <SelectItem value="construction_started">İnşaat Başladı</SelectItem>
-                      <SelectItem value="construction_completed">Tamamlandı</SelectItem>
+                      <SelectItem value="in_production">Üretimde</SelectItem>
+                      <SelectItem value="ready_for_shipping">Sevke Hazır</SelectItem>
+                      <SelectItem value="shipped">Sevk Edildi</SelectItem>
+                      <SelectItem value="delivered">Teslim Edildi</SelectItem>
                       <SelectItem value="rejected">Reddedildi</SelectItem>
                       <SelectItem value="cancelled">İptal</SelectItem>
                     </SelectContent>
@@ -626,6 +627,10 @@ export default function AdminOfferDetailClient({ id }: { id: string }) {
                 <div className="space-y-1.5">
                   <Label className="text-xs text-muted-foreground">Net Tutar</Label>
                   <Input inputMode="decimal" value={form.net_total} onChange={(e) => setField('net_total', e.target.value)} disabled={busy} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs text-muted-foreground">Nakliye</Label>
+                  <Input inputMode="decimal" value={form.shipping_total} onChange={(e) => setField('shipping_total', e.target.value)} disabled={busy} placeholder="0.00" />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-xs text-muted-foreground">KDV Oranı (%)</Label>

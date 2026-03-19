@@ -1,7 +1,7 @@
 -- =============================================================
 -- FILE: 304_bereketfide_blog.seed.sql
 -- Bereket Fide — Blog / haber yazıları (custom_pages) + i18n (TR/EN)
--- module_key = 'bereketfide_blog'
+-- module_key = 'blog'
 -- =============================================================
 
 SET NAMES utf8mb4;
@@ -11,7 +11,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 START TRANSACTION;
 
 -- =========================
--- 1) CUSTOM PAGES (BASE)
+-- 1) CLEANUP EXISTING BLOG POSTS
+-- =========================
+DELETE FROM `custom_pages` WHERE `module_key` IN ('blog', 'bereketfide_blog');
+
+-- =========================
+-- 2) CUSTOM PAGES (BASE)
 -- =========================
 INSERT INTO `custom_pages`
 (
@@ -31,10 +36,10 @@ INSERT INTO `custom_pages`
   `sub_category_id`
 )
 VALUES
-  ('bb010001-5001-4001-9001-bbbbbbbb0001', 'bereketfide_blog', 1, 1, 10, 10, '/media/blog-placeholder.svg', NULL, '/media/blog-placeholder.svg', NULL, '[]', '[]', NULL, NULL),
-  ('bb010002-5002-4002-9002-bbbbbbbb0002', 'bereketfide_blog', 1, 1, 20, 20, '/media/blog-placeholder.svg', NULL, '/media/blog-placeholder.svg', NULL, '[]', '[]', NULL, NULL),
-  ('bb010003-5003-4003-9003-bbbbbbbb0003', 'bereketfide_blog', 1, 0, 30, 30, '/media/blog-placeholder.svg', NULL, '/media/blog-placeholder.svg', NULL, '[]', '[]', NULL, NULL),
-  ('bb010004-5004-4004-9004-bbbbbbbb0004', 'bereketfide_blog', 1, 0, 40, 40, '/media/blog-placeholder.svg', NULL, '/media/blog-placeholder.svg', NULL, '[]', '[]', NULL, NULL)
+  ('bb010001-5001-4001-9001-bbbbbbbb0001', 'blog', 1, 1, 10, 10, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '[]', '[]', NULL, NULL),
+  ('bb010002-5002-4002-9002-bbbbbbbb0002', 'blog', 1, 1, 20, 20, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '[]', '[]', NULL, NULL),
+  ('bb010003-5003-4003-9003-bbbbbbbb0003', 'blog', 1, 0, 30, 30, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0', '[]', '[]', NULL, NULL),
+  ('bb010004-5004-4004-9004-bbbbbbbb0004', 'blog', 1, 0, 40, 40, '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315', '[]', '[]', NULL, NULL)
 ON DUPLICATE KEY UPDATE
   `module_key`   = VALUES(`module_key`),
   `is_published` = VALUES(`is_published`),
@@ -64,37 +69,37 @@ VALUES
     'bb020001-6001-4001-a001-bbbbbbbb0001',
     'bb010001-5001-4001-9001-bbbbbbbb0001',
     'tr',
-    'Fide Bakımı ve Sulama Teknikleri Rehberi',
-    'fide-bakimi-ve-sulama-teknikleri',
-    JSON_OBJECT('html', '<p>Sağlıklı bir hasat için fidenin ilk günlerdeki bakımı kritiktir. Doğru sulama ve iklimlendirme verimin temelidir.</p><h2>Doğru Sulama Zamanı</h2><p>Fideler güneşin en tepede olduğu saatlerde sulanmamalıdır. Sabahın erken saatleri veya akşam serinliği en ideal zamanlardır.</p><h2>Nem Kontrolü</h2><p>Sera içerisindeki nem oranının dengelenmesi, mantari hastalıkların önlenmesi için hayati önem taşır. Havalandırma pencerelerinin doğru kullanımı bu dengeyi sağlar.</p>'),
-    'Fideleriniz için doğru sulama periyotları ve nem kontrolü hakkında pratik bilgiler.',
-    'Fide Bakımı ve Sulama Rehberi | Bereket Fide Bilgi Bankası',
-    'Fidelerin sağlıklı büyümesi için sulama teknikleri, nem kontrolü ve bakım önerileri.',
-    'fide bakımı, sulama, tarım rehberi'
+    'Modern Seralarımızda Güneş Enerjisi ile Sürdürülebilir Üretim',
+    'modern-seralarimizda-gunes-enerjisi-ile-surdurulebilir-uretim',
+    JSON_OBJECT('html', '<p>Bereket Fide olarak üretimde sürdürülebilirliği yalnızca bir hedef değil, günlük operasyonlarımızın doğal parçası olarak görüyoruz.</p><h2>Enerji Verimliliği Odaklı Sera Altyapısı</h2><p>Modern seralarımızda iklim kontrolü, sulama ve üretim süreçleri enerji verimliliğini destekleyecek şekilde planlanır. Bu yaklaşım hem üretim kalitesini korur hem de kaynak kullanımını dengeler.</p><h2>Güneş Enerjisi ile Desteklenen Üretim</h2><p>Tesislerimizde kullanılan yenilenebilir enerji yaklaşımı sayesinde çevresel etkileri azaltmayı ve daha istikrarlı bir üretim modeli oluşturmayı hedefliyoruz. Böylece yüksek kaliteli fide üretimini daha sorumlu bir altyapı ile sürdürüyoruz.</p>'),
+    'Güneş enerjisi ile çevreci fide üretimi.',
+    'Sürdürülebilir Üretim | Bereket Fide Blog',
+    'Modern seralarımızda güneş enerjisi ve sürdürülebilir üretim yaklaşımımız.',
+    'sürdürülebilir üretim, güneş enerjisi, sera teknolojisi'
   ),
   (
     'bb020002-6002-4002-a002-bbbbbbbb0002',
     'bb010002-5002-4002-9002-bbbbbbbb0002',
     'tr',
-    'Neden Aşılı Fide Tercih Etmelisiniz?',
-    'neden-asili-fide-tercih-etmelisiniz',
-    JSON_OBJECT('html', '<p>Aşılı fide kullanımı, modern tarımda verimliliği artıran en önemli unsurlardan biridir. Peki avantajları nelerdir?</p><h2>Toprak Hastalıklarına Direnç</h2><p>Aşılı fideler, topraktan bulaşabilecek nematod ve fusarium gibi hastalıklara karşı doğal dirence sahiptir.</p><h2>Yüksek Verim ve Güçlü Kök</h2><p>Daha güçlü kök yapısı sayesinde bitki topraktaki besin elementlerini daha iyi emerek %30-50 arasında verim artışı sağlar.</p>'),
-    'Aşılı fidenin sağladığı hastalık direnci ve verim artışı gibi temel avantajlar.',
-    'Aşılı Fide Avantajları | Bereket Fide Bilgi Bankası',
-    'Neden aşılı fide kullanmalıyız? Hastalık direnci, verim artışı ve güçlü kök yapısı hakkında bilgiler.',
-    'aşılı fide avantajları, dirençli fide, yüksek verim'
+    '2025 Sezonu Aşılı Fide Dikim Rehberi',
+    '2025-sezonu-asili-fide-dikim-rehberi',
+    JSON_OBJECT('html', '<p>Aşılı fide ile yüksek performanslı üretim hedefleyen yetiştiriciler için dikim öncesi planlama kritik önemdedir.</p><h2>Dikim Öncesi Hazırlık</h2><p>Toprak yapısının kontrol edilmesi, sulama planının hazırlanması ve sera ya da tarla koşullarının fideye uygun hale getirilmesi sezon başlangıcında büyük fark yaratır.</p><h2>Sağlıklı Başlangıç, Dengeli Gelişim</h2><p>Aşılı fidelerin güçlü kök yapısından en iyi şekilde yararlanmak için dikim sıklığı, ilk sulama ve adaptasyon dönemi dikkatle yönetilmelidir. Doğru başlangıç, sezon boyunca daha istikrarlı gelişim sağlar.</p>'),
+    'Aşılı fide dikim teknikleri.',
+    'Aşılı Fide Dikim Rehberi 2025 | Bereket Fide Blog',
+    '2025 sezonunda aşılı fide dikimi için temel hazırlık ve uygulama önerileri.',
+    'aşılı fide, dikim rehberi, 2025 sezonu'
   ),
   (
     'bb020003-6003-4003-a003-bbbbbbbb0003',
     'bb010003-5003-4003-9003-bbbbbbbb0003',
     'tr',
-    'Sera ve Tarlada Zararlı Mücadelesi',
-    'sera-ve-tarlada-zararli-mucadelesi',
-    JSON_OBJECT('html', '<p>Zararlılarla mücadelede biyolojik ve teknik önlemler bitki sağlığı için vazgeçilmezdir. İşte en iyi yöntemler.</p><h2>Biyolojik Mücadele</h2><p>Kimyasal ilaç kullanımını azaltmak için faydalı böceklerin ve biyolojik tuzakların kullanımı sürdürülebilir tarım için kritiktir.</p><h2>Gözlem ve Erken Teşhis</h2><p>Fidelerin düzenli kontrolü, zararlıların yayılmadan tespit edilmesini sağlar. Yapışkan tuzakların kullanımı bu süreçte yardımcı olur.</p>'),
-    'Sebze üretiminde karşılaşılan zararlılar ve doğal mücadele yöntemleri.',
-    'Zararlı Mücadelesi Rehberi | Bereket Fide Bilgi Bankası',
-    'Fide ve sebze gelişiminde zararlı kontrolü, biyolojik mücadele ve koruma yöntemleri.',
-    'zararlı mücadelesi, biyolojik tarım, sera koruma'
+    'Fide Kalitesini Artıran İnovatif Yaklaşımlar',
+    'fide-kalitesini-artiran-inovatif-yaklasimlar',
+    JSON_OBJECT('html', '<p>Kaliteli fide üretimi, yalnızca iyi tohum seçimiyle değil; süreç boyunca uygulanan yenilikçi yöntemlerle mümkün olur.</p><h2>Kontrollü Üretim Süreçleri</h2><p>Isı, nem, sulama ve besleme parametrelerinin kontrollü şekilde yönetilmesi, gelişim sürecinde daha homojen ve güçlü fideler elde edilmesini sağlar.</p><h2>Veri ve Gözleme Dayalı İyileştirme</h2><p>Üretim sahasında yapılan düzenli gözlemler ve performans takibi, kaliteyi artıran kararların daha hızlı alınmasına yardımcı olur. Bu yaklaşım, sezon boyunca daha güçlü ve güvenilir sonuçlar üretir.</p>'),
+    'Kaliteli fide üretimi için inovasyon.',
+    'İnovatif Fide Üretimi | Bereket Fide Blog',
+    'Fide kalitesini artıran inovatif üretim ve kontrol yaklaşımları.',
+    'fide kalitesi, inovasyon, üretim teknolojisi'
   ),
   (
     'bb020004-6004-4004-a004-bbbbbbbb0004',
@@ -138,37 +143,37 @@ VALUES
     'bb020005-6005-4005-a005-bbbbbbbb0005',
     'bb010001-5001-4001-9001-bbbbbbbb0001',
     'en',
-    'Seedling Care and Irrigation Techniques Guide',
-    'seedling-care-and-irrigation-techniques',
-    JSON_OBJECT('html', '<p>Caring for seedlings in the first few days is critical for a healthy harvest. Correct irrigation and air conditioning are the basis of yield.</p><h2>Right Irrigation Time</h2><p>Seedlings should not be watered during the hours when the sun is at its highest. Early morning or evening cool are the ideal times.</p><h2>Humidity Control</h2><p>Balancing the humidity level in the greenhouse is vital to prevent fungal diseases. Correct use of ventilation windows provides this balance.</p>'),
-    'Practical information about the correct irrigation periods and humidity control for your seedlings.',
-    'Seedling Care and Irrigation Guide | Bereket Fide Knowledge Base',
-    'Irrigation techniques, humidity control, and care suggestions for healthy growth of seedlings.',
-    'seedling care, irrigation, agricultural guide'
+    'Sustainable Production with Solar Energy in Our Modern Greenhouses',
+    'sustainable-production-with-solar-energy-in-our-modern-greenhouses',
+    JSON_OBJECT('html', '<p>At Bereket Fide, we treat sustainability as a practical part of daily production rather than a separate initiative.</p><h2>Energy-Efficient Greenhouse Infrastructure</h2><p>Climate control, irrigation and production systems in our modern greenhouses are planned to support efficient resource use while maintaining stable product quality.</p><h2>Renewable Energy Supported Production</h2><p>By integrating a renewable energy approach into our facilities, we aim to reduce environmental impact and build a more resilient production model for high quality seedlings.</p>'),
+    'Eco-friendly seedling production with solar energy.',
+    'Sustainable Production | Bereket Fide Blog',
+    'Our approach to sustainable seedling production with solar energy and modern greenhouse systems.',
+    'sustainable production, solar energy, greenhouse systems'
   ),
   (
     'bb020006-6006-4006-a006-bbbbbbbb0006',
     'bb010002-5002-4002-9002-bbbbbbbb0002',
     'en',
-    'Why Should You Choose Grafted Seedlings?',
-    'why-choose-grafted-seedlings',
-    JSON_OBJECT('html', '<p>The use of grafted seedlings is one of the most important factors increasing productivity in modern agriculture. So what are the advantages?</p><h2>Resistance to Soil Diseases</h2><p>Grafted seedlings have natural resistance against diseases such as nematodes and fusarium that can be transmitted from the soil.</p><h2>High Yield and Strong Roots</h2><p>Thanks to the stronger root structure, the plant absorbs the nutrient elements in the soil better and provides a yield increase between 30-50%.</p>'),
-    'Key advantages of grafted seedlings such as disease resistance and yield increase.',
-    'Advantages of Grafted Seedlings | Bereket Fide Knowledge Base',
-    'Why use grafted seedlings? Information about disease resistance, yield increase, and strong root structure.',
-    'grafted seedling advantages, resistant seedling, high yield'
+    '2025 Season Grafted Seedling Planting Guide',
+    '2025-season-grafted-seedling-planting-guide',
+    JSON_OBJECT('html', '<p>For growers targeting high performance production with grafted seedlings, planning before planting is essential.</p><h2>Preparation Before Planting</h2><p>Checking soil structure, preparing irrigation planning and aligning greenhouse or field conditions with the crop helps the season start in a stronger way.</p><h2>Healthy Start, Balanced Development</h2><p>To benefit from the strong root structure of grafted seedlings, planting density, first irrigation and the adaptation period should be managed carefully from day one.</p>'),
+    'Grafted seedling planting techniques.',
+    '2025 Grafted Seedling Planting Guide | Bereket Fide Blog',
+    'Core preparation and application notes for grafted seedling planting in the 2025 season.',
+    'grafted seedlings, planting guide, 2025 season'
   ),
   (
     'bb020007-6007-4007-a007-bbbbbbbb0007',
     'bb010003-5003-4003-9003-bbbbbbbb0003',
     'en',
-    'Pest Control in Greenhouses and Fields',
-    'pest-control-in-greenhouses-and-fields',
-    JSON_OBJECT('html', '<p>Biological and technical measures are indispensable for plant health in pest control. Here are the best methods.</p><h2>Biyolojik Mücadele</h2><p>The use of beneficial insects and biological traps is critical for sustainable agriculture to reduce the use of chemical pesticides.</p><h2>Observation and Early Diagnosis</h2><p>Regular checking of seedlings allows pests to be detected before they spread. The use of sticky traps helps in this process.</p>'),
-    'Pests encountered in vegetable production and natural control methods.',
-    'Pest Control Guide | Bereket Fide Knowledge Base',
-    'Pest control, biological control, and protection methods in seedling and vegetable development.',
-    'pest control, biological farming, greenhouse protection'
+    'Innovative Approaches That Improve Seedling Quality',
+    'innovative-approaches-that-improve-seedling-quality',
+    JSON_OBJECT('html', '<p>High quality seedling production depends not only on seed selection but also on the innovative practices applied throughout the production cycle.</p><h2>Controlled Production Processes</h2><p>Managing temperature, humidity, irrigation and nutrition in a controlled way helps deliver more uniform and stronger seedlings.</p><h2>Observation and Data Driven Improvement</h2><p>Regular monitoring in the production area makes it easier to take timely quality decisions and maintain reliable results across the season.</p>'),
+    'Innovation for quality seedling production.',
+    'Innovative Seedling Production | Bereket Fide Blog',
+    'Innovative production and control methods that improve seedling quality.',
+    'seedling quality, innovation, production methods'
   ),
   (
     'bb020008-6008-4008-a008-bbbbbbbb0008',

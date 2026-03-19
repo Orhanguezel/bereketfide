@@ -55,8 +55,8 @@ export const productCreateSchema = z.object({
   category_id: z.string().uuid(),
   sub_category_id: emptyToNull(z.string().uuid().optional().nullable()),
 
-  image_url: emptyToNull(z.string().url().optional().nullable()),
-  images: z.array(z.string().url()).optional().default([]),
+  image_url: emptyToNull(z.string().refine((v) => !v || v.startsWith('/') || v.startsWith('http'), { message: 'Geçersiz URL' }).optional().nullable()),
+  images: z.array(z.string().refine((v) => !v || v.startsWith('/') || v.startsWith('http'), { message: 'Geçersiz URL' })).optional().default([]),
 
   storage_asset_id: emptyToNull(assetId.optional().nullable()),
   storage_image_ids: z.array(assetId).optional().default([]),

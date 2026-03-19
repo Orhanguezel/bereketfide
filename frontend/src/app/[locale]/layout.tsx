@@ -2,7 +2,7 @@ import 'server-only';
 
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { DM_Sans, Syne } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Toaster } from 'sonner';
@@ -29,14 +29,13 @@ function pickFirstString(...values: unknown[]): string {
   return '';
 }
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin', 'latin-ext'],
-  axes: ['opsz'],
   variable: '--font-body',
   display: 'swap',
 });
 
-const syne = Syne({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-heading',
   display: 'swap',
@@ -66,14 +65,15 @@ export async function generateMetadata({
   const logoValue = { ...readSettingValue(legacyLogo), ...readSettingValue(siteLogo) };
   const ogValue = readSettingValue(siteOgDefaultImage);
 
-  const title = asStr(val.site_title) || 'Bereket Fide | Kurumsal İnşaat ve Mimarlık';
+  const title = asStr(val.site_title) || 'Bereket Fide | Kaliteli ve Güvenilir Fide Üretimi';
   const description =
     asStr(val.site_description) ||
-    'Bereket Fide — konut, ticari ve karma kullanım projelerinde güvenilir çözüm ortağı.';
+    'Bereket Fide — sebze, meyve ve süs bitkisi fidelerinde kaliteli ve sağlıklı üretim çözüm ortağınız.';
   const faviconUrl = pickFirstString(
     logoValue.favicon_url,
     logoValue.favicon,
     logoValue.icon_url,
+    '/logo/logo7.png',
   );
   const appleTouchIconUrl = pickFirstString(
     logoValue.apple_touch_icon_url,
@@ -145,6 +145,7 @@ export default async function LocaleLayout({
     socialsSetting,
     activeLocales,
     companyProfileSetting,
+    contactInfoSetting,
     categories,
     services,
     news,
@@ -156,23 +157,25 @@ export default async function LocaleLayout({
     fetchSetting('socials', locale),
     fetchActiveLocaleConfigs(),
     fetchSetting('company_profile', locale),
+    fetchSetting('contact_info', locale),
     fetchCategories(locale),
     fetchServices(locale),
     fetchNews(locale),
   ]);
 
   const logoValue = { ...readSettingValue(legacyLogoSetting), ...readSettingValue(siteLogoSetting) };
-  const logoUrl = pickFirstString(logoValue.logo_url, logoValue.url);
-  const logoDarkUrl = pickFirstString(logoValue.logo_dark_url, logoValue.logo_url, logoValue.url);
+  const logoUrl = pickFirstString(logoValue.logo_url, '/logo/logo7.png');
+  const logoDarkUrl = pickFirstString(logoValue.logo_dark_url, logoUrl);
   const stableMenuItems = ensureMenuItems(menuItems, locale, navT);
   const stableFooterSections = ensureFooterSections(footerSections, locale, navT, footerT);
   const socials = readSettingValue(socialsSetting) as Record<string, string>;
   const companyProfile = readSettingValue(companyProfileSetting) as Record<string, string>;
+  const contactInfo = readSettingValue(contactInfoSetting) as Record<string, string>;
 
   return (
     <html
       lang={locale}
-      className={`${dmSans.variable} ${syne.variable}`}
+      className={`${inter.variable} ${plusJakartaSans.variable}`}
       data-theme-template={THEME_TEMPLATE}
       data-theme-intent={THEME_INTENT}
       data-theme-mode="light"
@@ -222,10 +225,14 @@ export default async function LocaleLayout({
           />
           <main className="flex-1">{children}</main>
           <Footer sections={stableFooterSections} locale={locale} socials={socials} companyProfile={companyProfile} logoUrl={logoUrl} logoDarkUrl={logoDarkUrl} />
-          <ClientShell 
-            companyName={companyProfile?.company_name} 
-            tagline={companyProfile?.slogan} 
+          <ClientShell
+            companyName={contactInfo?.company_name || companyProfile?.company_name}
+            tagline={companyProfile?.slogan}
+            logoUrl={logoDarkUrl}
             whatsappNumber={socials?.whatsapp}
+            socials={socials}
+            contactInfo={{ ...companyProfile, ...contactInfo }}
+            activeLocales={activeLocales.map(l => ({ code: l.code, label: l.label }))}
           />
           <Toaster position="bottom-right" richColors />
         </NextIntlClientProvider>

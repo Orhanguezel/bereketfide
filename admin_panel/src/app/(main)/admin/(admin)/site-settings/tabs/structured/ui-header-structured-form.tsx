@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { z } from 'zod';
+import { useAdminTranslations } from '@/i18n';
+import { usePreferencesStore } from '@/stores/preferences/preferences-provider';
 
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Input } from '@/components/ui/input';
@@ -62,15 +64,15 @@ export function uiHeaderFormToObj(s: UiHeaderFormState) {
   return result;
 }
 
-const FIELDS: { key: keyof UiHeaderFormState; label: string }[] = [
-  { key: 'nav_home', label: 'Ana Sayfa' },
-  { key: 'nav_products', label: 'Projeler' },
-  { key: 'nav_services', label: 'Hizmetler' },
-  { key: 'nav_gallery', label: 'Galeri' },
-  { key: 'nav_news', label: 'Haberler' },
-  { key: 'nav_about', label: 'Hakkımızda' },
-  { key: 'nav_contact', label: 'İletişim' },
-  { key: 'cta_label', label: 'CTA Butonu' },
+const FIELD_KEYS: { key: keyof UiHeaderFormState; labelKey: string }[] = [
+  { key: 'nav_home', labelKey: 'navHome' },
+  { key: 'nav_products', labelKey: 'navProducts' },
+  { key: 'nav_services', labelKey: 'navServices' },
+  { key: 'nav_gallery', labelKey: 'navGallery' },
+  { key: 'nav_news', labelKey: 'navNews' },
+  { key: 'nav_about', labelKey: 'navAbout' },
+  { key: 'nav_contact', labelKey: 'navContact' },
+  { key: 'cta_label', labelKey: 'ctaLabel' },
 ];
 
 export const UiHeaderStructuredForm: React.FC<UiHeaderStructuredFormProps> = ({
@@ -80,6 +82,8 @@ export const UiHeaderStructuredForm: React.FC<UiHeaderStructuredFormProps> = ({
   disabled,
   seed,
 }) => {
+  const adminLocale = usePreferencesStore((s) => s.adminLocale);
+  const t = useAdminTranslations(adminLocale || undefined);
   const s = (seed || EMPTY_SEED) as UiHeaderFormState;
   const form = uiHeaderObjToForm(value, s);
 
@@ -87,14 +91,14 @@ export const UiHeaderStructuredForm: React.FC<UiHeaderStructuredFormProps> = ({
     <div className="space-y-4">
       <Alert variant="default" className="py-2">
         <AlertDescription className="text-sm">
-          Navigasyon menüsü etiketleri ve CTA buton metni. Seçili dile göre düzenlenir.
+          {t('admin.siteSettings.structured.uiHeader.description')}
         </AlertDescription>
       </Alert>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {FIELDS.map((f) => (
+        {FIELD_KEYS.map((f) => (
           <div className="space-y-1" key={f.key}>
-            <Label htmlFor={`ui-header-${f.key}`} className="text-xs text-muted-foreground">{f.label}</Label>
+            <Label htmlFor={`ui-header-${f.key}`} className="text-xs text-muted-foreground">{t(`admin.siteSettings.structured.uiHeader.labels.${f.labelKey}`)}</Label>
             <Input
               id={`ui-header-${f.key}`}
               className="h-8"

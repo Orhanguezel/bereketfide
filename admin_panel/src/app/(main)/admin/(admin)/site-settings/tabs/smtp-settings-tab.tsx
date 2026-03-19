@@ -292,13 +292,16 @@ export const SmtpSettingsTab: React.FC<SmtpSettingsTabProps> = ({ locale }) => {
 /* ── SMTP Test Section ── */
 
 function SmtpTestSection({ busy }: { busy: boolean }) {
+  const adminLocale = usePreferencesStore((s) => s.adminLocale);
+  const t = useAdminTranslations(adminLocale || undefined);
+
   const [testEmail, setTestEmail] = React.useState('');
   const [testing, setTesting] = React.useState(false);
   const [result, setResult] = React.useState<{ ok: boolean; message: string } | null>(null);
 
   const handleTest = async () => {
     if (!testEmail.trim()) {
-      toast.error('E-posta adresi girin');
+      toast.error(t('admin.siteSettings.smtp.inline.emailRequired'));
       return;
     }
     setTesting(true);
@@ -312,15 +315,15 @@ function SmtpTestSection({ busy }: { busy: boolean }) {
       });
       const data = await res.json();
       if (res.ok) {
-        setResult({ ok: true, message: data.message || 'Test başarılı' });
-        toast.success(data.message || 'Test e-postası gönderildi');
+        setResult({ ok: true, message: data.message || t('admin.siteSettings.smtp.inline.testSuccess') });
+        toast.success(data.message || t('admin.siteSettings.smtp.inline.testSent'));
       } else {
-        const msg = data?.error?.message || 'SMTP hatası';
+        const msg = data?.error?.message || t('admin.siteSettings.smtp.inline.smtpError');
         setResult({ ok: false, message: msg });
         toast.error(msg);
       }
     } catch (err: any) {
-      const msg = err.message || 'Bağlantı hatası';
+      const msg = err.message || t('admin.siteSettings.smtp.inline.connectionError');
       setResult({ ok: false, message: msg });
       toast.error(msg);
     } finally {
@@ -330,7 +333,7 @@ function SmtpTestSection({ busy }: { busy: boolean }) {
 
   return (
     <div className="space-y-3">
-      <Label className="text-sm font-medium">SMTP Test</Label>
+      <Label className="text-sm font-medium">{t('admin.siteSettings.smtp.inline.testLabel')}</Label>
       <div className="flex flex-col gap-2 sm:flex-row">
         <Input
           value={testEmail}
@@ -346,7 +349,7 @@ function SmtpTestSection({ busy }: { busy: boolean }) {
           onClick={handleTest}
           disabled={busy || testing || !testEmail.trim()}
         >
-          {testing ? 'Gönderiliyor...' : 'Test Gönder'}
+          {testing ? t('admin.siteSettings.smtp.inline.sending') : t('admin.siteSettings.smtp.inline.sendTest')}
         </Button>
       </div>
       {result && (

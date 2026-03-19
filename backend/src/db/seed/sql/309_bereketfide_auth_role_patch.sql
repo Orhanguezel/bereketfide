@@ -1,5 +1,15 @@
-ALTER TABLE users
-  ADD COLUMN IF NOT EXISTS role ENUM('admin','moderator','user') NOT NULL DEFAULT 'user' AFTER phone;
+-- MySQL 8.0 uyumlu: IF NOT EXISTS desteklenmiyor, procedure ile kontrol
+SET @col_exists = (
+  SELECT COUNT(*) FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role'
+);
+SET @sql = IF(@col_exists = 0,
+  "ALTER TABLE users ADD COLUMN role ENUM('admin','moderator','user') NOT NULL DEFAULT 'user' AFTER phone",
+  'SELECT 1'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 UPDATE users u
 LEFT JOIN (

@@ -22,7 +22,9 @@ export const LOCALE_LIKE = z
 
 export const UUID36 = z.string().length(36);
 
-export const URL2000 = z.string().trim().max(2000).url('Geçersiz URL');
+/** URL veya relative path (/uploads/...) kabul eder */
+const isUrlOrPath = (v: string) => v.startsWith('/') || v.startsWith('http://') || v.startsWith('https://');
+export const URL2000 = z.string().trim().max(2000).refine(isUrlOrPath, { message: 'Geçersiz URL veya path' });
 
 export const SLUG = z
   .string()

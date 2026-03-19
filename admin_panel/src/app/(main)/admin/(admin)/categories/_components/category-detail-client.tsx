@@ -1,6 +1,6 @@
 // =============================================================
 // FILE: src/app/(main)/admin/(admin)/categories/[id]/CategoryDetailClient.tsx
-// Category Detail/Edit Form — JSON + i18n Support
+// Category Detail/Edit Form — İçerik | SEO | Görsel tabs
 // Bereket Fide
 // =============================================================
 
@@ -22,7 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ArrowLeft, Save, FileJson } from 'lucide-react';
+import { ArrowLeft, Save, Sparkles } from 'lucide-react';
+import { useAIContentAssist } from '@/app/(main)/admin/_components/common/useAIContentAssist';
 import { useAdminT } from '@/app/(main)/admin/_components/common/useAdminT';
 import { usePreferencesStore } from '@/stores/preferences/preferences-provider';
 import { AdminLocaleSelect } from '@/app/(main)/admin/_components/common/AdminLocaleSelect';
@@ -35,6 +36,9 @@ import {
   useCreateCategoryAdminMutation,
   useUpdateCategoryAdminMutation,
 } from '@/integrations/endpoints/admin/categories_admin.endpoints';
+
+const inputClass =
+  'w-full rounded border border-[#ccc] bg-white px-4 py-3 text-sm text-[#333] placeholder-[#999] outline-none focus:border-[#946e1c] focus:ring-1 focus:ring-[#946e1c]/30';
 
 interface Props {
   id: string;
@@ -49,7 +53,7 @@ export default function CategoryDetailClient({ id }: Props) {
   // Locale management
   const { localeOptions } = useAdminLocales();
   const [activeLocale, setActiveLocale] = React.useState<string>(adminLocale || 'tr');
-  const [activeTab, setActiveTab] = React.useState<'form' | 'json'>('form');
+  const [activeTab, setActiveTab] = React.useState<'content' | 'seo' | 'image'>('content');
 
   // RTK Query
   const { data: category, isFetching, refetch } = useGetCategoryAdminQuery(
@@ -74,6 +78,8 @@ export default function CategoryDetailClient({ id }: Props) {
     is_active: true,
     is_featured: false,
     display_order: 0,
+    meta_title: '',
+    meta_description: '',
     i18n_data: {} as Record<string, any>,
   });
 
@@ -93,6 +99,8 @@ export default function CategoryDetailClient({ id }: Props) {
         is_active: category.is_active ?? true,
         is_featured: category.is_featured ?? false,
         display_order: category.display_order || 0,
+        meta_title: (category as any).meta_title || '',
+        meta_description: (category as any).meta_description || '',
         i18n_data: (category as any).i18n_data || {},
       });
     }
@@ -111,8 +119,8 @@ export default function CategoryDetailClient({ id }: Props) {
     setFormData((prev) => ({ ...prev, locale: nextLocale }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
 
     if (!formData.name || !formData.slug) {
       toast.error('Name ve Slug zorunludur');
@@ -140,15 +148,44 @@ export default function CategoryDetailClient({ id }: Props) {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleJsonChange = (jsonData: Record<string, any>) => {
-    setFormData((prev) => ({ ...prev, ...jsonData }));
-  };
-
   const handleImageChange = (url: string) => {
     setFormData((prev) => ({ ...prev, image_url: url }));
   };
 
   const isLoading = isFetching || isCreating || isUpdating;
+
+  // AI Content Assist
+  const { assist: aiAssist, loading: aiLoading } = useAIContentAssist();
+
+  const handleAIAssist = async () => {
+    const targetLocales = localesForSelect.map((l: any) => l.value).filter(Boolean);
+    if (!targetLocales.length) targetLocales.push(activeLocale);
+
+    const result = await aiAssist({
+      title: formData.name,
+      summary: formData.description,
+      content: formData.description,
+      tags: '',
+      locale: activeLocale,
+      target_locales: targetLocales,
+      module_key: formData.module_key,
+      action: 'full',
+    });
+
+    if (!result) return;
+
+    const current = result.find((r) => r.locale === activeLocale) || result[0];
+    if (current) {
+      setFormData((prev) => ({
+        ...prev,
+        name: current.title || prev.name,
+        slug: current.slug || prev.slug,
+        description: current.summary || current.content?.replace(/<[^>]+>/g, '').slice(0, 500) || prev.description,
+        meta_title: current.meta_title || prev.meta_title,
+        meta_description: current.meta_description || prev.meta_description,
+      }));
+    }
+  };
 
   const localesForSelect = React.useMemo(() => {
     return (localeOptions || []).map((l: any) => ({
@@ -156,6 +193,9 @@ export default function CategoryDetailClient({ id }: Props) {
       label: String(l.label || l.value || ''),
     }));
   }, [localeOptions]);
+
+  // SEO preview URL
+  const seoPreviewUrl = `bereketfide.com.tr/kategori/${formData.slug || 'kategori-slug'}`;
 
   return (
     <div className="space-y-6">
@@ -183,213 +223,230 @@ export default function CategoryDetailClient({ id }: Props) {
                 onChange={handleLocaleChange}
                 disabled={isLoading}
               />
+              <Button variant="outline" onClick={handleAIAssist} disabled={isLoading || aiLoading}>
+                <Sparkles className="h-4 w-4 mr-2" />
+                {aiLoading ? 'AI...' : 'AI'}
+              </Button>
+              <Button onClick={() => handleSubmit()} disabled={isLoading || aiLoading}>
+                <Save className="h-4 w-4 mr-2" />
+                {t('actions.save')}
+              </Button>
             </div>
           </div>
         </CardHeader>
       </Card>
 
       {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'form' | 'json')}>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'content' | 'seo' | 'image')}>
         <TabsList>
-          <TabsTrigger value="form">Form</TabsTrigger>
-          <TabsTrigger value="json">
-            <FileJson className="h-4 w-4 mr-2" />
-            JSON
-          </TabsTrigger>
+          <TabsTrigger value="content">{t('tabs.content') || 'İçerik'}</TabsTrigger>
+          <TabsTrigger value="seo">{t('tabs.seo') || 'SEO'}</TabsTrigger>
+          <TabsTrigger value="image">{t('tabs.image') || 'Görsel'}</TabsTrigger>
         </TabsList>
 
-        {/* Form Tab */}
-        <TabsContent value="form">
-          <form onSubmit={handleSubmit}>
-            <Card>
-              <CardContent className="pt-6 space-y-6">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Main Column */}
-                  <div className="lg:col-span-2 space-y-6">
-                    {/* Name */}
-                    <div className="space-y-2">
-                      <Label htmlFor="name">{t('table.name')} *</Label>
-                      <Input
-                        id="name"
-                        value={formData.name}
-                        onChange={(e) => handleChange('name', e.target.value)}
-                        disabled={isLoading}
-                        placeholder="Örn: İndustrial Coolers"
-                      />
-                    </div>
-
-                    {/* Slug */}
-                    <div className="space-y-2">
-                      <Label htmlFor="slug">{t('table.slug')} *</Label>
-                      <Input
-                        id="slug"
-                        value={formData.slug}
-                        onChange={(e) => handleChange('slug', e.target.value)}
-                        disabled={isLoading}
-                        placeholder="Örn: industrial-coolers"
-                      />
-                    </div>
-
-                    {/* Description */}
-                    <div className="space-y-2">
-                      <Label htmlFor="description">Açıklama</Label>
-                      <Textarea
-                        id="description"
-                        value={formData.description}
-                        onChange={(e) => handleChange('description', e.target.value)}
-                        disabled={isLoading}
-                        rows={4}
-                        placeholder="Kategori açıklaması"
-                      />
-                    </div>
-
-                    {/* Module */}
-                    <div className="space-y-2">
-                      <Label htmlFor="module">{t('table.module')}</Label>
-                      <Select
-                        value={formData.module_key}
-                        onValueChange={(v) => handleChange('module_key', v)}
-                        disabled={isLoading}
-                      >
-                        <SelectTrigger id="module">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="product">{t('modules.product')}</SelectItem>
-                          <SelectItem value="services">{t('modules.services')}</SelectItem>
-                          <SelectItem value="news">{t('modules.news')}</SelectItem>
-                          <SelectItem value="library">{t('modules.library')}</SelectItem>
-                          <SelectItem value="about">{t('modules.about')}</SelectItem>
-                          <SelectItem value="sparepart">{t('modules.sparepart')}</SelectItem>
-                          <SelectItem value="references">{t('modules.references')}</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Icon & Alt */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="icon">Icon</Label>
-                        <Input
-                          id="icon"
-                          value={formData.icon}
-                          onChange={(e) => handleChange('icon', e.target.value)}
-                          disabled={isLoading}
-                          placeholder="fa-cube"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="alt">Alt Text</Label>
-                        <Input
-                          id="alt"
-                          value={formData.alt}
-                          onChange={(e) => handleChange('alt', e.target.value)}
-                          disabled={isLoading}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Display Order */}
-                    <div className="space-y-2">
-                      <Label htmlFor="display_order">Sıralama</Label>
-                      <Input
-                        id="display_order"
-                        type="number"
-                        value={formData.display_order}
-                        onChange={(e) => handleChange('display_order', Number(e.target.value))}
-                        disabled={isLoading}
-                      />
-                    </div>
-
-                    {/* Toggles */}
-                    <div className="flex gap-6">
-                      <div className="flex items-center gap-2">
-                        <Switch
-                          id="is_active"
-                          checked={formData.is_active}
-                          onCheckedChange={(v) => handleChange('is_active', v)}
-                          disabled={isLoading}
-                        />
-                        <Label htmlFor="is_active" className="cursor-pointer">
-                          {t('table.active')}
-                        </Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Switch
-                          id="is_featured"
-                          checked={formData.is_featured}
-                          onCheckedChange={(v) => handleChange('is_featured', v)}
-                          disabled={isLoading}
-                        />
-                        <Label htmlFor="is_featured" className="cursor-pointer">
-                          {t('table.featured')}
-                        </Label>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Sidebar - Image */}
-                  <div className="space-y-6">
-                    <AdminImageUploadField
-                      label="Kategori Görseli"
-                      value={formData.image_url}
-                      onChange={handleImageChange}
-                      disabled={isLoading}
-                    />
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex justify-end gap-3 pt-4 border-t">
-                  <Button type="button" variant="outline" onClick={handleBack} disabled={isLoading}>
-                    {t('actions.cancel')}
-                  </Button>
-                  <Button type="submit" disabled={isLoading}>
-                    <Save className="h-4 w-4 mr-2" />
-                    {t('actions.save')}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </form>
-        </TabsContent>
-
-        {/* JSON Tab */}
-        <TabsContent value="json">
+        {/* İçerik Tab */}
+        <TabsContent value="content">
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Kategori Verisi (JSON)</CardTitle>
-              <CardDescription>
-                Tüm kategori alanlarını JSON olarak düzenleyebilirsiniz.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
-                  <AdminJsonEditor
-                    value={formData}
-                    onChange={handleJsonChange}
+            <CardContent className="pt-6 space-y-6">
+              {/* Name */}
+              <div className="space-y-2">
+                <Label htmlFor="name">{t('table.name')} *</Label>
+                <input
+                  id="name"
+                  className={inputClass}
+                  value={formData.name}
+                  onChange={(e) => handleChange('name', e.target.value)}
+                  disabled={isLoading}
+                  placeholder="Örn: Meyve Fideleri"
+                />
+              </div>
+
+              {/* Slug */}
+              <div className="space-y-2">
+                <Label htmlFor="slug">{t('table.slug')} *</Label>
+                <input
+                  id="slug"
+                  className={inputClass}
+                  value={formData.slug}
+                  onChange={(e) => handleChange('slug', e.target.value)}
+                  disabled={isLoading}
+                  placeholder="Örn: meyve-fideleri"
+                />
+              </div>
+
+              {/* Description */}
+              <div className="space-y-2">
+                <Label htmlFor="description">Açıklama</Label>
+                <textarea
+                  id="description"
+                  className={`${inputClass} resize-y`}
+                  value={formData.description}
+                  onChange={(e) => handleChange('description', e.target.value)}
+                  disabled={isLoading}
+                  rows={4}
+                  placeholder="Kategori açıklaması"
+                />
+              </div>
+
+              {/* Module */}
+              <div className="space-y-2">
+                <Label htmlFor="module">{t('table.module')}</Label>
+                <Select
+                  value={formData.module_key}
+                  onValueChange={(v) => handleChange('module_key', v)}
+                  disabled={isLoading}
+                >
+                  <SelectTrigger id="module">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="product">{t('modules.product')}</SelectItem>
+                    <SelectItem value="services">{t('modules.services')}</SelectItem>
+                    <SelectItem value="news">{t('modules.news')}</SelectItem>
+                    <SelectItem value="library">{t('modules.library')}</SelectItem>
+                    <SelectItem value="about">{t('modules.about')}</SelectItem>
+                    <SelectItem value="sparepart">{t('modules.sparepart')}</SelectItem>
+                    <SelectItem value="references">{t('modules.references')}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Icon & Alt */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="icon">Icon</Label>
+                  <input
+                    id="icon"
+                    className={inputClass}
+                    value={formData.icon}
+                    onChange={(e) => handleChange('icon', e.target.value)}
                     disabled={isLoading}
-                    height={500}
+                    placeholder="fa-cube"
                   />
                 </div>
-                <div className="space-y-4">
-                  <AdminImageUploadField
-                    label="Kategori Görseli"
-                    value={formData.image_url}
-                    onChange={handleImageChange}
+                <div className="space-y-2">
+                  <Label htmlFor="alt">Alt Text</Label>
+                  <input
+                    id="alt"
+                    className={inputClass}
+                    value={formData.alt}
+                    onChange={(e) => handleChange('alt', e.target.value)}
                     disabled={isLoading}
                   />
                 </div>
               </div>
-              <div className="flex justify-end gap-3 pt-4 border-t">
-                <Button type="button" variant="outline" onClick={handleBack} disabled={isLoading}>
-                  {t('actions.cancel')}
-                </Button>
-                <Button onClick={handleSubmit} disabled={isLoading}>
-                  <Save className="h-4 w-4 mr-2" />
-                  {t('actions.save')}
-                </Button>
+
+              {/* Display Order */}
+              <div className="space-y-2">
+                <Label htmlFor="display_order">Sıralama</Label>
+                <input
+                  id="display_order"
+                  type="number"
+                  className={inputClass}
+                  value={formData.display_order}
+                  onChange={(e) => handleChange('display_order', Number(e.target.value))}
+                  disabled={isLoading}
+                />
+              </div>
+
+              {/* Toggles */}
+              <div className="flex gap-6">
+                <div className="flex items-center gap-2">
+                  <Switch
+                    id="is_active"
+                    checked={formData.is_active}
+                    onCheckedChange={(v) => handleChange('is_active', v)}
+                    disabled={isLoading}
+                  />
+                  <Label htmlFor="is_active" className="cursor-pointer">
+                    {t('table.active')}
+                  </Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Switch
+                    id="is_featured"
+                    checked={formData.is_featured}
+                    onCheckedChange={(v) => handleChange('is_featured', v)}
+                    disabled={isLoading}
+                  />
+                  <Label htmlFor="is_featured" className="cursor-pointer">
+                    {t('table.featured')}
+                  </Label>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* SEO Tab */}
+        <TabsContent value="seo">
+          <Card>
+            <CardContent className="pt-6 space-y-6">
+              {/* Meta Title */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="meta_title">Meta Title</Label>
+                  <span className={`text-xs ${(formData.meta_title?.length || 0) > 60 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                    {formData.meta_title?.length || 0}/60
+                  </span>
+                </div>
+                <input
+                  id="meta_title"
+                  className={inputClass}
+                  value={formData.meta_title}
+                  onChange={(e) => handleChange('meta_title', e.target.value)}
+                  disabled={isLoading}
+                  placeholder="Sayfa başlığı (arama sonuçlarında görünür)"
+                />
+              </div>
+
+              {/* Meta Description */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="meta_description">Meta Description</Label>
+                  <span className={`text-xs ${(formData.meta_description?.length || 0) > 155 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                    {formData.meta_description?.length || 0}/155
+                  </span>
+                </div>
+                <textarea
+                  id="meta_description"
+                  className={`${inputClass} resize-y`}
+                  value={formData.meta_description}
+                  onChange={(e) => handleChange('meta_description', e.target.value)}
+                  disabled={isLoading}
+                  rows={3}
+                  placeholder="Sayfa açıklaması (arama sonuçlarında görünür)"
+                />
+              </div>
+
+              {/* Google Search Preview */}
+              <div className="space-y-2">
+                <Label className="text-muted-foreground text-xs uppercase tracking-wide">Google Arama Önizlemesi</Label>
+                <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-1">
+                  <div className="text-xs text-green-700 truncate">{seoPreviewUrl}</div>
+                  <div className="text-base text-blue-700 font-medium truncate">
+                    {formData.meta_title || formData.name || 'Sayfa Başlığı'}
+                  </div>
+                  <div className="text-sm text-muted-foreground line-clamp-2">
+                    {formData.meta_description || formData.description || 'Sayfa açıklaması burada görünecek...'}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Görsel Tab */}
+        <TabsContent value="image">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="max-w-md">
+                <AdminImageUploadField
+                  label="Kategori Görseli"
+                  value={formData.image_url}
+                  onChange={handleImageChange}
+                  disabled={isLoading}
+                />
               </div>
             </CardContent>
           </Card>

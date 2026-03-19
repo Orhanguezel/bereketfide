@@ -29,7 +29,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { RefreshCw, Plus, Pencil, Trash2 } from 'lucide-react';
+import { RefreshCw, Plus, Pencil, Trash2, Layers } from 'lucide-react';
 import { useAdminT } from '@/app/(main)/admin/_components/common/useAdminT';
 import { useAdminLocales } from '@/app/(main)/admin/_components/common/useAdminLocales';
 import {
@@ -46,6 +46,10 @@ import {
   useDeleteCategoryAdminMutation,
 } from '@/integrations/endpoints/admin/categories_admin.endpoints';
 import type { CategoryDto } from '@/integrations/shared';
+
+const apiOrigin = typeof window !== 'undefined'
+  ? `${window.location.protocol}//${window.location.hostname}:8086`
+  : 'http://localhost:8086';
 
 export default function CategoriesListPanel({ initialModuleKey }: { initialModuleKey?: string }) {
   const t = useAdminT('admin.categories');
@@ -285,6 +289,7 @@ export default function CategoriesListPanel({ initialModuleKey }: { initialModul
               <Table>
                 <TableHeader>
                   <TableRow>
+                    <TableHead className="w-14">{t('table.image') || 'Görsel'}</TableHead>
                     <TableHead className="w-12.5">#</TableHead>
                     <TableHead>{t('table.name')}</TableHead>
                     <TableHead>{t('table.slug')}</TableHead>
@@ -298,6 +303,21 @@ export default function CategoriesListPanel({ initialModuleKey }: { initialModul
                 <TableBody>
                   {categories.map((item, index) => (
                     <TableRow key={item.id}>
+                      <TableCell>
+                        <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded border bg-muted/20">
+                          {item.image_url ? (
+                            <img
+                              src={item.image_url.startsWith('http') ? item.image_url : `${apiOrigin}${item.image_url}`}
+                              alt={item.name || ''}
+                              className="h-full w-full object-cover"
+                              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                            />
+                          ) : (
+                            <Layers className="h-4 w-4 text-muted-foreground" />
+                          )}
+                        </div>
+                      </TableCell>
+
                       <TableCell className="text-muted-foreground text-sm">
                         {index + 1}
                       </TableCell>

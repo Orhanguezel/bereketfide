@@ -34,7 +34,7 @@ const dayEnum = z.enum(['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']);
 const hhmm = z
   .string()
   .trim()
-  .refine((s) => /^\d{2}:\d{2}$/.test(s), 'Saat formatı HH:MM olmalı (örn 09:00)');
+  .refine((s) => /^\d{2}:\d{2}$/.test(s), 'HH:MM');
 
 export const businessHourRowSchema = z
   .object({

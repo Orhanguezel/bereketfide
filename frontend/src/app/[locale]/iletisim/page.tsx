@@ -9,10 +9,11 @@ import { GoogleMap } from '@/components/widgets/GoogleMap';
 import { fetchSetting } from '@/i18n/server';
 import { JsonLd, buildPageMetadata, jsonld, localizedPath, localizedUrl, organizationJsonLd, readSettingValue } from '@/seo';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 async function fetchContactInfo(locale: string) {
   try {
-    return await fetchSetting('contact_info', locale, { revalidate: 3600 });
+    return await fetchSetting('contact_info', locale, { revalidate: 0 });
   } catch {
     return null;
   }
@@ -34,7 +35,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: '/iletisim',
-    title: seo?.title || `${t('title')} — ${companyProfile?.company_name || (locale.startsWith('en') ? 'Bereket Fide' : 'Bereket Fide')}`,
+    title: seo?.title || `${t('title')} — ${companyProfile?.company_name || 'Bereket Fide'}`,
     description: seo?.description || t('description'),
     ogImage: seo?.og_image || undefined,
     noIndex: seo?.no_index,
@@ -60,17 +61,27 @@ export default async function ContactPage({
   const address = info.address || '';
   const phone = info.phone || '';
   const email = info.email || 'info@bereketfide.com.tr';
-  const hours = info.hours || info.working_hours || 'Pazartesi - Cuma, 09:00 - 18:00';
+  const hours = info.hours || info.working_hours || (locale.startsWith('en') ? 'Monday - Friday, 09:00 - 18:00' : 'Pazartesi - Cuma, 09:00 - 18:00');
   const embedUrl = info.maps_embed_url;
   const responseItems = Object.values(t.raw('contact.response.items') as Record<string, string>);
 
   return (
-    <div style={{ maxWidth: 1280, margin: '0 auto', padding: '16px 16px 60px' }}>
-      <div>
+    <div style={{ background: 'var(--color-bg)', minHeight: '100vh' }}>
+      <style>{`
+        .ct-info-card{background:var(--color-surface);border:1px solid var(--color-border);padding:24px;border-radius:16px;transition:all .3s ease}
+        .ct-info-card:hover{border-color:var(--color-brand);box-shadow:0 12px 24px rgba(0,0,0,0.06)}
+        .ct-icon-box{width:48px;height:48px;border-radius:12px;background:rgba(185, 142, 61, 0.1);color:var(--color-brand);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+        .ct-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);margin-bottom:8px;display:block}
+        .ct-value{font-size:15px;color:var(--color-text-primary);line-height:1.6;font-weight:500;text-decoration:none;transition:color .2s ease}
+        .ct-value:hover{color:var(--color-brand)}
+      `}</style>
+
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '24px 16px 80px' }}>
         <Breadcrumbs items={[
           { label: companyName, href: localizedPath(locale, '/') },
-          { label: locale.startsWith('en') ? 'Contact' : 'İletişim' },
+          { label: t('contact.title') },
         ]} />
+        
         <JsonLd
           data={jsonld.graph([
             jsonld.org(
@@ -92,64 +103,63 @@ export default async function ContactPage({
             }),
           ])}
         />
-        <ContentPageHeader
-          title={t('contact.title')}
-          description={t('contact.description')}
-        />
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-2">
-          <ContactFormClient locale={locale} />
+        <div style={{ marginTop: 24, marginBottom: 48 }}>
+          <ContentPageHeader
+            title={t('contact.title')}
+            description={t('contact.description')}
+          />
+        </div>
 
+        <div className="grid gap-10 lg:grid-cols-3">
+          {/* Form Section */}
+          <div className="lg:col-span-2">
+            <ContactFormClient locale={locale} />
+          </div>
+
+          {/* Sidebar Section */}
           <div className="space-y-6">
-            <section className="surface-card rounded-2xl p-6">
-              <h2 className="text-xl font-semibold">{t('contact.info.title')}</h2>
-              <div className="mt-5 space-y-4 text-sm text-(--color-text-secondary)">
-                <div>
-                  <p className="font-medium text-(--color-text-primary)">
-                    {t('contact.info.address')}
-                  </p>
-                  <p>{companyName}</p>
-                  {address && <p>{address}</p>}
+            <div className="grid gap-4">
+              <div className="ct-info-card">
+                <div className="ct-icon-box">
+                  <MapPin size={24} />
                 </div>
-                {phone && (
-                  <div>
-                    <p className="font-medium text-(--color-text-primary)">
-                      {t('contact.info.phone')}
-                    </p>
-                    <a
-                      href={`tel:${phone.replace(/\s/g, '')}`}
-                      className="hover:text-(--color-brand)"
-                    >
-                      {phone}
-                    </a>
-                  </div>
-                )}
-                <div>
-                  <p className="font-medium text-(--color-text-primary)">
-                    {t('contact.info.email')}
-                  </p>
-                  <a
-                    href={`mailto:${email}`}
-                    className="hover:text-(--color-brand)"
-                  >
-                    {email}
-                  </a>
-                </div>
-                <div>
-                  <p className="font-medium text-(--color-text-primary)">
-                    {t('contact.info.hours')}
-                  </p>
-                  <p>{hours}</p>
-                </div>
+                <span className="ct-label">{t('contact.info.address')}</span>
+                <p className="ct-value">{companyName}</p>
+                {address && <p className="ct-value" style={{ marginTop: 4, fontWeight: 400, opacity: 0.8 }}>{address}</p>}
               </div>
-            </section>
+
+              <div className="ct-info-card">
+                <div className="ct-icon-box">
+                  <Phone size={24} />
+                </div>
+                <span className="ct-label">{t('contact.info.phone')}</span>
+                <a href={`tel:${phone.replace(/\s/g, '')}`} className="ct-value">{phone}</a>
+              </div>
+
+              <div className="ct-info-card">
+                <div className="ct-icon-box">
+                  <Mail size={24} />
+                </div>
+                <span className="ct-label">{t('contact.info.email')}</span>
+                <a href={`mailto:${email}`} className="ct-value">{email}</a>
+              </div>
+
+              <div className="ct-info-card">
+                <div className="ct-icon-box">
+                  <Clock size={24} />
+                </div>
+                <span className="ct-label">{t('contact.info.hours')}</span>
+                <p className="ct-value">{hours}</p>
+              </div>
+            </div>
 
             <InfoListPanel
               title={t('contact.response.title')}
               items={responseItems}
             />
 
-            <div className="surface-card overflow-hidden rounded-2xl p-2">
+            <div className="surface-card overflow-hidden rounded-2xl p-2 border border-(--color-border)">
               <GoogleMap 
                 className="h-64 w-full overflow-hidden rounded-xl" 
                 embedUrl={embedUrl}

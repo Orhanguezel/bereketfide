@@ -38,6 +38,7 @@ export * from '@/integrations/shared/db_admin';
 export * from '@/integrations/shared/review_admin.types';
 export * from '@/integrations/shared/review.types';
 export * from '@/integrations/shared/projects';
+export * from '@/integrations/shared/references.types';
 export * from '@/integrations/shared/blog.helpers';
 export * from '@/integrations/shared/pricing';
 export * from '@/integrations/shared/resume';
@@ -68,4 +69,3 @@ export * from '@/integrations/shared/product_specs_admin.types';
 export * from '@/integrations/shared/gallery.types';
 export * from '@/integrations/shared/comment_admin.types';
 export * from '@/integrations/shared/theme.types';
-

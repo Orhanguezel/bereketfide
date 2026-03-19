@@ -90,15 +90,15 @@ export const listLibraryPublic: RouteHandler<{ Querystring: LibraryListQuery }> 
 
     q: q.q,
     type: q.type,
+    module_key: q.module_key,
 
     category_id: q.category_id,
     sub_category_id: q.sub_category_id,
 
     // public: sadece active (opsiyonel featured filtresi serbest)
     featured: q.featured,
+    is_published: typeof q.is_published === 'undefined' ? true : q.is_published,
     is_active: isActive,
-
-    // (varsa validation’da) yayın/published filtrelerini public’te istemiyorsan burada göndermeyebilirsin
   });
 
   reply.header('x-total-count', String(total ?? 0));
@@ -108,7 +108,7 @@ export const listLibraryPublic: RouteHandler<{ Querystring: LibraryListQuery }> 
 /* ----------------------------- GET BY ID (PUBLIC) ----------------------------- */
 
 export const getLibraryPublic: RouteHandler<{ Params: { id: string } }> = async (req, reply) => {
-  const { locale, def } = await resolveLocalesPublic(req as any);
+  const { locale, def } = await resolveLocalesPublic(req as any, req.query as any);
 
   const row = await getLibraryMergedById(locale, def, req.params.id);
   if (!row || row.is_active !== 1) {
@@ -124,7 +124,7 @@ export const getLibraryBySlugPublic: RouteHandler<{ Params: { slug: string } }> 
   req,
   reply,
 ) => {
-  const { locale, def } = await resolveLocalesPublic(req as any);
+  const { locale, def } = await resolveLocalesPublic(req as any, req.query as any);
 
   const row = await getLibraryMergedBySlug(locale, def, req.params.slug);
   if (!row || row.is_active !== 1) {
@@ -140,7 +140,7 @@ export const listLibraryImagesPublic: RouteHandler<{ Params: { id: string } }> =
   req,
   reply,
 ) => {
-  const { locale, def } = await resolveLocalesPublic(req as any);
+  const { locale, def } = await resolveLocalesPublic(req as any, req.query as any);
 
   const rows = await listLibraryImages({
     libraryId: req.params.id,

@@ -15,7 +15,7 @@ async function fetchAboutPage(locale: string) {
   try {
     const res = await fetch(
       `${API_BASE_URL}/custom_pages/by-slug/about?locale=${locale}`,
-      { next: { revalidate: 3600 } },
+      { next: { revalidate: 0 } },
     );
     if (!res.ok) return null;
     return await res.json();
@@ -52,7 +52,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: '/hakkimizda',
-    title: seo?.title || `${t('about.title')} - ${t('seo.defaultTitle')}`,
+    title: seo?.title || t('about.title'),
     description: seo?.description || t('about.description'),
     ogImage: seo?.og_image || undefined,
     noIndex: seo?.no_index,
@@ -79,7 +79,7 @@ export default async function AboutPage({
 
   const content = normalizeRichContent(page?.content);
   const org = organizationJsonLd(locale);
-  const imageSrc = absoluteAssetUrl(page?.image_url || page?.featured_image) || '/uploads/projects/bereket-fide-urun-01.jpeg';
+  const imageSrc = absoluteAssetUrl(page?.image_url || page?.featured_image) || '/uploads/products/WhatsApp Image 2026-03-17 at 23.28.30.jpeg';
 
   const breadcrumbs = [
     { label: companyName, href: localizedPath(locale, '/') },
@@ -146,7 +146,7 @@ export default async function AboutPage({
             {/* Hero image */}
             <div className="ab-hero">
               <OptimizedImage
-                src={absoluteAssetUrl(imageSrc) || imageSrc}
+                src={imageSrc}
                 alt={buildMediaAlt({
                   locale,
                   kind: 'project',
