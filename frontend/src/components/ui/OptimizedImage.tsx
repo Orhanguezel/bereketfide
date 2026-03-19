@@ -23,7 +23,11 @@ export function OptimizedImage({
     typeof props.src === 'string' &&
     (props.src.includes('/uploads/') ||
       props.src.includes('localhost:8086') ||
-      props.src.includes('127.0.0.1:8086'));
+      props.src.includes('localhost:8096') ||
+      props.src.includes('127.0.0.1:8086') ||
+      props.src.includes('127.0.0.1:8096') ||
+      props.src.includes('example.guezelwebdesign.com') ||
+      props.src.includes('bereketfide.com.tr'));
 
   // Next.js Image hata verirse, düz <img> ile fallback dene
   if (error && typeof props.src === 'string') {
