@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Bookmark } from 'lucide-react';
 import { absoluteAssetUrl } from '@/lib/utils';
 import { SaveProjectButton } from '@/components/projects/SaveProjectButton';
@@ -158,7 +158,7 @@ export function ProjectFeed({
                 {/* Main image */}
                 {mainImage && (
                   <Link href={projectHref} className="group relative mt-4 block aspect-16/10 overflow-hidden bg-(--color-bg-muted)">
-                    <Image
+                    <OptimizedImage
                       src={mainImage}
                       alt={project.title}
                       fill
@@ -258,7 +258,7 @@ export function ProjectFeed({
                       >
                         {img && (
                           <div className="relative aspect-4/3 w-24 shrink-0 overflow-hidden bg-(--color-bg-muted)">
-                            <Image
+                            <OptimizedImage
                               src={img}
                               alt={p.title}
                               fill
