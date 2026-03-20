@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useGetSiteSettingByKeyQuery } from '@/integrations/hooks';
 
 const BRAND_PREFIX = process.env.NEXT_PUBLIC_BRAND_PREFIX || 'bereketfide__';
-const LOGO_FALLBACK = '/logo/png/bereket_logo_512.png';
+const LOGO_FALLBACK = '/logo/bereket_logo_512.png';
 
 type Props = {
   heading: string;
@@ -21,8 +21,9 @@ export function AuthBrandPanel({ heading, subtext }: Props) {
 
   // DB'de logo_url veya url alanı olabilir
   const rawLogoUrl: string = logoVal?.logo_url || logoVal?.url || LOGO_FALLBACK;
-  // SVG files cannot go through Next.js image optimizer
+  // SVG and /uploads/ paths cannot go through Next.js image optimizer
   const isSvg = rawLogoUrl.endsWith('.svg');
+  const needsUnoptimized = isSvg || rawLogoUrl.startsWith('/uploads/');
   const logoUrl = rawLogoUrl;
   const logoAlt: string = logoVal?.alt || 'Logo';
   const appName: string = configVal?.branding?.app_name || 'Bereket Fide';
@@ -36,7 +37,7 @@ export function AuthBrandPanel({ heading, subtext }: Props) {
             alt={logoAlt}
             fill
             className="object-contain"
-            unoptimized={isSvg}
+            unoptimized={needsUnoptimized}
           />
         </div>
         <div className="space-y-2">

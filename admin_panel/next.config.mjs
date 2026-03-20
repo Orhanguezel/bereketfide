@@ -40,6 +40,16 @@ const nextConfig = {
         hostname: '**.vercel.app',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.bereketfide.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bereketfide.com',
+        pathname: '/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     dangerouslyAllowSVG: true,

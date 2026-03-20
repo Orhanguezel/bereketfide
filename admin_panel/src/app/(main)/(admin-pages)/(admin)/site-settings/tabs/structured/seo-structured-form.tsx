@@ -242,7 +242,7 @@ function SimpleSeoForm({
             value={v.og_image}
             onChange={(e) => set({ og_image: e.target.value })}
             disabled={disabled}
-            placeholder="/logo/png/bereket_logo_512.png"
+            placeholder="/logo/bereket_logo_512.png"
           />
         </div>
       </div>
