@@ -453,7 +453,7 @@ export default function AdminSiteSettingsClient() {
               </TabsContent>
 
               <TabsContent value="branding" className="mt-3 sm:mt-4">
-                <BrandingSettingsTab locale={locale} settingPrefix={brandPrefix} />
+                <BrandingSettingsTab locale={locale} />
               </TabsContent>
             </Tabs>
           )}
