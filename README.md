@@ -5,7 +5,19 @@
 Bereket Fide icin hazirlanan bu proje; modern kurumsal tanitim, urun gruplarinin duzenli sunumu,
 bilgi merkezi icerikleri ve iletisim/talep akislari icin olusturulan Next.js tabanli web platformudur.
 
-Domain: `https://www.bereketfide.com.tr`
+**Canli Site:** [https://www.bereketfide.com](https://www.bereketfide.com)
+
+---
+
+## Ekran Goruntuleri
+
+### Masaustu Gorunumu
+
+![Bereket Fide — Masaustu](docs/screenshots/bereketfide-desktop.png)
+
+### Mobil Gorunumu
+
+![Bereket Fide — Mobil](docs/screenshots/bereketfide-mobile.png)
 
 ---
 
@@ -14,8 +26,8 @@ Domain: `https://www.bereketfide.com.tr`
 ```txt
 bereketfide/
   frontend/         <- Next.js 16, port 3030
-  backend/          <- Fastify + Drizzle ORM + MySQL
-  admin_panel/      <- React admin paneli
+  backend/          <- Fastify + Drizzle ORM + MySQL, port 8096
+  admin_panel/      <- React admin paneli, port 3044
   package.json      <- workspace root
   CLAUDE.md         <- calisma kurallari
   THEMA.md          <- tema kontrati
@@ -30,53 +42,55 @@ bereketfide/
 | Katman   | Teknoloji                                      |
 | -------- | ---------------------------------------------- |
 | Frontend | Next.js 16, TypeScript, Tailwind CSS v4        |
-| Cok dil  | next-intl                                      |
+| Cok dil  | next-intl (TR/EN)                              |
 | Veri     | React Query, Zod, React Hook Form              |
 | State    | Zustand                                        |
 | UI       | Radix UI, Lucide React, Embla Carousel, Sonner |
+| Animasyon| Framer Motion                                  |
 | Backend  | Fastify, Drizzle ORM, MySQL                    |
 | Admin    | React tabanli yonetim paneli                   |
-| Deploy   | Nginx, PM2, SSL                                |
+| Deploy   | Nginx, PM2, Let's Encrypt SSL                  |
 
 ---
 
-## Proje Yonu
+## Ozellikler
 
-Bu proje icin hedef:
-
-- Bereket Fide'nin mevcut site icerigini modernlestirmek
-- urun/fide odakli temiz bir bilgi mimarisi kurmak
-- SEO ve performans odakli sayfa yapilari hazirlamak
-- yonetilebilir bir kurumsal icerik yapisi olusturmak
-
-Tasarim karakteri:
-
-- basak altini odakli marka dili
-- kirik krem ve toprak tonlari
-- sade, temiz ve guven veren kurumsal gorunum
+- Urun katalogu (liste + detay + galeri)
+- TR/EN cok dilli yapi (next-intl)
+- Bilgi Bankasi / Haberler
+- Galeri sistemi
+- Iletisim ve teklif formu
+- Token tabanli tema sistemi (basak altini, toprak tonlari)
+- Dark / Light mode
+- Teknik SEO (canonical, hreflang, JSON-LD, sitemap)
+- Admin panel ile icerik yonetimi
 
 ---
 
 ## Calistirma
 
 ```bash
-# Frontend
+# Frontend (port 3030)
 cd frontend && npm install && npm run dev
 
-# Backend
+# Backend (port 8096)
 cd backend && npm install && npm run dev
 
-# Admin panel
+# Admin panel (port 3044)
 cd admin_panel && npm install && npm run dev
 ```
 
 ---
 
-## Guncel Oncelikler
+## Deployment
 
-- Bereket Fide marka ve icerik katmanini yerlestirmek
-- urun katalog mantigini netlestirmek
-- kurumsal sayfalari kaynak siteden dogru bicimde tasimak
+- **VPS:** Nginx reverse proxy + PM2
+- **SSL:** Let's Encrypt (certbot, otomatik yenileme)
+- **Domain:** www.bereketfide.com (canonical, non-www → www redirect)
+- **PM2 Servisleri:**
+  - `bereketfide-frontend` (port 3040 — standalone build)
+  - `bereketfide-backend` (port 8096)
+  - `bereketfide-admin` (port 3044)
 
 ---
 
@@ -88,7 +102,3 @@ cd admin_panel && npm install && npm run dev
 | `THEMA.md`               | Tema, renk ve tipografi sistemi     |
 | `PLAN.md`                | Uygulama ve icerik yol haritasi     |
 | `project.portfolio.json` | Proje metadata kaynagi              |
-
----
-
-*Bu workspace icindeki referans mimari baz alinarak baslatilmistir; proje yonu tamamen Bereket Fide'ye gore yeniden sekillenmektedir.*

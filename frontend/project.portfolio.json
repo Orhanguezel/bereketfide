@@ -29,8 +29,8 @@
     "Dark / Light mode",
     "Newsletter"
   ],
-  "websiteUrl": "https://www.bereketfide.com.tr",
-  "domainTarget": "https://www.bereketfide.com.tr",
+  "websiteUrl": "https://www.bereketfide.com",
+  "domainTarget": "https://www.bereketfide.com",
   "devPort": 3030,
   "status": "in-development",
   "relation": "Bereket Fide kurumsal web sitesi; bereketfide-backend API üzerinden çalışır",
