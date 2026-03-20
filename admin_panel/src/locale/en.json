@@ -3109,7 +3109,8 @@
           "limit": "Limit: {limit}",
           "previous": "Previous",
           "next": "Next"
-        }
+        },
+        "createButton": "New User"
       },
       "detail": {
         "title": "User Details",
@@ -3170,6 +3171,16 @@
         "admin": "Admin",
         "moderator": "Moderator",
         "user": "User"
+      },
+      "create": {
+        "title": "Create New User",
+        "cardTitle": "User Information",
+        "cardDescription": "Enter email, password and role information.",
+        "emailRequired": "Email address is required.",
+        "emailExists": "This email address is already registered.",
+        "success": "User created successfully.",
+        "cancelButton": "Cancel",
+        "submitButton": "Create User"
       }
     },
     "userRoles": {

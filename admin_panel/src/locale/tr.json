@@ -1803,7 +1803,8 @@
           "limit": "Limit: {limit}",
           "previous": "Önceki",
           "next": "Sonraki"
-        }
+        },
+        "createButton": "Yeni Kullanıcı"
       },
       "detail": {
         "title": "Kullanıcı Detay",
@@ -1864,6 +1865,16 @@
         "admin": "Admin",
         "moderator": "Moderatör",
         "user": "Kullanıcı"
+      },
+      "create": {
+        "title": "Yeni Kullanıcı Oluştur",
+        "cardTitle": "Kullanıcı Bilgileri",
+        "cardDescription": "E-posta, şifre ve rol bilgilerini girin.",
+        "emailRequired": "E-posta adresi zorunludur.",
+        "emailExists": "Bu e-posta adresi zaten kayıtlı.",
+        "success": "Kullanıcı başarıyla oluşturuldu.",
+        "cancelButton": "İptal",
+        "submitButton": "Kullanıcı Oluştur"
       }
     },
     "userRoles": {

@@ -65,8 +65,61 @@ const setPasswordBody = z.object({
   password: z.string().min(8).max(200),
 });
 
+const createUserBody = z.object({
+  email: z.string().email().max(255),
+  password: z.string().min(8).max(200),
+  full_name: z.string().trim().min(2).max(100).optional(),
+  phone: z.string().trim().min(6).max(50).optional(),
+  role: z.enum(["admin", "moderator", "user"]).default("user"),
+});
+
 export function makeAdminController(_app: FastifyInstance) {
   return {
+    /** POST /admin/users  — create new user */
+    create: async (req: FastifyRequest, reply: FastifyReply) => {
+      const body = createUserBody.parse(req.body ?? {});
+
+      const exists = await db
+        .select({ id: users.id })
+        .from(users)
+        .where(eq(users.email, body.email));
+      if (exists.length > 0) {
+        return reply
+          .status(409)
+          .send({ error: { message: "user_exists" } });
+      }
+
+      const id = randomUUID();
+      const password_hash = await argonHash(body.password);
+
+      await db.insert(users).values({
+        id,
+        email: body.email,
+        password_hash,
+        full_name: body.full_name ?? null,
+        phone: body.phone ?? null,
+        role: body.role,
+        is_active: 1,
+        email_verified: 0,
+      });
+
+      const created = (
+        await db.select().from(users).where(eq(users.id, id)).limit(1)
+      )[0];
+
+      return reply.status(201).send({
+        id: created.id,
+        email: created.email,
+        full_name: created.full_name ?? null,
+        phone: created.phone ?? null,
+        email_verified: created.email_verified,
+        is_active: created.is_active,
+        created_at: created.created_at,
+        last_login_at: created.last_sign_in_at,
+        role: normalizeRole(created.role),
+      });
+    },
+
     /** GET /admin/users */
     list: async (req: FastifyRequest, reply: FastifyReply) => {
       const q = listQuery.parse(req.query ?? {});

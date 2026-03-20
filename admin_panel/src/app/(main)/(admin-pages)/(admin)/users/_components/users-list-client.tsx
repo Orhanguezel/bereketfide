@@ -10,7 +10,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Search, Filter, RefreshCcw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Filter, RefreshCcw, ChevronLeft, ChevronRight, UserPlus } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -154,11 +154,19 @@ export default function UsersListClient() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-1">
-        <h1 className="text-lg font-semibold">{t('list.title')}</h1>
-        <p className="text-sm text-muted-foreground">
-          {t('list.description')}
-        </p>
+      <div className="flex items-center justify-between">
+        <div className="space-y-1">
+          <h1 className="text-lg font-semibold">{t('list.title')}</h1>
+          <p className="text-sm text-muted-foreground">
+            {t('list.description')}
+          </p>
+        </div>
+        <Button asChild>
+          <Link href="/users/new">
+            <UserPlus className="mr-2 size-4" />
+            {t('list.createButton')}
+          </Link>
+        </Button>
       </div>
 
       <Card>

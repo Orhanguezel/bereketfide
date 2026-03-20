@@ -1,16 +1,14 @@
 'use client';
 
 // =============================================================
-// FILE: src/app/(main)/admin/users/[id]/_components/user-detail-client.tsx
-// FINAL — Admin User Detail (RTK auth_admin.endpoints uyumlu)
-// - roles: admin | moderator | user
-// - mutations payload: AdminUpdateUserBody, AdminSetActiveBody, etc.
+// FILE: users/_components/user-detail-client.tsx
+// Admin User Detail — view/edit existing user OR create new user
 // =============================================================
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { ArrowLeft, Save, ShieldCheck, KeyRound, Trash2 } from 'lucide-react';
+import { ArrowLeft, Save, ShieldCheck, KeyRound, Trash2, UserPlus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -25,6 +23,7 @@ import type { UserRoleName, AdminUserView } from '@/integrations/shared';
 
 import {
   useGetUserAdminQuery,
+  useCreateUserAdminMutation,
   useUpdateUserAdminMutation,
   useSetUserActiveAdminMutation,
   useSetUserRolesAdminMutation,
@@ -42,6 +41,7 @@ function isAdminFromView(u: AdminUserView): boolean {
 export default function UserDetailClient({ id }: { id: string }) {
   const router = useRouter();
   const t = useAdminT();
+  const isNew = id === 'new';
 
   function getErrMessage(err: unknown): string {
     const anyErr = err as any;
@@ -60,8 +60,9 @@ export default function UserDetailClient({ id }: { id: string }) {
     return t('admin.users.detail.roles.user');
   }
 
-  const userQ = useGetUserAdminQuery({ id });
+  const userQ = useGetUserAdminQuery({ id }, { skip: isNew });
 
+  const [createUser, createState] = useCreateUserAdminMutation();
   const [updateUser, updateState] = useUpdateUserAdminMutation();
   const [setActive, setActiveState] = useSetUserActiveAdminMutation();
   const [setRoles, setRolesState] = useSetUserRolesAdminMutation();
@@ -76,8 +77,7 @@ export default function UserDetailClient({ id }: { id: string }) {
   const [email, setEmail] = React.useState('');
   const [password, setPasswordLocal] = React.useState('');
   const [active, setActiveLocal] = React.useState(true);
-
-  const [roles, setRolesLocal] = React.useState<UserRoleName[]>([]);
+  const [roles, setRolesLocal] = React.useState<UserRoleName[]>(['user']);
 
   React.useEffect(() => {
     if (!u) return;
@@ -85,18 +85,56 @@ export default function UserDetailClient({ id }: { id: string }) {
     setPhone(u.phone ?? '');
     setEmail(u.email ?? '');
     setActiveLocal(!!u.is_active);
-
     setRolesLocal(u.roles.length > 0 ? u.roles : ['user']);
   }, [u, id]);
 
   const busy =
     userQ.isFetching ||
+    createState.isLoading ||
     updateState.isLoading ||
     setActiveState.isLoading ||
     setRolesState.isLoading ||
     setPasswordState.isLoading ||
     removeState.isLoading;
 
+  const currentRole = (roles[0] ?? 'user') as UserRoleName;
+
+  // --- CREATE ---
+  async function onCreateUser(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail) {
+      toast.error(t('admin.users.create.emailRequired'));
+      return;
+    }
+    if (trimmedPassword.length < 8) {
+      toast.error(t('admin.users.detail.password.minLengthError'));
+      return;
+    }
+
+    try {
+      const result = await createUser({
+        email: trimmedEmail,
+        password: trimmedPassword,
+        full_name: fullName.trim() || undefined,
+        phone: phone.trim() || undefined,
+        role: currentRole,
+      }).unwrap();
+      toast.success(t('admin.users.create.success'));
+      router.replace(`/users/${result.id}`);
+    } catch (err) {
+      const msg = getErrMessage(err);
+      if (msg === 'user_exists') {
+        toast.error(t('admin.users.create.emailExists'));
+      } else {
+        toast.error(msg);
+      }
+    }
+  }
+
+  // --- UPDATE ---
   async function onSaveProfile() {
     try {
       await updateUser({
@@ -105,7 +143,6 @@ export default function UserDetailClient({ id }: { id: string }) {
         phone: phone.trim() || null,
         email: email.trim() || undefined,
       }).unwrap();
-
       toast.success(t('admin.users.detail.profile.saved'));
       userQ.refetch();
     } catch (err) {
@@ -127,8 +164,6 @@ export default function UserDetailClient({ id }: { id: string }) {
   }
 
   async function onSaveRoles() {
-    // backend: roles: UserRoleName[] (set)
-    // UI'da single-select gibi davranıyoruz; yine de array gönderiyoruz.
     try {
       await setRoles({ id, roles }).unwrap();
       toast.success(t('admin.users.detail.roles.saved'));
@@ -159,17 +194,125 @@ export default function UserDetailClient({ id }: { id: string }) {
       await removeUser({ id }).unwrap();
       toast.success(t('admin.users.detail.delete.deleted'));
       router.replace('/users');
-      router.refresh();
     } catch (err) {
       toast.error(getErrMessage(err));
     }
   }
 
-  // ✅ tekil rol seçimi (admin/moderator/user) – ama payload array
   function chooseRole(r: UserRoleName) {
     setRolesLocal([r]);
   }
 
+  // --- NEW USER FORM ---
+  if (isNew) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => router.back()} disabled={busy}>
+            <ArrowLeft className="mr-2 size-4" />
+            {t('admin.users.detail.backButton')}
+          </Button>
+          <h1 className="text-lg font-semibold">{t('admin.users.create.title')}</h1>
+        </div>
+
+        <form onSubmit={onCreateUser}>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">{t('admin.users.create.cardTitle')}</CardTitle>
+              <CardDescription>{t('admin.users.create.cardDescription')}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid gap-3 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="email">{t('admin.users.detail.profile.emailLabel')} *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={busy}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">{t('admin.users.detail.password.label')} *</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder={t('admin.users.detail.password.placeholder')}
+                    value={password}
+                    onChange={(e) => setPasswordLocal(e.target.value)}
+                    disabled={busy}
+                    required
+                    minLength={8}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="full_name">{t('admin.users.detail.profile.fullNameLabel')}</Label>
+                  <Input
+                    id="full_name"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    disabled={busy}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone">{t('admin.users.detail.profile.phoneLabel')}</Label>
+                  <Input
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    disabled={busy}
+                  />
+                </div>
+              </div>
+
+              <Separator />
+
+              <div className="space-y-3">
+                <Label>{t('admin.users.detail.roles.title')}</Label>
+                <div className="flex flex-wrap gap-2">
+                  {ALL_ROLES.map((r) => {
+                    const checked = currentRole === r;
+                    return (
+                      <Button
+                        key={r}
+                        type="button"
+                        variant={checked ? 'default' : 'outline'}
+                        onClick={() => chooseRole(r)}
+                        disabled={busy}
+                      >
+                        <ShieldCheck className="mr-2 size-4" />
+                        {roleLabel(r)}
+                      </Button>
+                    );
+                  })}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {t('admin.users.detail.roles.currentRole')}{' '}
+                  <Badge className="ml-1" variant={currentRole === 'admin' ? 'default' : 'secondary'}>
+                    {roleLabel(currentRole)}
+                  </Badge>
+                </p>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-4 border-t">
+                <Button type="button" variant="outline" onClick={() => router.back()} disabled={busy}>
+                  {t('admin.users.create.cancelButton')}
+                </Button>
+                <Button type="submit" disabled={busy}>
+                  <UserPlus className="mr-2 size-4" />
+                  {t('admin.users.create.submitButton')}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </form>
+      </div>
+    );
+  }
+
+  // --- LOADING / ERROR ---
   if (userQ.isError) {
     return (
       <div className="space-y-3">
@@ -199,8 +342,7 @@ export default function UserDetailClient({ id }: { id: string }) {
     );
   }
 
-  const currentRole = (roles[0] ?? 'user') as UserRoleName;
-
+  // --- EXISTING USER ---
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -230,9 +372,7 @@ export default function UserDetailClient({ id }: { id: string }) {
       <Card>
         <CardHeader>
           <CardTitle className="text-base">{t('admin.users.detail.profile.title')}</CardTitle>
-          <CardDescription>
-            {t('admin.users.detail.profile.description')}
-          </CardDescription>
+          <CardDescription>{t('admin.users.detail.profile.description')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-3 md:grid-cols-3">

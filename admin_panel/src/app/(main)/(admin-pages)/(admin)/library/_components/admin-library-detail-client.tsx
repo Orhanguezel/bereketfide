@@ -31,6 +31,7 @@ import {
   useListLibraryFilesAdminQuery,
   useCreateLibraryFileAdminMutation,
   useDeleteLibraryFileAdminMutation,
+  useCreateAssetAdminMutation,
 } from '@/integrations/hooks';
 import type { LibraryAdminDto, LibraryFileDto } from '@/integrations/endpoints/admin/library_admin.endpoints';
 
@@ -137,15 +138,39 @@ export default function AdminLibraryDetailClient({ id }: { id: string }) {
   const files: LibraryFileDto[] = filesQ.data ?? [];
   const [createFile] = useCreateLibraryFileAdminMutation();
   const [deleteFile] = useDeleteLibraryFileAdminMutation();
-  const [newFileUrl, setNewFileUrl] = React.useState('');
-  const [newFileName, setNewFileName] = React.useState('');
+  const [createAsset, { isLoading: isUploading }] = useCreateAssetAdminMutation();
+  const fileInputRef = React.useRef<HTMLInputElement | null>(null);
 
-  async function handleAddFile() {
-    if (!newFileUrl.trim()) return;
+  async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const selected = e.target.files?.[0];
+    e.target.value = '';
+    if (!selected) return;
+
     try {
-      await createFile({ id, body: { file_url: newFileUrl.trim(), name: newFileName.trim() || newFileUrl.split('/').pop() || 'file', mime_type: newFileUrl.endsWith('.pdf') ? 'application/pdf' : 'application/octet-stream', display_order: files.length, is_active: true } as any }).unwrap();
-      setNewFileUrl(''); setNewFileName(''); filesQ.refetch();
-    } catch { toast.error(t('messages.error')); }
+      const res = await createAsset({
+        file: selected,
+        bucket: 'public',
+        folder: 'uploads/library',
+      } as any).unwrap();
+      const url = (res as any)?.url;
+      if (!url) throw new Error('URL alınamadı');
+
+      await createFile({
+        id,
+        body: {
+          file_url: url,
+          name: selected.name,
+          mime_type: selected.type || 'application/octet-stream',
+          size_bytes: selected.size,
+          display_order: files.length,
+          is_active: true,
+        } as any,
+      }).unwrap();
+      filesQ.refetch();
+      toast.success(`${selected.name} yüklendi.`);
+    } catch {
+      toast.error(t('messages.error'));
+    }
   }
 
   async function handleDeleteFile(fileId: string) {
@@ -280,19 +305,24 @@ export default function AdminLibraryDetailClient({ id }: { id: string }) {
                 <CardTitle className="text-base">{t('detail.files.title')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {/* Add file */}
-                <div className="flex flex-wrap gap-3 items-end p-4 rounded-lg border bg-muted/30">
-                  <div className="flex-1 min-w-[200px]">
-                    <Label className="mb-1 block text-xs font-medium">{t('detail.files.name')}</Label>
-                    <input type="text" value={newFileName} onChange={(e) => setNewFileName(e.target.value)} placeholder="katalog.pdf" className={cls} />
-                  </div>
-                  <div className="flex-1 min-w-[300px]">
-                    <Label className="mb-1 block text-xs font-medium">{t('detail.files.url')}</Label>
-                    <input type="text" value={newFileUrl} onChange={(e) => setNewFileUrl(e.target.value)} placeholder="/uploads/offers/katalog.pdf" className={cls} />
-                  </div>
-                  <Button type="button" onClick={handleAddFile} disabled={!newFileUrl.trim()}>
-                    <Plus className="h-4 w-4 mr-2" />{t('detail.files.add')}
+                {/* Add file — dosya seçerek yükle */}
+                <div className="flex flex-wrap gap-3 items-center p-4 rounded-lg border bg-muted/30">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,.rar"
+                    className="hidden"
+                    onChange={handleFileUpload}
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploading || busy}
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    {isUploading ? 'Yükleniyor...' : (t('detail.files.add') || 'Dosya Ekle')}
                   </Button>
+                  <p className="text-xs text-muted-foreground">PDF, DOC, XLS, ZIP dosyalarını yükleyebilirsiniz.</p>
                 </div>
 
                 {files.length === 0 ? (

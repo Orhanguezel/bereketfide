@@ -5,6 +5,7 @@ import type {
   AdminUserView,
   AdminUsersListParams,
   AdminUpdateUserBody,
+  AdminCreateUserBody,
   AdminSetActiveBody,
   AdminSetRolesBody,
   AdminSetPasswordBody,
@@ -68,6 +69,17 @@ export const authAdminApi = baseApi.injectEndpoints({
               { type: 'AdminUsers' as const, id: 'LIST' },
             ]
           : [{ type: 'AdminUsers' as const, id: 'LIST' }],
+    }),
+
+    /** POST /users — create new user */
+    adminCreateUser: b.mutation<AdminUserView, AdminCreateUserBody>({
+      query: (body) => ({
+        url: ADMIN_USERS_BASE,
+        method: 'POST',
+        body,
+      }),
+      transformResponse: (res: unknown): AdminUserView => normalizeAdminUser(unwrapUser(res)),
+      invalidatesTags: [{ type: 'AdminUsers' as const, id: 'LIST' }],
     }),
 
     /** GET /users/:id */
@@ -151,6 +163,7 @@ export const authAdminApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useAdminCreateUserMutation,
   useAdminListQuery,
   useAdminGetQuery,
   useAdminUpdateUserMutation,
@@ -161,6 +174,7 @@ export const {
 } = authAdminApi;
 
 // Legacy/admin-panel aliases
+export const useCreateUserAdminMutation = useAdminCreateUserMutation;
 export const useListUsersAdminQuery = useAdminListQuery;
 export const useGetUserAdminQuery = useAdminGetQuery;
 export const useUpdateUserAdminMutation = useAdminUpdateUserMutation;

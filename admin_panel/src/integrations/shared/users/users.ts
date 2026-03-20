@@ -87,3 +87,11 @@ export type AdminSetActiveBody = { id: string; is_active: boolean };
 export type AdminSetRolesBody = { id: string; roles: UserRoleName[] };
 export type AdminSetPasswordBody = { id: string; password: string };
 export type AdminRemoveUserBody = { id: string };
+
+export type AdminCreateUserBody = {
+  email: string;
+  password: string;
+  full_name?: string;
+  phone?: string;
+  role?: UserRoleName;
+};

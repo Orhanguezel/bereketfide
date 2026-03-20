@@ -1677,7 +1677,8 @@
           "limit": "Limit: {limit}",
           "previous": "Zurück",
           "next": "Weiter"
-        }
+        },
+        "createButton": "Neuer Benutzer"
       },
       "detail": {
         "title": "Benutzerdetails",
@@ -1738,6 +1739,16 @@
         "admin": "Admin",
         "moderator": "Moderator",
         "user": "Benutzer"
+      },
+      "create": {
+        "title": "Neuen Benutzer erstellen",
+        "cardTitle": "Benutzerinformationen",
+        "cardDescription": "E-Mail, Passwort und Rolleninformationen eingeben.",
+        "emailRequired": "E-Mail-Adresse ist erforderlich.",
+        "emailExists": "Diese E-Mail-Adresse ist bereits registriert.",
+        "success": "Benutzer erfolgreich erstellt.",
+        "cancelButton": "Abbrechen",
+        "submitButton": "Benutzer erstellen"
       }
     },
     "userRoles": {
