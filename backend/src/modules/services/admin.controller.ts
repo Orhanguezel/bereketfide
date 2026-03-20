@@ -2,7 +2,7 @@ import type { RouteHandler } from 'fastify';
 import { randomUUID } from 'crypto';
 import { and, asc, desc, eq, like, sql } from 'drizzle-orm';
 import { db } from '@/db/client';
-import { services, servicesI18n } from './schema';
+import { services, servicesI18n, serviceImages, serviceImagesI18n } from './schema';
 
 const normalizeLocale = (raw?: string | null) => {
   if (!raw) return 'tr';
@@ -124,7 +124,120 @@ export const adminUpdateService: RouteHandler = async (req, reply) => {
 
 export const adminDeleteService: RouteHandler = async (req, reply) => {
   const { id } = req.params as { id: string };
+  // delete images first (cascade should handle, but be safe)
+  const imgs = await db.select({ id: serviceImages.id }).from(serviceImages).where(eq(serviceImages.service_id, id));
+  for (const img of imgs) {
+    await db.delete(serviceImagesI18n).where(eq(serviceImagesI18n.image_id, img.id));
+  }
+  await db.delete(serviceImages).where(eq(serviceImages.service_id, id));
   await db.delete(servicesI18n).where(eq(servicesI18n.service_id, id));
   await db.delete(services).where(eq(services.id, id));
   return reply.code(204).send();
+};
+
+/* ================================================================
+ * SERVICE IMAGES CRUD
+ * ================================================================ */
+
+export const adminListServiceImages: RouteHandler = async (req, reply) => {
+  const { id: serviceId } = req.params as { id: string };
+
+  const rows = await db
+    .select()
+    .from(serviceImages)
+    .where(eq(serviceImages.service_id, serviceId))
+    .orderBy(asc(serviceImages.display_order));
+
+  return reply.send(rows.map((r) => ({
+    ...r,
+    is_active: r.is_active ? true : false,
+  })));
+};
+
+export const adminCreateServiceImage: RouteHandler = async (req, reply) => {
+  const { id: serviceId } = req.params as { id: string };
+  const body = (req.body || {}) as any;
+  const imgId = randomUUID();
+
+  await db.insert(serviceImages).values({
+    id: imgId,
+    service_id: serviceId,
+    image_url: body.image_url || null,
+    storage_asset_id: body.image_asset_id || null,
+    display_order: body.display_order ?? 0,
+    is_active: body.is_active ?? true,
+  });
+
+  // i18n row (optional)
+  if (body.alt || body.caption || body.title) {
+    await db.insert(serviceImagesI18n).values({
+      id: randomUUID(),
+      image_id: imgId,
+      locale: normalizeLocale(body.locale),
+      title: body.title || null,
+      alt: body.alt || null,
+      caption: body.caption || null,
+    });
+  }
+
+  // return updated list
+  const rows = await db
+    .select()
+    .from(serviceImages)
+    .where(eq(serviceImages.service_id, serviceId))
+    .orderBy(asc(serviceImages.display_order));
+
+  return reply.code(201).send(rows.map((r) => ({ ...r, is_active: r.is_active ? true : false })));
+};
+
+export const adminUpdateServiceImage: RouteHandler = async (req, reply) => {
+  const { id: serviceId, imageId } = req.params as { id: string; imageId: string };
+  const body = (req.body || {}) as any;
+
+  const baseFields: any = {};
+  if ('image_url' in body) baseFields.image_url = body.image_url;
+  if ('storage_asset_id' in body) baseFields.storage_asset_id = body.storage_asset_id;
+  if ('display_order' in body) baseFields.display_order = body.display_order;
+  if ('is_active' in body) baseFields.is_active = body.is_active;
+
+  if (Object.keys(baseFields).length) {
+    await db.update(serviceImages).set(baseFields).where(eq(serviceImages.id, imageId));
+  }
+
+  // i18n upsert
+  const i18nFields: any = {};
+  if ('alt' in body) i18nFields.alt = body.alt;
+  if ('caption' in body) i18nFields.caption = body.caption;
+  if ('title' in body) i18nFields.title = body.title;
+
+  if (Object.keys(i18nFields).length) {
+    const locale = normalizeLocale(body.locale);
+    await db
+      .insert(serviceImagesI18n)
+      .values({ id: randomUUID(), image_id: imageId, locale, ...i18nFields })
+      .onDuplicateKeyUpdate({ set: i18nFields });
+  }
+
+  const rows = await db
+    .select()
+    .from(serviceImages)
+    .where(eq(serviceImages.service_id, serviceId))
+    .orderBy(asc(serviceImages.display_order));
+
+  return reply.send(rows.map((r) => ({ ...r, is_active: r.is_active ? true : false })));
+};
+
+export const adminDeleteServiceImage: RouteHandler = async (req, reply) => {
+  const { id: serviceId, imageId } = req.params as { id: string; imageId: string };
+
+  await db.delete(serviceImagesI18n).where(eq(serviceImagesI18n.image_id, imageId));
+  await db.delete(serviceImages).where(eq(serviceImages.id, imageId));
+
+  const rows = await db
+    .select()
+    .from(serviceImages)
+    .where(eq(serviceImages.service_id, serviceId))
+    .orderBy(asc(serviceImages.display_order));
+
+  return reply.send(rows.map((r) => ({ ...r, is_active: r.is_active ? true : false })));
 };
