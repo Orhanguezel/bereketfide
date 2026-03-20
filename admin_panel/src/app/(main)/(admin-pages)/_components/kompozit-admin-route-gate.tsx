@@ -25,6 +25,13 @@ const ALLOWED_PREFIXES = [
   '/storage',
   '/audit',
   '/profile',
+  '/services',
+  '/comments',
+  '/email-templates',
+  '/cache',
+  '/theme',
+  '/newsletter',
+  '/unauthorized',
 ] as const;
 
 function isAllowed(pathname: string | null): boolean {
