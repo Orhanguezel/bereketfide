@@ -15,8 +15,9 @@ const nextConfig = {
     root: __dirname,
   },
 
-  // ✅ Image optimization config
+  // ✅ Image optimization config — admin panel is internal, skip optimizer
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

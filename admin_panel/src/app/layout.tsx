@@ -21,9 +21,14 @@ import { LocaleProvider } from '@/i18n';
 
 import './globals.css';
 
+const BASE_PATH = process.env.__NEXT_ROUTER_BASEPATH || '/admin';
+
 export async function generateMetadata(): Promise<Metadata> {
   const branding = await fetchBrandingConfig();
   const fallbackSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3004';
+
+  // Next.js does NOT auto-prepend basePath for metadata icon URLs
+  const bp = (p: string) => (p.startsWith('/') ? `${BASE_PATH}${p}` : p);
 
   return {
     metadataBase: new URL(branding.meta.og_url || fallbackSiteUrl),
@@ -31,10 +36,10 @@ export async function generateMetadata(): Promise<Metadata> {
     description: branding.meta.description,
     icons: {
       icon: [
-        { url: branding.favicon_16, sizes: '16x16' },
-        { url: branding.favicon_32, sizes: '32x32' },
+        { url: bp(branding.favicon_16), sizes: '16x16' },
+        { url: bp(branding.favicon_32), sizes: '32x32' },
       ],
-      apple: branding.apple_touch_icon,
+      apple: bp(branding.apple_touch_icon),
     },
     openGraph: {
       type: 'website',

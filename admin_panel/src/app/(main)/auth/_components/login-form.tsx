@@ -87,9 +87,8 @@ export function LoginForm() {
 
       toast.success(t('admin.auth.login.loginSuccess'));
 
-      const next = safeNext(sp?.get('next'), '/');
+      const next = safeNext(sp?.get('next'), '/dashboard');
       router.replace(next);
-      router.refresh();
     } catch (err) {
       toast.error(getErrMessage(err, t('admin.auth.login.loginFailed')));
     }
