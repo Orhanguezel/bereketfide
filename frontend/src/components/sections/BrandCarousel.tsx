@@ -90,7 +90,7 @@ export function BrandCarousel({ brands }: { brands: BrandItem[] }) {
                   <a
                     href={brand.website_url}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow noopener noreferrer"
                     aria-label={brand.title}
                     className="block"
                   >

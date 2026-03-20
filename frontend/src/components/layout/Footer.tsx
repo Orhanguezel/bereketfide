@@ -86,7 +86,7 @@ export function Footer({
                     key={key}
                     href={url}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow noopener noreferrer"
                     aria-label={label}
                     className="surface-dark-text transition-colors hover:text-(--color-brand-text)"
                   >
@@ -140,7 +140,7 @@ export function Footer({
             </Link>
             <span className="surface-dark-text inline-flex min-h-9 items-center py-1 text-xs ml-2 sm:ml-4 border-l border-gray-700 pl-4 sm:pl-6">
               Design by{' '}
-              <a href="https://guezelwebdesign.com" target="_blank" rel="noopener noreferrer" className="ml-1 text-(--color-brand-light) hover:text-white transition-colors hover:underline font-medium tracking-wide">
+              <a href="https://guezelwebdesign.com" target="_blank" rel="nofollow noopener noreferrer" className="ml-1 text-(--color-brand-light) hover:text-white transition-colors hover:underline font-medium tracking-wide">
                 GWD
               </a>
             </span>

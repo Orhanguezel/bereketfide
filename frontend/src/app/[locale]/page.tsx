@@ -287,7 +287,8 @@ export default async function HomePage({
             {products.slice(0, 4).map((p: any, idx: number) => (
               <Reveal key={p.id} delay={idx * 0.1} className={idx === 3 ? 'md:hidden lg:block' : ''}>
                 <Link
-                  href={p.slug ? localizedPath(locale, `/urunler/${p.slug}`) : '#'} 
+                  href={p.slug ? localizedPath(locale, `/urunler/${p.slug}`) : '#'}
+                  title={p.title}
                   className="group relative flex h-[220px] flex-col justify-end overflow-hidden border-l-4 border-(--color-brand) p-5 shadow-2xl transition-all duration-500 hover:scale-[1.02] sm:h-[240px] md:h-[220px] lg:h-[280px] lg:p-6"
                   style={{ background: '#141814' }}
                 >
@@ -366,8 +367,9 @@ export default async function HomePage({
                     </p>
                     
                     {/* Pill Button */}
-                    <Link 
+                    <Link
                       href={localizedPath(locale, `/blog/${post.slug}`)}
+                      title={post.title}
                       className="mt-auto px-8 py-2 border-2 border-white/20 rounded-full text-[11px] font-black text-white uppercase tracking-[0.2em] transition-all duration-300 hover:bg-(--color-brand) hover:border-(--color-brand) hover:scale-105"
                     >
                       {t('common.readMore')}
@@ -409,6 +411,7 @@ export default async function HomePage({
                       {mainImage ? (
                         <Link
                           href={postHref}
+                          title={post.title}
                           className="group relative block aspect-16/10 overflow-hidden bg-(--color-bg-muted)"
                         >
                           <OptimizedImage
@@ -428,7 +431,7 @@ export default async function HomePage({
                           </div>
                         ) : null}
 
-                        <Link href={postHref}>
+                        <Link href={postHref} title={post.title}>
                           <h3
                             className="mt-3 text-2xl font-bold text-(--color-text-primary) transition-colors hover:text-(--color-brand-text)"
                             style={{ fontFamily: 'var(--font-heading)' }}
@@ -453,6 +456,7 @@ export default async function HomePage({
                           </span>
                           <Link
                             href={postHref}
+                            title={`${post.title} — ${t('common.readMore')}`}
                             className="text-xs font-medium text-(--color-brand-text) hover:underline"
                           >
                             {t('common.readMore')} »
@@ -500,6 +504,7 @@ export default async function HomePage({
 
                       <Link
                         href={localizedPath(locale, `/kataloglar/${catalog.slug}`)}
+                        title={catalog.name || catalog.title}
                         className="mt-auto rounded-full border-2 border-white/20 px-8 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:border-(--color-brand) hover:bg-(--color-brand)"
                       >
                         {t('catalog.viewCatalog')}

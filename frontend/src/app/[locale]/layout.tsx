@@ -69,6 +69,8 @@ export async function generateMetadata({
   const description =
     asStr(val.site_description) ||
     'Bereket Fide — sebze, meyve ve süs bitkisi fidelerinde kaliteli ve sağlıklı üretim çözüm ortağınız.';
+  const author = asStr(val.author) || undefined;
+  const publisher = asStr(val.publisher) || undefined;
   const faviconUrl = pickFirstString(
     logoValue.favicon_url,
     logoValue.favicon,
@@ -90,6 +92,8 @@ export async function generateMetadata({
   return {
     title: { default: title, template: `%s | ${siteName}` },
     description,
+    ...(author ? { authors: [{ name: author }] } : {}),
+    ...(publisher ? { publisher } : {}),
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: '/',

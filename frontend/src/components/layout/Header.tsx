@@ -150,6 +150,7 @@ export function Header({
                     <Link
                       key={item.url}
                       href={item.url || '#'}
+                      title={item.title}
                       className="group relative text-[13px] font-bold uppercase tracking-[0.15em] transition-colors"
                       style={{
                         color: isActive ? 'var(--color-brand)' : '#1a1a1a',
@@ -172,6 +173,7 @@ export function Header({
             {/* Logo — Humintech style on the right */}
             <Link
               href={l('/')}
+              title="Bereket Fide"
               className="flex items-center shrink-0 border-l border-gray-100 pl-8 h-10"
             >
               <Image

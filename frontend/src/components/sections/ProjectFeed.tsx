@@ -140,7 +140,7 @@ export function ProjectFeed({
             return (
               <article key={project.id} className="border-b border-(--color-border) pb-10">
                 {/* Title + time */}
-                <Link href={projectHref}>
+                <Link href={projectHref} title={project.title}>
                   <h2
                     className="text-xl font-bold text-(--color-text-primary) hover:text-(--color-brand-text) lg:text-2xl"
                     style={{ fontFamily: 'var(--font-heading)' }}
@@ -157,7 +157,7 @@ export function ProjectFeed({
 
                 {/* Main image */}
                 {mainImage && (
-                  <Link href={projectHref} className="group relative mt-4 block aspect-16/10 overflow-hidden bg-(--color-bg-muted)">
+                  <Link href={projectHref} title={project.title} className="group relative mt-4 block aspect-16/10 overflow-hidden bg-(--color-bg-muted)">
                     <OptimizedImage
                       src={mainImage}
                       alt={project.title}

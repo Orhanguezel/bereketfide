@@ -448,7 +448,7 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
       <div className="pv-images-content" style={{ marginTop: 20 }}>
         <div className="pv-masonry">
           {filtered.map((p, i) => (
-            <Link key={p.id ?? p.title} href={p.href} className="pv-masonry-item">
+            <Link key={p.id ?? p.title} href={p.href} title={p.title} className="pv-masonry-item">
               <OptimizedImage
                 src={p.imageSrc}
                 alt={p.alt}
@@ -473,7 +473,7 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
 /* ── Grid card ── */
 function GridCard({ item, aspectRatio, titleSize, sizes }: { item: ProjectViewItem; aspectRatio: string; titleSize: number; sizes: string }) {
   return (
-    <Link href={item.href} className="pv-card">
+    <Link href={item.href} title={item.title} className="pv-card">
       <div className="pv-card-img" style={{ aspectRatio }}>
         <OptimizedImage src={item.imageSrc} alt={item.alt} fill className="object-cover" sizes={sizes} />
       </div>
@@ -494,7 +494,7 @@ function GridCard({ item, aspectRatio, titleSize, sizes }: { item: ProjectViewIt
 /* ── List card ── */
 function ListCard({ item, detailLabels }: { item: ProjectViewItem; detailLabels?: DetailLabels }) {
   return (
-    <Link href={item.href} className="pv-list-item">
+    <Link href={item.href} title={item.title} className="pv-list-item">
       <div className="pv-list-img">
         <OptimizedImage src={item.imageSrc} alt={item.alt} fill className="object-cover" sizes="(max-width:768px) 100vw, 320px" />
       </div>
