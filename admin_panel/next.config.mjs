@@ -78,15 +78,18 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3030'
     ).replace(/\/+$/, '');
 
+    const prodDomain = 'https://www.bereketfide.com.tr';
+    const prodDomainAlt = 'https://www.bereketfide.com';
+
     const csp = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      `img-src 'self' blob: data: https://res.cloudinary.com ${frontendUrl} ${apiBase} http://localhost:8086 http://127.0.0.1:8086`,
-      `connect-src 'self' ${apiBase} ${frontendUrl} https://cdn.jsdelivr.net https://api.cloudinary.com`,
+      `img-src 'self' blob: data: https://res.cloudinary.com ${prodDomain} ${prodDomainAlt} ${frontendUrl} ${apiBase} http://localhost:8086 http://127.0.0.1:8086`,
+      `connect-src 'self' ${apiBase} ${frontendUrl} ${prodDomain} ${prodDomainAlt} https://cdn.jsdelivr.net https://api.cloudinary.com`,
       "font-src 'self' https://fonts.gstatic.com data:",
-      `object-src 'self' ${apiBase} http://localhost:8086 http://127.0.0.1:8086`,
-      `frame-src 'self' blob: ${apiBase} http://localhost:8086 http://127.0.0.1:8086`,
+      `object-src 'self' ${apiBase} ${prodDomain} ${prodDomainAlt} http://localhost:8086 http://127.0.0.1:8086`,
+      `frame-src 'self' blob: ${apiBase} ${prodDomain} ${prodDomainAlt} http://localhost:8086 http://127.0.0.1:8086`,
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'none'",

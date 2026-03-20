@@ -407,7 +407,7 @@ export const normalizeServiceImage = (row: ApiServiceImage): ServiceImageDto => 
   image_asset_id: row.image_asset_id,
   image_url: row.image_url,
 
-  is_active: row.is_active === 1,
+  is_active: !!(row.is_active),
   display_order: row.display_order,
 
   created_at: row.created_at,

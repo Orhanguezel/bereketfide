@@ -6,7 +6,7 @@ import { spawn } from 'node:child_process';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const BUILD_ID_FILE = path.join(ROOT, '.next', 'BUILD_ID');
-const STANDALONE_DIR = path.join(ROOT, '.next', 'standalone', 'vistainsaat');
+const STANDALONE_DIR = path.join(ROOT, '.next', 'standalone', 'bereketfide');
 const STANDALONE_SERVER = path.join(STANDALONE_DIR, 'server.js');
 const PREPARE_SCRIPT = path.join(ROOT, 'scripts', 'prepare-standalone.mjs');
 
@@ -16,7 +16,7 @@ const API_BASE = (process.env.SMOKE_API_BASE_URL || process.env.NEXT_PUBLIC_API_
 const API_ORIGIN = API_BASE.endsWith('/api') ? API_BASE.slice(0, -4) : API_BASE;
 const ADMIN_EMAIL = process.env.SMOKE_ADMIN_EMAIL || process.env.SEED_ADMIN_EMAIL || 'orhanguzell@gmail.com';
 const ADMIN_PASSWORD = process.env.SMOKE_ADMIN_PASSWORD || process.env.SEED_ADMIN_PASSWORD || 'admin123';
-const VISTAINSAAT_CATEGORY_ID = 'cccc0001-4001-4001-8001-cccccccc0001';
+const BEREKETFIDE_CATEGORY_ID = 'cccc0001-4001-4001-8001-cccccccc0001';
 
 const created = {
   pageId: null,
@@ -211,7 +211,7 @@ async function createAdminContent() {
         method: 'POST',
         headers,
         body: JSON.stringify({
-          module_key: 'vistainsaat_blog',
+          module_key: 'bereketfide_blog',
           locale: 'tr',
           title: pageTitle,
           slug: pageSlug,
@@ -252,7 +252,7 @@ async function createAdminContent() {
         method: 'POST',
         headers,
         body: JSON.stringify({
-          item_type: 'vistainsaat',
+          item_type: 'bereketfide',
           locale: 'tr',
           title: productTitle,
           slug: productSlug,
@@ -260,8 +260,8 @@ async function createAdminContent() {
           image_url: `${API_ORIGIN}/media/gallery-placeholder.svg`,
           alt: `Admin flow product alt ${ts}`,
           price: 0,
-          category_id: VISTAINSAAT_CATEGORY_ID,
-          tags: ['admin-flow', 'vistainsaat'],
+          category_id: BEREKETFIDE_CATEGORY_ID,
+          tags: ['admin-flow', 'bereketfide'],
           meta_title: `${productTitle} Meta`,
           meta_description: `Admin flow product meta description ${ts}`,
           is_active: true,
@@ -298,7 +298,7 @@ async function createAdminContent() {
         method: 'POST',
         headers,
         body: JSON.stringify({
-          module_key: 'vistainsaat',
+          module_key: 'bereketfide',
           source_type: 'standalone',
           locale: 'tr',
           title: galleryTitle,

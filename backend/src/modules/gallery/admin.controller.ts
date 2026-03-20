@@ -104,7 +104,7 @@ export const adminUpdateGallery: RouteHandler = async (req, reply) => {
   const baseFields: Record<string, any> = {};
   if (body.module_key !== undefined) baseFields.module_key = body.module_key;
   if (body.source_id !== undefined) baseFields.source_id = body.source_id;
-  if (body.source_type !== undefined) baseFields.source_type = body.source_type;
+  if (body.source_type !== undefined) baseFields.source_type = body.source_type || 'standalone';
   if (body.is_active !== undefined) baseFields.is_active = toBool(body.is_active);
   if (body.is_featured !== undefined) baseFields.is_featured = toBool(body.is_featured);
   if (body.display_order !== undefined) baseFields.display_order = body.display_order;

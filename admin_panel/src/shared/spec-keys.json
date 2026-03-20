@@ -1,84 +1,74 @@
 {
-  "project": [
+  "product": [
     {
-      "id": "type",
-      "keys": { "tr": "Tip", "en": "Type" },
-      "labels": { "tr": "Tip", "en": "Type" }
+      "id": "species",
+      "keys": { "tr": "Tür", "en": "Species" },
+      "labels": { "tr": "Tür", "en": "Species" }
     },
     {
-      "id": "location",
-      "keys": { "tr": "Konum", "en": "Location" },
-      "labels": { "tr": "Konum", "en": "Location" }
+      "id": "variety",
+      "keys": { "tr": "Çeşit", "en": "Variety" },
+      "labels": { "tr": "Çeşit", "en": "Variety" }
     },
     {
-      "id": "year",
-      "keys": { "tr": "Yıl", "en": "Year" },
-      "labels": { "tr": "Yıl", "en": "Year" }
+      "id": "height",
+      "keys": { "tr": "Boy", "en": "Height" },
+      "labels": { "tr": "Boy", "en": "Height" }
     },
     {
-      "id": "area",
-      "keys": { "tr": "Alan", "en": "Area" },
-      "labels": { "tr": "Alan", "en": "Area" }
+      "id": "root_type",
+      "keys": { "tr": "Kök Tipi", "en": "Root Type" },
+      "labels": { "tr": "Kök Tipi", "en": "Root Type" }
     },
     {
-      "id": "status",
-      "keys": { "tr": "Durum", "en": "Status" },
-      "labels": { "tr": "Durum", "en": "Status" }
+      "id": "planting_season",
+      "keys": { "tr": "Dikim Zamanı", "en": "Planting Season" },
+      "labels": { "tr": "Dikim Zamanı", "en": "Planting Season" }
     },
     {
-      "id": "architects",
-      "keys": { "tr": "Mimarlar", "en": "Architects" },
-      "labels": { "tr": "Mimarlar", "en": "Architects" }
+      "id": "harvest_season",
+      "keys": { "tr": "Hasat Zamanı", "en": "Harvest Season" },
+      "labels": { "tr": "Hasat Zamanı", "en": "Harvest Season" }
     },
     {
-      "id": "lead_architect",
-      "keys": { "tr": "Sorumlu Mimar", "en": "Lead Architect" },
-      "labels": { "tr": "Sorumlu Mimar", "en": "Lead Architect" }
+      "id": "soil_type",
+      "keys": { "tr": "Toprak Tipi", "en": "Soil Type" },
+      "labels": { "tr": "Toprak Tipi", "en": "Soil Type" }
     },
     {
-      "id": "manufacturers",
-      "keys": { "tr": "Üreticiler", "en": "Manufacturers" },
-      "labels": { "tr": "Üreticiler", "en": "Manufacturers" }
+      "id": "sun_exposure",
+      "keys": { "tr": "Güneş İhtiyacı", "en": "Sun Exposure" },
+      "labels": { "tr": "Güneş İhtiyacı", "en": "Sun Exposure" }
     },
     {
-      "id": "project_team",
-      "keys": { "tr": "Proje Ekibi", "en": "Project Team" },
-      "labels": { "tr": "Proje Ekibi", "en": "Project Team" }
+      "id": "watering",
+      "keys": { "tr": "Sulama", "en": "Watering" },
+      "labels": { "tr": "Sulama", "en": "Watering" }
     },
     {
-      "id": "landscape_architecture",
-      "keys": { "tr": "Peyzaj Mimarisi", "en": "Landscape Architecture" },
-      "labels": { "tr": "Peyzaj Mimarisi", "en": "Landscape Architecture" }
+      "id": "frost_resistance",
+      "keys": { "tr": "Soğuğa Dayanıklılık", "en": "Frost Resistance" },
+      "labels": { "tr": "Soğuğa Dayanıklılık", "en": "Frost Resistance" }
     },
     {
-      "id": "interior_design",
-      "keys": { "tr": "İç Mimari", "en": "Interior Design" },
-      "labels": { "tr": "İç Mimari", "en": "Interior Design" }
+      "id": "pot_size",
+      "keys": { "tr": "Saksı Boyutu", "en": "Pot Size" },
+      "labels": { "tr": "Saksı Boyutu", "en": "Pot Size" }
     },
     {
-      "id": "engineering",
-      "keys": { "tr": "Mühendislik", "en": "Engineering" },
-      "labels": { "tr": "Mühendislik", "en": "Engineering" }
+      "id": "yield",
+      "keys": { "tr": "Verim", "en": "Yield" },
+      "labels": { "tr": "Verim", "en": "Yield" }
     },
     {
-      "id": "general_construction",
-      "keys": { "tr": "Genel İnşaat", "en": "General Construction" },
-      "labels": { "tr": "Genel İnşaat", "en": "General Construction" }
+      "id": "maturity_days",
+      "keys": { "tr": "Olgunlaşma Süresi", "en": "Maturity Days" },
+      "labels": { "tr": "Olgunlaşma Süresi", "en": "Maturity Days" }
     },
     {
-      "id": "city",
-      "keys": { "tr": "Şehir", "en": "City" },
-      "labels": { "tr": "Şehir", "en": "City" }
-    },
-    {
-      "id": "country",
-      "keys": { "tr": "Ülke", "en": "Country" },
-      "labels": { "tr": "Ülke", "en": "Country" }
-    },
-    {
-      "id": "contractor",
-      "keys": { "tr": "Yüklenici", "en": "Contractor" },
-      "labels": { "tr": "Yüklenici", "en": "Contractor" }
+      "id": "origin",
+      "keys": { "tr": "Menşei", "en": "Origin" },
+      "labels": { "tr": "Menşei", "en": "Origin" }
     }
   ]
 }

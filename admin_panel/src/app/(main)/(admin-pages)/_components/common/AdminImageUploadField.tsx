@@ -691,7 +691,7 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
 
         {/* Upload/Library Modal */}
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-6xl max-h-[90vh] flex flex-col">
             <DialogHeader>
               <DialogTitle>{multiple ? 'Görseller Yükle' : 'Görsel Yükle'}</DialogTitle>
               <DialogDescription>
@@ -699,8 +699,8 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
               </DialogDescription>
             </DialogHeader>
 
-            <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'upload' | 'library')}>
-              <TabsList className="grid w-full grid-cols-2">
+            <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'upload' | 'library')} className="flex min-h-0 flex-1 flex-col">
+              <TabsList className="grid w-full shrink-0 grid-cols-2">
                 <TabsTrigger value="upload">
                   <Upload className="mr-2 size-4" />
                   Yükle
@@ -735,7 +735,7 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
               </TabsContent>
 
               {/* Library Tab */}
-              <TabsContent value="library" className="space-y-4">
+              <TabsContent value="library" className="min-h-0 flex-1 overflow-y-auto space-y-4">
                 {isLoadingAssets ? (
                   <div className="flex items-center justify-center py-12">
                     <div className="text-sm text-muted-foreground">Yükleniyor...</div>
@@ -755,9 +755,9 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                  <div className="space-y-4">
                     {multiple && librarySelected.length > 0 && (
-                      <div className="mb-4 flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 p-3">
+                      <div className="sticky top-0 z-10 flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 p-3">
                         <span className="text-sm font-medium">{librarySelected.length} görsel seçildi</span>
                         <div className="flex gap-2">
                           <Button type="button" variant="outline" size="sm" onClick={() => setLibrarySelected([])}>
@@ -769,6 +769,7 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
                         </div>
                       </div>
                     )}
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                     {assetsData.items.map((asset) => {
                       const assetValue = norm(asset.url);
                       const url = getAdminAssetPreviewUrl(asset);
@@ -843,6 +844,7 @@ export const AdminImageUploadField: React.FC<AdminImageUploadFieldProps> = ({
                         </button>
                       );
                     })}
+                  </div>
                   </div>
                 )}
               </TabsContent>

@@ -186,12 +186,12 @@ function ListPanel({
 
 /* ----------------------------- main component ----------------------------- */
 
-const VISTA_BRAND = 'bereketfide';
-const VISTA_PREFIX = 'bereketfide__';
+const BRAND_KEY = 'bereketfide';
+const BRAND_PREFIX = 'bereketfide__';
 
 export default function AdminSiteSettingsClient() {
-  const brand = VISTA_BRAND;
-  const brandPrefix = VISTA_PREFIX;
+  const brand = BRAND_KEY;
+  const brandPrefix = BRAND_PREFIX;
   const isScopedBrand = true;
   const appLocalesKey = `${brandPrefix || ''}app_locales`;
   const localeSettingsQ = useListSiteSettingsAdminQuery({
@@ -414,6 +414,9 @@ export default function AdminSiteSettingsClient() {
                   <TabsTrigger value="locales" className="whitespace-nowrap text-xs sm:text-sm">
                     {t('admin.siteSettings.tabs.locales')}
                   </TabsTrigger>
+                  <TabsTrigger value="branding" className="whitespace-nowrap text-xs sm:text-sm">
+                    {t('admin.siteSettings.tabs.branding')}
+                  </TabsTrigger>
                 </TabsList>
               </div>
 
@@ -449,8 +452,9 @@ export default function AdminSiteSettingsClient() {
                 <LocalesSettingsTab settingPrefix={brandPrefix} />
               </TabsContent>
 
-
-
+              <TabsContent value="branding" className="mt-3 sm:mt-4">
+                <BrandingSettingsTab locale={locale} settingPrefix={brandPrefix} />
+              </TabsContent>
             </Tabs>
           )}
         </CardContent>

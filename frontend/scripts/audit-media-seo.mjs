@@ -42,9 +42,9 @@ try {
   const warnings = [];
 
   const [productResult, galleryResult, postResult] = await Promise.all([
-    fetchJson('/products?item_type=vistainsaat&is_active=1&limit=20'),
-    fetchJson('/galleries?module_key=vistainsaat&is_active=1&limit=20'),
-    fetchJson('/custom_pages?module_key=vistainsaat_blog&is_active=1&limit=20'),
+    fetchJson('/products?item_type=bereketfide&is_active=1&limit=20'),
+    fetchJson('/galleries?module_key=bereketfide&is_active=1&limit=20'),
+    fetchJson('/custom_pages?module_key=bereketfide_blog&is_active=1&limit=20'),
   ]);
 
   const products = productResult.data;
@@ -52,9 +52,9 @@ try {
   const posts = postResult.data;
 
   for (const [label, pathname, result] of [
-    ['products', '/products?item_type=vistainsaat&is_active=1&limit=20', productResult],
-    ['galleries', '/galleries?module_key=vistainsaat&is_active=1&limit=20', galleryResult],
-    ['blog', '/custom_pages?module_key=vistainsaat_blog&is_active=1&limit=20', postResult],
+    ['products', '/products?item_type=bereketfide&is_active=1&limit=20', productResult],
+    ['galleries', '/galleries?module_key=bereketfide&is_active=1&limit=20', galleryResult],
+    ['blog', '/custom_pages?module_key=bereketfide_blog&is_active=1&limit=20', postResult],
   ]) {
     if (!result.ok) {
       warnings.push(`Skipped ${label}: ${pathname} -> ${result.status}`);

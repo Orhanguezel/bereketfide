@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const NEXT_DIR = path.join(ROOT, '.next');
-const STANDALONE_APP_DIR = path.join(NEXT_DIR, 'standalone', 'vistainsaat');
+const STANDALONE_APP_DIR = path.join(NEXT_DIR, 'standalone', 'bereketfide');
 const STATIC_SOURCE = path.join(NEXT_DIR, 'static');
 const STATIC_TARGET = path.join(STANDALONE_APP_DIR, '.next', 'static');
 const PUBLIC_SOURCE = path.join(ROOT, 'public');

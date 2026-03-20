@@ -9,7 +9,7 @@ export const galleryCreateSchema = z.object({
   id: z.string().uuid().optional(),
   module_key: z.string().min(1).max(64).default('general'),
   source_id: emptyToNull(z.string().uuid().optional().nullable()),
-  source_type: z.enum(['product', 'blog', 'reference', 'standalone']).default('standalone'),
+  source_type: z.string().max(32).nullable().optional().default('standalone'),
 
   // i18n
   locale: z.string().min(2).max(8).optional(),
@@ -17,12 +17,21 @@ export const galleryCreateSchema = z.object({
   slug: z.string().min(1).max(255),
   description: emptyToNull(z.string().optional().nullable()),
 
+  // cover (denormalized — frontend uses these for cover image)
+  cover_image: emptyToNull(z.string().max(2000).optional().nullable()),
+  cover_asset_id: emptyToNull(z.string().max(64).optional().nullable()),
+  cover_image_alt: emptyToNull(z.string().max(255).optional().nullable()),
+
   meta_title: emptyToNull(z.string().max(255).optional().nullable()),
   meta_description: emptyToNull(z.string().max(500).optional().nullable()),
 
   is_active: boolLike.optional(),
   is_featured: boolLike.optional(),
   display_order: z.coerce.number().int().min(0).optional().default(0),
+
+  // frontend extras (accepted but not persisted to base table)
+  replicate_all_locales: z.boolean().optional(),
+  apply_all_locales: z.boolean().optional(),
 });
 
 export const galleryUpdateSchema = galleryCreateSchema.partial();

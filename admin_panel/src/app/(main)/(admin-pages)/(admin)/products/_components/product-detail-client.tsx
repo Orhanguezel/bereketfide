@@ -1,6 +1,6 @@
 // =============================================================
 // FILE: product-detail-client.tsx
-// Product / Project Detail — Tab bazlı düzenli form
+// Product Detail — Tab bazlı düzenli form
 // Genel | Görseller | Özellikler | SEO | SSS | Değerlendirmeler | JSON
 // =============================================================
 
@@ -55,12 +55,11 @@ type TabKey = 'general' | 'images' | 'specs' | 'seo' | 'faqs' | 'reviews' | 'jso
 
 // ─── Specifications Key-Value Editor ─────────────────────────
 
-// İnşaat projesi için önerilen özellik şablonları
 /** Spec key definitions — loaded from shared/spec-keys.json */
 import specKeysData from '@shared/spec-keys.json';
 
 type SpecKeyEntry = { id: string; labels: Record<string, string>; keys: Record<string, string> };
-const SPEC_ENTRIES: SpecKeyEntry[] = specKeysData.project;
+const SPEC_ENTRIES: SpecKeyEntry[] = specKeysData.product;
 
 function getSpecOptionsForLocale(locale: string): { key: string; label: string }[] {
   const lang = locale.split('-')[0].split('_')[0];
@@ -139,9 +138,7 @@ function SpecificationsEditor({
 
   // Henüz eklenmemiş standart özellikler
   const usedKeys = new Set(entries.map(([k]) => normalizeKey(k)));
-  const availableOptions = isProject
-    ? specOptions.filter((o) => !usedKeys.has(o.key))
-    : [];
+  const availableOptions = specOptions.filter((o) => !usedKeys.has(o.key));
 
   const isStandardKey = (key: string) =>
     specOptions.some(
@@ -157,7 +154,7 @@ function SpecificationsEditor({
         const isCustom = customKeyInputs[idx] || !isStandardKey(k);
         return (
           <div key={idx} className="flex items-center gap-2">
-            {isProject && !isCustom ? (
+            {!isCustom ? (
               <select
                 className="w-50 shrink-0 h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-xs focus:outline-none focus:ring-1 focus:ring-ring"
                 value={normalizeKey(k)}
@@ -187,18 +184,16 @@ function SpecificationsEditor({
                   disabled={disabled}
                   placeholder="Özellik adı"
                 />
-                {isProject && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 shrink-0"
-                    onClick={() => setCustomKeyInputs((p) => ({ ...p, [idx]: false }))}
-                    title="Listeden seç"
-                  >
-                    <ChevronDown className="h-3.5 w-3.5" />
-                  </Button>
-                )}
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 shrink-0"
+                  onClick={() => setCustomKeyInputs((p) => ({ ...p, [idx]: false }))}
+                  title="Listeden seç"
+                >
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Button>
               </div>
             )}
             <Input
@@ -457,7 +452,7 @@ export default function ProductDetailClient({ id, itemType }: Props) {
   const adminLocale = usePreferencesStore((s) => s.adminLocale);
   const isNew = id === 'new';
   const backUrl = itemType ? `/products?type=${itemType}` : '/products';
-  const isProject = itemType === 'bereketfide';
+  const isProject = false; // Bereket Fide: tüm ürünler "Ürün" olarak gösterilir
 
   const { localeOptions } = useAdminLocales();
   const [activeLocale, setActiveLocale] = React.useState<string>(adminLocale || 'tr');
@@ -684,14 +679,14 @@ export default function ProductDetailClient({ id, itemType }: Props) {
     try {
       if (isNew) {
         const result = await createProduct({ ...payload, category_id: formData.category_id || undefined }).unwrap();
-        toast.success(isProject ? 'Proje oluşturuldu' : 'Ürün oluşturuldu');
+        toast.success('Ürün oluşturuldu');
         if (result?.id) {
           const typeParam = itemType ? `?type=${itemType}` : '';
           router.push(`/products/${result.id}${typeParam}`);
         }
       } else {
         await updateProduct({ id, patch: payload }).unwrap();
-        toast.success(isProject ? 'Proje güncellendi' : 'Ürün güncellendi');
+        toast.success('Ürün güncellendi');
       }
     } catch (error: any) {
       const errObj = error?.data?.error;
@@ -702,7 +697,7 @@ export default function ProductDetailClient({ id, itemType }: Props) {
 
   const isLoading = isFetching || isCreating || isUpdating;
   const productId = isNew ? undefined : id;
-  const entityLabel = isProject ? 'Proje' : 'Ürün';
+  const entityLabel = 'Ürün';
 
   const localesForSelect = React.useMemo(
     () =>
@@ -854,15 +849,13 @@ export default function ProductDetailClient({ id, itemType }: Props) {
                 {/* Kod + Kategori */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="product_code">
-                      {isProject ? 'Proje Kodu' : 'Ürün Kodu'}
-                    </Label>
+                    <Label htmlFor="product_code">Ürün Kodu</Label>
                     <Input
                       id="product_code"
                       value={formData.product_code}
                       onChange={(e) => handleChange('product_code', e.target.value)}
                       disabled={isLoading}
-                      placeholder={isProject ? 'VIS-KNT-001' : 'SKU-001'}
+                      placeholder="BF-FDE-001"
                     />
                   </div>
                   <div className="space-y-2">
@@ -916,32 +909,30 @@ export default function ProductDetailClient({ id, itemType }: Props) {
                   </div>
                 )}
 
-                {/* Fiyat + Stok (ürün için) */}
-                {!isProject && (
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="price">Fiyat</Label>
-                      <Input
-                        id="price"
-                        type="number"
-                        step="0.01"
-                        value={formData.price}
-                        onChange={(e) => handleChange('price', e.target.value)}
-                        disabled={isLoading}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="stock_quantity">Stok</Label>
-                      <Input
-                        id="stock_quantity"
-                        type="number"
-                        value={formData.stock_quantity}
-                        onChange={(e) => handleChange('stock_quantity', e.target.value)}
-                        disabled={isLoading}
-                      />
-                    </div>
+                {/* Fiyat + Stok */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="price">Fiyat</Label>
+                    <Input
+                      id="price"
+                      type="number"
+                      step="0.01"
+                      value={formData.price}
+                      onChange={(e) => handleChange('price', e.target.value)}
+                      disabled={isLoading}
+                    />
                   </div>
-                )}
+                  <div className="space-y-2">
+                    <Label htmlFor="stock_quantity">Stok</Label>
+                    <Input
+                      id="stock_quantity"
+                      type="number"
+                      value={formData.stock_quantity}
+                      onChange={(e) => handleChange('stock_quantity', e.target.value)}
+                      disabled={isLoading}
+                    />
+                  </div>
+                </div>
 
                 {/* Açıklama */}
                 <div className="space-y-2">
@@ -1093,13 +1084,9 @@ export default function ProductDetailClient({ id, itemType }: Props) {
             {/* Inline specifications (product_i18n.specifications JSON) */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">
-                  {isProject ? 'Proje Özellikleri' : 'Teknik Özellikler'}
-                </CardTitle>
+                <CardTitle className="text-sm">Teknik Özellikler</CardTitle>
                 <CardDescription>
-                  {isProject
-                    ? 'Lokasyon, yıl, alan, tip, durum, mimarlar gibi proje bilgilerini ekleyin. Yeni özellik eklemek için "Özellik Ekle" butonunu kullanın.'
-                    : 'Ürüne ait teknik detayları ekleyin.'}
+                  Tür, çeşit, boy, dikim zamanı, toprak tipi gibi ürün özelliklerini ekleyin.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -1176,7 +1163,7 @@ export default function ProductDetailClient({ id, itemType }: Props) {
                   value={formData.tags}
                   onChange={(e) => handleChange('tags', e.target.value)}
                   disabled={isLoading}
-                  placeholder="virgülle ayır: konut, rezidans, istanbul"
+                  placeholder="virgülle ayır: domates fidesi, biber, sebze"
                 />
                 {formData.tags && (
                   <div className="flex flex-wrap gap-1.5 pt-1">

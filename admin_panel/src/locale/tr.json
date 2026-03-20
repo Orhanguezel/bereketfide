@@ -1169,8 +1169,8 @@
         "cancelled": "İptal",
         "site_survey": "Keşif Bekleniyor",
         "contract_signed": "Sözleşme İmzalandı",
-        "construction_started": "İnşaat Başladı",
-        "construction_completed": "İnşaat Tamamlandı"
+        "construction_started": "Hazırlık Başladı",
+        "construction_completed": "Teslim Edildi"
       },
       "detail": {
         "createTitle": "Yeni Teklif Oluştur",
@@ -1249,9 +1249,9 @@
         "projectType": "Proje Tipi",
         "estimatedArea": "Tahmini Alan (m²)",
         "preferredDeadline": "Teslim Tarihi",
-        "constructionType": "İnşaat Tipi",
-        "constructionStartDate": "İnşaat Başlangıç Tarihi",
-        "constructionEndDate": "İnşaat Bitiş Tarihi"
+        "constructionType": "Sipariş Tipi",
+        "constructionStartDate": "Hazırlık Başlangıç Tarihi",
+        "constructionEndDate": "Teslim Tarihi"
       },
       "actions": {
         "refresh": "Yenile",

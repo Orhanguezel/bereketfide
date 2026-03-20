@@ -220,7 +220,7 @@ function ImageEditForm({
   const [values, setValues] = React.useState<EditFormValues>({
     alt: norm(image.alt),
     caption: norm(image.caption),
-    is_active: image.is_active === 1,
+    is_active: !!(image.is_active),
   });
 
   const [updateImage, { isLoading }] = useUpdateGalleryImageAdminMutation();
