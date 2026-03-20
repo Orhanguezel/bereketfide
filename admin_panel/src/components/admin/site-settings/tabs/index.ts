@@ -1,1 +1,1 @@
-export * from '@/app/(main)/admin/(admin)/site-settings/tabs';
+export * from '@/app/(main)/(admin-pages)/(admin)/site-settings/tabs';

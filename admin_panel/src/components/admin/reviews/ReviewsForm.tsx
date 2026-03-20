@@ -1,4 +1,4 @@
-import ReviewsFormComponent from '@/app/(main)/admin/(admin)/reviews/[id]/page';
+import ReviewsFormComponent from '@/app/(main)/(admin-pages)/(admin)/reviews/[id]/page';
 
 export const ReviewsForm = ReviewsFormComponent;
 export default ReviewsFormComponent;

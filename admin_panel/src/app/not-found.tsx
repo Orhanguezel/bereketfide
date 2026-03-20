@@ -13,7 +13,7 @@ export default function NotFound() {
       <p className="text-muted-foreground">
         {t('notFound.description', {}, 'The page you are looking for could not be found.')}
       </p>
-      <Link prefetch={false} replace href="/admin/dashboard">
+      <Link prefetch={false} replace href="/dashboard">
         <Button variant="outline">{t('notFound.goBack', {}, 'Go back home')}</Button>
       </Link>
     </div>

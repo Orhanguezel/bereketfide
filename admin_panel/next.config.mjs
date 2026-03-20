@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
+  basePath: "/admin",
   compiler: { removeConsole: process.env.NODE_ENV === 'production' },
 
   // Silence "multiple lockfiles" workspace root warning
