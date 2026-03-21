@@ -42,7 +42,7 @@ export const DEFAULT_BRANDING: AdminBrandingConfig = {
     og_title: 'Bereket Fide Admin Panel',
     og_description:
       'Bereket Fide urunleri icin icerik, medya, teklif ve site ayari yonetim ekrani.',
-    og_image: '/logo/bereket_logo_512.png',
+    og_image: '/admin/logo/bereket_logo_512.png',
     twitter_card: 'summary_large_image',
   },
 };
