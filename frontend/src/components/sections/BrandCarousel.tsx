@@ -61,7 +61,7 @@ export function BrandCarousel({ brands }: { brands: BrandItem[] }) {
             const TileContent = (
               <div
                 className={cn(
-                  'group relative flex h-24 w-40 items-center justify-center overflow-hidden transition-all duration-500 md:h-28 md:w-52',
+                  'group relative flex h-32 w-52 items-center justify-center overflow-hidden transition-all duration-500 md:h-36 md:w-64',
                   'rounded-xl border border-border bg-card shadow-sm',
                   'hover:scale-[1.04] hover:border-(--color-brand-light) hover:bg-card hover:shadow-2xl hover:shadow-(--color-brand)/5',
                   brand.website_url && 'cursor-pointer'
@@ -73,8 +73,8 @@ export function BrandCarousel({ brands }: { brands: BrandItem[] }) {
                     src={logoSrc!}
                     alt={brand.title}
                     fill
-                    sizes="(max-width: 768px) 160px, 208px"
-                    className="object-contain p-5 md:p-6 opacity-70 grayscale-[0.3] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
+                    sizes="(max-width: 768px) 208px, 256px"
+                    className="object-contain p-4 md:p-5 opacity-70 grayscale-[0.3] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
                     unoptimized={logoSrc!.endsWith('.svg')}
                   />
                 </div>
