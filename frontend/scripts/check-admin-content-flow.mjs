@@ -464,10 +464,10 @@ async function main() {
   try {
     await waitForServer(proc);
 
-    await expectFrontend('/tr/about', ['Vista İnşaat', 'Karbon fiber', 'Calisma Modelimiz']);
-    await expectFrontend('/en/about', ['Vista İnşaat', 'carbon fiber', 'How We Work']);
-    await expectFrontend('/tr/legal/privacy', ['Vista İnşaat', '/tr/legal/privacy', '<link rel="canonical"']);
-    await expectFrontend('/en/legal/privacy', ['Vista İnşaat', '/en/legal/privacy', '<link rel="canonical"']);
+    await expectFrontend('/tr/about', ['Bereket Fide', 'Karbon fiber', 'Calisma Modelimiz']);
+    await expectFrontend('/en/about', ['Bereket Fide', 'carbon fiber', 'How We Work']);
+    await expectFrontend('/tr/legal/privacy', ['Bereket Fide', '/tr/legal/privacy', '<link rel="canonical"']);
+    await expectFrontend('/en/legal/privacy', ['Bereket Fide', '/en/legal/privacy', '<link rel="canonical"']);
 
     await expectFrontend(`/tr/blog/${content.blog.slug}`, [
       content.blog.tr.metaTitle,

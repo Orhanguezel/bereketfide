@@ -15,19 +15,19 @@ const BASE_URL = `http://127.0.0.1:${PORT}`;
 const routeChecks = [
   {
     pathname: '/tr',
-    patterns: ['data-theme-template="vista-construction"', 'data-theme-mode="light"', '<link rel="canonical"'],
+    patterns: ['data-theme-template="bereket-harvest"', 'data-theme-mode="light"', '<link rel="canonical"'],
   },
   {
     pathname: '/tr/projeler',
-    patterns: ['data-theme-template="vista-construction"', 'Vista İnşaat'],
+    patterns: ['data-theme-template="bereket-harvest"', 'Bereket Fide'],
   },
   {
     pathname: '/tr/haberler',
-    patterns: ['data-theme-template="vista-construction"', '<html lang="tr"'],
+    patterns: ['data-theme-template="bereket-harvest"', '<html lang="tr"'],
   },
   {
     pathname: '/tr/iletisim',
-    patterns: ['data-theme-template="vista-construction"', '<html lang="tr"'],
+    patterns: ['data-theme-template="bereket-harvest"', '<html lang="tr"'],
   },
   {
     pathname: '/robots.txt',

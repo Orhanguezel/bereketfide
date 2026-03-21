@@ -82,7 +82,7 @@
       "subtitle": "Von der Planung bis zur Übergabe bieten wir qualitativ hochwertige, termingerechte und transparente Bauleistungen für Wohn-, Gewerbe- und Mischnutzungsprojekte.",
       "cta": "Unsere Projekte entdecken",
       "ctaSecondary": "Angebot anfordern",
-      "badge": "Vista Bau",
+      "badge": "Bereket Fide",
       "newProjectBadge": "Neues Projekt",
       "workflowLabel": "Projektablauf",
       "workflowTitle": "Individuelle Planung und Umsetzung für Ihr Projekt",
@@ -124,7 +124,7 @@
       "subtitle": "Umfassende Lösungen von der Architekturplanung über den Bau bis zur Projektsteuerung und Übergabe"
     },
     "whyUs": {
-      "title": "Warum Vista Bau?",
+      "title": "Warum Bereket Fide?",
       "subtitle": "Mit einer auf Qualität, Vertrauen und Termintreue ausgerichteten Bauphilosophie machen wir bei jedem Projekt den Unterschied",
       "quality": "Hohe Qualität",
       "qualityDesc": "Vollständige Einhaltung der Qualitätsstandards in jeder Phase, von der Materialauswahl bis zur Ausführung",
@@ -149,7 +149,7 @@
       "featuredLabel": "Hervorgehobener Beitrag",
       "spotlightTitle": "Nachhaltiges Bauen: Green Building Zertifizierung und LEED-Standards",
       "spotlightBodyPrimary": "Nachhaltiges Bauen wird in Bezug auf Energieeffizienz, Wassereinsparung und gesunde Innenraumbedingungen zu einem immer wichtigeren Standard. Die LEED-Zertifizierung (Leadership in Energy and Environmental Design) ist ein internationales Referenzsystem, das Gebäude als umweltfreundlich zertifiziert.",
-      "spotlightBodySecondary": "Bei Vista Bau streben wir danach, nachhaltige Materialauswahl und energieeffiziente Designprinzipien in jedes Projekt zu integrieren. Nachhaltigkeitsziele können ohne richtige Planung nicht erreicht werden — deshalb planen wir von Anfang an einen umweltbewussten Ansatz für jedes Projekt.",
+      "spotlightBodySecondary": "Bei Bereket Fide streben wir danach, nachhaltige Materialauswahl und energieeffiziente Designprinzipien in jedes Projekt zu integrieren. Nachhaltigkeitsziele können ohne richtige Planung nicht erreicht werden — deshalb planen wir von Anfang an einen umweltbewussten Ansatz für jedes Projekt.",
       "insightLabel": "Was dieser Artikel behandelt",
       "insightText": "Standards für grünes Bauen, Zertifizierungsprozess und der Mehrwert für Ihr Projekt",
       "archiveLabel": "Weitere Inhalte",
@@ -269,7 +269,7 @@
   },
   "blog": {
     "title": "Nachrichten",
-    "description": "Architektur, Bautechnologien und aktuelle Entwicklungen von Vista Bau.",
+    "description": "Architektur, Bautechnologien und aktuelle Entwicklungen von Bereket Fide.",
     "viewPost": "Nachricht lesen",
     "allPosts": "Alle Nachrichten",
     "all": "Alle",
@@ -360,7 +360,7 @@
   },
   "about": {
     "title": "Über uns",
-    "description": "Vista Bau bietet zuverlässige, qualitativ hochwertige und termingerechte Bauleistungen für Wohn- und Gewerbeprojekte von der Planung bis zur Übergabe.",
+    "description": "Bereket Fide bietet zuverlässige, qualitativ hochwertige und termingerechte Bauleistungen für Wohn- und Gewerbeprojekte von der Planung bis zur Übergabe.",
     "intro": "Unser Team verwaltet jedes Projekt sorgfältig mit Architekturplanung, Ingenieurlösungen und einem erfahrenen Umsetzungsteam vor Ort. Kundenzufriedenheit, Qualität und termingerechte Lieferung sind unsere Grundwerte.",
     "sections": {
       "expertiseTitle": "Unsere Fachgebiete",
@@ -389,9 +389,9 @@
     }
   },
   "auth": {
-    "loginTitle": "Melden Sie sich bei Ihrem Vista Bau Konto an",
+    "loginTitle": "Melden Sie sich bei Ihrem Bereket Fide Konto an",
     "loginSubtitle": "Verfolgen Sie Ihre Projekte, sehen Sie den Angebotsstatus und greifen Sie auf exklusive Inhalte zu.",
-    "registerTitle": "Erstellen Sie Ihr Vista Bau Konto",
+    "registerTitle": "Erstellen Sie Ihr Bereket Fide Konto",
     "registerSubtitle": "Verfolgen Sie Ihre Projekte, sehen Sie den Angebotsstatus und greifen Sie auf exklusive Inhalte zu.",
     "continueWithGoogle": "Mit Google fortfahren",
     "orUseEmail": "oder verwenden Sie Ihre E-Mail-Adresse",
@@ -456,15 +456,15 @@
   "legal": {
     "title": "Rechtliches",
     "privacy": "Datenschutzerklärung",
-    "privacyDesc": "Zusammenfassung der Handhabung von Kontakt-, Angebots- und technischen Projektdaten, die mit Vista Bau geteilt werden.",
-    "privacyContent": "<p>Vista Bau verwendet über Kontakt- und Angebotsformulare übermittelte Daten ausschließlich zur Bewertung von Anfragen, zur Angebotserstellung und zur Pflege der Projektkommunikation.</p><p>Wir fordern keine unnötigen personenbezogenen Daten an und beschränken den Zugriff auf Projektdateien, Zeichnungen und technische Dokumente auf die relevanten Betriebsteams.</p><p>Für Datenaktualisierungen oder Löschanfragen können Sie uns über die auf der Kontaktseite angegebenen Kanäle erreichen.</p>",
+    "privacyDesc": "Zusammenfassung der Handhabung von Kontakt-, Angebots- und technischen Projektdaten, die mit Bereket Fide geteilt werden.",
+    "privacyContent": "<p>Bereket Fide verwendet über Kontakt- und Angebotsformulare übermittelte Daten ausschließlich zur Bewertung von Anfragen, zur Angebotserstellung und zur Pflege der Projektkommunikation.</p><p>Wir fordern keine unnötigen personenbezogenen Daten an und beschränken den Zugriff auf Projektdateien, Zeichnungen und technische Dokumente auf die relevanten Betriebsteams.</p><p>Für Datenaktualisierungen oder Löschanfragen können Sie uns über die auf der Kontaktseite angegebenen Kanäle erreichen.</p>",
     "terms": "Nutzungsbedingungen",
-    "termsDesc": "Allgemeine Bedingungen für die Nutzung der Vista Bau Website, technischer Inhalte und Angebotskommunikationskanäle.",
+    "termsDesc": "Allgemeine Bedingungen für die Nutzung der Bereket Fide Website, technischer Inhalte und Angebotskommunikationskanäle.",
     "termsContent": "<p>Die auf dieser Website veröffentlichten Informationen dienen der allgemeinen technischen und kommerziellen Orientierung. Der endgültige Produktumfang, die Materialauswahl und die Produktionsbedingungen werden im Rahmen der Projektprüfung festgelegt.</p><p>Bilder, technische Hinweise und Beschreibungen auf der Website stellen allein kein verbindliches Endangebot dar.</p><p>Alle Angebots- und Lieferzusagen werden erst nach gegenseitiger Bestätigung im Geschäftsprozess gültig.</p>"
   },
   "seo": {
-    "defaultTitle": "Vista Bau | Zuverlässige Bau- und Architekturleistungen",
-    "defaultDescription": "Qualitativ hochwertige, termingerechte und zuverlässige Baulösungen für Wohn-, Gewerbe- und Mischnutzungsprojekte. Verwirklichen Sie Ihr Traumprojekt mit Vista Bau.",
+    "defaultTitle": "Bereket Fide | Qualitäts-Setzlinge und Pflanzenproduktion",
+    "defaultDescription": "Hochwertige, zuverlässige Setzlinge und Pflanzenproduktion. Entdecken Sie unser Sortiment an Gemüse-, Obst- und Zierpflanzensetzlingen bei Bereket Fide.",
     "keywords": "Bau, Architektur, Wohnprojekte, Gewerbeprojekte, Villa, Wohnhaus, Projektmanagement, schlüsselfertig"
   }
 }
