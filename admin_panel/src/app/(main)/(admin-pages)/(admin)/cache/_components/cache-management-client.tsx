@@ -9,14 +9,11 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
-const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3030';
-const REVALIDATE_SECRET = process.env.NEXT_PUBLIC_REVALIDATE_SECRET || 'bereket-revalidate-2026';
-
 async function revalidate(opts: { all?: boolean; path?: string }) {
-  const res = await fetch(`${FRONTEND_URL}/api/revalidate`, {
+  const res = await fetch('/admin/api/revalidate-proxy', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ secret: REVALIDATE_SECRET, ...opts }),
+    body: JSON.stringify(opts),
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data?.error || 'Revalidation failed');
@@ -40,11 +37,11 @@ const CACHE_ACTIONS = [
     action: () => revalidate({ path: '/tr' }),
   },
   {
-    id: 'projects',
-    label: 'Projeler',
-    description: 'Projeler listesi ve detay sayfalarının cache\'ini temizler.',
+    id: 'products',
+    label: 'Ürünler',
+    description: 'Ürünler listesi ve detay sayfalarının cache\'ini temizler.',
     icon: FileText,
-    action: () => revalidate({ path: '/tr/projeler' }),
+    action: () => revalidate({ path: '/tr/urunler' }),
   },
   {
     id: 'services',

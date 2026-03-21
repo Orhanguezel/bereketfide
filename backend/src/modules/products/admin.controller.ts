@@ -178,7 +178,9 @@ export const adminCreateProduct: RouteHandler = async (req, reply) => {
     const image_url = coverId
       ? urlMap[coverId] ?? input.image_url ?? null
       : input.image_url ?? null;
-    const images = galleryIds.map((aid) => urlMap[aid]).filter(Boolean) as string[];
+    const images = galleryIds.length > 0
+      ? galleryIds.map((aid) => urlMap[aid]).filter(Boolean) as string[]
+      : Array.isArray(input.images) ? input.images : [];
 
     const now = new Date();
 
@@ -305,8 +307,12 @@ export const adminUpdateProduct: RouteHandler = async (req, reply) => {
       ...basePatch
     } = patch;
 
-    const coverId = patch.storage_asset_id ?? curMerged.storage_asset_id ?? null;
-    const galleryIds = patch.storage_image_ids ?? (curMerged.storage_image_ids as string[]) ?? [];
+    const coverId = patch.storage_asset_id !== undefined
+      ? patch.storage_asset_id
+      : (curMerged.storage_asset_id ?? null);
+    const galleryIds = patch.storage_image_ids !== undefined
+      ? patch.storage_image_ids
+      : ((curMerged.storage_image_ids as string[]) ?? []);
 
     const urlMap = await urlsForAssets([...(coverId ? [coverId] : []), ...galleryIds]);
 
@@ -318,9 +324,11 @@ export const adminUpdateProduct: RouteHandler = async (req, reply) => {
         : curMerged.image_url;
 
     const images =
-      patch.storage_image_ids !== undefined || patch.images !== undefined
+      patch.storage_image_ids !== undefined
         ? (galleryIds.map((aid: string) => urlMap[aid]).filter(Boolean) as string[])
-        : (curMerged.images as string[]);
+        : patch.images !== undefined
+          ? patch.images
+          : (curMerged.images as string[]);
 
     const now = new Date();
 

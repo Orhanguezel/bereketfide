@@ -94,7 +94,8 @@ const resolveAdminMediaUrl = (raw: string | undefined | null): string => {
   const s = norm(raw);
   if (!s) return '';
   if (s.startsWith('data:')) return s;
-  if (/^https?:\/\//i.test(s)) return safeEncodeAssetUrl(toRelativeAssetPath(s));
+  // External URLs (Cloudinary etc.) — keep as-is, don't strip to relative path
+  if (/^https?:\/\//i.test(s)) return safeEncodeAssetUrl(s);
   if (s === '/uploads' || s.startsWith('/uploads/')) return safeEncodeAssetUrl(s);
   if (s === '/media' || s.startsWith('/media/')) return safeEncodeAssetUrl(s);
   const uploadIdx = s.indexOf('/uploads/');

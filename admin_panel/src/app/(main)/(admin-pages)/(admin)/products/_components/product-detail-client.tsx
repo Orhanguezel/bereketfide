@@ -574,7 +574,7 @@ export default function ProductDetailClient({ id, itemType }: Props) {
     setFormData((prev) => ({ ...prev, ...json }));
 
   const handleImageChange = (url: string) =>
-    setFormData((prev) => ({ ...prev, image_url: url }));
+    setFormData((prev) => ({ ...prev, image_url: url, image_asset_id: '' }));
 
   // ── AI Content Assist ──
   const { assist: aiAssist, loading: aiLoading } = useAIContentAssist();
