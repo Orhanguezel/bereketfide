@@ -25,6 +25,7 @@ const GENERAL_KEYS = [
   'hero_video',
   'hero_config',
   'home_backgrounds',
+  'home_stats',
   'seo_pages',
   'contact_info',
   'socials',
@@ -65,6 +66,12 @@ const DEFAULTS_BY_KEY: Record<GeneralKey, SettingValue> = {
     cta_label: 'Get Offer',
   },
   home_backgrounds: [],
+  home_stats: [
+    { value: 376, label: 'Mutlu Müşteri' },
+    { value: 20, label: 'Çeşit Fidan' },
+    { value: 16, label: 'Yıllık Deneyim' },
+    { value: 31, label: 'Tamamlanan Sipariş' },
+  ],
 };
 
 function isGeneralKey(k: string): k is GeneralKey {

@@ -2129,7 +2129,8 @@
           "socials": "Social Media",
           "businessHours": "Business Hours",
           "company_profile": "Company Profile",
-          "ui_header": "Menu Labels"
+          "ui_header": "Menu Labels",
+          "home_stats": "Homepage Statistics"
         },
         "keyDescriptions": {
           "app_locales": "Supported languages and default language",
@@ -2137,6 +2138,7 @@
           "hero_video": "Hero video settings",
           "hero_config": "Hero headline and button settings",
           "home_backgrounds": "Parallax backgrounds between sections",
+          "home_stats": "Stat counters like happy customers, seedling varieties, years of experience",
           "seo_pages": "Title, description and OG image per page",
           "contact_info": "Phone, email, address, map",
           "socials": "Instagram, Facebook, LinkedIn, YouTube, X",

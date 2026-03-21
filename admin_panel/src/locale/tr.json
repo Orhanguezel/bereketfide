@@ -2571,7 +2571,8 @@
           "socials": "Sosyal Medya",
           "businessHours": "Çalışma Saatleri",
           "company_profile": "Firma Bilgileri",
-          "ui_header": "Menü Başlıkları"
+          "ui_header": "Menü Başlıkları",
+          "home_stats": "Anasayfa İstatistikleri"
         },
         "keyDescriptions": {
           "app_locales": "Desteklenen diller ve varsayılan dil",
@@ -2579,6 +2580,7 @@
           "hero_video": "Hero video ayarları",
           "hero_config": "Hero başlık ve buton ayarları",
           "home_backgrounds": "Bölümler arası değişen parallax arkaplanlar",
+          "home_stats": "Mutlu müşteri, çeşit fidan, yıl deneyim gibi istatistik rakamları",
           "seo_pages": "Her sayfanın başlık, açıklama ve OG görseli",
           "contact_info": "Telefon, e-posta, adres, harita",
           "socials": "Instagram, Facebook, LinkedIn, YouTube, X",
