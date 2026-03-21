@@ -100,6 +100,12 @@ import {
   BackgroundsStructuredForm,
 } from '../tabs/structured/home-backgrounds-structured-form';
 
+import {
+  HomeStatsStructuredForm,
+  homeStatsObjToForm,
+  homeStatsFormToObj,
+} from '../tabs/structured/home-stats-structured-form';
+
 /* ----------------------------- helpers (same behavior as /pages) ----------------------------- */
 
 const toShortLocale = (v: unknown): string =>
@@ -121,6 +127,7 @@ const GENERAL_KEYS = [
   'app_locales',
   'hero',
   'home_backgrounds',
+  'home_stats',
   'seo_pages',
   'contact_info',
   'socials',
@@ -248,6 +255,25 @@ const BackgroundsStructuredRenderer: React.FC<StructuredRenderProps> = ({
     <BackgroundsStructuredForm
       value={data}
       onChange={(next) => setValue(next)}
+      disabled={!!disabled}
+    />
+  );
+};
+
+const HomeStatsStructuredRenderer: React.FC<StructuredRenderProps> = ({
+  value,
+  setValue,
+  disabled,
+}) => {
+  const data = React.useMemo(() => {
+    const v = coerceSettingValue(value);
+    return homeStatsObjToForm(Array.isArray(v) ? v : []);
+  }, [value]);
+
+  return (
+    <HomeStatsStructuredForm
+      value={data}
+      onChange={(next) => setValue(homeStatsFormToObj(next))}
       disabled={!!disabled}
     />
   );
@@ -665,6 +691,7 @@ export default function SiteSettingsDetailClient({ id }: { id: string }) {
       if (settingKey === 'app_locales') return AppLocalesStructuredRenderer;
       if (settingKey === 'hero') return HeroStructuredRenderer;
       if (settingKey === 'home_backgrounds') return BackgroundsStructuredRenderer;
+      if (settingKey === 'home_stats') return HomeStatsStructuredRenderer;
       if (settingKey === 'seo_pages') return SeoPagesStructuredRenderer;
       if (settingKey === 'contact_info') return ContactStructuredRenderer;
       if (settingKey === 'socials') return SocialsStructuredRenderer;
