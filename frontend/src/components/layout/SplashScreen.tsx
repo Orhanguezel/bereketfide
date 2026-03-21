@@ -272,6 +272,7 @@ export function SplashScreen({
           className="splash-logo-img"
           style={{ height: 'auto', width: 240, objectFit: 'contain' }}
           priority
+          unoptimized={finalLogo.startsWith('/uploads/') || finalLogo.endsWith('.svg')}
         />
       </div>
 
