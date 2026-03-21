@@ -270,7 +270,7 @@ export function Header({
                     {(categories as any[]).map((c) => (
                       <li key={c.id || c.slug}>
                         <Link
-                          href={l(`/urunler?category=${c.slug}`)}
+                          href={l(`/urunler?category=${encodeURIComponent(c.name || c.title)}`)}
                           className="text-sm transition-colors block py-0.5"
                           style={{ color: 'var(--color-text-on-dark)' }}
                           onClick={() => setMenuOpen(false)}

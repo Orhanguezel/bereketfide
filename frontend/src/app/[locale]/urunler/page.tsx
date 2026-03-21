@@ -94,7 +94,7 @@ function toViewItem(p: any, locale: string): ProjectViewItem {
       caption: p.caption,
       description: p.description,
     }),
-    category: p.category_name || p.type || specById(specs, 'type') || undefined,
+    category: p.category?.name || p.category_name || p.type || specById(specs, 'type') || undefined,
     location: specById(specs, 'location') || undefined,
     architects: specById(specs, 'architects') || specById(specs, 'lead_architect') || undefined,
     year: specById(specs, 'year') || undefined,
