@@ -62,8 +62,8 @@ export function BrandCarousel({ brands }: { brands: BrandItem[] }) {
               <div
                 className={cn(
                   'group relative flex h-24 w-40 items-center justify-center overflow-hidden transition-all duration-500 md:h-28 md:w-52',
-                  'rounded-xl border border-white/10 bg-white/5 shadow-inner backdrop-blur-sm',
-                  'hover:scale-[1.04] hover:border-(--color-brand-light) hover:bg-white/10 hover:shadow-2xl hover:shadow-(--color-brand)/5',
+                  'rounded-xl border border-border bg-card shadow-sm',
+                  'hover:scale-[1.04] hover:border-(--color-brand-light) hover:bg-card hover:shadow-2xl hover:shadow-(--color-brand)/5',
                   brand.website_url && 'cursor-pointer'
                 )}
               >
@@ -74,7 +74,7 @@ export function BrandCarousel({ brands }: { brands: BrandItem[] }) {
                     alt={brand.title}
                     fill
                     sizes="(max-width: 768px) 160px, 208px"
-                    className="object-contain p-5 md:p-6 brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500"
+                    className="object-contain p-5 md:p-6 opacity-70 grayscale-[0.3] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
                     unoptimized={logoSrc!.endsWith('.svg')}
                   />
                 </div>
