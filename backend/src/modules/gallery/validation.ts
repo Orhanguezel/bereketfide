@@ -6,9 +6,9 @@ import { emptyToNull, boolLike } from '@/modules/_shared';
 
 /* ----------------- GALLERY ----------------- */
 export const galleryCreateSchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.string().min(1).optional(),
   module_key: z.string().min(1).max(64).default('general'),
-  source_id: emptyToNull(z.string().uuid().optional().nullable()),
+  source_id: emptyToNull(z.string().min(1).optional().nullable()),
   source_type: z.string().max(32).nullable().optional().default('standalone'),
 
   // i18n
@@ -41,8 +41,8 @@ export type GalleryUpdateInput = z.infer<typeof galleryUpdateSchema>;
 
 /* ----------------- GALLERY IMAGE ----------------- */
 export const galleryImageCreateSchema = z.object({
-  id: z.string().uuid().optional(),
-  gallery_id: z.string().uuid(),
+  id: z.string().min(1).optional(),
+  gallery_id: z.string().min(1),
   storage_asset_id: emptyToNull(z.string().max(64).optional().nullable()),
   image_url: emptyToNull(z.string().refine((v) => !v || v.startsWith('/') || v.startsWith('http'), { message: 'Geçersiz URL' }).optional().nullable()),
   display_order: z.coerce.number().int().min(0).optional().default(0),
@@ -61,7 +61,7 @@ export type GalleryImageUpdateInput = z.infer<typeof galleryImageUpdateSchema>;
 
 /* ----------------- BULK IMAGE ADD ----------------- */
 export const galleryBulkImagesSchema = z.object({
-  gallery_id: z.string().uuid(),
+  gallery_id: z.string().min(1),
   images: z.array(
     z.object({
       storage_asset_id: z.string().max(64),

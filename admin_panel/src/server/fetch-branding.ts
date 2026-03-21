@@ -14,7 +14,7 @@ function getServerApiUrl(): string {
   const pub = (process.env.NEXT_PUBLIC_API_URL || '').trim().replace(/\/+$/, '');
   if (pub) return pub;
 
-  return 'http://127.0.0.1:8086/api';
+  return 'http://127.0.0.1:8096/api';
 }
 
 function parseSettingValue(value: unknown): unknown {
