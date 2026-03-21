@@ -10,9 +10,9 @@ const nextConfig = {
   basePath: "/admin",
   compiler: { removeConsole: process.env.NODE_ENV === 'production' },
 
-  // Silence "multiple lockfiles" workspace root warning
+  // Workspace root — bun hoists next to parent node_modules
   turbopack: {
-    root: __dirname,
+    root: path.resolve(__dirname, '..'),
   },
 
   // ✅ Image optimization config — admin panel is internal, skip optimizer
