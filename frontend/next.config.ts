@@ -21,15 +21,15 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'fastly.picsum.photos' },
       ...(process.env.NODE_ENV === 'development'
         ? [
-            { protocol: 'http' as const, hostname: 'localhost', port: '8086' },
-            { protocol: 'http' as const, hostname: '127.0.0.1', port: '8086' },
+            { protocol: 'http' as const, hostname: 'localhost', port: '8096' },
+            { protocol: 'http' as const, hostname: '127.0.0.1', port: '8096' },
           ]
         : []),
     ],
   },
 
   async rewrites() {
-    const apiBase = process.env.INTERNAL_API_URL?.replace(/\/api\/?$/, '') || 'http://127.0.0.1:8086';
+    const apiBase = process.env.INTERNAL_API_URL?.replace(/\/api\/?$/, '') || 'http://127.0.0.1:8096';
     return [
       {
         source: '/uploads/:path*',
