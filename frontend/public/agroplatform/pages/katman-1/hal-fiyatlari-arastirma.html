@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hal Fiyatlari Veri Kaynaklari Arastirmasi — AgroPlatform</title>
+<link rel="stylesheet" href="../../css/shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../../index.html" class="topnav-brand">Agro<span>Platform</span></a>
+  <div class="topnav-links">
+    <a href="../../index.html">Ekosistem</a>
+    <a href="hal-fiyatlari-arastirma.html" class="active">Hal Fiyatları</a>
+    <a href="index.html">İçerik</a>
+    <a href="../katman-2/index.html">Ticaret</a>
+    <a href="../katman-3/index.html">Üretim</a>
+    <a href="../katman-4/index.html">Veri & AI</a>
+    <a href="../katman-5/index.html">Eğitim</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../../index.html">Ekosistem</a>
+  <span class="sep">/</span>
+  <a href="index.html">Katman 1: İçerik</a>
+  <span class="sep">/</span>
+  <span style="font-weight: 700; color: var(--text-dark);">Hal Fiyatları Araştırması</span>
+</div>
+
+<div class="container">
+
+  <div class="page-header" style="border-left-color: var(--blue);">
+    <div class="eyebrow" style="color: var(--blue);">ARAŞTIRMA VE ENTEGRASYON RAPORU</div>
+    <h1>Hal Fiyatları — Veri Kaynakları Analizi</h1>
+    <div class="desc">Türkiye'deki hal fiyat verilerine erişim yolları, mevcut API'ler, veri kalitesi ve AgroPlatform için teknik entegrasyon stratejisi.</div>
+  </div>
+
+  <div class="success-box">
+    <strong>Stratejik Sonuç:</strong> Veri bankasını sıfırdan oluşturmaya gerek yoktur. Birden fazla büyükşehir belediyesi açık ve ücretsiz API sunmaktadır. Bizim görevimiz bu verileri tek formatta birleştirip akıllı UX ve analitik araçlarla sunmaktır.
+  </div>
+
+  <!-- BÖLÜM 1: RESMİ API'LER -->
+  <div class="section">
+    <div class="section-title">Resmi API Kaynakları <span class="tag green" style="margin-left: 10px;">Hazır & Ücretsiz</span></div>
+
+    <div class="card-grid two">
+
+      <div class="card blue">
+        <span class="card-eyebrow">ANA KAYNAK</span>
+        <h3 class="card-title">İstanbul İBB — Hal Ürünleri API</h3>
+        <p class="card-desc">Swagger dökümantasyonlu REST API. JSON formatında, kayıt gerektirmeyen ve en kapsamlı veri setine sahip kaynaktır.</p>
+        <div class="code-block" style="font-size: 11px; margin: 12px 0;">
+          halfiyatlaripublicdata.ibb.gov.tr/swagger/ui/index
+        </div>
+        <div style="font-size: 11px; color: var(--gray-500); margin-bottom: 8px;"><strong>Kritik Endpoint'ler:</strong></div>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="font-size: 11px; margin-bottom: 4px;"><span class="tag blue" style="font-size: 9px;">GET</span> Ürün kategorileri ve ID eşleşmeleri</li>
+          <li style="font-size: 11px; margin-bottom: 4px;"><span class="tag blue" style="font-size: 9px;">GET</span> Günlük birim fiyatlar (Min/Max/Ort)</li>
+          <li style="font-size: 11px; margin-bottom: 4px;"><span class="tag blue" style="font-size: 9px;">GET</span> Tarih bazlı geçmiş veri sorgulama</li>
+        </ul>
+      </div>
+
+      <div class="card blue">
+        <span class="card-eyebrow">EGE BÖLGESİ</span>
+        <h3 class="card-title">İzmir Büyükşehir — Açık API</h3>
+        <p class="card-desc">Günlük sebze ve meyve hal fiyatları. JSON formatında, tarih parametresi ile sorgulanabilen stabil bir servistir.</p>
+        <div class="code-block" style="font-size: 11px; margin: 12px 0;">
+          openapi.izmir.bel.tr/api/ibb/halfiyatlari/...
+        </div>
+        <div style="margin-top: 15px; border-top: 1px solid var(--blue-border); padding-top: 12px;">
+            <span class="card-eyebrow">DİĞER KAYNAKLAR</span>
+            <ul style="list-style: none; padding: 0; margin-top: 8px;">
+                <li style="font-size: 11px; margin-bottom: 4px;"><strong>Balıkesir:</strong> REST API (Açık Veri Portalı)</li>
+                <li style="font-size: 11px; margin-bottom: 4px;"><strong>Bursa:</strong> CSV/JSON (Açık Yeşil Portalı)</li>
+                <li style="font-size: 11px; margin-bottom: 4px;"><strong>Konya:</strong> Günlük PDF/CSV Dökümleri</li>
+            </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BÖLÜM 2: STRATEJİ -->
+  <div class="section">
+    <div class="section-title">Entegrasyon Stratejisi <span class="tag blue" style="margin-left: 10px;">Hibrit Model</span></div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Kaynak Kurum</th>
+            <th>Yöntem</th>
+            <th>Bölgesel Kapsam</th>
+            <th>Öncelik Durumu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>İstanbul İBB</strong></td>
+            <td><span class="tag blue">REST API</span></td>
+            <td>Marmara / Türkiye Geneli</td>
+            <td><span class="tag green">KRİTİK</span></td>
+          </tr>
+          <tr>
+            <td><strong>İzmir BŞB</strong></td>
+            <td><span class="tag blue">REST API</span></td>
+            <td>Ege Bölgesi</td>
+            <td><span class="tag green">YÜKSEK</span></td>
+          </tr>
+          <tr>
+            <td><strong>Bursa / Konya</strong></td>
+            <td><span class="tag amber">CSV / JSON</span></td>
+            <td>Marmara / İç Anadolu</td>
+            <td><span class="tag blue">ORTA</span></td>
+          </tr>
+          <tr>
+            <td><strong>HKS (Bakanlık)</strong></td>
+            <td><span class="tag purple">SOAP API</span></td>
+            <td>Resmi Kayıtlar</td>
+            <td><span class="tag amber">FAZ 2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BÖLÜM 3: TEKNİK AKIŞ -->
+  <div class="section">
+    <div class="section-title">Teknik İş Akışı ve Veri Mimarisi</div>
+    
+    <div class="card-grid two">
+      
+      <div class="card">
+        <h3 class="card-title" style="font-size: 15px; margin-bottom: 12px;">Veri Toplama Akışı (ETL)</h3>
+        <div class="code-block" style="font-size: 11px;">
+Cron Job (Her gün 06:15)<br>
+&nbsp;&nbsp;[FETCH] --> IBB & Izmir API<br>
+&nbsp;&nbsp;[PARSE] --> Normalize (Havuç <-> Havuc)<br>
+&nbsp;&nbsp;[STORE] --> market_prices Table<br>
+&nbsp;&nbsp;[NOTIFY] --> Threshold Alarms triggered<br>
+&nbsp;&nbsp;[STATS]  --> Update Trend Graphics
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title" style="font-size: 15px; margin-bottom: 12px;">Veritabanı Şeması (PostgreSQL)</h3>
+        <div class="code-block" style="font-size: 11px;">
+TABLE market_prices (<br>
+&nbsp;&nbsp;id BIGSERIAL PRIMARY KEY,<br>
+&nbsp;&nbsp;product_name VARCHAR(100),<br>
+&nbsp;&nbsp;city_name VARCHAR(50),<br>
+&nbsp;&nbsp;min_price DECIMAL(10,2),<br>
+&nbsp;&nbsp;max_price DECIMAL(10,2),<br>
+&nbsp;&nbsp;avg_price DECIMAL(10,2),<br>
+&nbsp;&nbsp;price_date DATE INDEX,<br>
+&nbsp;&nbsp;source_api VARCHAR(50)<br>
+);
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BÖLÜM 4: KATMA DEĞER -->
+  <div class="section">
+    <div class="section-title">AgroPlatform'un Yarattığı Fark</div>
+    <div class="card-grid three">
+      
+      <div class="card green">
+        <h3 class="card-title" style="font-size: 14px;">Merkezi Veri Havuzu</h3>
+        <p class="card-desc" style="font-size: 11px;">Onlarca farklı belediye ve kaynağı tek bir temiz arayüzde birleştiriyoruz.</p>
+      </div>
+
+      <div class="card green">
+        <h3 class="card-title" style="font-size: 14px;">Akıllı Fiyat Alarmları</h3>
+        <p class="card-desc" style="font-size: 11px;">Belli bir ürünün fiyatı değiştiğinde çiftçiye anlık Telegram bildirimi gönderiyoruz.</p>
+      </div>
+
+      <div class="card green">
+        <h3 class="card-title" style="font-size: 14px;">Analitik Öngörüler</h3>
+        <p class="card-desc" style="font-size: 11px;">Geçmiş verilerle gelecek hafta fiyat tahminleri ve bölgesel fırsat analizleri sunuyoruz.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BÖLÜM 5: KAYNAKLAR -->
+  <div class="section">
+    <div class="section-title">Hızlı Erişim Linkleri</div>
+    <div class="card">
+        <ul class="source-list" style="margin: 0;">
+            <li><span class="tag green" style="width: 50px; text-align: center;">API</span> <a href="https://data.ibb.gov.tr/dataset/hal-urunleri-ve-fiyatlari-web-servisi" target="_blank">İBB Açık Veri Portalı — Hal Fiyatları</a></li>
+            <li><span class="tag green" style="width: 50px; text-align: center;">API</span> <a href="https://acikveri.bizizmir.com/tr/dataset/sebze-ve-meyve-hal-fiyatlari" target="_blank">İzmir Açık Veri Portalı — Hal Verileri</a></li>
+            <li><span class="tag blue" style="width: 50px; text-align: center;">LINK</span> <a href="https://agrimetre.com/" target="_blank">Agrimetre — Gıda Tarım Veri Portalı</a></li>
+            <li><span class="tag purple" style="width: 50px; text-align: center;">INFO</span> <a href="https://ticaret.gov.tr/ic-ticaret/bilgi-sistemleri/hal-kayit-sistemi-hks" target="_blank">Ticaret Bakanlığı HKS Bilgilendirme</a></li>
+        </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+    <div><strong>AgroPlatform</strong> · Katman 1 Araştırma</div>
+    <div>Mart 2026 · Grevenbroich, Germany</div>
+</footer>
+
+</body>
+</html>

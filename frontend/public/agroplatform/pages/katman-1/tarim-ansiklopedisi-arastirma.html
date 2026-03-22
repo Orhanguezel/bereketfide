@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarım Ansiklopedisi Araştırma — AgroPlatform</title>
+<link rel="stylesheet" href="../../css/shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../../index.html" class="topnav-brand">Agro<span>Platform</span></a>
+  <div class="topnav-links">
+    <a href="../../index.html">Ekosistem</a>
+    <a href="hal-fiyatlari-arastirma.html">Hal Fiyatları</a>
+    <a href="index.html" class="active">İçerik</a>
+    <a href="../katman-2/index.html">Ticaret</a>
+    <a href="../katman-3/index.html">Üretim</a>
+    <a href="../katman-4/index.html">Veri & AI</a>
+    <a href="../katman-5/index.html">Eğitim</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../../index.html">Ekosistem</a>
+  <span class="sep">/</span>
+  <a href="index.html">Katman 1: İçerik</a>
+  <span class="sep">/</span>
+  <span style="font-weight: 700; color: var(--text-dark);">Tarım Ansiklopedisi Araştırması</span>
+</div>
+
+<div class="container">
+
+  <div class="page-header" style="border-left-color: var(--green);">
+    <div class="eyebrow" style="color: var(--green);">STRATEJİK İÇERİK MİMARİSİ</div>
+    <h1>Tarım Ansiklopedisi — Veri Yapılandırma</h1>
+    <div class="desc">Türkiye'nin ilk yapılandırılmış, ilişkisel ve SEO odaklı dijital tarım kütüphanesi için teknik yol haritası.</div>
+  </div>
+
+  <!-- MEVCUT DURUM -->
+  <div class="section">
+    <div class="section-title">Pazar Analizi & Mevcut Durum</div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Durum / Analiz</th>
+            <th>Eksiklik / Fırsat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>probitki.com</strong></td>
+            <td>Güçlü SEO, yüksek trafik.</td>
+            <td>Veritabanı yok, sadece statik makaleler.</td>
+          </tr>
+          <tr>
+            <td><strong>tarimrehberim.com</strong></td>
+            <td>Bölge bazlı rehber denemesi.</td>
+            <td>Sığ içerik, uzun süredir güncellenmiyor.</td>
+          </tr>
+          <tr>
+            <td><strong>teknikrehber.com</strong></td>
+            <td>Basit ekim takvimi.</td>
+            <td>Veri derinliği yok, modern UX eksik.</td>
+          </tr>
+          <tr>
+            <td><strong>tarlasera.com</strong></td>
+            <td>Sera sektöründe otorite.</td>
+            <td>Haber odaklı, ansiklopedik yapı yok.</td>
+          </tr>
+          <tr>
+            <td><strong>Wikipedia TR</strong></td>
+            <td>Genel botanik bilgisi.</td>
+            <td>Akademik dil, çiftçi pratiklerine uygun değil.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box" style="margin-top: 32px; border-left-color: var(--amber); background: var(--amber-bg);">
+      <strong>Kritik Tespit:</strong> Türkiye'de aranabilir, filtrelenebilir ve yapılandırılmış bir tarım ansiklopedisi bulunmamaktadır. Mevcut sitelerin tamamı "Blog" formatındadır. AgroPlatform, **ilişkisel veritabanı** yapısı ile bu boşluğu dolduracaktır.
+    </div>
+  </div>
+
+  <!-- VERİ KAYNAKLARI -->
+  <div class="section">
+    <div class="section-title">Veri Kaynakları & API Entegrasyonu</div>
+    <div class="card-grid two">
+      
+      <div class="card green">
+        <span class="card-eyebrow">YEREL VERİ (ÜCRETSİZ)</span>
+        <h3 class="card-title">Resmi Kaynaklar</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>TTSM:</strong> Tescilli tohum çeşitleri listesi (Scraping).</li>
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>BKU Portalı:</strong> Ruhsatlı zirai ilaç veritabanı (Hastalık-İlaç eşleşmesi).</li>
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>TurKomp:</strong> 645 gıda için 63.000 besin değeri verisi.</li>
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>Zirai Mücadele:</strong> Hastalık rehberleri ve tedavi PDF'leri.</li>
+        </ul>
+      </div>
+
+      <div class="card blue">
+        <span class="card-eyebrow">KÜRESEL API'LER</span>
+        <h3 class="card-title">Uluslararası Kaynaklar</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>FAOSTAT:</strong> Üretim/İhracat verileri (Python SDK).</li>
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>Wikidata:</strong> Botanik sınıflandırma (SPARQL API).</li>
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>BrAPI:</strong> Islah standartları için küresel API.</li>
+          <li style="margin-bottom: 12px; font-size: 14px;"><strong>PlantNet:</strong> AI tabanlı bitki teşhis servisi (20K+ tür).</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SEO STRATEJİSİ -->
+  <div class="section">
+    <div class="section-title">SEO Stratejisi: 6500+ Otomatik Sayfa</div>
+    <div class="success-box">
+      <strong>Long-Tail SEO Dominasyonu:</strong> Veritabanındaki her benzersiz kayıt (200 Ürün × Çeşitler × Hastalıklar × 81 İl Takvimi) otomatik olarak SEO uyumlu sayfalar oluşturacaktır. LLM (AI) yardımıyla zenginleştirilen içerikler, editoryal kontrolden geçerek yayına alınacaktır. Rakiplerin 100 makalelik trafiğini, biz binlerce yapılandırılmış sayfa ile domine edeceğiz.
+    </div>
+  </div>
+
+  <!-- DB ŞEMASI -->
+  <div class="section">
+    <div class="section-title">Teknik Mimarî & Veritabanı Şeması</div>
+    <div class="code-block">
+-- Çekirdek Tablolar ve İlişkiler<br>
+TABLE crops (id, name, slug, scientific_name, description);<br>
+TABLE varieties (id, crop_id, name, characteristic, ttsm_code);<br>
+TABLE diseases (id, name, symptoms, causes, period);<br>
+TABLE crop_diseases (crop_id, disease_id);<br>
+TABLE disease_treatments (disease_id, bku_drug_id, method);<br>
+TABLE planting_calendar (crop_id, city_id, month, action_type);
+    </div>
+    <div class="info-box" style="margin-top: 16px;">
+      <strong>Önemli:</strong> Tüm tablolar birbirine bağlıdır. Örneğin "Konya'da mısır pası hastalığı ne zaman görülür ve hangi ilaç kullanılır?" sorusu tek bir SQL sorgusu ile yanıtlanabilir.
+    </div>
+  </div>
+
+  <!-- AKSİYON -->
+  <div class="section">
+    <div class="section-title">Sonraki Adım</div>
+    <div class="success-box" style="margin: 0; background: var(--blue-bg); border-left-color: var(--blue); color: var(--blue);">
+      <strong>Aksiyon:</strong> TurKomp ve BKU veritabanlarını indirip normalize etme scriptini yaz. Tahmini 6500 sayfanın URL yapısını (slug) tasarla.
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+    <div><strong>AgroPlatform</strong> · Katman 1 Araştırma (Ansiklopedi)</div>
+    <div>Mart 2026 · Grevenbroich, Germany</div>
+</footer>
+
+</body>
+</html>

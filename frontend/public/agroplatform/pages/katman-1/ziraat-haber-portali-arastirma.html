@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modul 1.1: Ziraat Haber Portali Arastirmasi — AgroPlatform</title>
+<link rel="stylesheet" href="../../css/shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../../index.html" class="topnav-brand">Agro<span>Platform</span></a>
+  <div class="topnav-links">
+    <a href="../../index.html">Ekosistem</a>
+    <a href="hal-fiyatlari-arastirma.html">Hal Fiyatları</a>
+    <a href="index.html" class="active">İçerik</a>
+    <a href="../katman-2/index.html">Ticaret</a>
+    <a href="../katman-3/index.html">Üretim</a>
+    <a href="../katman-4/index.html">Veri & AI</a>
+    <a href="../katman-5/index.html">Eğitim</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../../index.html">Ekosistem</a>
+  <span class="sep">/</span>
+  <a href="index.html">Katman 1: İçerik</a>
+  <span class="sep">/</span>
+  <span style="font-weight: 700; color: var(--text-dark);">Ziraat Haber Portalı Araştırması</span>
+</div>
+
+<div class="container">
+
+  <div class="page-header" style="border-left-color: var(--blue);">
+    <div class="eyebrow" style="color: var(--blue);">MODÜL 1.1 — PİYASA ANALİZİ</div>
+    <h1>Ziraat Haber Portalı: Mevcut Durum ve Fırsatlar</h1>
+    <div class="desc">Türkiye'deki mevcut tarım haber platformlarının derinlemesine analizi, sektördeki kritik eksiklikler ve AgroPlatform'un farklılaşma stratejisi.</div>
+  </div>
+
+  <!-- MEVCUT OYUNCULAR -->
+  <div class="section">
+    <div class="section-title">Turkiye'deki Mevcut Tarim Haber Siteleri</div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Site</th>
+          <th>Odak</th>
+          <th>Guclu Yonleri</th>
+          <th>Zayif Yonleri</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>tarimdanhaber.com</strong></td>
+          <td>Flash haber, son dakika</td>
+          <td>Turkiye'nin en takip edilen tarimsal haber sitesi. Hizli haber akisi, guncel fiyatlar.</td>
+          <td>Sadece haber odakli, analiz/derinlik yok. Veri gorsellestirme zayif. Eski tasarim.</td>
+        </tr>
+        <tr>
+          <td><strong>tarimpusulasi.com</strong></td>
+          <td>Haber + bilgi portali</td>
+          <td>"1 numarali tarimsal haber portali" konumlandirmasi. Ciftci + profesyonel hedef kitle.</td>
+          <td>Icerik yogunlugu daginik. Kullanici deneyimi zayif. Kisisellestirilmis icerik yok.</td>
+        </tr>
+        <tr>
+          <td><strong>gidatarim.com</strong></td>
+          <td>Gida + tarim haberleri</td>
+          <td>20 yillik prestij. Gida sektoru ile kesisim. Sektorde guvenilir kaynak.</td>
+          <td>Daha cok gida odakli, ciftciye uzak. Dijital deneyim eski nesil.</td>
+        </tr>
+        <tr>
+          <td><strong>tarimdunyasi.net</strong></td>
+          <td>Analiz + politika</td>
+          <td>Ali Ekber Yildirim imzasi. Derin analiz, politika yorumu, uluslararasi perspektif.</td>
+          <td>Tek yazar bagimliligi. Haber hizi dusuk. Interaktif icerik yok.</td>
+        </tr>
+        <tr>
+          <td><strong>ziraatpostasi.com.tr</strong></td>
+          <td>Genel tarim haberleri</td>
+          <td>Genis icerik yelpazesi, destekler ve hayvancilik haberleri.</td>
+          <td>Dusuk trafik, marka bilinirlik zayif. SEO optimizasyonu yetersiz.</td>
+        </tr>
+        <tr>
+          <td><strong>tarimturk.com.tr</strong></td>
+          <td>Ulusal/uluslararasi haber</td>
+          <td>Genis sektor haberleri kapsami.</td>
+          <td>Icerik kalitesi tutarsiz. Gorsel ve UX eski.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box" style="margin-top: 16px;">
+      <strong>Genel Tablo:</strong> Turkiye'de 6+ aktif tarim haber sitesi var. Ancak hicbiri modern dijital medya standartlarinda degil. Hepsi geleneksel "haber sitesi" formatinda — veri, interaktif icerik, kisisellestirme ve topluluk ozellikleri eksik.
+    </div>
+  </div>
+
+  <!-- BUYUK MEDYA -->
+  <div class="section">
+    <div class="section-title">Buyuk Medya Kuruluslari Tarim Bolumleri</div>
+    <div class="card-grid three">
+      <div class="card">
+        <div class="card-title">Hurriyet</div>
+        <div class="card-desc">hurriyet.com.tr/haberleri/tarim — Genel gazete icinde alt kategori. Derin icerik yok, ajanstan gelen haberler.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Son Dakika</div>
+        <div class="card-desc">sondakika.com/tarim — Haber aggregator. Farkli kaynaklardan derleme. Ozgun icerik uretiyor.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Donanim Haber</div>
+        <div class="card-desc">donanimhaber.com/tarim — Teknoloji sitesinde tarim bolumu. Dijitallesme haberleri one cikar.</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <strong>Firsat:</strong> Buyuk medya kuruluslari tarimi "yan kategori" olarak goruyor. Sektore ozel, derinlemesine bir portal icin ciddi bosluk var.
+    </div>
+  </div>
+
+  <!-- DEVLET PLATFORMLARI -->
+  <div class="section">
+    <div class="section-title">Devlet Dijital Altyapisi</div>
+    <div class="card-grid two">
+
+      <div class="card green">
+        <div class="card-title">Tarim Cebimde (Mobil Uygulama)</div>
+        <div class="card-desc">
+          Tarim Bakanligi'nin 16 modulluk mobil uygulamasi. 1.36M+ indirme. CKS, hayvan kayit, aricilik, sulama modulleri. Uretici islemlerini dijitallestiriyor.
+        </div>
+        <div style="margin-top: 10px;">
+          <span class="tag green">1.36M indirme</span>
+          <span class="tag blue" style="margin-left: 4px;">Devlet Uygulamasi</span>
+        </div>
+      </div>
+
+      <div class="card green">
+        <div class="card-title">Tarim-Orman Acik Veri Portali</div>
+        <div class="card-desc">
+          veri.tarimorman.gov.tr — Bakanlik acik veri portali. Tarimsal istatistikler, uretim verileri, organik tarim rakamlari. API erisimi sinirli ama veri seti indirilebilir.
+        </div>
+        <div style="margin-top: 10px;">
+          <span class="tag green">Acik Veri</span>
+          <span class="tag amber" style="margin-left: 4px;">API Sinirli</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">TurKomp (Gida Kompozisyon DB)</div>
+        <div class="card-desc">
+          turkomp.tarimorman.gov.tr — 645 gida, 63.000 besin degeri verisi. Ulusal gida kompozisyon veritabani. Ansiklopedi modulu icin degerli veri kaynagi.
+        </div>
+        <div style="margin-top: 10px;">
+          <span class="tag blue">Veri Kaynagi</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Tarim Istatistik Bulteni</div>
+        <div class="card-desc">
+          istatistik.tarimorman.gov.tr — Uretim, ihracat, ithalat, tuketim istatistikleri. Duzensiz guncelleme ama resmi veri kaynagi.
+        </div>
+        <div style="margin-top: 10px;">
+          <span class="tag blue">Resmi Istatistik</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EKSIKLIK ANALIZI -->
+  <div class="section">
+    <div class="section-title">Piyasadaki Kritik Eksiklikler <span class="badge" style="background: var(--rose-light); color: var(--rose);">Firsat Alani</span></div>
+
+    <div class="card-grid two">
+
+      <div class="card" style="border-color: var(--rose-border); background: var(--rose-light);">
+        <div class="card-eyebrow" style="color: var(--rose);">Eksiklik 1</div>
+        <div class="card-title">Veri Gorsellestirme Yok</div>
+        <div class="card-desc">
+          Hicbir site fiyat grafigi, trend analizi, bolgesel karsilastirma haritasi sunmuyor. Hep duz metin + tablo. Ciftci veriyi "gormek" istiyor.
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--rose-border); background: var(--rose-light);">
+        <div class="card-eyebrow" style="color: var(--rose);">Eksiklik 2</div>
+        <div class="card-title">Kisisellestirme Yok</div>
+        <div class="card-desc">
+          Kullanici bolgesine, urununune, ilgi alanina gore icerik filtreleme yok. Antalya'daki seraciya da Konya'daki bugday ciftcisine de ayni icerik gosteriliyor.
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--rose-border); background: var(--rose-light);">
+        <div class="card-eyebrow" style="color: var(--rose);">Eksiklik 3</div>
+        <div class="card-title">Topluluk ve Etkilesim Yok</div>
+        <div class="card-desc">
+          Yorum, tartisma, soru-cevap, ciftci forumu gibi ozellikler yok. Siteler tek yonlu yayin yapiyor, etkilesim sifir. Kullanici sadece "okuyor" ve cikiyor.
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--rose-border); background: var(--rose-light);">
+        <div class="card-eyebrow" style="color: var(--rose);">Eksiklik 4</div>
+        <div class="card-title">Mobil Deneyim Zayif</div>
+        <div class="card-desc">
+          Cogu site responsive bile degil veya cok yavas. Ciftcinin %80+'i telefon kullaniyor. Push notification, PWA gibi ozellikler hicbirinde yok.
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--rose-border); background: var(--rose-light);">
+        <div class="card-eyebrow" style="color: var(--rose);">Eksiklik 5</div>
+        <div class="card-title">Entegre Ekosistem Yok</div>
+        <div class="card-desc">
+          Haber siteleri sadece haber veriyor. Fiyat takibi, ticaret, uretim yonetimi, egitim gibi baglantili hizmetler yok. Kullanici baska isler icin baska sitelere gidiyor.
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--rose-border); background: var(--rose-light);">
+        <div class="card-eyebrow" style="color: var(--rose);">Eksiklik 6</div>
+        <div class="card-title">SEO & Icerik Stratejisi Zayif</div>
+        <div class="card-desc">
+          Cogu site anahtar kelime arastirmasi, icerik planlama, uzun kuyruk SEO yapmadan icerik uretiyor. "Domates hastaliklari" gibi yuksek hacimli sorgular icin optimize icerik yok.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ICERIK KAYNAKLARI -->
+  <div class="section">
+    <div class="section-title">Icerik Toplama Stratejisi</div>
+
+    <div class="card-grid two">
+
+      <div class="card blue">
+        <div class="card-eyebrow">Otomatik Toplama (RSS/API)</div>
+        <div class="card-title">Haber Aggregasyonu</div>
+        <div class="card-desc">
+          Turk haber sitelerinin cogu RSS feed sunuyor. WP RSS Aggregator veya ozel cron job ile 15-20 kaynaktan otomatik haber toplama, NLP ile kategorileme ve ozetleme.
+        </div>
+        <table class="data-table" style="margin-top: 12px;">
+          <tr><th>Kaynak Tipi</th><th>Ornek</th><th>Yontem</th></tr>
+          <tr><td>Tarim Siteleri</td><td>tarimdanhaber, tarimpusulasi</td><td>RSS Feed</td></tr>
+          <tr><td>Haber Ajanslari</td><td>AA (Anadolu Ajansi)</td><td>RSS / API</td></tr>
+          <tr><td>Bakanlik</td><td>tarimorman.gov.tr</td><td>Web Scraping + RSS</td></tr>
+          <tr><td>Uluslararasi</td><td>FAO, USDA, EU Agri</td><td>API / RSS</td></tr>
+          <tr><td>Borsa</td><td>TUIK, Konya Ticaret Borsasi</td><td>API / Scraping</td></tr>
+        </table>
+      </div>
+
+      <div class="card blue">
+        <div class="card-eyebrow">Ozgun Icerik Uretimi</div>
+        <div class="card-title">Editoryal + AI Destekli</div>
+        <div class="card-desc">
+          Fark yaratacak olan aggregasyon degil, ozgun analiz ve derin icerik. LLM destekli icerik uretim pipeline'i:
+        </div>
+        <table class="data-table" style="margin-top: 12px;">
+          <tr><th>Icerik Tipi</th><th>Kaynak</th><th>Sikligi</th></tr>
+          <tr><td>Gunluk Piyasa Ozeti</td><td>Fiyat verileri + LLM analiz</td><td>Gunluk</td></tr>
+          <tr><td>Haftalik Sektor Raporu</td><td>Haber ozet + istatistik</td><td>Haftalik</td></tr>
+          <tr><td>Bolgesel Ekim Rehberi</td><td>Meteoroloji + takvim</td><td>Sezonluk</td></tr>
+          <tr><td>Hastalik/Zararli Uyarisi</td><td>Zirai mucadele verileri</td><td>Anlik</td></tr>
+          <tr><td>Politika Analizi</td><td>Bakanlik kararlari + yorum</td><td>Olay bazli</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TEKNIK MIMARI -->
+  <div class="section">
+    <div class="section-title">Teknik Mimari: Haber Portali</div>
+
+    <div class="flow-h">
+      <div class="flow-node" style="background: var(--dark); color: #fff;">RSS/API Kaynaklari</div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--blue); color: #fff;">Cron Job (15dk)</div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--purple); color: #fff;">NLP Kategorileme</div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--green); color: #fff;">Editoryal Onay</div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--amber); color: #fff;">Yayin</div>
+    </div>
+
+    <div class="code-block">
+// Haber toplama pipeline (ornek)
+// Cron: Her 15 dakikada bir calisir
+
+1. RSS_SOURCES[] → fetch() ile son haberleri cek
+2. NLP_PIPELINE  → baslik + icerik analizi
+   - Kategori: politika | fiyat | uretim | ihracat | destek
+   - Bolge: Ege | Akdeniz | Ic Anadolu | Marmara | ...
+   - Urun: domates | bugday | findik | zeytin | ...
+3. DEDUP_CHECK   → ayni haber tekrarini onle (baslik benzerlik &gt; 85%)
+4. DB_INSERT     → articles tablosuna kaydet
+5. PUSH_NOTIFY   → ilgili bolge/urun abonelerine bildirim
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-title">Veritabani Semasi</div>
+      <div class="code-block">
+articles
+├── id            INT PK AUTO_INCREMENT
+├── title         VARCHAR(255)
+├── slug          VARCHAR(255) UNIQUE
+├── summary       TEXT          -- LLM ile uretilmis ozet
+├── content       LONGTEXT
+├── source_url    VARCHAR(500)
+├── source_name   VARCHAR(100)
+├── category      ENUM('politika','fiyat','uretim','ihracat','destek','genel')
+├── region        VARCHAR(50)   -- bolge etiketi
+├── products      JSON          -- iliskili urunler ["domates","biber"]
+├── image_url     VARCHAR(500)
+├── published_at  DATETIME
+├── created_at    DATETIME DEFAULT NOW()
+└── is_original   BOOLEAN       -- ozgun mu, toplama mi
+
+article_tags
+├── article_id    INT FK
+└── tag           VARCHAR(50)
+
+subscribers
+├── id            INT PK
+├── email         VARCHAR(255)
+├── phone         VARCHAR(20)   -- SMS/WhatsApp icin
+├── regions       JSON          -- ["Antalya","Konya"]
+├── products      JSON          -- ["domates","biber"]
+├── frequency     ENUM('anlik','gunluk','haftalik')
+└── created_at    DATETIME
+      </div>
+    </div>
+  </div>
+
+  <!-- FARKLILASMA STRATEJISI -->
+  <div class="section">
+    <div class="section-title">AgroPlatform Farklilasma Stratejisi</div>
+
+    <div class="card-grid three">
+
+      <div class="card green">
+        <div class="card-eyebrow" style="color: var(--green);">Fark 1</div>
+        <div class="card-title">Veri + Haber Birlesimi</div>
+        <div class="card-desc">
+          Sadece haber degil, haber + canli fiyat + grafik + harita bir arada. "Domates fiyati artti" haberinin yaninda gercek fiyat grafigi gosterilir.
+        </div>
+      </div>
+
+      <div class="card green">
+        <div class="card-eyebrow" style="color: var(--green);">Fark 2</div>
+        <div class="card-title">Bolgesel Kisisellesme</div>
+        <div class="card-desc">
+          Kullanici profili: bolge + urun secimi. Ana sayfada sadece ilgili haberler. "Antalya sera domatesciligini sectin → sana ozel icerik akisi."
+        </div>
+      </div>
+
+      <div class="card green">
+        <div class="card-eyebrow" style="color: var(--green);">Fark 3</div>
+        <div class="card-title">Modern UX + PWA</div>
+        <div class="card-desc">
+          Next.js ile hizli, mobil-oncelikli, PWA destekli site. Push bildirimler, offline okuma, aninda yuklenme. Rakiplerin hicbirinde yok.
+        </div>
+      </div>
+
+      <div class="card green">
+        <div class="card-eyebrow" style="color: var(--green);">Fark 4</div>
+        <div class="card-title">AI Destekli Icerik</div>
+        <div class="card-desc">
+          LLM ile gunluk piyasa ozeti, haftalik sektor raporu, haber ozetleri. Ozgun analiz uretimi. Turkce NLP ile otomatik kategorileme.
+        </div>
+      </div>
+
+      <div class="card green">
+        <div class="card-eyebrow" style="color: var(--green);">Fark 5</div>
+        <div class="card-title">Ekosistem Entegrasyonu</div>
+        <div class="card-desc">
+          Haber → fiyat takibi → ticaret → uretim yonetimi → AI. Kullanici bir kez gelir, ekosistemde kalir. Rakipler sadece haber veriyor.
+        </div>
+      </div>
+
+      <div class="card green">
+        <div class="card-eyebrow" style="color: var(--green);">Fark 6</div>
+        <div class="card-title">E-posta / WhatsApp Bulteni</div>
+        <div class="card-desc">
+          Gunluk/haftalik otomatik bulten: "Bolgenizde bu hafta: domates %5 yukseldi, don riski var, yeni destek aciklandi." Kisisellesmis, aksiyonellebilir.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GELIR MODELI -->
+  <div class="section">
+    <div class="section-title">Haber Portalinin Gelir Kanallari</div>
+    <div class="card-grid two">
+
+      <div class="card">
+        <div class="card-title">Reklam Geliri</div>
+        <table class="data-table" style="margin-top: 8px;">
+          <tr><th>Kanal</th><th>Tahmini BGBG (TL)</th></tr>
+          <tr><td>Google AdSense (Display)</td><td>3-8 TL</td></tr>
+          <tr><td>Dogrudan Reklam (Banner)</td><td>15-40 TL</td></tr>
+          <tr><td>Sponsorlu Icerik</td><td>500-2000 TL/makale</td></tr>
+          <tr><td>Tarimsal Girdi Reklamlari</td><td>Sektor ozel, yuksek CPC</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Diger Gelir Kanallari</div>
+        <table class="data-table" style="margin-top: 8px;">
+          <tr><th>Kanal</th><th>Aciklama</th></tr>
+          <tr><td>Premium Abonelik</td><td>Derin analiz + raporlar (aylik)</td></tr>
+          <tr><td>E-posta Listesi</td><td>Ticaret katmanina yonlendirme</td></tr>
+          <tr><td>Affiliate</td><td>Tarimsal urun onerisi komisyonu</td></tr>
+          <tr><td>Veri Lisanslama</td><td>B2B: sektorel rapor satisi</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="success-box">
+      <strong>Hedef:</strong> 10.000 gunluk ziyaretci ile aylik 15.000-40.000 TL reklam geliri mumkun. Premium abonelik ve affiliate ile 50.000+ TL/ay potansiyeli var. En onemlisi: bu trafik ekosistemin diger katmanlarini (ticaret, uretim, AI) besler.
+    </div>
+  </div>
+
+  <!-- SEO STRATEJISI -->
+  <div class="section">
+    <div class="section-title">SEO ve Trafik Stratejisi</div>
+
+    <div class="card-grid two">
+      <div class="card blue">
+        <div class="card-title">Yuksek Hacimli Anahtar Kelimeler</div>
+        <div class="card-desc">Bu alanlarda optimize icerik ureterek organik trafik cekilir:</div>
+        <table class="data-table" style="margin-top: 8px;">
+          <tr><th>Anahtar Kelime</th><th>Icerik Tipi</th></tr>
+          <tr><td>"domates fiyatlari bugun"</td><td>Canli fiyat + grafik</td></tr>
+          <tr><td>"bugday destegi 2026"</td><td>Destek rehberi</td></tr>
+          <tr><td>"sera kurma maliyeti"</td><td>Hesaplama araci + rehber</td></tr>
+          <tr><td>"domates hastaliklari"</td><td>Ansiklopedi (Katman 1.2)</td></tr>
+          <tr><td>"tarim hibeleri 2026"</td><td>Guncel hibe listesi</td></tr>
+          <tr><td>"organik tarim nasil yapilir"</td><td>Rehber + video</td></tr>
+          <tr><td>"gubre fiyatlari"</td><td>Karsilastirma tablosu</td></tr>
+        </table>
+      </div>
+
+      <div class="card blue">
+        <div class="card-title">Trafik Edinme Kanallari</div>
+        <div class="card-desc">Organik SEO disinda trafik kaynaklari:</div>
+        <table class="data-table" style="margin-top: 8px;">
+          <tr><th>Kanal</th><th>Strateji</th></tr>
+          <tr><td>Google Discover</td><td>Gorsel zengin, guncel haberler</td></tr>
+          <tr><td>WhatsApp Gruplari</td><td>Ciftci gruplarina otomatik haber</td></tr>
+          <tr><td>Telegram Kanali</td><td>Anlik fiyat + haber bulteni</td></tr>
+          <tr><td>YouTube Shorts</td><td>30sn haber ozetleri (AI seslendirme)</td></tr>
+          <tr><td>Facebook Gruplari</td><td>Bolgesel ciftci gruplari</td></tr>
+          <tr><td>E-posta Bulteni</td><td>Haftalik kisisellesmis ozet</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SONRAKI ADIM -->
+  <div class="section">
+    <div class="section-title">Sonraki Adim</div>
+    <div class="success-box">
+      <strong>Aksiyon Plani:</strong>
+      <ol style="margin: 12px 0 0 20px; font-size: 13px; line-height: 2;">
+        <li>RSS kaynaklarini test et — 10-15 tarim sitesinin RSS feed'lerini cek ve veri kalitesini degerlendir</li>
+        <li>Anahtar kelime arastirmasi — Google Keyword Planner ile tarimsal sorgularin hacmini olc</li>
+        <li>MVP tanimla — Aggregasyon + ozgun gunluk ozet + e-posta bulteni ile baslangic</li>
+        <li>Icerik pipeline kur — LLM (Groq/OpenAI) ile otomatik ozetleme ve kategorileme prototipi</li>
+        <li>Bereket Fide & Vista Seeds haberleri ile pilot icerik olustur</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- KAYNAKLAR -->
+  <div class="section">
+    <div class="section-title">Arastirma Kaynaklari</div>
+    <ul class="source-list">
+      <li>
+        <span class="source-type" style="background: var(--blue-light); color: var(--blue);">HABER</span>
+        <a href="https://www.tarimdanhaber.com" target="_blank">tarimdanhaber.com</a> — Turkiye'nin en takip edilen tarim haber sitesi
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--blue-light); color: var(--blue);">HABER</span>
+        <a href="http://www.tarimpusulasi.com" target="_blank">tarimpusulasi.com</a> — Tarimsal haber ve bilgi portali
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--blue-light); color: var(--blue);">HABER</span>
+        <a href="https://gidatarim.com" target="_blank">gidatarim.com</a> — 20 yillik gida ve tarim haberleri
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--blue-light); color: var(--blue);">HABER</span>
+        <a href="https://www.tarimdunyasi.net" target="_blank">tarimdunyasi.net</a> — Ali Ekber Yildirim, analiz ve politika
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--blue-light); color: var(--blue);">HABER</span>
+        <a href="https://www.ziraatpostasi.com.tr" target="_blank">ziraatpostasi.com.tr</a> — Genel tarim haberleri
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--blue-light); color: var(--blue);">HABER</span>
+        <a href="https://www.tarimturk.com.tr" target="_blank">tarimturk.com.tr</a> — Ulusal/uluslararasi haber
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--green-light); color: var(--green);">DEVLET</span>
+        <a href="http://veri.tarimorman.gov.tr" target="_blank">veri.tarimorman.gov.tr</a> — Tarim-Orman Acik Veri Portali
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--green-light); color: var(--green);">DEVLET</span>
+        <a href="https://turkomp.tarimorman.gov.tr" target="_blank">turkomp.tarimorman.gov.tr</a> — TurKomp Gida Kompozisyon DB (645 gida, 63K veri)
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--green-light); color: var(--green);">DEVLET</span>
+        <a href="https://istatistik.tarimorman.gov.tr" target="_blank">istatistik.tarimorman.gov.tr</a> — Tarim Istatistik Bulteni
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--green-light); color: var(--green);">DEVLET</span>
+        <a href="https://play.google.com/store/apps/details?id=tr.gov.tarimorman.tarimcebimde" target="_blank">Tarim Cebimde</a> — Bakanlik mobil uygulamasi (1.36M+ indirme)
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--purple-light); color: var(--purple);">ULUSLARARASI</span>
+        <a href="https://www.turkishagrinews.com" target="_blank">turkishagrinews.com</a> — Turk tariminin uluslararasi penceresi
+      </li>
+      <li>
+        <span class="source-type" style="background: var(--amber-light); color: #b45309;">STARTUP</span>
+        <a href="https://www.agrovech.com" target="_blank">agrovech.com</a> — AI tabanli tarim startup (drone analiz, TEKNOFEST)
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+    <div><strong>AgroPlatform</strong> · Katman 1 Araştırma (Haber)</div>
+    <div>Mart 2026 · Grevenbroich, Germany</div>
+</footer>
+
+</body>
+</html>

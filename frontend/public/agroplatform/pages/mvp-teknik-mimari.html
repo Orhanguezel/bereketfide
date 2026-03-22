@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVP Teknik Mimari — AgroPlatform</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../index.html" class="topnav-brand">Agro<span>Platform</span></a>
+  <div class="topnav-links">
+    <a href="../index.html">Ekosistem</a>
+    <a href="katman-1/hal-fiyatlari-arastirma.html">Hal Fiyatları</a>
+    <a href="katman-1/index.html">İçerik</a>
+    <a href="katman-2/index.html">Ticaret</a>
+    <a href="katman-3/index.html">Üretim</a>
+    <a href="katman-4/index.html">Veri & AI</a>
+    <a href="katman-5/index.html">Eğitim</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../index.html">Ekosistem</a>
+  <span class="sep">/</span>
+  <span style="font-weight: 700; color: var(--text-dark);">MVP Teknik Mimari</span>
+</div>
+
+<div class="container">
+
+  <div class="page-header" style="border-left-color: var(--dark);">
+    <div class="eyebrow" style="color: var(--green);">TEKNİK MİMARİ KARARLARI</div>
+    <h1>MVP Teknik Mimari — Birleştirilmiş Sistem Tasarımı</h1>
+    <div class="desc">5 katman, 15 modülün araştırma sonuçlarından çıkarılan tech stack, veritabanı şeması, API kontratları ve uygulama yol haritası. Tüm katmanlar arası veri akışı tek dokümanda.</div>
+  </div>
+
+  <!-- TECH STACK -->
+  <div class="section">
+    <div class="section-title">Tech Stack Kararları</div>
+    <div class="card-grid two">
+      <div class="card" style="border-color: var(--blue-border);">
+        <span class="card-eyebrow" style="color: var(--blue);">FRONTEND</span>
+        <h3 class="card-title">Web & Mobil</h3>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead><tr><th>Teknoloji</th><th>Kullanım</th><th>Gerekçe</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Next.js 16</strong></td><td>Web uygulaması</td><td>SSR/SSG ile SEO (K1), React 19, App Router</td></tr>
+              <tr><td><strong>React Native / Flutter</strong></td><td>Mobil uygulama</td><td>Sera kontrolü (K3), hastalık teşhisi (K4), forum (K5)</td></tr>
+              <tr><td><strong>Tailwind CSS v4</strong></td><td>Stil sistemi</td><td>Hızlı UI geliştirme, tutarlı tasarım</td></tr>
+              <tr><td><strong>Zustand</strong></td><td>State yönetimi</td><td>Hafif, TypeScript uyumlu</td></tr>
+              <tr><td><strong>TanStack Query</strong></td><td>Veri çekme</td><td>Cache, optimistic updates, pagination</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--green-border);">
+        <span class="card-eyebrow" style="color: var(--green);">BACKEND</span>
+        <h3 class="card-title">API & Servisler</h3>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead><tr><th>Teknoloji</th><th>Kullanım</th><th>Gerekçe</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Fastify</strong></td><td>REST API</td><td>Yüksek performans, Swagger entegre, plugin sistemi</td></tr>
+              <tr><td><strong>Drizzle ORM</strong></td><td>Veritabanı erişimi</td><td>Type-safe SQL, migration, MySQL uyumlu</td></tr>
+              <tr><td><strong>MySQL 8</strong></td><td>İlişkisel veri</td><td>Ürünler, siparişler, kullanıcılar, forum</td></tr>
+              <tr><td><strong>TimescaleDB</strong></td><td>Zaman serisi</td><td>IoT sensör verileri, fiyat geçmişi (K4)</td></tr>
+              <tr><td><strong>Redis</strong></td><td>Cache & kuyruk</td><td>Oturum, hal fiyat cache, gerçek zamanlı bildirim</td></tr>
+              <tr><td><strong>Bun</strong></td><td>Runtime</td><td>Hızlı başlatma, native TypeScript</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid two" style="margin-top: 16px;">
+      <div class="card" style="border-color: var(--purple-border);">
+        <span class="card-eyebrow" style="color: var(--purple);">AI & VERİ</span>
+        <h3 class="card-title">Yapay Zeka & Analitik</h3>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead><tr><th>Teknoloji</th><th>Kullanım</th></tr></thead>
+            <tbody>
+              <tr><td><strong>TensorFlow Lite</strong></td><td>Mobilde hastalık teşhisi (MobileNetV3, <4MB)</td></tr>
+              <tr><td><strong>Groq / Llama 3</strong></td><td>Türkçe AI chatbot ("Uzmana Sor"), RAG</td></tr>
+              <tr><td><strong>Sentinel Hub API</strong></td><td>Uydu NDVI/EVI haritalama (ücretsiz katman)</td></tr>
+              <tr><td><strong>OpenWeatherMap Agro</strong></td><td>Meteoroloji + don uyarısı</td></tr>
+              <tr><td><strong>Apache Kafka</strong></td><td>IoT sensör veri streaming</td></tr>
+              <tr><td><strong>Grafana</strong></td><td>IoT dashboard & monitöring</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--amber-border);">
+        <span class="card-eyebrow" style="color: var(--amber);">DEVOPS & SERVİSLER</span>
+        <h3 class="card-title">Altyapı & Entegrasyonlar</h3>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead><tr><th>Teknoloji</th><th>Kullanım</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Docker + Nginx</strong></td><td>Konteyner orkestrasyon, reverse proxy</td></tr>
+              <tr><td><strong>PM2</strong></td><td>Node.js process yönetimi</td></tr>
+              <tr><td><strong>GitHub Actions</strong></td><td>CI/CD pipeline</td></tr>
+              <tr><td><strong>iyzico</strong></td><td>Çok satıcılı ödeme (K2 pazaryeri)</td></tr>
+              <tr><td><strong>Cloudinary</strong></td><td>Görsel CDN (ürün, hastalık fotoğrafları)</td></tr>
+              <tr><td><strong>Moodle API</strong></td><td>LMS entegrasyonu (K5 eğitim)</td></tr>
+              <tr><td><strong>MQTT / LoRaWAN</strong></td><td>IoT sensör iletişimi (K4)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BİRLEŞTİRİLMİŞ DB ŞEMASI -->
+  <div class="section">
+    <div class="section-title">Birleştirilmiş Veritabanı Şeması</div>
+
+    <div class="info-box" style="margin-bottom: 24px;">
+      <strong>Mimari Karar:</strong> Çekirdek tablolar (users, cities) tüm katmanlar arasında paylaşılır. Her katmanın kendi modül tabloları ayrıdır. IoT zaman serisi verileri TimescaleDB'de, diğer tüm veriler MySQL 8'de tutulur.
+    </div>
+
+    <div class="code-block">
+-- ═══════════════════════════════════════<br>
+-- ÇEKIRDEK (Paylaşılan Tablolar)<br>
+-- ═══════════════════════════════════════<br>
+TABLE users (id, name, email, phone, role, city_id, farm_type, created_at);<br>
+TABLE cities (id, name, region, latitude, longitude);<br>
+TABLE notifications (id, user_id, type, title, body, is_read, created_at);<br>
+<br>
+-- ═══════════════════════════════════════<br>
+-- KATMAN 1: İÇERİK<br>
+-- ═══════════════════════════════════════<br>
+TABLE articles (id, title, slug, source, category, body, published_at);<br>
+TABLE article_tags (article_id, tag_id);<br>
+TABLE crops (id, name, slug, scientific_name, description);<br>
+TABLE varieties (id, crop_id, name, characteristic, ttsm_code);<br>
+TABLE diseases (id, name, symptoms, causes, period);<br>
+TABLE crop_diseases (crop_id, disease_id);<br>
+TABLE disease_treatments (disease_id, bku_drug_id, method);<br>
+TABLE planting_calendar (crop_id, city_id, month, action_type);<br>
+TABLE market_prices (product_name, city_id, price, unit, source, date);<br>
+TABLE subscribers (id, user_id, email, preferences_json);<br>
+<br>
+-- ═══════════════════════════════════════<br>
+-- KATMAN 2: TİCARET<br>
+-- ═══════════════════════════════════════<br>
+TABLE sellers (id, user_id, company_name, rating, verification_status);<br>
+TABLE products (id, seller_id, category, name, price, stock, specs_json);<br>
+TABLE orders (id, buyer_id, seller_id, total_amount, status, iyzico_ref);<br>
+TABLE order_items (id, order_id, product_id, quantity, unit_price);<br>
+TABLE group_buys (id, product_id, min_quantity, current_qty, end_date, discount_pct);<br>
+TABLE group_buy_members (group_buy_id, user_id, quantity);<br>
+TABLE price_comparisons (product_id, city_id, price, source, timestamp);<br>
+<br>
+-- ═══════════════════════════════════════<br>
+-- KATMAN 3: ÜRETİM YÖNETİMİ<br>
+-- ═══════════════════════════════════════<br>
+TABLE farms (id, user_id, name, type, city_id, total_area);<br>
+TABLE parcels (id, farm_id, name, area, crop_id, soil_type, gps_polygon);<br>
+TABLE production_logs (id, parcel_id, action_type, input_product, quantity, date, notes);<br>
+TABLE harvests (id, parcel_id, crop_id, yield_kg, quality_grade, harvest_date);<br>
+TABLE inventory (id, farm_id, product_name, category, quantity, unit, cost_per_unit);<br>
+<br>
+-- ═══════════════════════════════════════<br>
+-- KATMAN 4: VERİ & AI (MySQL)<br>
+-- ═══════════════════════════════════════<br>
+TABLE iot_devices (id, farm_id, device_type, protocol, status, last_seen);<br>
+TABLE satellite_images (id, parcel_id, source, capture_date, cloud_cover, file_url);<br>
+TABLE vegetation_indices (image_id, parcel_id, ndvi, evi, ndre, calculated_at);<br>
+TABLE disease_detections (id, user_id, crop_id, image_url, model_version, result_json, confidence);<br>
+TABLE ai_models (id, name, version, accuracy, size_mb, target_platform);<br>
+TABLE yield_predictions (parcel_id, crop_id, season, predicted_yield, actual_yield, model_id);<br>
+TABLE price_forecasts (product_id, city_id, predicted_price, actual_price, forecast_date);<br>
+TABLE data_exports (id, buyer_type, region_id, data_scope, anonymization_level, export_date);<br>
+<br>
+-- KATMAN 4: VERİ & AI (TimescaleDB — ayrı DB)<br>
+TABLE sensor_readings (device_id, metric, value, unit, timestamp); -- hypertable<br>
+TABLE weather_data (city_id, source, temp, humidity, wind, rain, forecast_date); -- hypertable<br>
+<br>
+-- ═══════════════════════════════════════<br>
+-- KATMAN 5: EĞİTİM & TOPLULUK<br>
+-- ═══════════════════════════════════════<br>
+TABLE courses (id, title, slug, category, instructor_id, duration_min, level, is_free);<br>
+TABLE lessons (id, course_id, title, video_url, content_md, sort_order);<br>
+TABLE enrollments (user_id, course_id, progress_pct, completed_at, certificate_url);<br>
+TABLE quizzes (id, lesson_id, question, options_json, correct_answer);<br>
+TABLE forum_categories (id, name, slug, description);<br>
+TABLE forum_topics (id, user_id, category_id, title, body, upvotes, is_answered);<br>
+TABLE forum_replies (id, topic_id, user_id, body, upvotes, is_expert_verified);<br>
+TABLE consultants (id, user_id, specialty, tyd_certificate, rating, hourly_rate);<br>
+TABLE appointments (id, consultant_id, farmer_id, datetime, type, status, payment_status);<br>
+TABLE reviews (id, appointment_id, rating, comment);<br>
+TABLE grants (id, name, institution, deadline, min_amount, max_amount, eligibility_json);<br>
+TABLE grant_applications (user_id, grant_id, status, applied_at);<br>
+TABLE badges (id, name, icon_url, criteria_json);<br>
+TABLE user_badges (user_id, badge_id, earned_at);<br>
+TABLE leaderboard (user_id, region_id, points, rank, period);
+    </div>
+
+    <div class="info-box" style="margin-top: 16px;">
+      <strong>Toplam:</strong> 45 tablo (43 MySQL + 2 TimescaleDB hypertable). Katmanlar arası bağlantılar: users.id, crops.id, cities.id, products.id foreign key'leri ile sağlanır.
+    </div>
+  </div>
+
+  <!-- KATMANLAR ARASI VERİ AKIŞI -->
+  <div class="section">
+    <div class="section-title">Katmanlar Arası Veri Akışı</div>
+
+    <div class="flow-h" style="background: var(--bg-slate); border-radius: 24px; padding: 24px;">
+      <div class="flow-node" style="background: var(--blue-grad); color: #fff;">K1 İçerik<br><small>SEO Trafik</small></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--green-grad); color: #fff;">K2 Ticaret<br><small>Dönüşüm</small></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--amber-grad); color: #fff;">K3 Üretim<br><small>Günlük Kullanım</small></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--purple-grad); color: #fff;">K4 AI<br><small>Akıllı Öneriler</small></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-node" style="background: var(--cyan-grad); color: #fff;">K5 Eğitim<br><small>Bağlılık</small></div>
+    </div>
+
+    <div class="card-grid two" style="margin-top: 24px;">
+      <div class="card">
+        <h4 class="card-title" style="font-size: 15px;">Yatay Bağlantılar</h4>
+        <ul style="list-style: none; padding: 0; font-size: 13px;">
+          <li style="margin-bottom: 8px;"><strong>K1 → K2:</strong> Hal fiyatları → Ticaret platformunda fiyat referansı</li>
+          <li style="margin-bottom: 8px;"><strong>K2 → K3:</strong> Satın alınan girdi → Üretim kaydına otomatik ekleme</li>
+          <li style="margin-bottom: 8px;"><strong>K3 → K4:</strong> Üretim verileri → AI verim tahmini besleme</li>
+          <li style="margin-bottom: 8px;"><strong>K4 → K1:</strong> AI analiz sonuçları → İçerik olarak yayınlama</li>
+          <li style="margin-bottom: 8px;"><strong>K5 → K1:</strong> Forum UGC → SEO trafik kaynağı</li>
+          <li style="margin-bottom: 8px;"><strong>K4 → K5:</strong> Hastalık tespiti → Danışmanlık yönlendirme</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="card-title" style="font-size: 15px;">Paylaşılan Veri Nesneleri</h4>
+        <ul style="list-style: none; padding: 0; font-size: 13px;">
+          <li style="margin-bottom: 8px;"><strong>users:</strong> Tüm katmanlar — tek kimlik, tek profil</li>
+          <li style="margin-bottom: 8px;"><strong>crops:</strong> K1 ansiklopedi + K3 üretim + K4 AI modelleri</li>
+          <li style="margin-bottom: 8px;"><strong>cities:</strong> K1 takvim + K2 fiyat + K3 çiftlik + K4 hava durumu</li>
+          <li style="margin-bottom: 8px;"><strong>products:</strong> K2 ticaret + K3 stok takip + K4 fiyat tahmini</li>
+          <li style="margin-bottom: 8px;"><strong>diseases:</strong> K1 rehber + K4 AI teşhis + K5 danışmanlık</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- API KONTRATLARI -->
+  <div class="section">
+    <div class="section-title">API Kontratları — Temel Endpoint'ler</div>
+    <div class="code-block">
+-- ═══ KATMAN 1: İÇERİK API ═══<br>
+GET  /api/v1/articles?category=&page=&limit=<br>
+GET  /api/v1/crops/:slug<br>
+GET  /api/v1/crops/:slug/diseases<br>
+GET  /api/v1/crops/:slug/calendar?city_id=<br>
+GET  /api/v1/market-prices?product=&city_id=&date_range=<br>
+GET  /api/v1/market-prices/trends?product=&period=30d<br>
+<br>
+-- ═══ KATMAN 2: TİCARET API ═══<br>
+GET  /api/v1/products?category=&seller_id=&sort=<br>
+POST /api/v1/orders<br>
+GET  /api/v1/orders/:id<br>
+POST /api/v1/group-buys<br>
+POST /api/v1/group-buys/:id/join<br>
+GET  /api/v1/price-compare?product_id=&city_id=<br>
+POST /api/v1/payments/iyzico/callback<br>
+<br>
+-- ═══ KATMAN 3: ÜRETİM API ═══<br>
+GET  /api/v1/farms<br>
+POST /api/v1/farms/:id/parcels<br>
+POST /api/v1/parcels/:id/logs<br>
+POST /api/v1/parcels/:id/harvests<br>
+GET  /api/v1/farms/:id/inventory<br>
+GET  /api/v1/farms/:id/cost-report?season=<br>
+<br>
+-- ═══ KATMAN 4: VERİ & AI API ═══<br>
+POST /api/v1/ai/disease-detect  (multipart/form-data: image)<br>
+GET  /api/v1/weather?city_id=&days=<br>
+GET  /api/v1/satellite/ndvi?parcel_id=&date_range=<br>
+GET  /api/v1/yield-prediction?parcel_id=&season=<br>
+GET  /api/v1/price-forecast?product_id=&city_id=<br>
+GET  /api/v1/iot/devices/:id/readings?metric=&range=<br>
+POST /api/v1/ai/chat  (body: { message, context })<br>
+<br>
+-- ═══ KATMAN 5: EĞİTİM & TOPLULUK API ═══<br>
+GET  /api/v1/courses?category=&level=<br>
+POST /api/v1/courses/:id/enroll<br>
+GET  /api/v1/forum/topics?category=&sort=<br>
+POST /api/v1/forum/topics<br>
+POST /api/v1/forum/topics/:id/reply<br>
+GET  /api/v1/consultants?specialty=&city_id=<br>
+POST /api/v1/appointments<br>
+GET  /api/v1/grants?eligible_for=user_id<br>
+    </div>
+  </div>
+
+  <!-- HARİCİ API ENTEGRASYONLARl -->
+  <div class="section">
+    <div class="section-title">Harici API Entegrasyonları</div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr><th>Servis</th><th>API</th><th>Kullanım</th><th>Maliyet</th><th>Katman</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>OpenWeatherMap Agro</strong></td><td>REST</td><td>Hava durumu + don uyarısı</td><td>1K çağrı/gün ücretsiz</td><td>K4</td></tr>
+          <tr><td><strong>Sentinel Hub</strong></td><td>Processing API</td><td>NDVI/EVI uydu haritaları</td><td>10K PU/ay ücretsiz</td><td>K4</td></tr>
+          <tr><td><strong>FAOSTAT</strong></td><td>REST</td><td>Global üretim/ihracat verisi</td><td>Ücretsiz</td><td>K1, K4</td></tr>
+          <tr><td><strong>iyzico</strong></td><td>REST</td><td>Çok satıcılı ödeme</td><td>İşlem komisyonu</td><td>K2</td></tr>
+          <tr><td><strong>Groq API</strong></td><td>REST</td><td>Llama 3 chatbot / RAG</td><td>Freemium</td><td>K5</td></tr>
+          <tr><td><strong>Cloudinary</strong></td><td>REST + SDK</td><td>Görsel yükleme/CDN</td><td>25 kredit/ay ücretsiz</td><td>Tümü</td></tr>
+          <tr><td><strong>PlantNet API</strong></td><td>REST</td><td>Bitki türü tanıma (yedek)</td><td>Araştırma ücretsiz</td><td>K4</td></tr>
+          <tr><td><strong>TÜİK</strong></td><td>Scraping</td><td>Tarım istatistikleri</td><td>Ücretsiz (API yok)</td><td>K1, K4</td></tr>
+          <tr><td><strong>Moodle API</strong></td><td>REST</td><td>LMS kurs yönetimi</td><td>Self-hosted ücretsiz</td><td>K5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MVP FAZ PLANI -->
+  <div class="section">
+    <div class="section-title">MVP Faz Planı</div>
+    <div class="card-grid two">
+      <div class="card" style="border-top: 4px solid var(--green);">
+        <span class="card-eyebrow" style="color: var(--green);">FAZ 1: TEMEL (Ay 1-6)</span>
+        <h3 class="card-title" style="font-size: 18px;">İçerik + Ticaret Çekirdeği</h3>
+        <ul style="list-style: none; padding: 0; font-size: 13px;">
+          <li style="margin-bottom: 8px;">K1: Haber portalı (RSS/API otomatik toplama)</li>
+          <li style="margin-bottom: 8px;">K1: Hal fiyatları sayfası (günlük güncelleme)</li>
+          <li style="margin-bottom: 8px;">K1: İlk 50 ürün ansiklopedi sayfası</li>
+          <li style="margin-bottom: 8px;">K2: Bereket Fide/Vista Seeds ürün kataloğu</li>
+          <li style="margin-bottom: 8px;">K2: iyzico entegrasyonu, temel sipariş akışı</li>
+          <li style="margin-bottom: 8px;">Altyapı: Next.js + Fastify + MySQL + Docker</li>
+        </ul>
+        <div style="margin-top: 12px;"><span class="tag green">Gelir: İlk Komisyon</span></div>
+      </div>
+
+      <div class="card" style="border-top: 4px solid var(--blue);">
+        <span class="card-eyebrow" style="color: var(--blue);">FAZ 2: BÜYÜME (Ay 7-12)</span>
+        <h3 class="card-title" style="font-size: 18px;">Üretim SaaS + Topluluk</h3>
+        <ul style="list-style: none; padding: 0; font-size: 13px;">
+          <li style="margin-bottom: 8px;">K3: Sera/tarla yönetimi MVP (kayıt tutma)</li>
+          <li style="margin-bottom: 8px;">K3: Stok takip ve basit maliyet raporu</li>
+          <li style="margin-bottom: 8px;">K2: 3. parti tedarikçilere açılma</li>
+          <li style="margin-bottom: 8px;">K2: Toplu alım modülü</li>
+          <li style="margin-bottom: 8px;">K5: Çiftçi forumu (Q&A)</li>
+          <li style="margin-bottom: 8px;">K5: İlk 10 online kurs (Moodle)</li>
+          <li style="margin-bottom: 8px;">Mobil uygulama v1</li>
+        </ul>
+        <div style="margin-top: 12px;"><span class="tag blue">Gelir: SaaS + Forum Trafiği</span></div>
+      </div>
+
+      <div class="card" style="border-top: 4px solid var(--purple);">
+        <span class="card-eyebrow" style="color: var(--purple);">FAZ 3: ZEKA (Ay 13-18)</span>
+        <h3 class="card-title" style="font-size: 18px;">AI & IoT Entegrasyonu</h3>
+        <ul style="list-style: none; padding: 0; font-size: 13px;">
+          <li style="margin-bottom: 8px;">K4: AI hastalık teşhisi (TFLite mobil model)</li>
+          <li style="margin-bottom: 8px;">K4: Hava durumu API + don uyarı sistemi</li>
+          <li style="margin-bottom: 8px;">K4: Sentinel-2 NDVI haritaları</li>
+          <li style="margin-bottom: 8px;">K4: IoT sensör pilot (LoRaWAN gateway)</li>
+          <li style="margin-bottom: 8px;">K5: Danışmanlık pazaryeri (video call)</li>
+          <li style="margin-bottom: 8px;">K5: AI chatbot ("Uzmana Sor" — Groq/Llama 3)</li>
+          <li style="margin-bottom: 8px;">K5: Hibe takip modülü</li>
+        </ul>
+        <div style="margin-top: 12px;"><span class="tag purple">Gelir: Premium AI + Danışmanlık</span></div>
+      </div>
+
+      <div class="card" style="border-top: 4px solid var(--amber);">
+        <span class="card-eyebrow" style="color: var(--amber);">FAZ 4: ÖLÇEK (Ay 19-24)</span>
+        <h3 class="card-title" style="font-size: 18px;">Veri Monetizasyon & Genişleme</h3>
+        <ul style="list-style: none; padding: 0; font-size: 13px;">
+          <li style="margin-bottom: 8px;">K4: Verim tahmini modelleri (CNN-BiLSTM)</li>
+          <li style="margin-bottom: 8px;">K4: Fiyat tahmini (hal fiyat AI)</li>
+          <li style="margin-bottom: 8px;">K4: Veri monetizasyon (sigorta, devlet, gıda)</li>
+          <li style="margin-bottom: 8px;">K1: 6500+ otomatik SEO sayfası</li>
+          <li style="margin-bottom: 8px;">K5: Gamification (liderlik tablosu, rozetler)</li>
+          <li style="margin-bottom: 8px;">K2: Tarfin BNPL entegrasyonu</li>
+          <li style="margin-bottom: 8px;">IPARD/hibe başvurusu (platform yatırımı için)</li>
+        </ul>
+        <div style="margin-top: 12px;"><span class="tag amber">Gelir: Tam Ekosistem</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GELİR MODELİ ÖZET -->
+  <div class="section">
+    <div class="section-title">Gelir Modeli Özeti</div>
+    <div class="card-grid three">
+      <div class="card" style="text-align: center; border-color: var(--green-border); background: var(--green-bg);">
+        <div class="card-title" style="font-size: 20px; color: var(--green);">%5-8 Komisyon</div>
+        <p style="font-size: 11px; color: var(--text-light);">K2 Pazaryeri satışları</p>
+      </div>
+      <div class="card" style="text-align: center; border-color: var(--amber-border); background: var(--amber-bg);">
+        <div class="card-title" style="font-size: 20px; color: var(--amber);">199-499 TL/ay</div>
+        <p style="font-size: 11px; color: var(--text-light);">K3 SaaS abonelik</p>
+      </div>
+      <div class="card" style="text-align: center; border-color: var(--purple-border); background: var(--purple-bg);">
+        <div class="card-title" style="font-size: 20px; color: var(--purple);">Premium AI</div>
+        <p style="font-size: 11px; color: var(--text-light);">K4 Gelişmiş analitik</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="card-title" style="font-size: 20px; color: var(--blue);">AdSense + Sponsor</div>
+        <p style="font-size: 11px; color: var(--text-light);">K1 İçerik reklamları</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="card-title" style="font-size: 20px; color: var(--cyan);">%15-20 Kesinti</div>
+        <p style="font-size: 11px; color: var(--text-light);">K5 Danışmanlık komisyonu</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="card-title" style="font-size: 20px; color: var(--rose);">Veri Satışı</div>
+        <p style="font-size: 11px; color: var(--text-light);">K4 Anonim toplu veri</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AKSİYON -->
+  <div class="section">
+    <div class="section-title">Sonraki Adım</div>
+    <div class="success-box" style="margin: 0;">
+      <strong>Aksiyon — Faz 1 Başlangıç:</strong> Next.js 16 + Fastify + MySQL + Docker boilerplate oluştur. Drizzle ORM ile çekirdek ve K1 tablolarını migrate et. Hal fiyatları scraper MVP'sini yaz. Bereket Fide ürün kataloğunu seed data olarak hazırla.
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+    <div><strong>AgroPlatform</strong> · MVP Teknik Mimari</div>
+    <div>Mart 2026 · Grevenbroich, Germany</div>
+</footer>
+
+</body>
+</html>
