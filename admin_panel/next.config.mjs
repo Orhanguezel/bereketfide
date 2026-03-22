@@ -27,13 +27,13 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '8096',
+        port: '8086',
         pathname: '/**',
       },
       {
         protocol: 'http',
         hostname: '127.0.0.1',
-        port: '8096',
+        port: '8086',
         pathname: '/**',
       },
       {
@@ -71,7 +71,7 @@ const nextConfig = {
     const apiBase = (
       process.env.PANEL_API_URL ||
       process.env.NEXT_PUBLIC_PANEL_API_URL ||
-      'http://127.0.0.1:8096'
+      'http://127.0.0.1:8086'
     ).replace(/\/+$/, '');
 
     const frontendUrl = (
@@ -85,11 +85,11 @@ const nextConfig = {
       "default-src 'self'",
       "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      `img-src 'self' blob: data: https://res.cloudinary.com ${prodDomain} ${prodDomainAlt} ${frontendUrl} ${apiBase} http://localhost:8096 http://127.0.0.1:8096`,
+      `img-src 'self' blob: data: https://res.cloudinary.com ${prodDomain} ${prodDomainAlt} ${frontendUrl} ${apiBase} http://localhost:8086 http://127.0.0.1:8086`,
       `connect-src 'self' ${apiBase} ${frontendUrl} ${prodDomain} ${prodDomainAlt} https://cdn.jsdelivr.net https://api.cloudinary.com`,
       "font-src 'self' https://fonts.gstatic.com data:",
-      `object-src 'self' ${apiBase} ${prodDomain} ${prodDomainAlt} http://localhost:8096 http://127.0.0.1:8096`,
-      `frame-src 'self' blob: ${apiBase} ${prodDomain} ${prodDomainAlt} http://localhost:8096 http://127.0.0.1:8096`,
+      `object-src 'self' ${apiBase} ${prodDomain} ${prodDomainAlt} http://localhost:8086 http://127.0.0.1:8086`,
+      `frame-src 'self' blob: ${apiBase} ${prodDomain} ${prodDomainAlt} http://localhost:8086 http://127.0.0.1:8086`,
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'none'",
@@ -105,7 +105,7 @@ const nextConfig = {
 
   async rewrites() {
     const origin =
-      process.env.PANEL_API_URL || process.env.NEXT_PUBLIC_PANEL_API_URL || 'http://127.0.0.1:8096';
+      process.env.PANEL_API_URL || process.env.NEXT_PUBLIC_PANEL_API_URL || 'http://127.0.0.1:8086';
 
     const base = String(origin).replace(/\/+$/, '');
 
