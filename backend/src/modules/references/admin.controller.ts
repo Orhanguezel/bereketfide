@@ -1,6 +1,6 @@
 // =============================================================
 // FILE: src/modules/references/admin.controller.ts
-// Ensotek – References Admin Controller (DYNAMIC LOCALES)
+// Bereket Fide – References Admin Controller (DYNAMIC LOCALES)
 //  - locale doğrulama: core i18n (runtime site_settings)
 //  - DEFAULT_LOCALE: getRuntimeDefaultLocale()
 //  - LOCALES: core LOCALES (runtime-loaded)
