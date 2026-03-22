@@ -10,6 +10,7 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { buildMediaAlt } from '@/lib/media-seo';
 import { fetchSetting } from '@/i18n/server';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { fetchSeoPage } from '@/seo/server';
 
 async function fetchAboutPage(locale: string) {
   try {
@@ -38,7 +39,27 @@ async function fetchServices(locale: string) {
   }
 }
 
-import { fetchSeoPage } from '@/seo/server';
+function normalizeStats(input: unknown): { value: number | string; label: string }[] {
+  if (!Array.isArray(input)) return [];
+  return input
+    .map((item) => {
+      if (!item || typeof item !== 'object') return null;
+      const raw = (item as { value?: unknown }).value;
+      const value = typeof raw === 'number' ? raw : typeof raw === 'string' ? raw : null;
+      const label = typeof (item as { label?: unknown }).label === 'string'
+        ? (item as { label: string }).label.trim()
+        : '';
+      if (value == null || !label) return null;
+      return { value, label };
+    })
+    .filter((item): item is { value: number | string; label: string } => Boolean(item));
+}
+
+function readCtaField(obj: unknown, field: string): string {
+  if (!obj || typeof obj !== 'object') return '';
+  const val = (obj as Record<string, unknown>)[field];
+  return typeof val === 'string' ? val : '';
+}
 
 export async function generateMetadata({
   params,
@@ -66,24 +87,31 @@ export default async function AboutPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale });
-  const isEn = locale.startsWith('en');
 
-  const [page, services, profile] = await Promise.all([
+  const [page, services, profile, statsSetting, ctaSetting] = await Promise.all([
     fetchAboutPage(locale),
     fetchServices(locale),
     fetchSetting('company_profile', locale),
+    fetchSetting('home_stats', locale),
+    fetchSetting('cta_offer', locale),
   ]);
 
   const companyProfile = (profile?.value as any) ?? {};
   const companyName = companyProfile.company_name || 'Bereket Fide';
 
   const content = normalizeRichContent(page?.content);
-  const org = organizationJsonLd(locale);
   const imageSrc = absoluteAssetUrl(page?.image_url || page?.featured_image) || '/uploads/products/23.28.30.jpeg';
+
+  const stats = normalizeStats(statsSetting?.value);
+  const cta = ctaSetting?.value ?? null;
+  const ctaTitle = readCtaField(cta, 'title');
+  const ctaDescription = readCtaField(cta, 'description');
+  const ctaButtonText = readCtaField(cta, 'button_text');
+  const ctaButtonUrl = readCtaField(cta, 'button_url') || '/teklif';
 
   const breadcrumbs = [
     { label: companyName, href: localizedPath(locale, '/') },
-    { label: t('about.title') },
+    { label: page?.title || t('about.title') },
   ];
 
   return (
@@ -105,7 +133,7 @@ export default async function AboutPage({
         .ab-sidebar-item{display:block;padding:8px 0;font-size:14px;color:var(--color-text-secondary);text-decoration:none;border-bottom:1px solid var(--color-border)}
         .ab-sidebar-item:last-child{border-bottom:none}
         .ab-sidebar-item:hover{color:var(--color-brand)}
-        .ab-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+        .ab-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:32px}
         .ab-stat{text-align:center;padding:20px 12px;border:1px solid var(--color-border)}
         .ab-stat-value{font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--color-brand)}
         .ab-stat-label{font-size:13px;color:var(--color-text-muted);margin-top:4px}
@@ -117,7 +145,7 @@ export default async function AboutPage({
         data={jsonld.graph([
           jsonld.org(
             organizationJsonLd(locale, {
-              description: t('about.description'),
+              description: page?.summary || t('about.description'),
             }),
           ),
           jsonld.breadcrumb(
@@ -136,22 +164,22 @@ export default async function AboutPage({
         {/* Breadcrumb */}
         <Breadcrumbs items={breadcrumbs} />
 
-        {/* Title */}
+        {/* Title — DB */}
         <h1 className="ab-title">{page?.title || t('about.title')}</h1>
 
         {/* Main layout */}
         <div className="ab-layout">
           {/* LEFT COLUMN */}
           <div>
-            {/* Hero image */}
+            {/* Hero image — DB */}
             <div className="ab-hero">
               <OptimizedImage
                 src={imageSrc}
                 alt={buildMediaAlt({
                   locale,
                   kind: 'project',
-                  title: `${companyName} — ${t('about.title')}`,
-                  description: t('about.description'),
+                  title: `${companyName} — ${page?.title || t('about.title')}`,
+                  description: page?.summary || t('about.description'),
                 })}
                 fill
                 className="object-cover"
@@ -160,100 +188,79 @@ export default async function AboutPage({
               />
             </div>
 
-            {/* Intro */}
-            <p className="ab-intro">{t('about.description')}</p>
+            {/* Intro — DB (summary) */}
+            {page?.summary && (
+              <p className="ab-intro">{page.summary}</p>
+            )}
 
-            {/* Content from API or fallback */}
-            {content ? (
+            {/* Content — DB (content HTML) */}
+            {content && (
               <div
                 className="ab-content"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
-            ) : (
-              <div className="ab-content">
-                <p>{t('about.intro')}</p>
+            )}
 
-                <h2>{t('about.sections.expertiseTitle')}</h2>
-                <ul>
-                  {Object.values(t.raw('about.sections.expertiseItems') as Record<string, string>).map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-
-                <h2>{t('about.sections.processTitle')}</h2>
-                <ul>
-                  {Object.values(t.raw('about.sections.processItems') as Record<string, string>).map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-
-                <h2>{t('about.sections.sectorsTitle')}</h2>
-                <ul>
-                  {Object.values(t.raw('about.sections.sectorsItems') as Record<string, string>).map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+            {/* Stats — DB (home_stats setting) */}
+            {stats.length > 0 && (
+              <div className="ab-stats">
+                {stats.map((s) => (
+                  <div key={s.label} className="ab-stat">
+                    <div className="ab-stat-value">{s.value}</div>
+                    <div className="ab-stat-label">{s.label}</div>
+                  </div>
+                ))}
               </div>
             )}
 
-            {/* Stats */}
-            <div className="ab-stats">
-              <div className="ab-stat">
-                <div className="ab-stat-value">15+</div>
-                <div className="ab-stat-label">{t('about.sections.stats.experience')}</div>
-              </div>
-              <div className="ab-stat">
-                <div className="ab-stat-value">100+</div>
-                <div className="ab-stat-label">{t('about.sections.stats.projects')}</div>
-              </div>
-              <div className="ab-stat">
-                <div className="ab-stat-value">50+</div>
-                <div className="ab-stat-label">{t('about.sections.stats.team')}</div>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div
-              style={{
-                marginTop: 40,
-                padding: '24px 28px',
-                background: 'var(--color-bg-dark)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: 16,
-              }}
-            >
-              <div>
-                <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-text-on-dark)', margin: 0 }}>
-                  {t('common.offerCtaTitle')}
-                </h3>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', marginTop: 4 }}>
-                  {t('common.offerCtaDescription')}
-                </p>
-              </div>
-              <Link
-                href={localizedPath(locale, '/teklif')}
+            {/* CTA — DB (cta_offer setting) */}
+            {ctaTitle && (
+              <div
                 style={{
-                  padding: '10px 24px',
-                  background: 'var(--color-brand)',
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: 14,
-                  textDecoration: 'none',
-                  borderRadius: 2,
-                  whiteSpace: 'nowrap',
+                  marginTop: 40,
+                  padding: '24px 28px',
+                  background: 'var(--color-bg-dark)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: 16,
                 }}
               >
-                {t('common.requestOffer')}
-              </Link>
-            </div>
+                <div>
+                  <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-text-on-dark)', margin: 0 }}>
+                    {ctaTitle}
+                  </h3>
+                  {ctaDescription && (
+                    <p style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', marginTop: 4 }}>
+                      {ctaDescription}
+                    </p>
+                  )}
+                </div>
+                {ctaButtonText && (
+                  <Link
+                    href={localizedPath(locale, ctaButtonUrl)}
+                    style={{
+                      padding: '10px 24px',
+                      background: 'var(--color-brand)',
+                      color: '#fff',
+                      fontWeight: 600,
+                      fontSize: 14,
+                      textDecoration: 'none',
+                      borderRadius: 2,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {ctaButtonText}
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
 
           {/* RIGHT SIDEBAR */}
           <aside>
-            {/* Services list */}
+            {/* Services list — DB (services API) */}
             {services.length > 0 && (
               <div className="ab-sidebar-card">
                 <h3>{t('home.services.title')}</h3>
@@ -269,32 +276,38 @@ export default async function AboutPage({
               </div>
             )}
 
-            {/* Offer CTA sidebar */}
-            <div
-              className="ab-sidebar-card"
-              style={{ background: 'var(--color-bg-secondary)', borderColor: 'transparent' }}
-            >
-              <h3 style={{ fontSize: 16 }}>{t('common.offerCtaTitle')}</h3>
-              <p style={{ fontSize: 13, color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
-                {t('common.offerCtaDescription')}
-              </p>
-              <Link
-                href={localizedPath(locale, '/teklif')}
-                style={{
-                  display: 'inline-block',
-                  marginTop: 12,
-                  padding: '8px 20px',
-                  background: 'var(--color-brand)',
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  borderRadius: 2,
-                }}
+            {/* Offer CTA sidebar — DB (cta_offer setting) */}
+            {ctaTitle && (
+              <div
+                className="ab-sidebar-card"
+                style={{ background: 'var(--color-bg-secondary)', borderColor: 'transparent' }}
               >
-                {t('common.requestOffer')}
-              </Link>
-            </div>
+                <h3 style={{ fontSize: 16 }}>{ctaTitle}</h3>
+                {ctaDescription && (
+                  <p style={{ fontSize: 13, color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+                    {ctaDescription}
+                  </p>
+                )}
+                {ctaButtonText && (
+                  <Link
+                    href={localizedPath(locale, ctaButtonUrl)}
+                    style={{
+                      display: 'inline-block',
+                      marginTop: 12,
+                      padding: '8px 20px',
+                      background: 'var(--color-brand)',
+                      color: '#fff',
+                      fontWeight: 600,
+                      fontSize: 13,
+                      textDecoration: 'none',
+                      borderRadius: 2,
+                    }}
+                  >
+                    {ctaButtonText}
+                  </Link>
+                )}
+              </div>
+            )}
 
             {/* Contact link */}
             <Link

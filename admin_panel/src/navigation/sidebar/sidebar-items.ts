@@ -151,8 +151,8 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
     id: 4,
     key: 'bereket_content',
     items: [
-      { key: 'bereket_blog', url: '/custompage?module=blog', icon: Newspaper },
-      { key: 'bereket_news', url: '/custompage?module=news', icon: Newspaper },
+      { key: 'bereket_blog', url: '/custompage?module=news', icon: Newspaper },
+      { key: 'bereket_news', url: '/custompage?module=blog', icon: Newspaper },
       { key: 'bereket_blog_comments', url: '/comments', icon: MessageSquare },
       { key: 'bereket_corporate', url: '/custompage?module=bereketfide_about', icon: FileText },
       { key: 'bereket_legal', url: '/custompage?module=bereketfide_legal', icon: FileSearch },

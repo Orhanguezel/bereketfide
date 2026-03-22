@@ -273,5 +273,41 @@ VALUES (
 )
 ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);
 
+-- =============================================================
+-- CTA OFFER — TR
+-- =============================================================
+INSERT INTO `site_settings` (`id`, `key`, `locale`, `value`, `created_at`, `updated_at`)
+VALUES (
+  UUID(),
+  'bereketfide__cta_offer',
+  'tr',
+  JSON_OBJECT(
+    'title',       'Fide Siparişiniz İçin Ücretsiz Fiyat Teklifi Hazırlayalım',
+    'description', 'Sebze, meyve veya süs bitkisi fideleriniz için çeşit, miktar ve teslimat beklentilerinizi birlikte netleştirip size özel teklif hazırlayalım.',
+    'button_text', 'Teklif İste',
+    'button_url',  '/teklif'
+  ),
+  NOW(3), NOW(3)
+)
+ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);
+
+-- =============================================================
+-- CTA OFFER — EN
+-- =============================================================
+INSERT INTO `site_settings` (`id`, `key`, `locale`, `value`, `created_at`, `updated_at`)
+VALUES (
+  UUID(),
+  'bereketfide__cta_offer',
+  'en',
+  JSON_OBJECT(
+    'title',       'Get a Free Quote for Your Seedling Order',
+    'description', 'Let us determine your seedling variety, quantity and delivery expectations together and prepare a custom quote for you.',
+    'button_text', 'Request Quote',
+    'button_url',  '/teklif'
+  ),
+  NOW(3), NOW(3)
+)
+ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), `updated_at` = VALUES(`updated_at`);
+
 COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;
