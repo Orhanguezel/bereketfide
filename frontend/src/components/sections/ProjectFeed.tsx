@@ -32,6 +32,7 @@ interface ProjectFeedProps {
   sidebarProjects?: ProjectItem[];
   sidebarTitle?: string;
   readMoreLabel?: string;
+  extraParams?: string;
 }
 
 function localePath(locale: string, path: string): string {
@@ -60,6 +61,7 @@ export function ProjectFeed({
   sidebarProjects,
   sidebarTitle,
   readMoreLabel,
+  extraParams,
 }: ProjectFeedProps) {
   const t = useTranslations();
   const finalReadMore = readMoreLabel || t('common.readMore');
@@ -76,7 +78,7 @@ export function ProjectFeed({
     setLoading(true);
     try {
       const res = await fetch(
-        `${apiUrl}/products?item_type=bereketfide&is_active=1&locale=${locale}&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`
+        `${apiUrl}/products?item_type=bereketfide&is_active=1&locale=${locale}&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}${extraParams || ''}`
       );
       if (!res.ok) { setHasMore(false); return; }
       const data = await res.json();
@@ -93,7 +95,7 @@ export function ProjectFeed({
     } finally {
       setLoading(false);
     }
-  }, [loading, hasMore, page, apiUrl, locale]);
+  }, [loading, hasMore, page, apiUrl, locale, extraParams]);
 
   useEffect(() => {
     const el = sentinelRef.current;

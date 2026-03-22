@@ -86,7 +86,7 @@ function normalizeHomeStats(input: unknown): { value: number; label: string }[] 
 async function fetchFeaturedProducts(locale: string) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/products?item_type=bereketfide&is_active=1&is_featured=1&locale=${locale}&limit=4`,
+      `${API_BASE_URL}/products?item_type=bereketfide&is_active=1&is_featured=1&locale=${locale}&limit=20`,
       { next: { revalidate: 300 } },
     );
     if (!res.ok) return [];
@@ -97,10 +97,10 @@ async function fetchFeaturedProducts(locale: string) {
   }
 }
 
-async function fetchInitialProducts(locale: string) {
+async function fetchLatestNonFeaturedProducts(locale: string) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/products?item_type=bereketfide&is_active=1&locale=${locale}&limit=10`,
+      `${API_BASE_URL}/products?item_type=bereketfide&is_active=1&is_featured=0&locale=${locale}&limit=10`,
       { next: { revalidate: 300 } },
     );
     if (!res.ok) return [];
@@ -180,12 +180,12 @@ export default async function HomePage({
   const { locale } = await params;
   const t = await getTranslations({ locale });
 
-  const [products, blogPosts, newsPosts, catalogs, initialProducts, references, heroVideoSetting, heroConfigSetting, homeBackgroundsSetting, homeStatsSetting] = await Promise.all([
+  const [products, blogPosts, newsPosts, catalogs, latestProducts, references, heroVideoSetting, heroConfigSetting, homeBackgroundsSetting, homeStatsSetting] = await Promise.all([
     fetchFeaturedProducts(locale),
     fetchFeaturedBlogPosts(locale),
     fetchFeaturedNewsPosts(locale),
     fetchFeaturedCatalogs(locale),
-    fetchInitialProducts(locale),
+    fetchLatestNonFeaturedProducts(locale),
     fetchReferences(locale, 12),
     fetchSetting('hero_video', locale),
     fetchSetting('hero_config', locale),
@@ -218,7 +218,8 @@ export default async function HomePage({
   const heroSubtitle = asStr(heroConfig.subtitle) || t('home.hero.subtitle');
 
   const siteUrl = siteUrlBase();
-  const visibleProducts = products.slice(0, 8);
+  const heroProducts = products.slice(0, 4);
+  const highlightProducts = products.slice(4);
   const visibleBlogPosts = blogPosts.slice(0, 3);
   const visibleNewsPosts = newsPosts.slice(0, 2);
   const visibleCatalogs = catalogs.slice(0, 3);
@@ -284,8 +285,8 @@ export default async function HomePage({
         {/* Hero Category Navigation — Humintech-inspired cards */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 lg:px-6">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {products.slice(0, 4).map((p: any, idx: number) => (
-              <Reveal key={p.id} delay={idx * 0.1} className={idx === 3 ? 'md:hidden lg:block' : ''}>
+            {heroProducts.map((p: any, idx: number) => (
+              <Reveal key={p.id} delay={idx * 0.1} className={idx === 2 ? 'hidden md:block' : idx === 3 ? 'hidden lg:block' : ''}>
                 <Link
                   href={p.slug ? localizedPath(locale, `/urunler/${p.slug}`) : '#'}
                   title={p.title}
@@ -517,22 +518,25 @@ export default async function HomePage({
           </section>
         ) : null}
 
-        {/* Featured Products Section */}
-        <section className="bg-white/95 backdrop-blur-sm border-b border-(--color-border) py-24">
-          <div className="mx-auto max-w-7xl px-4 lg:px-6">
-            <ProjectFeed
-              initialProjects={products}
-              locale={locale}
-              apiUrl={API_BASE_URL}
-              backendUrl={API_BASE_URL.replace(/\/api\/?$/, '')}
-              title={t('home.projects.title')}
-              subtitle={t('home.projects.subtitle')}
-              sidebarProjects={products}
-              sidebarTitle={t('projects.loveTitle')}
-              readMoreLabel={t('common.readMore')}
-            />
-          </div>
-        </section>
+        {/* Öne Çıkanlar — hero'ya sığmayan featured ürünler */}
+        {highlightProducts.length > 0 && (
+          <section className="bg-white/95 backdrop-blur-sm border-b border-(--color-border) py-24">
+            <div className="mx-auto max-w-7xl px-4 lg:px-6">
+              <ProjectFeed
+                initialProjects={highlightProducts}
+                locale={locale}
+                apiUrl={API_BASE_URL}
+                backendUrl={API_BASE_URL.replace(/\/api\/?$/, '')}
+                title={t('home.projects.title')}
+                subtitle={t('home.projects.subtitle')}
+                sidebarProjects={heroProducts}
+                sidebarTitle={t('projects.loveTitle')}
+                readMoreLabel={t('common.readMore')}
+                extraParams="&is_featured=1"
+              />
+            </div>
+          </section>
+        )}
 
 
 
@@ -564,21 +568,24 @@ export default async function HomePage({
           </section>
         ) : null}
 
-        {/* Latest Products - Infinite Scroll */}
-        <section className="bg-white border-t border-(--color-border) py-24">
-          <div className="mx-auto max-w-7xl px-4 lg:px-6">
-            <ProjectFeed
-              initialProjects={initialProducts}
-              locale={locale}
-              apiUrl={API_BASE_URL}
-              backendUrl={API_BASE_URL.replace(/\/api\/?$/, '')}
-              title={t('home.latestProjects.title')}
-              subtitle={t('home.latestProjects.subtitle')}
-              sidebarProjects={products}
-              sidebarTitle={t('home.projects.title')}
-            />
-          </div>
-        </section>
+        {/* Son Eklenenler — featured olmayan ürünler */}
+        {latestProducts.length > 0 && (
+          <section className="bg-white border-t border-(--color-border) py-24">
+            <div className="mx-auto max-w-7xl px-4 lg:px-6">
+              <ProjectFeed
+                initialProjects={latestProducts}
+                locale={locale}
+                apiUrl={API_BASE_URL}
+                backendUrl={API_BASE_URL.replace(/\/api\/?$/, '')}
+                title={t('home.latestProjects.title')}
+                subtitle={t('home.latestProjects.subtitle')}
+                sidebarProjects={heroProducts}
+                sidebarTitle={t('home.projects.title')}
+                extraParams="&is_featured=0"
+              />
+            </div>
+          </section>
+        )}
 
         {/* CTA - Final Premium Section (Humintech Inspired) */}
         <section className="mx-auto max-w-7xl px-4 py-24">
