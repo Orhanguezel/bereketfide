@@ -168,7 +168,7 @@ VALUES (
     'email',            'info@bereketfide.com.tr',
     'email_2',          '',
     'working_hours',    'Pazartesi - Cumartesi: 08:00 - 18:00',
-    'maps_embed_url',   '',
+    'maps_embed_url',   'https://www.google.com/maps/embed/v1/place?key=AIzaSyCH696E3o9TIToJunwB9cHBVlFWKGf-2iA&q=36.9392215,30.8525091&zoom=15',
     'maps_lat',         '36.9392215',
     'maps_lng',         '30.8525091'
   ),
@@ -230,7 +230,7 @@ VALUES (
     'email',            'info@bereketfide.com.tr',
     'email_2',          '',
     'working_hours',    'Monday - Saturday: 08:00 - 18:00',
-    'maps_embed_url',   '',
+    'maps_embed_url',   'https://www.google.com/maps/embed/v1/place?key=AIzaSyCH696E3o9TIToJunwB9cHBVlFWKGf-2iA&q=36.9392215,30.8525091&zoom=15',
     'maps_lat',         '36.9392215',
     'maps_lng',         '30.8525091'
   ),
