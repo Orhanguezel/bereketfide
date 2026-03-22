@@ -12,22 +12,22 @@
   :root {
     --dark: #0f172a;
     --dark2: #1e293b;
-    --green: #16a34a;
+    --green: #15803d;
     --green-light: #f0fdf4;
     --green-border: #bbf7d0;
-    --blue: #2563eb;
+    --blue: #1d4ed8;
     --blue-light: #eff6ff;
     --blue-border: #bfdbfe;
-    --amber: #f59e0b;
+    --amber: #d97706;
     --amber-light: #fffbeb;
     --amber-border: #fde68a;
-    --purple: #7c3aed;
+    --purple: #6d28d9;
     --purple-light: #f5f3ff;
     --purple-border: #ddd6fe;
-    --rose: #e11d48;
+    --rose: #be123c;
     --rose-light: #fff1f2;
     --rose-border: #fecdd3;
-    --cyan: #0891b2;
+    --cyan: #0e7490;
     --cyan-light: #ecfeff;
     --cyan-border: #a5f3fc;
     --gray-50: #f8fafc;
@@ -35,16 +35,16 @@
     --gray-200: #e2e8f0;
     --gray-300: #cbd5e1;
     --gray-400: #94a3b8;
-    --gray-600: #475569;
-    --gray-800: #1e293b;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
   }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13px;
-    color: var(--dark);
+    font-size: 15px;
+    color: var(--gray-800);
     background: #fff;
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
   }
 
@@ -57,30 +57,32 @@
   /* ===== HEADER ===== */
   .header {
     text-align: center;
-    padding-bottom: 24px;
-    margin-bottom: 32px;
-    border-bottom: 3px solid var(--dark);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 4px solid var(--dark);
   }
   .header .eyebrow {
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     color: var(--blue);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
   .header h1 {
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 32px;
+    font-weight: 900;
     color: var(--dark);
-    line-height: 1.2;
-    margin-bottom: 6px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
   }
   .header .subtitle {
-    font-size: 13px;
-    color: var(--gray-600);
-    max-width: 600px;
+    font-size: 17px;
+    color: var(--gray-800);
+    max-width: 700px;
     margin: 0 auto;
+    font-weight: 500;
   }
 
   /* ===== SECTION ===== */
@@ -97,10 +99,10 @@
     border-bottom: 2px solid var(--gray-200);
   }
   .section-header h3 {
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
   }
 
   /* ===== ARCHITECTURE ===== */
@@ -111,11 +113,11 @@
     margin: 20px 0;
   }
   .arch-layer {
-    padding: 12px;
-    border-radius: 10px;
+    padding: 16px;
+    border-radius: 12px;
     text-align: center;
-    font-weight: 700;
-    font-size: 12px;
+    font-weight: 800;
+    font-size: 15px;
     border: 2px solid;
     position: relative;
     transition: transform 0.3s ease;
@@ -137,17 +139,17 @@
   }
   .db-table {
     border: 1px solid var(--gray-200);
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 18px;
     background: var(--gray-50);
   }
   .db-table h4 {
-    font-size: 12px;
-    margin-bottom: 6px;
+    font-size: 16px;
+    margin-bottom: 10px;
     color: var(--dark);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
   .db-table h4::before { content: "📊"; }
   .db-cols {

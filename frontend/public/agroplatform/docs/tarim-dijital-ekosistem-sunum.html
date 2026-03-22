@@ -14,21 +14,34 @@
     --dark2: #0f172a;
     --green: #10b981;
     --green-grad: linear-gradient(135deg, #10b981, #059669);
+    --green-light: #f0fdf4;
+    --green-border: #dcfce7;
     --blue: #3b82f6;
     --blue-grad: linear-gradient(135deg, #3b82f6, #2563eb);
+    --blue-light: #eff6ff;
+    --blue-border: #dbeafe;
     --amber: #f59e0b;
     --amber-grad: linear-gradient(135deg, #f59e0b, #d97706);
+    --amber-light: #fffbeb;
+    --amber-border: #fef1c7;
     --purple: #8b5cf6;
     --purple-grad: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    --purple-light: #f5f3ff;
+    --purple-border: #ede9fe;
     --cyan: #06b6d4;
     --cyan-grad: linear-gradient(135deg, #06b6d4, #0891b2);
+    --cyan-light: #ecfeff;
+    --cyan-border: #cffafe;
     --rose: #f43f5e;
     --gray-50: #f8fafc;
     --gray-100: #f1f5f9;
     --gray-200: #e2e8f0;
     --gray-300: #cbd5e1;
     --gray-400: #94a3b8;
+    --gray-500: #64748b;
     --gray-600: #475569;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
     --slide-w: 1024px;
     --slide-h: 576px;
   }
@@ -105,41 +118,46 @@
 
   /* ===== TYPOGRAPHY ===== */
   .slide-eyebrow {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 8px;
-  }
-  .slide-title {
-    font-size: 32px;
-    font-weight: 900;
-    line-height: 1.15;
+    letter-spacing: 0.2em;
     margin-bottom: 12px;
   }
+  .slide-title {
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: var(--gray-900);
+  }
   .slide-subtitle {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.5;
-    opacity: 0.7;
-    max-width: 600px;
+    opacity: 0.85;
+    max-width: 700px;
+    font-weight: 500;
   }
   .slide h3 {
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 16px;
-    line-height: 1.2;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    line-height: 1.1;
+    color: var(--gray-900);
   }
   .slide h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--dark);
   }
   .slide p {
-    font-size: 13px;
-    color: var(--gray-600);
-    line-height: 1.6;
+    font-size: 16px;
+    color: var(--gray-800);
+    line-height: 1.7;
   }
   .slide.dark p { color: var(--gray-300); }
+  .slide.dark h3, .slide.dark h4, .slide.dark .slide-title { color: #fff; }
 
   /* ===== LAYOUT HELPERS ===== */
   .two-col {
@@ -175,32 +193,37 @@
 
   /* ===== CARDS ===== */
   .s-card {
-    border-radius: 10px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 24px;
     border: 2px solid var(--gray-200);
+    background: #fff;
   }
   .s-card.blue { background: var(--blue-light); border-color: var(--blue-border); }
   .s-card.green { background: var(--green-light); border-color: var(--green-border); }
   .s-card.amber { background: var(--amber-light); border-color: var(--amber-border); }
   .s-card.purple { background: var(--purple-light); border-color: var(--purple-border); }
   .s-card.cyan { background: var(--cyan-light); border-color: var(--cyan-border); }
-  .s-card.dark-card { background: var(--dark); border-color: var(--dark); color: #fff; }
+  .s-card.dark-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: #fff; }
   .s-card .card-icon {
-    font-size: 28px;
-    margin-bottom: 8px;
+    font-size: 36px;
+    margin-bottom: 12px;
   }
   .s-card .card-title {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 800;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    color: var(--gray-900);
   }
   .s-card .card-desc {
-    font-size: 10px;
-    opacity: 0.7;
-    line-height: 1.4;
+    font-size: 13px;
+    opacity: 0.85;
+    line-height: 1.5;
+    color: var(--gray-800);
   }
+  .s-card.dark-card .card-title { color: #fff; }
+  .s-card.dark-card .card-desc { color: var(--gray-400); }
   .s-card .card-num {
-    font-size: 28px;
+    font-size: 42px;
     font-weight: 900;
   }
 
@@ -229,25 +252,27 @@
     padding: 0;
   }
   .s-list li {
-    font-size: 13px;
-    padding: 6px 0 6px 20px;
+    font-size: 16px;
+    padding: 10px 0 10px 28px;
     position: relative;
-    color: var(--gray-600);
-    line-height: 1.5;
+    color: var(--gray-800);
+    line-height: 1.6;
+    font-weight: 500;
   }
-  .slide.dark .s-list li { color: var(--gray-300); }
+  .slide.dark .s-list li { color: var(--gray-200); }
   .s-list li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 12px;
-    width: 8px;
-    height: 8px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: var(--green);
   }
   .s-list.blue li::before { background: var(--blue); }
   .s-list.amber li::before { background: var(--amber); }
+  .s-list.purple li::before { background: var(--purple); }
   .s-list.purple li::before { background: var(--purple); }
 
   /* ===== TIMELINE HORIZONTAL ===== */
@@ -476,16 +501,16 @@
     
     <div style="margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; width: 100%; max-width: 800px;">
         <div style="text-align: left; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-            <div style="font-size: 10px; color: var(--gray-600); margin-bottom: 5px;">MİSYON</div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--gray-200);">Çiftçiyi dijitalleştir, verimi maksimize et.</div>
+            <div style="font-size: 12px; color: var(--gray-500); margin-bottom: 5px; font-weight: 700;">MİSYON</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--gray-200);">Çiftçiyi dijitalleştir, verimi maksimize et.</div>
         </div>
         <div style="text-align: left; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-            <div style="font-size: 10px; color: var(--gray-600); margin-bottom: 5px;">HEDEF 2027</div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--gray-200);">Türkiye'nin 1 numaralı tarım SaaS platformu.</div>
+            <div style="font-size: 12px; color: var(--gray-500); margin-bottom: 5px; font-weight: 700;">HEDEF 2027</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--gray-200);">Türkiye'nin 1 numaralı tarım SaaS platformu.</div>
         </div>
         <div style="text-align: left; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-            <div style="font-size: 10px; color: var(--gray-600); margin-bottom: 5px;">YARATICI</div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--gray-200);">Orhan Güzel | Full-Stack Developer</div>
+            <div style="font-size: 12px; color: var(--gray-500); margin-bottom: 5px; font-weight: 700;">YARATICI</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--gray-200);">Orhan Güzel | Full-Stack Developer</div>
         </div>
     </div>
   </div>
@@ -510,12 +535,12 @@
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <div class="s-card" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
-          <div class="card-num" style="color: var(--rose); font-size: 36px;">%92</div>
-          <div class="card-desc" style="font-size: 12px; color: var(--gray-600);">Turkiye'deki ciftcilerin dijital arac kullanmadan uretim yapma orani</div>
+          <div class="card-num" style="color: var(--rose); font-size: 48px;">%92</div>
+          <div class="card-desc" style="font-size: 14px; color: var(--gray-800); font-weight: 600;">Turkiye'deki ciftcilerin dijital arac kullanmadan uretim yapma orani</div>
         </div>
         <div class="s-card" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
-          <div class="card-num" style="color: var(--amber); font-size: 36px;">0</div>
-          <div class="card-desc" style="font-size: 12px; color: var(--gray-600);">Turkiye'de tarim odakli kapsamli B2B dijital platform sayisi</div>
+          <div class="card-num" style="color: var(--amber); font-size: 48px;">0</div>
+          <div class="card-desc" style="font-size: 14px; color: var(--gray-800); font-weight: 600;">Turkiye'de tarim odakli kapsamli B2B dijital platform sayisi</div>
         </div>
       </div>
     </div>
@@ -540,7 +565,7 @@
       <div class="flow-arrow-h">&#8594;</div>
       <div class="flow-node" style="background: var(--cyan-light); color: var(--cyan);">Egitim</div>
     </div>
-    <div style="margin-top: 24px; font-size: 12px; color: var(--gray-400); max-width: 500px;">Her katman bir sonrakini besler. Icerik trafik getirir, trafik veri uretir, veri AI'yi anlamli kilar, AI platformu vazgecilmez yapar.</div>
+    <div style="margin-top: 24px; font-size: 15px; color: var(--gray-300); max-width: 600px; line-height: 1.6;">Her katman bir sonrakini besler. Icerik trafik getirir, trafik veri uretir, veri AI'yi anlamli kilar, AI platformu vazgecilmez yapar.</div>
   </div>
   <div class="slide-num">3</div>
 </div>
@@ -556,43 +581,43 @@
     <div class="five-col" style="flex: 1;">
       <div class="s-card" style="background: #fff; border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-top: 6px solid var(--blue);">
         <div class="card-icon">📰</div>
-        <div class="card-title" style="font-size: 15px;">İÇERİK</div>
-        <div class="card-desc" style="font-size: 11px; line-height: 1.6;">
+        <div class="card-title" style="font-size: 16px;">İÇERİK</div>
+        <div class="card-desc" style="font-size: 13px; line-height: 1.6;">
             • Haber & Analiz<br>• <strong>BKÜ/FAO</strong> Ansiklopedi<br>• Canlı Hal Fiyatları
         </div>
-        <div style="margin-top: auto; padding-top: 15px; font-size: 9px; font-weight: 700; color: var(--blue);">TRAFİK MOTORU</div>
+        <div style="margin-top: auto; padding-top: 15px; font-size: 11px; font-weight: 800; color: var(--blue);">TRAFİK MOTORU</div>
       </div>
       <div class="s-card" style="background: #fff; border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-top: 6px solid var(--green);">
         <div class="card-icon">🤝</div>
-        <div class="card-title" style="font-size: 15px;">TİCARET</div>
-        <div class="card-desc" style="font-size: 11px; line-height: 1.6;">
+        <div class="card-title" style="font-size: 16px;">TİCARET</div>
+        <div class="card-desc" style="font-size: 13px; line-height: 1.6;">
             • B2B Pazaryeri<br>• Toplu Alım Grubu<br>• Girdi Kıyaslama
         </div>
-        <div style="margin-top: auto; padding-top: 15px; font-size: 9px; font-weight: 700; color: var(--green);">GELİR MERKEZİ</div>
+        <div style="margin-top: auto; padding-top: 15px; font-size: 11px; font-weight: 800; color: var(--green);">GELİR MERKEZİ</div>
       </div>
       <div class="s-card" style="background: #fff; border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-top: 6px solid var(--amber);">
         <div class="card-icon">🚜</div>
-        <div class="card-title" style="font-size: 15px;">ÜRETİM</div>
-        <div class="card-desc" style="font-size: 11px; line-height: 1.6;">
+        <div class="card-title" style="font-size: 16px;">ÜRETİM</div>
+        <div class="card-desc" style="font-size: 13px; line-height: 1.6;">
             • <strong>IPARD III</strong> Uyumlu SaaS<br>• Stok & Depo Takibi<br>• Birim Maliyet Analizi
         </div>
-        <div style="margin-top: auto; padding-top: 15px; font-size: 9px; font-weight: 700; color: var(--amber);">OPERASYONEL SaaS</div>
+        <div style="margin-top: auto; padding-top: 15px; font-size: 11px; font-weight: 800; color: var(--amber);">OPERASYONEL SaaS</div>
       </div>
       <div class="s-card" style="background: #fff; border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-top: 6px solid var(--purple);">
         <div class="card-icon">🧠</div>
-        <div class="card-title" style="font-size: 15px;">VERİ & AI</div>
-        <div class="card-desc" style="font-size: 11px; line-height: 1.6;">
+        <div class="card-title" style="font-size: 16px;">VERİ & AI</div>
+        <div class="card-desc" style="font-size: 13px; line-height: 1.6;">
             • <strong>LoRaWAN</strong> Sensörler<br>• AI Hastalık Tanısı<br>• Kafka/Timescale Analiz
         </div>
-        <div style="margin-top: auto; padding-top: 15px; font-size: 9px; font-weight: 700; color: var(--purple);">TEKNOLOJİ BARİYERİ</div>
+        <div style="margin-top: auto; padding-top: 15px; font-size: 11px; font-weight: 800; color: var(--purple);">TEKNOLOJİ BARİYERİ</div>
       </div>
       <div class="s-card" style="background: #fff; border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-top: 6px solid var(--cyan);">
         <div class="card-icon">🎓</div>
-        <div class="card-title" style="font-size: 15px;">AKADEMİ</div>
-        <div class="card-desc" style="font-size: 11px; line-height: 1.6;">
+        <div class="card-title" style="font-size: 16px;">AKADEMİ</div>
+        <div class="card-desc" style="font-size: 13px; line-height: 1.6;">
             • <strong>Moodle</strong> LMS Akademi<br>• Çiftçi & Uzman Forumu<br>• TYD Danışmanlık Ağı
         </div>
-        <div style="margin-top: auto; padding-top: 15px; font-size: 9px; font-weight: 700; color: var(--cyan);">SOSYAL SADAKAT</div>
+        <div style="margin-top: auto; padding-top: 15px; font-size: 11px; font-weight: 800; color: var(--cyan);">SOSYAL SADAKAT</div>
       </div>
     </div>
   </div>
@@ -609,19 +634,19 @@
         <div class="s-card" style="background: #fff; border: 1px solid var(--blue-border);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <h4 style="margin: 0; color: var(--blue);">Ziraat Haber Portalı</h4>
-            <span style="font-size: 8px; font-weight: 800; background: var(--blue); color: #fff; padding: 2px 6px; border-radius: 4px;">TOP 1% SEO</span>
+            <span style="font-size: 10px; font-weight: 800; background: var(--blue); color: #fff; padding: 2px 8px; border-radius: 4px;">TOP 1% SEO</span>
           </div>
-          <p style="font-size: 11px;">Günlük 50+ otomatik haber girişi, bölgesel filtreleme ve uzman analizleri. Türkiye'nin en büyük organik trafik kaynağı hedefi.</p>
+          <p style="font-size: 14px; color: var(--gray-800);">Günlük 50+ otomatik haber girişi, bölgesel filtreleme ve uzman analizleri. Türkiye'nin en büyük organik trafik kaynağı hedefi.</p>
         </div>
         <div class="s-card" style="background: #fff; border: 1px solid var(--blue-border);">
           <h4 style="color: var(--blue);">Akıllı Hal Fiyatları</h4>
-          <p style="font-size: 11px;">81 ildeki hal fiyatlarının anlık takibi, trend analizleri ve "Fiyat Tahminleme" motoru ile çiftçiye satış zamanı önerisi.</p>
+          <p style="font-size: 14px; color: var(--gray-800);">81 ildeki hal fiyatlarının anlık takibi, trend analizleri ve "Fiyat Tahminleme" motoru ile çiftçiye satış zamanı önerisi.</p>
         </div>
       </div>
       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: rgba(59, 130, 246, 0.05); border-radius: 20px; border: 1px dashed var(--blue-border); padding: 30px;">
-        <div style="font-size: 48px; font-weight: 900; color: var(--blue); line-height: 1;">250K+</div>
-        <div style="font-size: 12px; font-weight: 700; color: var(--dark); margin-top: 10px;">AYLIK HEDEF ZİYARETÇİ</div>
-        <p style="font-size: 10px; margin-top: 15px;">İçerik katmanı, diğer tüm katmanlar için düşük maliyetli (CAC < 0.5₺) müşteri edinim kanalıdır.</p>
+        <div style="font-size: 56px; font-weight: 900; color: var(--blue); line-height: 1;">250K+</div>
+        <div style="font-size: 15px; font-weight: 800; color: var(--dark); margin-top: 10px; text-transform: uppercase; letter-spacing: 0.1em;">AYLIK HEDEF ZİYARETÇİ</div>
+        <p style="font-size: 13px; margin-top: 15px; color: var(--gray-800);">İçerik katmanı, diğer tüm katmanlar için düşük maliyetli (CAC < 0.5₺) müşteri edinim kanalıdır.</p>
       </div>
     </div>
   </div>
