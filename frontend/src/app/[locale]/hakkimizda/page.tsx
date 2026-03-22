@@ -100,7 +100,7 @@ export default async function AboutPage({
   const companyName = companyProfile.company_name || 'Bereket Fide';
 
   const content = normalizeRichContent(page?.content);
-  const imageSrc = absoluteAssetUrl(page?.image_url || page?.featured_image) || '/uploads/products/23.28.30.jpeg';
+  const imageSrc = absoluteAssetUrl(page?.featured_image || page?.image_url);
 
   const stats = normalizeStats(statsSetting?.value);
   const cta = ctaSetting?.value ?? null;
@@ -172,21 +172,23 @@ export default async function AboutPage({
           {/* LEFT COLUMN */}
           <div>
             {/* Hero image — DB */}
-            <div className="ab-hero">
-              <OptimizedImage
-                src={imageSrc}
-                alt={buildMediaAlt({
-                  locale,
-                  kind: 'project',
-                  title: `${companyName} — ${page?.title || t('about.title')}`,
-                  description: page?.summary || t('about.description'),
-                })}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 800px"
-                priority
-              />
-            </div>
+            {imageSrc && (
+              <div className="ab-hero">
+                <OptimizedImage
+                  src={imageSrc}
+                  alt={page?.featured_image_alt || buildMediaAlt({
+                    locale,
+                    kind: 'project',
+                    title: `${companyName} — ${page?.title || t('about.title')}`,
+                    description: page?.summary || t('about.description'),
+                  })}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 800px"
+                  priority
+                />
+              </div>
+            )}
 
             {/* Intro — DB (summary) */}
             {page?.summary && (
