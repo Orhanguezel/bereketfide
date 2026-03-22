@@ -118,7 +118,7 @@ export default async function AboutPage({
     <>
       <style>{`
         .ab-title{font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--color-text-primary);line-height:1.2;margin:0 0 16px}
-        .ab-hero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--color-bg-muted);margin-top:16px}
+        .ab-hero{position:relative;width:100%;overflow:hidden;background:var(--color-bg-muted);margin-top:16px}
         .ab-intro{font-size:16px;color:var(--color-text-secondary);line-height:1.7;margin-top:16px;max-width:720px}
         .ab-content{margin-top:24px;font-size:15px;line-height:1.8;color:var(--color-text-secondary)}
         .ab-content p{margin-bottom:16px}
@@ -182,8 +182,9 @@ export default async function AboutPage({
                     title: `${companyName} — ${page?.title || t('about.title')}`,
                     description: page?.summary || t('about.description'),
                   })}
-                  fill
-                  className="object-cover"
+                  width={900}
+                  height={600}
+                  className="w-full h-auto"
                   sizes="(max-width: 1024px) 100vw, 800px"
                   priority
                 />
