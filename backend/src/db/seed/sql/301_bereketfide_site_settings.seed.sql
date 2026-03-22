@@ -168,7 +168,7 @@ VALUES (
     'email',            'info@bereketfide.com.tr',
     'email_2',          '',
     'working_hours',    'Pazartesi - Cumartesi: 08:00 - 18:00',
-    'maps_embed_url',   'https://www.google.com/maps/embed/v1/place?key=AIzaSyCH696E3o9TIToJunwB9cHBVlFWKGf-2iA&q=36.9392215,30.8525091&zoom=15',
+    'maps_embed_url',   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.5!2d30.8525091!3d36.9392215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39a000b4f2c7f%3A0x0!2zMzbCsDU2JzIxLjIiTiAzMMKwNTEnMDkuMCJF!5e0!3m2!1str!2str!4v1',
     'maps_lat',         '36.9392215',
     'maps_lng',         '30.8525091'
   ),
@@ -230,7 +230,7 @@ VALUES (
     'email',            'info@bereketfide.com.tr',
     'email_2',          '',
     'working_hours',    'Monday - Saturday: 08:00 - 18:00',
-    'maps_embed_url',   'https://www.google.com/maps/embed/v1/place?key=AIzaSyCH696E3o9TIToJunwB9cHBVlFWKGf-2iA&q=36.9392215,30.8525091&zoom=15',
+    'maps_embed_url',   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.5!2d30.8525091!3d36.9392215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39a000b4f2c7f%3A0x0!2zMzbCsDU2JzIxLjIiTiAzMMKwNTEnMDkuMCJF!5e0!3m2!1str!2str!4v1',
     'maps_lat',         '36.9392215',
     'maps_lng',         '30.8525091'
   ),
