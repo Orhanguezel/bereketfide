@@ -123,81 +123,81 @@
       <strong>Mimari Karar:</strong> Çekirdek tablolar (users, cities) tüm katmanlar arasında paylaşılır. Her katmanın kendi modül tabloları ayrıdır. IoT zaman serisi verileri TimescaleDB'de, diğer tüm veriler MySQL 8'de tutulur.
     </div>
 
-    <div class="code-block">
--- ═══════════════════════════════════════<br>
--- ÇEKIRDEK (Paylaşılan Tablolar)<br>
--- ═══════════════════════════════════════<br>
-TABLE users (id, name, email, phone, role, city_id, farm_type, created_at);<br>
-TABLE cities (id, name, region, latitude, longitude);<br>
-TABLE notifications (id, user_id, type, title, body, is_read, created_at);<br>
-<br>
--- ═══════════════════════════════════════<br>
--- KATMAN 1: İÇERİK<br>
--- ═══════════════════════════════════════<br>
-TABLE articles (id, title, slug, source, category, body, published_at);<br>
-TABLE article_tags (article_id, tag_id);<br>
-TABLE crops (id, name, slug, scientific_name, description);<br>
-TABLE varieties (id, crop_id, name, characteristic, ttsm_code);<br>
-TABLE diseases (id, name, symptoms, causes, period);<br>
-TABLE crop_diseases (crop_id, disease_id);<br>
-TABLE disease_treatments (disease_id, bku_drug_id, method);<br>
-TABLE planting_calendar (crop_id, city_id, month, action_type);<br>
-TABLE market_prices (product_name, city_id, price, unit, source, date);<br>
-TABLE subscribers (id, user_id, email, preferences_json);<br>
-<br>
--- ═══════════════════════════════════════<br>
--- KATMAN 2: TİCARET<br>
--- ═══════════════════════════════════════<br>
-TABLE sellers (id, user_id, company_name, rating, verification_status);<br>
-TABLE products (id, seller_id, category, name, price, stock, specs_json);<br>
-TABLE orders (id, buyer_id, seller_id, total_amount, status, iyzico_ref);<br>
-TABLE order_items (id, order_id, product_id, quantity, unit_price);<br>
-TABLE group_buys (id, product_id, min_quantity, current_qty, end_date, discount_pct);<br>
-TABLE group_buy_members (group_buy_id, user_id, quantity);<br>
-TABLE price_comparisons (product_id, city_id, price, source, timestamp);<br>
-<br>
--- ═══════════════════════════════════════<br>
--- KATMAN 3: ÜRETİM YÖNETİMİ<br>
--- ═══════════════════════════════════════<br>
-TABLE farms (id, user_id, name, type, city_id, total_area);<br>
-TABLE parcels (id, farm_id, name, area, crop_id, soil_type, gps_polygon);<br>
-TABLE production_logs (id, parcel_id, action_type, input_product, quantity, date, notes);<br>
-TABLE harvests (id, parcel_id, crop_id, yield_kg, quality_grade, harvest_date);<br>
-TABLE inventory (id, farm_id, product_name, category, quantity, unit, cost_per_unit);<br>
-<br>
--- ═══════════════════════════════════════<br>
--- KATMAN 4: VERİ & AI (MySQL)<br>
--- ═══════════════════════════════════════<br>
-TABLE iot_devices (id, farm_id, device_type, protocol, status, last_seen);<br>
-TABLE satellite_images (id, parcel_id, source, capture_date, cloud_cover, file_url);<br>
-TABLE vegetation_indices (image_id, parcel_id, ndvi, evi, ndre, calculated_at);<br>
-TABLE disease_detections (id, user_id, crop_id, image_url, model_version, result_json, confidence);<br>
-TABLE ai_models (id, name, version, accuracy, size_mb, target_platform);<br>
-TABLE yield_predictions (parcel_id, crop_id, season, predicted_yield, actual_yield, model_id);<br>
-TABLE price_forecasts (product_id, city_id, predicted_price, actual_price, forecast_date);<br>
-TABLE data_exports (id, buyer_type, region_id, data_scope, anonymization_level, export_date);<br>
-<br>
--- KATMAN 4: VERİ & AI (TimescaleDB — ayrı DB)<br>
-TABLE sensor_readings (device_id, metric, value, unit, timestamp); -- hypertable<br>
-TABLE weather_data (city_id, source, temp, humidity, wind, rain, forecast_date); -- hypertable<br>
-<br>
--- ═══════════════════════════════════════<br>
--- KATMAN 5: EĞİTİM & TOPLULUK<br>
--- ═══════════════════════════════════════<br>
-TABLE courses (id, title, slug, category, instructor_id, duration_min, level, is_free);<br>
-TABLE lessons (id, course_id, title, video_url, content_md, sort_order);<br>
-TABLE enrollments (user_id, course_id, progress_pct, completed_at, certificate_url);<br>
-TABLE quizzes (id, lesson_id, question, options_json, correct_answer);<br>
-TABLE forum_categories (id, name, slug, description);<br>
-TABLE forum_topics (id, user_id, category_id, title, body, upvotes, is_answered);<br>
-TABLE forum_replies (id, topic_id, user_id, body, upvotes, is_expert_verified);<br>
-TABLE consultants (id, user_id, specialty, tyd_certificate, rating, hourly_rate);<br>
-TABLE appointments (id, consultant_id, farmer_id, datetime, type, status, payment_status);<br>
-TABLE reviews (id, appointment_id, rating, comment);<br>
-TABLE grants (id, name, institution, deadline, min_amount, max_amount, eligibility_json);<br>
-TABLE grant_applications (user_id, grant_id, status, applied_at);<br>
-TABLE badges (id, name, icon_url, criteria_json);<br>
-TABLE user_badges (user_id, badge_id, earned_at);<br>
+    <div class="code-block" style="white-space: pre-wrap;">
+-- ═══════════════════════════════════════
+-- ÇEKIRDEK (Paylaşılan Tablolar)
+-- ═══════════════════════════════════════
+TABLE users (id, name, email, phone, role, city_id, farm_type, created_at);
+TABLE cities (id, name, region, latitude, longitude);
+TABLE notifications (id, user_id, type, title, body, is_read, created_at);
+
+-- ═══════════════════════════════════════
+-- KATMAN 1: İÇERİK
+-- ═══════════════════════════════════════
+TABLE articles (id, title, slug, source, category, body, published_at);
+TABLE article_tags (article_id, tag_id);
+TABLE crops (id, name, slug, scientific_name, description);
+TABLE varieties (id, crop_id, name, characteristic, ttsm_code);
+TABLE diseases (id, name, symptoms, causes, period);
+TABLE crop_diseases (crop_id, disease_id);
+TABLE disease_treatments (disease_id, bku_drug_id, method);
+TABLE planting_calendar (crop_id, city_id, month, action_type);
+TABLE market_prices (product_name, city_id, price, unit, source, date);
+TABLE subscribers (id, user_id, email, preferences_json);
+
+-- ═══════════════════════════════════════
+-- KATMAN 2: TİCARET
+-- ═══════════════════════════════════════
+TABLE sellers (id, user_id, company_name, rating, verification_status);
+TABLE products (id, seller_id, category, name, price, stock, specs_json);
+TABLE orders (id, buyer_id, seller_id, total_amount, status, iyzico_ref);
+TABLE order_items (id, order_id, product_id, quantity, unit_price);
+TABLE group_buys (id, product_id, min_quantity, current_qty, end_date, discount_pct);
+TABLE group_buy_members (group_buy_id, user_id, quantity);
+TABLE price_comparisons (product_id, city_id, price, source, timestamp);
+
+-- ═══════════════════════════════════════
+-- KATMAN 3: ÜRETİM YÖNETİMİ
+-- ═══════════════════════════════════════
+TABLE farms (id, user_id, name, type, city_id, total_area);
+TABLE parcels (id, farm_id, name, area, crop_id, soil_type, gps_polygon);
+TABLE production_logs (id, parcel_id, action_type, input_product, quantity, date, notes);
+TABLE harvests (id, parcel_id, crop_id, yield_kg, quality_grade, harvest_date);
+TABLE inventory (id, farm_id, product_name, category, quantity, unit, cost_per_unit);
+
+-- ═══════════════════════════════════════
+-- KATMAN 4: VERİ & AI (MySQL)
+-- ═══════════════════════════════════════
+TABLE iot_devices (id, farm_id, device_type, protocol, status, last_seen);
+TABLE satellite_images (id, parcel_id, source, capture_date, cloud_cover, file_url);
+TABLE vegetation_indices (image_id, parcel_id, ndvi, evi, ndre, calculated_at);
+TABLE disease_detections (id, user_id, crop_id, image_url, model_version, result_json, confidence);
+TABLE ai_models (id, name, version, accuracy, size_mb, target_platform);
+TABLE yield_predictions (parcel_id, crop_id, season, predicted_yield, actual_yield, model_id);
+TABLE price_forecasts (product_id, city_id, predicted_price, actual_price, forecast_date);
+TABLE data_exports (id, buyer_type, region_id, data_scope, anonymization_level, export_date);
+
+-- KATMAN 4: VERİ & AI (TimescaleDB — ayrı DB)
+TABLE sensor_readings (device_id, metric, value, unit, timestamp); -- hypertable
+TABLE weather_data (city_id, source, temp, humidity, wind, rain, forecast_date); -- hypertable
+
+-- ═══════════════════════════════════════
+-- KATMAN 5: EĞİTİM & TOPLULUK
+-- ═══════════════════════════════════════
+TABLE courses (id, title, slug, category, instructor_id, duration_min, level, is_free);
+TABLE lessons (id, course_id, title, video_url, content_md, sort_order);
+TABLE enrollments (user_id, course_id, progress_pct, completed_at, certificate_url);
+TABLE quizzes (id, lesson_id, question, options_json, correct_answer);
+TABLE forum_categories (id, name, slug, description);
+TABLE forum_topics (id, user_id, category_id, title, body, upvotes, is_answered);
+TABLE forum_replies (id, topic_id, user_id, body, upvotes, is_expert_verified);
+TABLE consultants (id, user_id, specialty, tyd_certificate, rating, hourly_rate);
+TABLE appointments (id, consultant_id, farmer_id, datetime, type, status, payment_status);
+TABLE reviews (id, appointment_id, rating, comment);
+TABLE grants (id, name, institution, deadline, min_amount, max_amount, eligibility_json);
+TABLE grant_applications (user_id, grant_id, status, applied_at);
+TABLE badges (id, name, icon_url, criteria_json);
+TABLE user_badges (user_id, badge_id, earned_at);
 TABLE leaderboard (user_id, region_id, points, rank, period);
     </div>
 
@@ -225,7 +225,7 @@ TABLE leaderboard (user_id, region_id, points, rank, period);
     <div class="card-grid two" style="margin-top: 24px;">
       <div class="card">
         <h4 class="card-title" style="font-size: 15px;">Yatay Bağlantılar</h4>
-        <ul style="list-style: none; padding: 0; font-size: 13px;">
+        <ul style="list-style: none; padding: 0;">
           <li style="margin-bottom: 8px;"><strong>K1 → K2:</strong> Hal fiyatları → Ticaret platformunda fiyat referansı</li>
           <li style="margin-bottom: 8px;"><strong>K2 → K3:</strong> Satın alınan girdi → Üretim kaydına otomatik ekleme</li>
           <li style="margin-bottom: 8px;"><strong>K3 → K4:</strong> Üretim verileri → AI verim tahmini besleme</li>
@@ -236,7 +236,7 @@ TABLE leaderboard (user_id, region_id, points, rank, period);
       </div>
       <div class="card">
         <h4 class="card-title" style="font-size: 15px;">Paylaşılan Veri Nesneleri</h4>
-        <ul style="list-style: none; padding: 0; font-size: 13px;">
+        <ul style="list-style: none; padding: 0;">
           <li style="margin-bottom: 8px;"><strong>users:</strong> Tüm katmanlar — tek kimlik, tek profil</li>
           <li style="margin-bottom: 8px;"><strong>crops:</strong> K1 ansiklopedi + K3 üretim + K4 AI modelleri</li>
           <li style="margin-bottom: 8px;"><strong>cities:</strong> K1 takvim + K2 fiyat + K3 çiftlik + K4 hava durumu</li>
@@ -250,50 +250,50 @@ TABLE leaderboard (user_id, region_id, points, rank, period);
   <!-- API KONTRATLARI -->
   <div class="section">
     <div class="section-title">API Kontratları — Temel Endpoint'ler</div>
-    <div class="code-block">
--- ═══ KATMAN 1: İÇERİK API ═══<br>
-GET  /api/v1/articles?category=&page=&limit=<br>
-GET  /api/v1/crops/:slug<br>
-GET  /api/v1/crops/:slug/diseases<br>
-GET  /api/v1/crops/:slug/calendar?city_id=<br>
-GET  /api/v1/market-prices?product=&city_id=&date_range=<br>
-GET  /api/v1/market-prices/trends?product=&period=30d<br>
-<br>
--- ═══ KATMAN 2: TİCARET API ═══<br>
-GET  /api/v1/products?category=&seller_id=&sort=<br>
-POST /api/v1/orders<br>
-GET  /api/v1/orders/:id<br>
-POST /api/v1/group-buys<br>
-POST /api/v1/group-buys/:id/join<br>
-GET  /api/v1/price-compare?product_id=&city_id=<br>
-POST /api/v1/payments/iyzico/callback<br>
-<br>
--- ═══ KATMAN 3: ÜRETİM API ═══<br>
-GET  /api/v1/farms<br>
-POST /api/v1/farms/:id/parcels<br>
-POST /api/v1/parcels/:id/logs<br>
-POST /api/v1/parcels/:id/harvests<br>
-GET  /api/v1/farms/:id/inventory<br>
-GET  /api/v1/farms/:id/cost-report?season=<br>
-<br>
--- ═══ KATMAN 4: VERİ & AI API ═══<br>
-POST /api/v1/ai/disease-detect  (multipart/form-data: image)<br>
-GET  /api/v1/weather?city_id=&days=<br>
-GET  /api/v1/satellite/ndvi?parcel_id=&date_range=<br>
-GET  /api/v1/yield-prediction?parcel_id=&season=<br>
-GET  /api/v1/price-forecast?product_id=&city_id=<br>
-GET  /api/v1/iot/devices/:id/readings?metric=&range=<br>
-POST /api/v1/ai/chat  (body: { message, context })<br>
-<br>
--- ═══ KATMAN 5: EĞİTİM & TOPLULUK API ═══<br>
-GET  /api/v1/courses?category=&level=<br>
-POST /api/v1/courses/:id/enroll<br>
-GET  /api/v1/forum/topics?category=&sort=<br>
-POST /api/v1/forum/topics<br>
-POST /api/v1/forum/topics/:id/reply<br>
-GET  /api/v1/consultants?specialty=&city_id=<br>
-POST /api/v1/appointments<br>
-GET  /api/v1/grants?eligible_for=user_id<br>
+    <div class="code-block" style="white-space: pre-wrap;">
+-- ═══ KATMAN 1: İÇERİK API ═══
+GET  /api/v1/articles?category=&page=&limit=
+GET  /api/v1/crops/:slug
+GET  /api/v1/crops/:slug/diseases
+GET  /api/v1/crops/:slug/calendar?city_id=
+GET  /api/v1/market-prices?product=&city_id=&date_range=
+GET  /api/v1/market-prices/trends?product=&period=30d
+
+-- ═══ KATMAN 2: TİCARET API ═══
+GET  /api/v1/products?category=&seller_id=&sort=
+POST /api/v1/orders
+GET  /api/v1/orders/:id
+POST /api/v1/group-buys
+POST /api/v1/group-buys/:id/join
+GET  /api/v1/price-compare?product_id=&city_id=
+POST /api/v1/payments/iyzico/callback
+
+-- ═══ KATMAN 3: ÜRETİM API ═══
+GET  /api/v1/farms
+POST /api/v1/farms/:id/parcels
+POST /api/v1/parcels/:id/logs
+POST /api/v1/parcels/:id/harvests
+GET  /api/v1/farms/:id/inventory
+GET  /api/v1/farms/:id/cost-report?season=
+
+-- ═══ KATMAN 4: VERİ & AI API ═══
+POST /api/v1/ai/disease-detect  (multipart/form-data: image)
+GET  /api/v1/weather?city_id=&days=
+GET  /api/v1/satellite/ndvi?parcel_id=&date_range=
+GET  /api/v1/yield-prediction?parcel_id=&season=
+GET  /api/v1/price-forecast?product_id=&city_id=
+GET  /api/v1/iot/devices/:id/readings?metric=&range=
+POST /api/v1/ai/chat  (body: { message, context })
+
+-- ═══ KATMAN 5: EĞİTİM & TOPLULUK API ═══
+GET  /api/v1/courses?category=&level=
+POST /api/v1/courses/:id/enroll
+GET  /api/v1/forum/topics?category=&sort=
+POST /api/v1/forum/topics
+POST /api/v1/forum/topics/:id/reply
+GET  /api/v1/consultants?specialty=&city_id=
+POST /api/v1/appointments
+GET  /api/v1/grants?eligible_for=user_id
     </div>
   </div>
 
@@ -327,7 +327,7 @@ GET  /api/v1/grants?eligible_for=user_id<br>
       <div class="card" style="border-top: 4px solid var(--green);">
         <span class="card-eyebrow" style="color: var(--green);">FAZ 1: TEMEL (Ay 1-6)</span>
         <h3 class="card-title" style="font-size: 18px;">İçerik + Ticaret Çekirdeği</h3>
-        <ul style="list-style: none; padding: 0; font-size: 13px;">
+        <ul style="list-style: none; padding: 0;">
           <li style="margin-bottom: 8px;">K1: Haber portalı (RSS/API otomatik toplama)</li>
           <li style="margin-bottom: 8px;">K1: Hal fiyatları sayfası (günlük güncelleme)</li>
           <li style="margin-bottom: 8px;">K1: İlk 50 ürün ansiklopedi sayfası</li>
@@ -341,7 +341,7 @@ GET  /api/v1/grants?eligible_for=user_id<br>
       <div class="card" style="border-top: 4px solid var(--blue);">
         <span class="card-eyebrow" style="color: var(--blue);">FAZ 2: BÜYÜME (Ay 7-12)</span>
         <h3 class="card-title" style="font-size: 18px;">Üretim SaaS + Topluluk</h3>
-        <ul style="list-style: none; padding: 0; font-size: 13px;">
+        <ul style="list-style: none; padding: 0;">
           <li style="margin-bottom: 8px;">K3: Sera/tarla yönetimi MVP (kayıt tutma)</li>
           <li style="margin-bottom: 8px;">K3: Stok takip ve basit maliyet raporu</li>
           <li style="margin-bottom: 8px;">K2: 3. parti tedarikçilere açılma</li>
@@ -356,7 +356,7 @@ GET  /api/v1/grants?eligible_for=user_id<br>
       <div class="card" style="border-top: 4px solid var(--purple);">
         <span class="card-eyebrow" style="color: var(--purple);">FAZ 3: ZEKA (Ay 13-18)</span>
         <h3 class="card-title" style="font-size: 18px;">AI & IoT Entegrasyonu</h3>
-        <ul style="list-style: none; padding: 0; font-size: 13px;">
+        <ul style="list-style: none; padding: 0;">
           <li style="margin-bottom: 8px;">K4: AI hastalık teşhisi (TFLite mobil model)</li>
           <li style="margin-bottom: 8px;">K4: Hava durumu API + don uyarı sistemi</li>
           <li style="margin-bottom: 8px;">K4: Sentinel-2 NDVI haritaları</li>
@@ -371,7 +371,7 @@ GET  /api/v1/grants?eligible_for=user_id<br>
       <div class="card" style="border-top: 4px solid var(--amber);">
         <span class="card-eyebrow" style="color: var(--amber);">FAZ 4: ÖLÇEK (Ay 19-24)</span>
         <h3 class="card-title" style="font-size: 18px;">Veri Monetizasyon & Genişleme</h3>
-        <ul style="list-style: none; padding: 0; font-size: 13px;">
+        <ul style="list-style: none; padding: 0;">
           <li style="margin-bottom: 8px;">K4: Verim tahmini modelleri (CNN-BiLSTM)</li>
           <li style="margin-bottom: 8px;">K4: Fiyat tahmini (hal fiyat AI)</li>
           <li style="margin-bottom: 8px;">K4: Veri monetizasyon (sigorta, devlet, gıda)</li>
@@ -390,28 +390,28 @@ GET  /api/v1/grants?eligible_for=user_id<br>
     <div class="section-title">Gelir Modeli Özeti</div>
     <div class="card-grid three">
       <div class="card" style="text-align: center; border-color: var(--green-border); background: var(--green-bg);">
-        <div class="card-title" style="font-size: 20px; color: var(--green);">%5-8 Komisyon</div>
-        <p style="font-size: 11px; color: var(--text-light);">K2 Pazaryeri satışları</p>
+        <div class="card-title" style="font-size: 24px; color: var(--green); margin-bottom: 8px;">%5-8 Komisyon</div>
+        <p style="color: var(--text-dark); font-weight: 500;">K2 Pazaryeri satışları</p>
       </div>
       <div class="card" style="text-align: center; border-color: var(--amber-border); background: var(--amber-bg);">
-        <div class="card-title" style="font-size: 20px; color: var(--amber);">199-499 TL/ay</div>
-        <p style="font-size: 11px; color: var(--text-light);">K3 SaaS abonelik</p>
+        <div class="card-title" style="font-size: 24px; color: var(--amber); margin-bottom: 8px;">999-2499 TL/ay</div>
+        <p style="color: var(--text-dark); font-weight: 500;">K3 SaaS abonelik</p>
       </div>
       <div class="card" style="text-align: center; border-color: var(--purple-border); background: var(--purple-bg);">
-        <div class="card-title" style="font-size: 20px; color: var(--purple);">Premium AI</div>
-        <p style="font-size: 11px; color: var(--text-light);">K4 Gelişmiş analitik</p>
+        <div class="card-title" style="font-size: 24px; color: var(--purple); margin-bottom: 8px;">Premium AI</div>
+        <p style="color: var(--text-dark); font-weight: 500;">K4 Gelişmiş analitik</p>
       </div>
       <div class="card" style="text-align: center;">
-        <div class="card-title" style="font-size: 20px; color: var(--blue);">AdSense + Sponsor</div>
-        <p style="font-size: 11px; color: var(--text-light);">K1 İçerik reklamları</p>
+        <div class="card-title" style="font-size: 24px; color: var(--blue); margin-bottom: 8px;">AdSense + Sponsor</div>
+        <p style="color: var(--text-dark); font-weight: 500;">K1 İçerik reklamları</p>
       </div>
-      <div class="card" style="text-align: center;">
-        <div class="card-title" style="font-size: 20px; color: var(--cyan);">%15-20 Kesinti</div>
-        <p style="font-size: 11px; color: var(--text-light);">K5 Danışmanlık komisyonu</p>
+      <div class="card" style="text-align: center; border-color: var(--cyan-border); background: var(--cyan-bg);">
+        <div class="card-title" style="font-size: 24px; color: var(--cyan); margin-bottom: 8px;">%15-20 Kesinti</div>
+        <p style="color: var(--text-dark); font-weight: 500;">K5 Danışmanlık komisyonu</p>
       </div>
-      <div class="card" style="text-align: center;">
-        <div class="card-title" style="font-size: 20px; color: var(--rose);">Veri Satışı</div>
-        <p style="font-size: 11px; color: var(--text-light);">K4 Anonim toplu veri</p>
+      <div class="card" style="text-align: center; border-color: var(--rose-border); background: var(--rose-bg);">
+        <div class="card-title" style="font-size: 24px; color: var(--rose); margin-bottom: 8px;">Veri Satışı</div>
+        <p style="color: var(--text-dark); font-weight: 500;">K4 Anonim toplu veri</p>
       </div>
     </div>
   </div>
