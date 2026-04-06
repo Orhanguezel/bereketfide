@@ -1,4 +1,7 @@
--- Test bayi: bayi@example.com — parola seed sirasinda ADMIN ile ayni hash ({{ADMIN_PASSWORD_HASH}})
+-- Örnek bayi kullanıcı (Bayi Girişi /bayi-girisi)
+-- E-posta: bayi@example.com
+-- Şifre: BAYI_PASSWORD (env) → yoksa ADMIN_PASSWORD → yoksa seed varsayılanı admin123
+-- Hash: {{BAYI_PASSWORD_HASH}} (db/seed/index.ts bcrypt 12)
 SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 SET @BAYI_ID := 'a1b2c3d4-e5f6-7890-abcd-ef1234567890';
@@ -9,7 +12,7 @@ INSERT INTO `users` (
 ) VALUES (
   @BAYI_ID,
   @BAYI_EMAIL,
-  '{{ADMIN_PASSWORD_HASH}}',
+  '{{BAYI_PASSWORD_HASH}}',
   'Test Bayi',
   NULL,
   'user',

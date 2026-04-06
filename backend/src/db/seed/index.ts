@@ -112,13 +112,26 @@ function getAdminVars() {
   return { email, id, passwordHash };
 }
 
+/** Test bayi (317): BAYI_PASSWORD yoksa ADMIN_PASSWORD, o da yoksa admin123 */
+function getBayiPasswordHash() {
+  const plain =
+    (process.env.BAYI_PASSWORD && process.env.BAYI_PASSWORD.trim()) ||
+    process.env.ADMIN_PASSWORD ||
+    'admin123';
+  return bcrypt.hashSync(plain, 12);
+}
+
 /** SQL string güvenli tek tırnak escape */
 function sqlStr(v: string) {
   return v.replaceAll("'", "''");
 }
 
 /** Dosyayı oku, temizle, admin değişkenleri enjekte et ve opsiyonel yer tutucu değiştir */
-function prepareSqlForRun(rawSql: string, admin: { email: string; id: string; passwordHash: string }) {
+function prepareSqlForRun(
+  rawSql: string,
+  admin: { email: string; id: string; passwordHash: string },
+  bayiPasswordHash: string,
+) {
   // Dosyadaki comment/boşluk temizliği
   let sql = cleanSql(rawSql);
 
@@ -133,6 +146,7 @@ function prepareSqlForRun(rawSql: string, admin: { email: string; id: string; pa
   sql = sql
     .replaceAll('{{ADMIN_BCRYPT}}', admin.passwordHash)
     .replaceAll('{{ADMIN_PASSWORD_HASH}}', admin.passwordHash)
+    .replaceAll('{{BAYI_PASSWORD_HASH}}', bayiPasswordHash)
     .replaceAll('{{ADMIN_EMAIL}}', admin.email)
     .replaceAll('{{ADMIN_ID}}', admin.id);
 
@@ -142,12 +156,17 @@ function prepareSqlForRun(rawSql: string, admin: { email: string; id: string; pa
   return sql;
 }
 
-async function runSqlFile(conn: mysql.Connection, absPath: string, adminVars: { email: string; id: string; passwordHash: string }) {
+async function runSqlFile(
+  conn: mysql.Connection,
+  absPath: string,
+  adminVars: { email: string; id: string; passwordHash: string },
+  bayiPasswordHash: string,
+) {
   const name = path.basename(absPath);
   logStep(`⏳ ${name} çalışıyor...`);
   const raw = fs.readFileSync(absPath, 'utf8');
 
-  const sql = prepareSqlForRun(raw, adminVars);
+  const sql = prepareSqlForRun(raw, adminVars, bayiPasswordHash);
   const statements = splitStatements(sql);
 
   // bağlantı karakter seti & timezone
@@ -193,8 +212,9 @@ async function main() {
   const conn = await createConnToDb();
 
   try {
-    // 3) Admin değişkenlerini hazırla (tek sefer)
+    // 3) Admin + test bayi hash (tek sefer)
     const ADMIN = getAdminVars();
+    const BAYI_HASH = getBayiPasswordHash();
 
     // 4) SQL klasörünü bul (öncelik env, sonra dist/sql, yoksa src/sql)
     const envDir = process.env.SEED_SQL_DIR && process.env.SEED_SQL_DIR.trim();
@@ -212,7 +232,7 @@ async function main() {
         logStep(`⏭️ ${f} atlandı (--only filtresi)`);
         continue;
       }
-      await runSqlFile(conn, abs, ADMIN);
+      await runSqlFile(conn, abs, ADMIN, BAYI_HASH);
     }
     logStep('🎉 Seed tamamlandı.');
   } finally {

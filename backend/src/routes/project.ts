@@ -11,6 +11,7 @@ import { registerOfferAdmin } from '@/modules/offer/admin.routes';
 import { registerDashboardAdmin } from '@/modules/dashboard/admin.routes';
 import { registerServicesAdmin } from '@/modules/services/admin.routes';
 import { registerCommentsAdmin } from '@/modules/comments/admin.routes';
+import { registerCommentsPublic } from '@/modules/comments/public.routes';
 import { registerOrders } from '@/modules/orders/router';
 import { registerOrdersAdmin } from '@/modules/orders/admin.routes';
 import { registerDealerFinance } from '@/modules/dealerFinance/router';
@@ -22,6 +23,7 @@ export async function registerProjectPublic(api: FastifyInstance) {
   await registerServices(api);
   await registerOrders(api);
   await registerDealerFinance(api);
+  await registerCommentsPublic(api);
 }
 
 export async function registerProjectAdmin(api: FastifyInstance) {

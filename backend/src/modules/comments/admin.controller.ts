@@ -1,5 +1,5 @@
 import type { RouteHandler } from 'fastify';
-import { asc, desc, eq, like, sql } from 'drizzle-orm';
+import { asc, desc, eq, sql } from 'drizzle-orm';
 import { db } from '@/db/client';
 import { comments } from './schema';
 
@@ -35,7 +35,8 @@ export const adminUpdateComment: RouteHandler = async (req, reply) => {
   const { id } = req.params as { id: string };
   const body = (req.body || {}) as any;
   const fields: any = {};
-  if ('status' in body) fields.status = body.status;
+  if ('is_approved' in body) fields.is_approved = body.is_approved ? 1 : 0;
+  if ('is_active' in body) fields.is_active = body.is_active ? 1 : 0;
   if ('content' in body) fields.content = body.content;
 
   if (Object.keys(fields).length) {

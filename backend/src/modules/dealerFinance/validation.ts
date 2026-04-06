@@ -68,13 +68,16 @@ export const transactionListQuerySchema = z.object({
 });
 export type TransactionListQueryInput = z.infer<typeof transactionListQuerySchema>;
 
-/** GET /dealers/public — liste + filtre */
+const emptyToUndef = (v: unknown) =>
+  v === '' || v === undefined || v === null ? undefined : v;
+
+/** GET /dealers/public — liste + filtre (query string / tekrarlayan anahtar güvenli) */
 export const publicDealersQuerySchema = z.object({
-  q: z.string().max(128).optional(),
-  city: z.string().max(128).optional(),
-  region: z.string().max(128).optional(),
-  page: z.coerce.number().int().positive().optional(),
-  limit: z.coerce.number().int().positive().max(50).optional(),
+  q: z.preprocess(emptyToUndef, z.string().max(128).optional()),
+  city: z.preprocess(emptyToUndef, z.string().max(128).optional()),
+  region: z.preprocess(emptyToUndef, z.string().max(128).optional()),
+  page: z.preprocess(emptyToUndef, z.coerce.number().int().positive().optional()),
+  limit: z.preprocess(emptyToUndef, z.coerce.number().int().positive().max(50).optional()),
 });
 export type PublicDealersQueryInput = z.infer<typeof publicDealersQuerySchema>;
 
