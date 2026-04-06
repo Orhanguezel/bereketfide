@@ -357,7 +357,7 @@ export default async function HomePage({
       {homeStats.length > 0 ? <StatsHighlightSection items={homeStats} /> : null}
 
       {/* ═══════════════════════════════════════════
-          DYNAMIC CONTENT SECTIONS- Solid/Glass Backgrounds
+          DYNAMIC CONTENT SECTIONS — Glass/Transparent (ScrollBackground görünsün)
       ═══════════════════════════════════════════ */}
       <div className="relative space-y-24 py-24">
         
@@ -407,7 +407,7 @@ export default async function HomePage({
         ) : null}
 
         {visibleNewsPosts.length ? (
-          <section className="border-y border-(--color-border) bg-(--color-bg-secondary) py-24">
+          <section className="border-y border-(--color-border-on-dark) py-24 backdrop-blur-sm" style={{ background: 'color-mix(in srgb, var(--color-bg-dark) 80%, transparent)' }}>
             <div className="mx-auto max-w-7xl px-4 lg:px-6">
               <div className="mb-8">
                 <h2
@@ -431,7 +431,7 @@ export default async function HomePage({
                   return (
                     <article
                       key={post.id}
-                      className="overflow-hidden border border-(--color-border) bg-(--color-bg-secondary) transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                      className="overflow-hidden border border-(--color-border-on-dark) bg-(--color-bg-dark) transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     >
                       {mainImage ? (
                         <Link
@@ -544,7 +544,7 @@ export default async function HomePage({
 
         {/* Öne Çıkanlar — hero'ya sığmayan featured ürünler */}
         {highlightProducts.length > 0 && (
-          <section className="border-b border-(--color-border) bg-(--color-bg-secondary)/95 py-24 backdrop-blur-sm">
+          <section className="border-b border-(--color-border-on-dark) py-24 backdrop-blur-sm" style={{ background: 'color-mix(in srgb, var(--color-bg-dark) 80%, transparent)' }}>
             <div className="mx-auto max-w-7xl px-4 lg:px-6">
               <ProjectFeed
                 initialProjects={highlightProducts}
@@ -599,7 +599,7 @@ export default async function HomePage({
 
         {/* Son Eklenenler — featured olmayan ürünler */}
         {latestProducts.length > 0 && (
-          <section className="border-t border-(--color-border) bg-(--color-bg-secondary) py-24">
+          <section className="border-t border-(--color-border-on-dark) py-24 backdrop-blur-sm" style={{ background: 'color-mix(in srgb, var(--color-bg-dark) 80%, transparent)' }}>
             <div className="mx-auto max-w-7xl px-4 lg:px-6">
               <ProjectFeed
                 initialProjects={latestProducts}
