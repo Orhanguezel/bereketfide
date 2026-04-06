@@ -6,7 +6,8 @@ const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactCompiler: true,
+  // Next 16.2 + React Compiler: production `next start` bazı ortamlarda TypeError (.map) ile düşüyor
+  reactCompiler: false,
   basePath: "/admin",
   compiler: { removeConsole: process.env.NODE_ENV === 'production' },
 
