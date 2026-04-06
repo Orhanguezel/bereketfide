@@ -105,4 +105,5 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 };
 
-export default withNextIntl(nextConfig);
+// Workspace'te iki ayrı node_modules/next örneği; plugin ile NextConfig tipleri çakışıyor.
+export default withNextIntl(nextConfig as Parameters<typeof withNextIntl>[0]);
