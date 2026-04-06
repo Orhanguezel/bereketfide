@@ -43,6 +43,22 @@ CREATE TABLE IF NOT EXISTS products (
   rating             DECIMAL(3,2)  NOT NULL DEFAULT 5.00,
   review_count       INT(11)       NOT NULL DEFAULT 0,
 
+  -- 🌱 Tarımsal özellikler (fide/tohum)
+  botanical_name     VARCHAR(255)  DEFAULT NULL,
+  planting_seasons   JSON          DEFAULT (JSON_ARRAY()),
+  harvest_days       INT           DEFAULT NULL,
+  climate_zones      JSON          DEFAULT (JSON_ARRAY()),
+  soil_types         JSON          DEFAULT (JSON_ARRAY()),
+  water_need         VARCHAR(16)   DEFAULT NULL,
+  sun_exposure       VARCHAR(16)   DEFAULT NULL,
+  min_temp           DECIMAL(5,2)  DEFAULT NULL,
+  max_temp           DECIMAL(5,2)  DEFAULT NULL,
+  germination_days   INT           DEFAULT NULL,
+  seed_depth_cm      DECIMAL(5,2)  DEFAULT NULL,
+  row_spacing_cm     INT           DEFAULT NULL,
+  plant_spacing_cm   INT           DEFAULT NULL,
+  yield_per_sqm      VARCHAR(50)   DEFAULT NULL,
+
   created_at         DATETIME(3)   NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   updated_at         DATETIME(3)   NOT NULL DEFAULT CURRENT_TIMESTAMP(3)
                      ON UPDATE CURRENT_TIMESTAMP(3),

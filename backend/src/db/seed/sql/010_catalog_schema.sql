@@ -53,8 +53,10 @@ CREATE TABLE IF NOT EXISTS `category_i18n` (
   `name`        VARCHAR(255) NOT NULL,
   `slug`        VARCHAR(255) NOT NULL,
 
-  `description` TEXT         NULL,
-  `alt`         VARCHAR(255) NULL,
+  `description`      TEXT         NULL,
+  `alt`              VARCHAR(255) NULL,
+  `meta_title`       VARCHAR(255) NULL,
+  `meta_description` VARCHAR(500) NULL,
 
   `created_at`  DATETIME(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `updated_at`  DATETIME(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
