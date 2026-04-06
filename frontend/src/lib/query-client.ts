@@ -65,7 +65,4 @@ export const queryKeys = {
   contact: {
     all: ['contact'] as const,
   },
-  newsletter: {
-    all: ['newsletter'] as const,
-  },
 } as const;

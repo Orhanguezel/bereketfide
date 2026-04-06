@@ -42,7 +42,7 @@ export function StatsHighlightSection({ items }: StatsHighlightSectionProps) {
 
   useEffect(() => {
     const node = sectionRef.current;
-    if (!node || started) return;
+    if (!node || !items.length || started) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -55,12 +55,14 @@ export function StatsHighlightSection({ items }: StatsHighlightSectionProps) {
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [started]);
+  }, [started, items.length]);
+
+  if (!items.length) return null;
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-10 lg:py-14 bg-[#2B2B2B]"
+      className="relative overflow-hidden bg-(--color-bg-dark) py-10 lg:py-14"
     >
       <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 lg:grid-cols-4 lg:gap-5 lg:px-6">
         {items.map((item) => (
@@ -69,24 +71,27 @@ export function StatsHighlightSection({ items }: StatsHighlightSectionProps) {
             className="flex items-center gap-3 border px-4 py-5 sm:gap-4 sm:px-5 lg:gap-5 lg:px-6 lg:py-6"
             style={{
               background: 'linear-gradient(180deg, var(--color-brand-light) 0%, var(--color-brand) 100%)',
-              borderColor: 'rgb(255 255 255 / 0.18)',
-              boxShadow: 'inset 0 1px 0 rgb(255 255 255 / 0.16)',
+              borderColor: 'color-mix(in srgb, var(--section-bg-white) 18%, transparent)',
+              boxShadow: 'inset 0 1px 0 color-mix(in srgb, var(--section-bg-white) 16%, transparent)',
             }}
           >
             <div
-              className="flex size-12 shrink-0 items-center justify-center rounded-full border text-white sm:size-14"
+              className="flex size-12 shrink-0 items-center justify-center rounded-full border text-(--section-bg-white) sm:size-14"
               style={{
-                borderColor: 'rgb(255 255 255 / 0.22)',
-                background: 'rgb(255 255 255 / 0.08)',
+                borderColor: 'color-mix(in srgb, var(--section-bg-white) 22%, transparent)',
+                background: 'color-mix(in srgb, var(--section-bg-white) 8%, transparent)',
               }}
             >
               <Sprout className="size-6 sm:size-7" strokeWidth={1.8} />
             </div>
             <div className="min-w-0">
-              <div className="text-3xl font-black leading-none text-white sm:text-4xl" style={{ fontFamily: 'var(--font-heading)' }}>
+              <div
+                className="text-3xl font-black leading-none text-(--section-bg-white) sm:text-4xl"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
                 <AnimatedValue value={item.value} start={started} />
               </div>
-              <p className="mt-2 text-base leading-tight font-medium text-white/95 sm:text-lg">{item.label}</p>
+              <p className="mt-2 text-base font-medium leading-tight text-(--section-bg-white)/95 sm:text-lg">{item.label}</p>
             </div>
           </div>
         ))}

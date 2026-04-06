@@ -61,26 +61,26 @@ SET @OG_DEFAULT := COALESCE(
 -- -------------------------------------------------------------
 
 -- Brand / default titles (ASCII-safe)
-SET @BRAND_TR := 'Bereket Fide – Endustriyel Su Sogutma Kuleleri ve Muhendislik';
-SET @BRAND_EN := 'Bereket Fide – Industrial Cooling Towers and Engineering';
-SET @BRAND_DE := 'Bereket Fide – Industrielle Kuehltuerme und Engineering';
+SET @BRAND_TR := 'Bereket Fide – Kaliteli Sebze Fidesi Uretimi';
+SET @BRAND_EN := 'Bereket Fide – Quality Vegetable Seedling Production';
+SET @BRAND_DE := 'Bereket Fide – Qualitaets-Gemuesepflanzen';
 
 -- Site name (shorter, neutral)
-SET @SITE_NAME_GLOBAL := 'Bereket Fide Industrial Cooling Towers';
+SET @SITE_NAME_GLOBAL := 'Bereket Fide';
 
 -- Global default title
-SET @TITLE_GLOBAL := 'Bereket Fide Industrial Cooling Towers and Engineering';
+SET @TITLE_GLOBAL := 'Bereket Fide | Seedling Production Antalya';
 
 -- Concise descriptions
-SET @DESC_TR := 'CTP malzemeden acik ve kapali tip su sogutma kuleleri. Imaalat ve montaj. Bakim, onarim, modernizasyon, test ve yedek parca.';
-SET @DESC_EN := 'Open and closed-circuit FRP cooling towers. Manufacturing and installation. Maintenance, repair, modernization, performance testing and spare parts.';
-SET @DESC_DE := 'Offene und geschlossene GFK Kuehltuerme. Herstellung und Montage. Wartung, Reparatur, Modernisierung, Leistungstests und Ersatzteile.';
+SET @DESC_TR := 'Antalya Aksu''da 2006''dan beri modern seralarda asili ve normal domates, biber, salatalik fideleri uretimi.';
+SET @DESC_EN := 'Grafted and conventional tomato, pepper, and cucumber seedlings in modern greenhouses in Aksu, Antalya since 2006.';
+SET @DESC_DE := 'Seit 2006 Veredelte und unveredelte Tomaten-, Paprika- und Gurkenpflanzen in modernen Gewaechshaeusern in Antalya Aksu.';
 
 -- Global concise description
-SET @DESC_GLOBAL := 'Industrial cooling towers, engineering, installation and service solutions for efficient process cooling.';
+SET @DESC_GLOBAL := 'Vegetable seedling production in Antalya: grafted and conventional tomatoes, peppers, cucumbers and more.';
 
 -- Global keywords (neutral)
-SET @KW_GLOBAL := 'bereketfide, cooling tower, industrial cooling, FRP, engineering, installation, service';
+SET @KW_GLOBAL := 'bereket fide, seedling, vegetable seedling, grafted seedling, antalya, agriculture, greenhouse';
 
 -- -------------------------------------------------------------
 -- Build JSON payloads once (DRY)
@@ -193,7 +193,7 @@ SET @META_TR := CAST(
   JSON_OBJECT(
     'title',       @BRAND_TR,
     'description', @DESC_TR,
-    'keywords',    'bereketfide, su sogutma kulesi, sogutma kulesi, ctp, camelyaf takviyeli polyester, acik tip, kapali tip, modernizasyon, bakim onarim, test, yedek parca'
+    'keywords',    'bereket fide, fide, asili fide, domates fidesi, biber fidesi, salatalik fidesi, antalya, sera, fide uretimi'
   ) AS CHAR CHARACTER SET utf8mb4
 );
 
@@ -201,7 +201,7 @@ SET @META_EN := CAST(
   JSON_OBJECT(
     'title',       @BRAND_EN,
     'description', @DESC_EN,
-    'keywords',    'bereketfide, cooling tower, FRP, fiber reinforced plastic, open circuit, closed circuit, modernization, maintenance, repair, performance testing, spare parts'
+    'keywords',    'bereket fide, antalya seedling, grafted seedling, tomato seedling, pepper seedling, vegetable seedling, agriculture'
   ) AS CHAR CHARACTER SET utf8mb4
 );
 
@@ -209,7 +209,7 @@ SET @META_DE := CAST(
   JSON_OBJECT(
     'title',       @BRAND_DE,
     'description', @DESC_DE,
-    'keywords',    'bereketfide, kuehlturm, GFK, glasfaserverstaerkter kunststoff, offen, geschlossen, modernisierung, wartung, reparatur, leistungstest, ersatzteile'
+    'keywords',    'bereket fide, gemuesepflanze, veredelung, tomatenpflanze, antalya, gewaechshaus, landwirtschaft'
   ) AS CHAR CHARACTER SET utf8mb4
 );
 

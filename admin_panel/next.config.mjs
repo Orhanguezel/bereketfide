@@ -12,7 +12,7 @@ const nextConfig = {
 
   // Workspace root — bun hoists next to parent node_modules
   turbopack: {
-    root: path.resolve(__dirname, '..'),
+    root: path.resolve(__dirname, '../../..'),
   },
 
   // ✅ Image optimization config — admin panel is internal, skip optimizer
@@ -117,10 +117,12 @@ const nextConfig = {
       {
         source: '/uploads/:path*',
         destination: `${base}/uploads/:path*`,
+        basePath: false,
       },
       {
         source: '/storage/:path*',
         destination: `${base}/api/storage/:path*`,
+        basePath: false,
       },
     ];
   },

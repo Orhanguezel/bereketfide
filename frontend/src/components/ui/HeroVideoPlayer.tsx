@@ -76,7 +76,10 @@ export function HeroVideoPlayer({ src, mobileSrc, poster, badge, title, descript
           {!poster && (
             <div
               className="absolute inset-0 z-0"
-              style={{ background: 'linear-gradient(135deg, #1a1a12 0%, #2d2a1a 40%, #3d3520 100%)' }}
+              style={{
+                background:
+                  'linear-gradient(135deg, var(--gold-950) 0%, var(--soil-900) 42%, color-mix(in srgb, var(--gold-900) 50%, var(--soil-800) 50%) 100%)',
+              }}
             />
           )}
           <video
@@ -91,7 +94,7 @@ export function HeroVideoPlayer({ src, mobileSrc, poster, badge, title, descript
             <source src={currentSrc} type="video/mp4" />
           </video>
           {/* Video badge — top left */}
-          <div className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-sm bg-white px-3 py-1.5 text-xs font-semibold text-(--color-text-primary)">
+          <div className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-sm bg-(--color-bg-secondary) px-3 py-1.5 text-xs font-semibold text-(--color-text-primary)">
             <Play className="size-3 fill-current" />
             Video
           </div>
@@ -132,7 +135,7 @@ export function HeroVideoPlayer({ src, mobileSrc, poster, badge, title, descript
         >
           <button
             onClick={closeFullscreen}
-            className="absolute right-6 top-6 z-10 flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+            className="absolute right-6 top-6 z-10 flex size-10 items-center justify-center rounded-full bg-(--color-glass-bg-strong) text-(--section-bg-white) transition-colors hover:bg-(--color-glass-hover)"
             aria-label="Kapat"
           >
             <X className="size-5" />

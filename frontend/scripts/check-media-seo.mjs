@@ -10,8 +10,8 @@ const requiredFiles = [
 
 const mediaFiles = [
   path.join(ROOT, 'src', 'app', '[locale]', 'page.tsx'),
-  path.join(ROOT, 'src', 'app', '[locale]', 'projeler', 'page.tsx'),
-  path.join(ROOT, 'src', 'app', '[locale]', 'projeler', '[slug]', 'page.tsx'),
+  path.join(ROOT, 'src', 'app', '[locale]', 'urunler', 'page.tsx'),
+  path.join(ROOT, 'src', 'app', '[locale]', 'urunler', '[slug]', 'page.tsx'),
   path.join(ROOT, 'src', 'app', '[locale]', 'haberler', 'page.tsx'),
   path.join(ROOT, 'src', 'app', '[locale]', 'galeri', 'page.tsx'),
   path.join(ROOT, 'src', 'app', '[locale]', 'galeri', '[slug]', 'page.tsx'),

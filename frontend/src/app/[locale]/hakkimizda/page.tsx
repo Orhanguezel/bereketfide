@@ -10,12 +10,14 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { buildMediaAlt } from '@/lib/media-seo';
 import { fetchSetting } from '@/i18n/server';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { RelatedLinks } from '@/components/seo/RelatedLinks';
+import { fetchRelatedContent } from '@/lib/related-content';
 import { fetchSeoPage } from '@/seo/server';
 
 async function fetchAboutPage(locale: string) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/custom_pages/by-slug/about?locale=${locale}`,
+      `${API_BASE_URL}/custom-pages/by-slug/about?locale=${locale}`,
       { next: { revalidate: 0 } },
     );
     if (!res.ok) return null;
@@ -95,6 +97,18 @@ export default async function AboutPage({
     fetchSetting('home_stats', locale),
     fetchSetting('cta_offer', locale),
   ]);
+
+  const pageTags: string[] = Array.isArray(page?.tags) ? page.tags : [];
+  const related = await fetchRelatedContent(
+    {
+      title: page?.title || t('about.title'),
+      description: page?.summary || null,
+      slug: 'about',
+      tags: pageTags,
+    },
+    'about',
+    locale,
+  );
 
   const companyProfile = (profile?.value as any) ?? {};
   const companyName = companyProfile.company_name || 'Bereket Fide';
@@ -235,7 +249,13 @@ export default async function AboutPage({
                     {ctaTitle}
                   </h3>
                   {ctaDescription && (
-                    <p style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', marginTop: 4 }}>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        marginTop: 4,
+                        color: 'color-mix(in srgb, var(--section-bg-white) 70%, transparent)',
+                      }}
+                    >
                       {ctaDescription}
                     </p>
                   )}
@@ -246,7 +266,7 @@ export default async function AboutPage({
                     style={{
                       padding: '10px 24px',
                       background: 'var(--color-brand)',
-                      color: '#fff',
+                      color: 'var(--color-on-brand)',
                       fontWeight: 600,
                       fontSize: 14,
                       textDecoration: 'none',
@@ -299,7 +319,7 @@ export default async function AboutPage({
                       marginTop: 12,
                       padding: '8px 20px',
                       background: 'var(--color-brand)',
-                      color: '#fff',
+                      color: 'var(--color-on-brand)',
                       fontWeight: 600,
                       fontSize: 13,
                       textDecoration: 'none',
@@ -330,6 +350,48 @@ export default async function AboutPage({
             </Link>
           </aside>
         </div>
+
+        {(related.products.length > 0 ||
+          related.blogPosts.length > 0 ||
+          related.knowledgePosts.length > 0 ||
+          related.galleries.length > 0) && (
+          <div
+            style={{
+              marginTop: 48,
+              paddingTop: 32,
+              borderTop: '1px solid var(--color-border)',
+            }}
+          >
+            <div
+              style={{
+                display: 'grid',
+                gap: 24,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              }}
+            >
+              <RelatedLinks
+                title={t('common.relatedProducts')}
+                hrefBase={localizedPath(locale, '/urunler')}
+                items={related.products}
+              />
+              <RelatedLinks
+                title={t('common.relatedArticles')}
+                hrefBase={localizedPath(locale, '/haberler')}
+                items={related.blogPosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedKnowledgePosts')}
+                hrefBase={localizedPath(locale, '/blog')}
+                items={related.knowledgePosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedGallery')}
+                hrefBase={localizedPath(locale, '/galeri')}
+                items={related.galleries}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

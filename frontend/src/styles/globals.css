@@ -123,6 +123,8 @@ html[data-theme-mode='light'],
   --color-bg-secondary: var(--surface-raised);
   --color-bg-muted: var(--surface-muted);
   --color-bg-dark: var(--surface-dark);
+  --color-bg-alt: var(--section-bg-light);
+  --color-surface: var(--color-bg-secondary);
 
   --color-text-primary: var(--text-strong);
   --color-text-secondary: var(--text-body);
@@ -183,6 +185,8 @@ html[data-theme-mode='dark'] {
   --color-bg-secondary: var(--surface-raised);
   --color-bg-muted: var(--surface-muted);
   --color-bg-dark: var(--surface-dark);
+  --color-bg-alt: var(--surface-muted);
+  --color-surface: var(--color-bg-secondary);
 
   --color-text-primary: var(--text-strong);
   --color-text-secondary: var(--text-body);
@@ -413,6 +417,26 @@ h6 {
 .field-input:focus-visible {
   outline: 2px solid var(--color-brand);
   outline-offset: 2px;
+}
+
+.bf-alert-danger {
+  border: 1px solid color-mix(in srgb, var(--status-danger) 22%, transparent);
+  background: color-mix(in srgb, var(--status-danger) 8%, transparent);
+  color: var(--status-danger);
+}
+
+.bf-alert-success {
+  border: 1px solid color-mix(in srgb, var(--color-success) 22%, transparent);
+  background: color-mix(in srgb, var(--color-success) 8%, transparent);
+  color: var(--color-success-dark);
+}
+
+.bf-link-danger {
+  color: var(--status-danger);
+}
+
+.bf-link-danger:hover {
+  text-decoration: underline;
 }
 
 /* ─── Butonlar ─── */

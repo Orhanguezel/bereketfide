@@ -73,7 +73,7 @@ export function SplashScreen({
           align-items: center;
           justify-content: center;
           flex-direction: column;
-          background: #0f0e0d;
+          background: var(--section-bg-dark-deep);
           overflow: hidden;
         }
 
@@ -82,9 +82,9 @@ export function SplashScreen({
           position: absolute;
           inset: 0;
           background:
-            radial-gradient(ellipse 80% 60% at 50% 40%, rgba(46,125,50,0.18) 0%, transparent 70%),
-            radial-gradient(ellipse 60% 50% at 20% 80%, rgba(76,175,80,0.1) 0%, transparent 60%),
-            radial-gradient(ellipse 50% 40% at 80% 20%, rgba(129,199,132,0.12) 0%, transparent 50%);
+            radial-gradient(ellipse 80% 60% at 50% 40%, color-mix(in srgb, var(--green-700) 18%, transparent) 0%, transparent 70%),
+            radial-gradient(ellipse 60% 50% at 20% 80%, color-mix(in srgb, var(--green-500) 10%, transparent) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 40% at 80% 20%, color-mix(in srgb, var(--green-300) 12%, transparent) 0%, transparent 50%);
         }
 
         /* ── Organic floating particles ── */
@@ -92,7 +92,11 @@ export function SplashScreen({
         .splash-dot {
           position: absolute;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(129,199,132,0.8), rgba(46,125,50,0.2));
+          background: radial-gradient(
+            circle,
+            color-mix(in srgb, var(--green-300) 80%, transparent),
+            color-mix(in srgb, var(--green-700) 20%, transparent)
+          );
           animation: splash-dot-drift 5s ease-in-out infinite;
           opacity: 0;
         }
@@ -124,7 +128,7 @@ export function SplashScreen({
         @keyframes splash-logo-appear { to { opacity: 1; transform: scale(1); } }
 
         .splash-logo-img {
-          filter: drop-shadow(0 0 50px rgba(46,125,50,0.4));
+          filter: drop-shadow(0 0 50px color-mix(in srgb, var(--green-600) 40%, transparent));
         }
 
         /* Glow halo */
@@ -133,7 +137,7 @@ export function SplashScreen({
           width: 380px;
           height: 380px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(76,175,80,0.25) 0%, transparent 70%);
+          background: radial-gradient(circle, color-mix(in srgb, var(--green-500) 25%, transparent) 0%, transparent 70%);
           filter: blur(50px);
           animation: splash-halo-breathe 3s ease-in-out infinite;
           z-index: -1;
@@ -158,7 +162,13 @@ export function SplashScreen({
           font-weight: 800;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          background: linear-gradient(135deg, #a5d6a7 0%, #4caf50 30%, #81c784 60%, #2e7d32 100%);
+          background: linear-gradient(
+            135deg,
+            var(--gold-300) 0%,
+            var(--gold-500) 30%,
+            var(--gold-400) 60%,
+            var(--gold-700) 100%
+          );
           background-size: 300% 100%;
           -webkit-background-clip: text;
           background-clip: text;
@@ -172,14 +182,19 @@ export function SplashScreen({
         }
         @keyframes splash-txt-in { to { opacity: 1; transform: translateY(0); } }
 
-        /* ── Green divider ── */
+        /* ── Brand divider ── */
         .splash-rule {
           position: relative;
           z-index: 2;
           width: 0;
           height: 1px;
           margin-top: 20px;
-          background: linear-gradient(90deg, transparent, rgba(76,175,80,0.4), transparent);
+          background: linear-gradient(
+            90deg,
+            transparent,
+            color-mix(in srgb, var(--gold-500) 40%, transparent),
+            transparent
+          );
           animation: splash-rule-grow 1s cubic-bezier(0.22,1,0.36,1) 1.2s forwards;
         }
         @keyframes splash-rule-grow { to { width: clamp(120px, 30vw, 260px); } }
@@ -199,7 +214,7 @@ export function SplashScreen({
           font-weight: 500;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: rgba(129,199,132,0.8);
+          color: color-mix(in srgb, var(--gold-300) 80%, transparent);
         }
 
         /* ── Bottom badge ── */
@@ -215,7 +230,7 @@ export function SplashScreen({
           font-size: 11px;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: rgba(129,199,132,0.4);
+          color: color-mix(in srgb, var(--gold-500) 40%, transparent);
         }
 
         /* ── Corner accents ── */
@@ -223,7 +238,7 @@ export function SplashScreen({
           position: absolute;
           width: 50px;
           height: 50px;
-          border-color: rgba(129,199,132,0.15);
+          border-color: color-mix(in srgb, var(--gold-500) 15%, transparent);
           border-style: solid;
           opacity: 0;
           animation: splash-corner-fade 1s ease-out 0.8s forwards;

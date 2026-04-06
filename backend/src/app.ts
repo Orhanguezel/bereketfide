@@ -1,81 +1,26 @@
-// =============================================================
-// FILE: src/app.ts
-// FIX: Audit module single-entry mount (registerAudit) + remove duplicate stream mount
-// =============================================================
-
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
 import cookie from '@fastify/cookie';
 import multipart from '@fastify/multipart';
+import rateLimit from '@fastify/rate-limit';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import authPlugin from './plugins/authPlugin';
 import mysqlPlugin from '@/plugins/mysql';
 import staticUploads from './plugins/staticUploads';
 import { localeMiddleware } from '@/common/middleware/locale';
-
 import type { FastifyInstance } from 'fastify';
 import { env } from '@/core/env';
-import { registerErrorHandlers } from '@/core/error';
-
-// Public modüller
-import { registerAuth } from '@/modules/auth/router';
-import { registerStorage } from '@/modules/storage/router';
-import { registerCustomPages } from '@/modules/customPages/router';
-import { registerSiteSettings } from '@/modules/siteSettings/router';
-import { registerMenuItems } from '@/modules/menuItems/router';
-import { registerCategories } from '@/modules/categories/router';
-import { registerSubCategories } from '@/modules/subcategories/router';
-import { registerContacts } from '@/modules/contact/router';
-import { registerLibrary } from '@/modules/library/router';
-import { registerProducts } from '@/modules/products/router';
-import { registerOffer } from '@/modules/offer/router';
-import { registerGallery } from '@/modules/gallery/router';
-import { registerServices } from '@/modules/services/router';
-import { registerNotifications } from '@/modules/notifications/router';
-import { registerReferences } from '@/modules/references/router';
-
-// ✅ Audit single entry
-import { registerAudit } from '@/modules/audit/router';
-import { shouldSkipAuditLog, writeRequestAuditLog, startRetentionJob } from '@/modules/audit/service';
-
-// Admin modüller
-import { registerCustomPagesAdmin } from '@/modules/customPages/admin.routes';
-import { registerSiteSettingsAdmin } from '@/modules/siteSettings/admin.routes';
-import { registerUserAdmin } from '@/modules/auth/admin.routes';
-import { registerStorageAdmin } from '@/modules/storage/admin.routes';
-import { registerMenuItemsAdmin } from '@/modules/menuItems/admin.routes';
-import { registerCategoriesAdmin } from '@/modules/categories/admin.routes';
-import { registerSubCategoriesAdmin } from '@/modules/subcategories/admin.routes';
-import { registerContactsAdmin } from '@/modules/contact/admin.routes';
-import { registerLibraryAdmin } from '@/modules/library/admin.routes';
-import { registerProductsAdmin } from '@/modules/products/admin.routes';
-import { registerOfferAdmin } from '@/modules/offer/admin.routes';
-import { registerGalleryAdmin } from '@/modules/gallery/admin.routes';
-import { registerDashboardAdmin } from '@/modules/dashboard/admin.routes';
-import { registerServicesAdmin } from '@/modules/services/admin.routes';
-import { registerEmailTemplatesAdmin } from '@/modules/emailTemplates/admin.routes';
-import { registerNewsletterAdmin } from '@/modules/newsletter/admin.routes';
-import { registerCommentsAdmin } from '@/modules/comments/admin.routes';
-import { registerThemeAdmin } from '@/modules/theme/admin.routes';
-import { registerTheme } from '@/modules/theme/router';
-import { registerReferencesAdmin } from '@/modules/references/admin.routes';
-
-import {
-  jsonSchemaTransform,
-  serializerCompiler,
-  validatorCompiler,
-} from 'fastify-type-provider-zod';
+import { registerErrorHandlers } from '@agro/shared-backend/core/error';
+import { loggerConfig } from '@agro/shared-backend/core/logger';
+import { registerSharedPublic, registerSharedAdmin, shouldSkipAuditLog, writeRequestAuditLog, startRetentionJob } from './routes/shared';
+import { registerProjectPublic, registerProjectAdmin } from './routes/project';
+import { jsonSchemaTransform, serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
 
 function parseCorsOrigins(v?: string | string[]): boolean | string[] {
   if (!v) return true;
   if (Array.isArray(v)) return v;
-  const s = String(v).trim();
-  if (!s) return true;
-  const arr = s
-    .split(',')
-    .map((x) => x.trim())
-    .filter(Boolean);
+  const arr = String(v).trim().split(',').map((x) => x.trim()).filter(Boolean);
   return arr.length ? arr : true;
 }
 
@@ -84,9 +29,7 @@ export async function createApp() {
     default: (opts?: Parameters<FastifyInstance['log']['child']>[0]) => FastifyInstance;
   };
 
-  const app = buildFastify({
-    logger: env.NODE_ENV !== 'production',
-  }) as FastifyInstance;
+  const app = buildFastify({ logger: loggerConfig }) as FastifyInstance;
 
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
@@ -95,163 +38,99 @@ export async function createApp() {
     origin: parseCorsOrigins(env.CORS_ORIGIN as any),
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'x-lang',
-      'Prefer',
-      'Accept',
-      'Accept-Language',
-      'X-Locale',
-      'x-skip-auth',
-      'Range',
-    ],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-lang', 'Prefer', 'Accept', 'Accept-Language', 'X-Locale', 'x-skip-auth', 'Range'],
     exposedHeaders: ['x-total-count', 'content-range', 'range'],
   });
 
-  // Swagger docs
   await app.register(fastifySwagger, {
     openapi: {
-      info: {
-        title: 'Bereket Fide API',
-        description: 'Bereket Fide Backend API Documentation',
-        version: '0.1.0',
-      },
-      servers: [
-        {
-          url: `http://${process.env.HOST || 'localhost'}:${env.PORT}`,
-          description: 'Local server',
-        },
-      ],
-      components: {
-        securitySchemes: {
-          apiKey: {
-            type: 'apiKey',
-            name: 'Authorization',
-            in: 'header',
-          },
-        },
-      },
+      info: { title: 'Bereket Fide API', version: '0.1.0' },
+      servers: [{ url: `http://${process.env.HOST || 'localhost'}:${env.PORT}` }],
+      components: { securitySchemes: { apiKey: { type: 'apiKey', name: 'Authorization', in: 'header' } } },
     },
     transform: jsonSchemaTransform,
   });
 
   await app.register(fastifySwaggerUi, {
     routePrefix: '/documentation',
-    uiConfig: {
-      docExpansion: 'list',
-      deepLinking: false,
-    },
-    // transformStaticCSP allow 'unsafe-inline' because of Swagger UI inline styles issue
+    uiConfig: { docExpansion: 'list', deepLinking: false },
     staticCSP: true,
-    transformStaticCSP: (header) => {
-      return header.replace('style-src', "style-src 'unsafe-inline'");
-    },
+    transformStaticCSP: (h) => h.replace('style-src', "style-src 'unsafe-inline'"),
   });
 
-  const cookieSecret =
-    (globalThis as any).Bun?.env?.COOKIE_SECRET ?? process.env.COOKIE_SECRET ?? 'cookie-secret';
-
+  const cookieSecret = (globalThis as any).Bun?.env?.COOKIE_SECRET ?? process.env.COOKIE_SECRET ?? 'cookie-secret';
   await app.register(cookie, {
     secret: cookieSecret,
     hook: 'onRequest',
-    parseOptions: {
-      httpOnly: true,
-      path: '/',
-      sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
-      secure: env.NODE_ENV === 'production',
+    parseOptions: { httpOnly: true, path: '/', sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax', secure: env.NODE_ENV === 'production' },
+  });
+
+  await app.register(jwt, { secret: env.JWT_SECRET, cookie: { cookieName: 'access_token', signed: false } });
+
+  await app.register(rateLimit, {
+    max: 100,
+    timeWindow: '1 minute',
+    allowList: (req) => {
+      const path = (req.url ?? '').split('?')[0] ?? '';
+      return (
+        path === '/health' || path === '/api/health' || path.startsWith('/uploads/')
+      );
     },
   });
 
-  await app.register(jwt, {
-    secret: env.JWT_SECRET,
-    cookie: { cookieName: 'access_token', signed: false },
-  });
-
   app.addHook('onRequest', localeMiddleware);
-
   await app.register(authPlugin);
   await app.register(mysqlPlugin);
 
   app.get('/health', async () => ({ ok: true }));
+  await app.register(multipart, { throwFileSizeLimit: true, limits: { fileSize: 20 * 1024 * 1024 } });
 
-  await app.register(multipart, {
-    throwFileSizeLimit: true,
-    limits: { fileSize: 20 * 1024 * 1024 },
-  });
+  app.addContentTypeParser(
+    'application/x-www-form-urlencoded',
+    { parseAs: 'string' },
+    (_req, body, done) => {
+      try {
+        done(null, Object.fromEntries(new URLSearchParams(body as string)));
+      } catch {
+        done(null, {});
+      }
+    },
+  );
 
   await app.register(staticUploads);
 
   await app.register(
-    async (api) => {
+    async (_api) => {
+      const api = _api as unknown as FastifyInstance;
       api.get('/health', async () => ({ ok: true }));
 
-      // ✅ Audit request logger: /api scope'unda — TÜM API trafiğini loglar
       api.addHook('onResponse', async (req, reply) => {
         try {
           if (shouldSkipAuditLog(req)) return;
-          const reqId = String((req as any).id || (req as any).reqId || '');
-          const elapsed =
-            typeof (reply as any).elapsedTime === 'number' ? (reply as any).elapsedTime : 0;
+          const reqId = String((req as any).id || '');
+          const elapsed = typeof (reply as any).elapsedTime === 'number' ? (reply as any).elapsedTime : 0;
           await writeRequestAuditLog({ req, reply, reqId, responseTimeMs: elapsed });
         } catch (err) {
           (req as any).log?.warn?.({ err }, 'audit_request_log_failed');
         }
       });
 
-      // Audit admin endpoints + SSE stream
-      await api.register(async (i) => registerAudit(i), { prefix: '/admin' });
-      await api.register(async (i) => registerCustomPagesAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerSiteSettingsAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerUserAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerStorageAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerMenuItemsAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerCategoriesAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerSubCategoriesAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerContactsAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerLibraryAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerProductsAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerOfferAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerGalleryAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerDashboardAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerServicesAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerReferencesAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerEmailTemplatesAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerNewsletterAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerCommentsAdmin(i), { prefix: '/admin' });
-      await api.register(async (i) => registerThemeAdmin(i), { prefix: '/admin' });
-
-      // --- AI Content Assist
-      const { aiContentAssist } = await import('@/modules/ai/content');
-      api.post('/admin/ai/content', aiContentAssist);
-
-      // --- Public modüller: /api/...
-      await registerAuth(api);
-      await registerStorage(api);
-      await registerCustomPages(api);
-      await registerSiteSettings(api);
-      await registerMenuItems(api);
-      await registerCategories(api);
-      await registerSubCategories(api);
-      await registerContacts(api);
-      await registerLibrary(api);
-      await registerNotifications(api);
-      await registerProducts(api);
-      await registerOffer(api);
-      await registerGallery(api);
-      await registerServices(api);
-      await registerReferences(api);
-      await registerTheme(api);
+      // /api/v1/...
+      await api.register(
+        async (v1) => {
+          await registerSharedAdmin(v1);
+          await registerProjectAdmin(v1);
+          await registerSharedPublic(v1);
+          await registerProjectPublic(v1);
+        },
+        { prefix: '/v1' },
+      );
     },
     { prefix: '/api' },
   );
 
   registerErrorHandlers(app);
-
-  // Audit log retention cleanup (runs daily)
   startRetentionJob();
-
-  // Sync uploads/ folder to storage_assets (idempotent, safe on hot reload)
   import('@/db/sync-uploads').then((m) => m.syncUploadsToStorage()).catch(() => {});
 
   return app;

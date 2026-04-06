@@ -25,7 +25,7 @@ export function RelatedLinks({
           <li key={item.id ?? item.slug}>
             <Link
               href={`${hrefBase}/${item.slug}`}
-              className="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-brand)] hover:underline"
+              className="text-sm text-(--color-text-secondary) transition-colors hover:text-(--color-brand) hover:underline"
             >
               {item.title}
             </Link>

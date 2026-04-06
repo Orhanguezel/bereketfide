@@ -12,8 +12,7 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { RelatedLinks } from '@/components/seo/RelatedLinks';
 import { buildMediaAlt, buildMediaCaption, buildMediaSchemaText, isMeaningfulMediaDate, resolveMediaDimensions } from '@/lib/media-seo';
 import { GalleryImageGrid } from '@/components/gallery/GalleryImageGrid';
-
-const GALLERY_PLACEHOLDER_SRC = '/media/gallery-placeholder.svg';
+import { GALLERY_IMAGE_PLACEHOLDER } from '@/lib/placeholders';
 
 async function fetchGallery(slug: string, locale: string) {
   try {
@@ -70,7 +69,7 @@ export default async function GalleryDetailPage({
   const images = Array.isArray(gallery.images)
     ? gallery.images.map((img: any) => ({
         ...img,
-        image_url_resolved: absoluteAssetUrl(img.asset_url || img.image_url) || img.image_url_resolved || GALLERY_PLACEHOLDER_SRC,
+        image_url_resolved: absoluteAssetUrl(img.asset_url || img.image_url) || img.image_url_resolved || GALLERY_IMAGE_PLACEHOLDER,
         width: img.width || img.asset_width,
         height: img.height || img.asset_height,
       }))
@@ -140,7 +139,7 @@ export default async function GalleryDetailPage({
               });
 
               return jsonld.imageObject({
-                contentUrl: img.image_url_resolved || img.image_url || gallery.cover_image_url_resolved || gallery.cover_image || GALLERY_PLACEHOLDER_SRC,
+                contentUrl: img.image_url_resolved || img.image_url || gallery.cover_image_url_resolved || gallery.cover_image || GALLERY_IMAGE_PLACEHOLDER,
                 name: media.alt,
                 caption: media.caption || media.alt,
                 width: dimensions.width,
@@ -220,7 +219,7 @@ export default async function GalleryDetailPage({
       ) : (
         <div style={{ marginTop: 24, overflow: 'hidden', borderRadius: 8, border: '1px solid var(--color-border)', background: 'var(--color-bg-secondary)' }}>
           <img
-            src={gallery.cover_image_url_resolved || gallery.cover_image || GALLERY_PLACEHOLDER_SRC}
+            src={gallery.cover_image_url_resolved || gallery.cover_image || GALLERY_IMAGE_PLACEHOLDER}
             alt={buildMediaAlt({
               locale,
               kind: 'gallery-cover',
@@ -249,6 +248,11 @@ export default async function GalleryDetailPage({
           title={t('common.relatedArticles')}
           hrefBase={localizedPath(locale, '/haberler')}
           items={related.blogPosts}
+        />
+        <RelatedLinks
+          title={t('common.relatedKnowledgePosts')}
+          hrefBase={localizedPath(locale, '/blog')}
+          items={related.knowledgePosts}
         />
       </div>
     </div>

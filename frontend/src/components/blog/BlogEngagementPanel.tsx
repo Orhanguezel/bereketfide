@@ -255,10 +255,10 @@ export function BlogEngagementPanel({ locale, postId, texts, commonTexts, captch
       <div className="surface-card rounded-[2rem] p-6 lg:p-7">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-brand)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-brand)">
               {texts.title}
             </p>
-            <h2 className="mt-2 text-2xl font-semibold text-[var(--color-text-primary)]">
+            <h2 className="mt-2 text-2xl font-semibold text-(--color-text-primary)">
               {texts.subtitle}
             </h2>
           </div>
@@ -275,30 +275,30 @@ export function BlogEngagementPanel({ locale, postId, texts, commonTexts, captch
 
         <div className="mt-6 space-y-4">
           {loading ? (
-            <p className="text-sm text-[var(--color-text-secondary)]">{commonTexts.loading}</p>
+            <p className="text-sm text-(--color-text-secondary)">{commonTexts.loading}</p>
           ) : comments.length > 0 ? (
             comments.map((comment) => (
               <article key={comment.id} className="surface-card-muted rounded-[1.5rem] p-5">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="font-semibold text-[var(--color-text-primary)]">{comment.name}</p>
+                  <p className="font-semibold text-(--color-text-primary)">{comment.name}</p>
                   {comment.created_at ? (
-                    <p className="text-xs text-[var(--color-text-muted)]">
+                    <p className="text-xs text-(--color-text-muted)">
                       {formatter.format(new Date(comment.created_at))}
                     </p>
                   ) : null}
                 </div>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+                <p className="mt-3 text-sm leading-7 text-(--color-text-secondary)">
                   {comment.comment}
                 </p>
               </article>
             ))
           ) : (
             <div className="surface-card-muted rounded-[1.5rem] p-5">
-              <div className="flex items-center gap-2 text-[var(--color-text-primary)]">
+              <div className="flex items-center gap-2 text-(--color-text-primary)">
                 <MessageSquare className="size-4" />
                 <p className="font-medium">{texts.emptyTitle}</p>
               </div>
-              <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
+              <p className="mt-2 text-sm leading-7 text-(--color-text-secondary)">
                 {texts.emptyText}
               </p>
             </div>
@@ -308,13 +308,13 @@ export function BlogEngagementPanel({ locale, postId, texts, commonTexts, captch
 
       <form onSubmit={handleSubmit} className="surface-card space-y-4 rounded-[2rem] p-6 lg:p-7">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-brand)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-brand)">
             {texts.formLabel}
           </p>
-          <h2 className="mt-2 text-2xl font-semibold text-[var(--color-text-primary)]">
+          <h2 className="mt-2 text-2xl font-semibold text-(--color-text-primary)">
             {texts.formTitle}
           </h2>
-          <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+          <p className="mt-3 text-sm leading-7 text-(--color-text-secondary)">
             {texts.formDescription}
           </p>
         </div>
@@ -323,14 +323,14 @@ export function BlogEngagementPanel({ locale, postId, texts, commonTexts, captch
           name="name"
           required
           placeholder={texts.namePlaceholder}
-          className="field-input w-full rounded-lg px-4 py-2.5 text-sm focus:border-[var(--color-brand)] focus:outline-none"
+          className="field-input w-full rounded-lg px-4 py-2.5 text-sm focus:border-(--color-brand) focus:outline-none"
         />
         <input
           name="email"
           type="email"
           required
           placeholder={texts.emailPlaceholder}
-          className="field-input w-full rounded-lg px-4 py-2.5 text-sm focus:border-[var(--color-brand)] focus:outline-none"
+          className="field-input w-full rounded-lg px-4 py-2.5 text-sm focus:border-(--color-brand) focus:outline-none"
         />
         <textarea
           name="comment"
@@ -338,7 +338,7 @@ export function BlogEngagementPanel({ locale, postId, texts, commonTexts, captch
           minLength={5}
           rows={5}
           placeholder={texts.commentPlaceholder}
-          className="field-input w-full rounded-lg px-4 py-2.5 text-sm focus:border-[var(--color-brand)] focus:outline-none"
+          className="field-input w-full rounded-lg px-4 py-2.5 text-sm focus:border-(--color-brand) focus:outline-none"
         />
 
         <div className="min-h-[78px]">
@@ -348,13 +348,13 @@ export function BlogEngagementPanel({ locale, postId, texts, commonTexts, captch
         </div>
 
         <p
-          className={`text-xs leading-6 ${captchaError ? 'text-[var(--color-brand)]' : 'text-[var(--color-text-muted)]'}`}
+          className={`text-xs leading-6 ${captchaError ? 'text-(--color-brand)' : 'text-(--color-text-muted)'}`}
           suppressHydrationWarning
         >
           {captchaError || (isLocalhost ? captchaBypassText : !mounted || !widgetId ? captchaLoadingText : !captchaToken ? captchaPendingText : '')}
         </p>
 
-        <p className="text-xs leading-6 text-[var(--color-text-muted)]">
+        <p className="text-xs leading-6 text-(--color-text-muted)">
           {texts.moderationNote}
         </p>
 

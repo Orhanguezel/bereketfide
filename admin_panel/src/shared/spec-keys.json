@@ -2,73 +2,73 @@
   "product": [
     {
       "id": "species",
-      "keys": { "tr": "Tür", "en": "Species" },
-      "labels": { "tr": "Tür", "en": "Species" }
+      "keys": { "tr": "Tür", "en": "Species", "de": "Art" },
+      "labels": { "tr": "Tür", "en": "Species", "de": "Art" }
     },
     {
       "id": "variety",
-      "keys": { "tr": "Çeşit", "en": "Variety" },
-      "labels": { "tr": "Çeşit", "en": "Variety" }
+      "keys": { "tr": "Çeşit", "en": "Variety", "de": "Sorte" },
+      "labels": { "tr": "Çeşit", "en": "Variety", "de": "Sorte" }
     },
     {
       "id": "height",
-      "keys": { "tr": "Boy", "en": "Height" },
-      "labels": { "tr": "Boy", "en": "Height" }
+      "keys": { "tr": "Boy", "en": "Height", "de": "Höhe" },
+      "labels": { "tr": "Boy", "en": "Height", "de": "Höhe" }
     },
     {
       "id": "root_type",
-      "keys": { "tr": "Kök Tipi", "en": "Root Type" },
-      "labels": { "tr": "Kök Tipi", "en": "Root Type" }
+      "keys": { "tr": "Kök Tipi", "en": "Root Type", "de": "Wurzeltyp" },
+      "labels": { "tr": "Kök Tipi", "en": "Root Type", "de": "Wurzeltyp" }
     },
     {
       "id": "planting_season",
-      "keys": { "tr": "Dikim Zamanı", "en": "Planting Season" },
-      "labels": { "tr": "Dikim Zamanı", "en": "Planting Season" }
+      "keys": { "tr": "Dikim Zamanı", "en": "Planting Season", "de": "Pflanzzeit" },
+      "labels": { "tr": "Dikim Zamanı", "en": "Planting Season", "de": "Pflanzzeit" }
     },
     {
       "id": "harvest_season",
-      "keys": { "tr": "Hasat Zamanı", "en": "Harvest Season" },
-      "labels": { "tr": "Hasat Zamanı", "en": "Harvest Season" }
+      "keys": { "tr": "Hasat Zamanı", "en": "Harvest Season", "de": "Erntezeit" },
+      "labels": { "tr": "Hasat Zamanı", "en": "Harvest Season", "de": "Erntezeit" }
     },
     {
       "id": "soil_type",
-      "keys": { "tr": "Toprak Tipi", "en": "Soil Type" },
-      "labels": { "tr": "Toprak Tipi", "en": "Soil Type" }
+      "keys": { "tr": "Toprak Tipi", "en": "Soil Type", "de": "Bodentyp" },
+      "labels": { "tr": "Toprak Tipi", "en": "Soil Type", "de": "Bodentyp" }
     },
     {
       "id": "sun_exposure",
-      "keys": { "tr": "Güneş İhtiyacı", "en": "Sun Exposure" },
-      "labels": { "tr": "Güneş İhtiyacı", "en": "Sun Exposure" }
+      "keys": { "tr": "Güneş İhtiyacı", "en": "Sun Exposure", "de": "Lichtbedarf" },
+      "labels": { "tr": "Güneş İhtiyacı", "en": "Sun Exposure", "de": "Lichtbedarf" }
     },
     {
       "id": "watering",
-      "keys": { "tr": "Sulama", "en": "Watering" },
-      "labels": { "tr": "Sulama", "en": "Watering" }
+      "keys": { "tr": "Sulama", "en": "Watering", "de": "Bewässerung" },
+      "labels": { "tr": "Sulama", "en": "Watering", "de": "Bewässerung" }
     },
     {
       "id": "frost_resistance",
-      "keys": { "tr": "Soğuğa Dayanıklılık", "en": "Frost Resistance" },
-      "labels": { "tr": "Soğuğa Dayanıklılık", "en": "Frost Resistance" }
+      "keys": { "tr": "Soğuğa Dayanıklılık", "en": "Frost Resistance", "de": "Frosthärte" },
+      "labels": { "tr": "Soğuğa Dayanıklılık", "en": "Frost Resistance", "de": "Frosthärte" }
     },
     {
       "id": "pot_size",
-      "keys": { "tr": "Saksı Boyutu", "en": "Pot Size" },
-      "labels": { "tr": "Saksı Boyutu", "en": "Pot Size" }
+      "keys": { "tr": "Saksı Boyutu", "en": "Pot Size", "de": "Topfgröße" },
+      "labels": { "tr": "Saksı Boyutu", "en": "Pot Size", "de": "Topfgröße" }
     },
     {
       "id": "yield",
-      "keys": { "tr": "Verim", "en": "Yield" },
-      "labels": { "tr": "Verim", "en": "Yield" }
+      "keys": { "tr": "Verim", "en": "Yield", "de": "Ertrag" },
+      "labels": { "tr": "Verim", "en": "Yield", "de": "Ertrag" }
     },
     {
       "id": "maturity_days",
-      "keys": { "tr": "Olgunlaşma Süresi", "en": "Maturity Days" },
-      "labels": { "tr": "Olgunlaşma Süresi", "en": "Maturity Days" }
+      "keys": { "tr": "Olgunlaşma Süresi", "en": "Maturity Days", "de": "Reifezeit (Tage)" },
+      "labels": { "tr": "Olgunlaşma Süresi", "en": "Maturity Days", "de": "Reifezeit (Tage)" }
     },
     {
       "id": "origin",
-      "keys": { "tr": "Menşei", "en": "Origin" },
-      "labels": { "tr": "Menşei", "en": "Origin" }
+      "keys": { "tr": "Menşei", "en": "Origin", "de": "Herkunft" },
+      "labels": { "tr": "Menşei", "en": "Origin", "de": "Herkunft" }
     }
   ]
 }

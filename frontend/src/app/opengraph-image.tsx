@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { BEREKET_PALETTE_HEX as C } from '@/lib/bereketfide-palette-hex';
 
 export const runtime = 'nodejs';
 export const alt = 'Bereket Fide';
@@ -18,8 +19,8 @@ export default function OpenGraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: 'linear-gradient(135deg, #0a1f0c 0%, #1b5e20 60%, #2e7d32 100%)',
-          color: '#ffffff',
+          background: `linear-gradient(135deg, ${C.gold950} 0%, ${C.soil900} 42%, ${C.gold900} 100%)`,
+          color: C.sectionWhite,
           padding: '56px',
           fontFamily: 'Arial, sans-serif',
         }}
@@ -38,7 +39,7 @@ export default function OpenGraphImage() {
               fontSize: 22,
               letterSpacing: 4,
               textTransform: 'uppercase',
-              color: '#4caf50',
+              color: C.gold400,
               fontWeight: 600,
             }}
           >
@@ -49,7 +50,7 @@ export default function OpenGraphImage() {
               display: 'flex',
               width: 80,
               height: 3,
-              background: '#4caf50',
+              background: C.gold550,
             }}
           />
         </div>
@@ -63,7 +64,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.08,
               fontWeight: 700,
               maxWidth: 900,
-              color: '#f0ece6',
+              color: C.textOnDarkHead,
               letterSpacing: -2,
             }}
           >
@@ -73,7 +74,7 @@ export default function OpenGraphImage() {
             style={{
               display: 'flex',
               fontSize: 28,
-              color: '#a5d6a7',
+              color: C.gold300,
               maxWidth: 820,
             }}
           >
@@ -88,11 +89,11 @@ export default function OpenGraphImage() {
             alignItems: 'center',
             justifyContent: 'space-between',
             fontSize: 22,
-            color: '#66bb6a',
+            color: C.green500,
           }}
         >
           <div style={{ display: 'flex' }}>bereketfide.com.tr</div>
-          <div style={{ display: 'flex', color: '#4caf50', fontWeight: 600 }}>
+          <div style={{ display: 'flex', color: C.gold400, fontWeight: 600 }}>
             Kalite · Guven · Dogallik
           </div>
         </div>

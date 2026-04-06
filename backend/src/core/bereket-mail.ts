@@ -2,8 +2,8 @@ import nodemailer from 'nodemailer';
 import type { Transporter } from 'nodemailer';
 
 import { db } from '@/db/client';
-import { siteSettings } from '@/modules/siteSettings/schema';
-import { getSmtpSettings } from '@/modules/siteSettings/service';
+import { siteSettings } from '@agro/shared-backend/modules/siteSettings/schema';
+import { getSmtpSettings } from '@agro/shared-backend/modules/siteSettings/service';
 import { eq } from 'drizzle-orm';
 
 type SendMailInput = {

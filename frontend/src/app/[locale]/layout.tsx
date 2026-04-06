@@ -187,6 +187,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <ThemeBootScript />
       </head>
       <body
@@ -201,7 +202,7 @@ export default async function LocaleLayout({
             position: 'fixed',
             inset: 0,
             zIndex: 99998,
-            background: '#0f0e0d',
+            background: 'var(--section-bg-dark-deep)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

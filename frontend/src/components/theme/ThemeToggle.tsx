@@ -42,7 +42,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleMode}
-      className="inline-flex items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg-secondary)] p-2 text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
+      className="inline-flex items-center justify-center rounded-full border border-(--color-border) bg-(--color-bg-secondary) p-2 text-(--color-text-secondary) transition-colors hover:text-(--color-text-primary)"
       aria-label={ariaLabel}
       title={title}
       suppressHydrationWarning

@@ -32,7 +32,7 @@ import {
 } from '@/integrations/hooks';
 import { useAdminT } from '@/app/(main)/(admin-pages)/_components/common/useAdminT';
 
-const ALL_ROLES: UserRoleName[] = ['admin', 'moderator', 'user'];
+const ALL_ROLES: UserRoleName[] = ['admin', 'editor', 'carrier', 'customer', 'dealer'];
 
 function isAdminFromView(u: AdminUserView): boolean {
   return u.roles.includes('admin');
@@ -55,9 +55,20 @@ export default function UserDetailClient({ id }: { id: string }) {
   }
 
   function roleLabel(r: UserRoleName) {
-    if (r === 'admin') return t('admin.users.detail.roles.admin');
-    if (r === 'moderator') return t('admin.users.detail.roles.moderator');
-    return t('admin.users.detail.roles.user');
+    switch (r) {
+      case 'admin':
+        return t('admin.users.detail.roles.admin');
+      case 'editor':
+        return t('admin.users.detail.roles.editor');
+      case 'carrier':
+        return t('admin.users.detail.roles.carrier');
+      case 'customer':
+        return t('admin.users.detail.roles.customer');
+      case 'dealer':
+        return t('admin.users.detail.roles.dealer');
+      default:
+        return r;
+    }
   }
 
   const userQ = useGetUserAdminQuery({ id }, { skip: isNew });
@@ -77,7 +88,7 @@ export default function UserDetailClient({ id }: { id: string }) {
   const [email, setEmail] = React.useState('');
   const [password, setPasswordLocal] = React.useState('');
   const [active, setActiveLocal] = React.useState(true);
-  const [roles, setRolesLocal] = React.useState<UserRoleName[]>(['user']);
+  const [roles, setRolesLocal] = React.useState<UserRoleName[]>(['customer']);
 
   React.useEffect(() => {
     if (!u) return;
@@ -85,7 +96,7 @@ export default function UserDetailClient({ id }: { id: string }) {
     setPhone(u.phone ?? '');
     setEmail(u.email ?? '');
     setActiveLocal(!!u.is_active);
-    setRolesLocal(u.roles.length > 0 ? u.roles : ['user']);
+    setRolesLocal(u.roles.length > 0 ? u.roles : ['customer']);
   }, [u, id]);
 
   const busy =
@@ -97,7 +108,7 @@ export default function UserDetailClient({ id }: { id: string }) {
     setPasswordState.isLoading ||
     removeState.isLoading;
 
-  const currentRole = (roles[0] ?? 'user') as UserRoleName;
+  const currentRole = (roles[0] ?? 'customer') as UserRoleName;
 
   // --- CREATE ---
   async function onCreateUser(e: React.FormEvent) {

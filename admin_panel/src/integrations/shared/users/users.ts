@@ -2,7 +2,7 @@
 
 import type { BoolLike } from '@/integrations/shared';
 
-export type UserRoleName = 'admin' | 'moderator' | 'user';
+export type UserRoleName = 'admin' | 'editor' | 'carrier' | 'customer' | 'dealer';
 
 export type ProfileRow = {
   id: string;

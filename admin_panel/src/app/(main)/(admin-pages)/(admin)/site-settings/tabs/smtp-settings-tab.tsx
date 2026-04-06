@@ -307,7 +307,7 @@ function SmtpTestSection({ busy }: { busy: boolean }) {
     setTesting(true);
     setResult(null);
     try {
-      const res = await fetch('/api/admin/site_settings/smtp-test', {
+      const res = await fetch('/api/v1/admin/site-settings/smtp-test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

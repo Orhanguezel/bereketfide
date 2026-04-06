@@ -145,7 +145,7 @@ export function ProfileClient({ locale }: { locale: string }) {
               height: 80,
               borderRadius: '50%',
               background: 'var(--color-brand)',
-              color: '#fff',
+              color: 'var(--color-on-brand)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -228,20 +228,32 @@ export function ProfileClient({ locale }: { locale: string }) {
             </h3>
 
             {profileSuccess && (
-              <div style={{
-                padding: '10px 14px', marginBottom: 16, borderRadius: 4,
-                background: 'rgba(34, 197, 94, 0.08)', border: '1px solid rgba(34, 197, 94, 0.2)',
-                color: '#16a34a', fontSize: 13,
-              }}>
+              <div
+                style={{
+                  padding: '10px 14px',
+                  marginBottom: 16,
+                  borderRadius: 4,
+                  background: 'color-mix(in srgb, var(--color-success) 8%, transparent)',
+                  border: '1px solid color-mix(in srgb, var(--color-success) 20%, transparent)',
+                  color: 'var(--color-success-dark)',
+                  fontSize: 13,
+                }}
+              >
                 {profileSuccess}
               </div>
             )}
             {profileError && (
-              <div style={{
-                padding: '10px 14px', marginBottom: 16, borderRadius: 4,
-                background: 'rgba(220, 38, 38, 0.08)', border: '1px solid rgba(220, 38, 38, 0.2)',
-                color: '#dc2626', fontSize: 13,
-              }}>
+              <div
+                style={{
+                  padding: '10px 14px',
+                  marginBottom: 16,
+                  borderRadius: 4,
+                  background: 'color-mix(in srgb, var(--status-danger) 8%, transparent)',
+                  border: '1px solid color-mix(in srgb, var(--status-danger) 20%, transparent)',
+                  color: 'var(--status-danger)',
+                  fontSize: 13,
+                }}
+              >
                 {profileError}
               </div>
             )}
@@ -339,20 +351,32 @@ export function ProfileClient({ locale }: { locale: string }) {
             </h3>
 
             {pwSuccess && (
-              <div style={{
-                padding: '10px 14px', marginBottom: 16, borderRadius: 4,
-                background: 'rgba(34, 197, 94, 0.08)', border: '1px solid rgba(34, 197, 94, 0.2)',
-                color: '#16a34a', fontSize: 13,
-              }}>
+              <div
+                style={{
+                  padding: '10px 14px',
+                  marginBottom: 16,
+                  borderRadius: 4,
+                  background: 'color-mix(in srgb, var(--color-success) 8%, transparent)',
+                  border: '1px solid color-mix(in srgb, var(--color-success) 20%, transparent)',
+                  color: 'var(--color-success-dark)',
+                  fontSize: 13,
+                }}
+              >
                 {pwSuccess}
               </div>
             )}
             {pwError && (
-              <div style={{
-                padding: '10px 14px', marginBottom: 16, borderRadius: 4,
-                background: 'rgba(220, 38, 38, 0.08)', border: '1px solid rgba(220, 38, 38, 0.2)',
-                color: '#dc2626', fontSize: 13,
-              }}>
+              <div
+                style={{
+                  padding: '10px 14px',
+                  marginBottom: 16,
+                  borderRadius: 4,
+                  background: 'color-mix(in srgb, var(--status-danger) 8%, transparent)',
+                  border: '1px solid color-mix(in srgb, var(--status-danger) 20%, transparent)',
+                  color: 'var(--status-danger)',
+                  fontSize: 13,
+                }}
+              >
                 {pwError}
               </div>
             )}

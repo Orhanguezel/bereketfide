@@ -21,11 +21,11 @@ import { normalizeSubCategory,cleanParamsSubCategory } from '@/integrations/shar
 export const subCategoriesAdminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     /* --------------------------------------------------------- */
-    /* LIST – GET /api/admin/sub-categories/list                 */
+    /* LIST – GET /api/admin/subcategories/list                 */
     /* --------------------------------------------------------- */
     listSubCategoriesAdmin: build.query<SubCategoryDto[], SubCategoryAdminListQueryParams | void>({
       query: (params) => ({
-        url: '/admin/sub-categories/list',
+        url: '/admin/subcategories/list',
         method: 'GET',
         params: cleanParamsSubCategory(params as Record<string, unknown> | undefined),
       }),
@@ -34,12 +34,12 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     }),
 
     /* --------------------------------------------------------- */
-    /* GET by id – /api/admin/sub-categories/:id?locale=xx       */
+    /* GET by id – /api/admin/subcategories/:id?locale=xx       */
     /*  👉 i18n için kategori ile aynı pattern: { id, locale? }   */
     /* --------------------------------------------------------- */
     getSubCategoryAdmin: build.query<SubCategoryDto, { id: string; locale?: string }>({
       query: ({ id, locale }) => ({
-        url: `/admin/sub-categories/${encodeURIComponent(id)}`,
+        url: `/admin/subcategories/${encodeURIComponent(id)}`,
         method: 'GET',
         params: cleanParamsSubCategory(locale ? { locale } : undefined),
       }),
@@ -47,11 +47,11 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     }),
 
     /* --------------------------------------------------------- */
-    /* (Opsiyonel) Slug ile – /admin/sub-categories/by-slug/:slug*/
+    /* (Opsiyonel) Slug ile – /admin/subcategories/by-slug/:slug*/
     /* --------------------------------------------------------- */
     getSubCategoryBySlugAdmin: build.query<SubCategoryDto, { slug: string; category_id?: string }>({
       query: ({ slug, category_id }) => ({
-        url: `/admin/sub-categories/by-slug/${encodeURIComponent(slug)}`,
+        url: `/admin/subcategories/by-slug/${encodeURIComponent(slug)}`,
         method: 'GET',
         params: cleanParamsSubCategory(category_id ? { category_id } : undefined),
       }),
@@ -59,11 +59,11 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     }),
 
     /* --------------------------------------------------------- */
-    /* CREATE – POST /api/admin/sub-categories                   */
+    /* CREATE – POST /api/admin/subcategories                   */
     /* --------------------------------------------------------- */
     createSubCategoryAdmin: build.mutation<SubCategoryDto, SubCategoryCreatePayload>({
       query: (body) => ({
-        url: '/admin/sub-categories',
+        url: '/admin/subcategories',
         method: 'POST',
         body,
       }),
@@ -71,7 +71,7 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     }),
 
     /* --------------------------------------------------------- */
-    /* PATCH – /api/admin/sub-categories/:id                     */
+    /* PATCH – /api/admin/subcategories/:id                     */
     /*  Body: SubCategoryUpdatePayload (+ locale i18n alanları)  */
     /* --------------------------------------------------------- */
     updateSubCategoryAdmin: build.mutation<
@@ -79,7 +79,7 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
       { id: string; patch: SubCategoryUpdatePayload }
     >({
       query: ({ id, patch }) => ({
-        url: `/admin/sub-categories/${encodeURIComponent(id)}`,
+        url: `/admin/subcategories/${encodeURIComponent(id)}`,
         method: 'PATCH',
         body: patch,
       }),
@@ -87,23 +87,23 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     }),
 
     /* --------------------------------------------------------- */
-    /* DELETE – /api/admin/sub-categories/:id                    */
+    /* DELETE – /api/admin/subcategories/:id                    */
     /* --------------------------------------------------------- */
     deleteSubCategoryAdmin: build.mutation<void, string>({
       query: (id) => ({
-        url: `/admin/sub-categories/${encodeURIComponent(id)}`,
+        url: `/admin/subcategories/${encodeURIComponent(id)}`,
         method: 'DELETE',
       }),
     }),
 
     /* --------------------------------------------------------- */
-    /* REORDER – /api/admin/sub-categories/reorder               */
+    /* REORDER – /api/admin/subcategories/reorder               */
     /* Body: { items: [{id, display_order}, ...] }               */
     /* --------------------------------------------------------- */
     reorderSubCategoriesAdmin: build.mutation<{ ok: boolean }, { items: SubCategoryReorderItem[] }>(
       {
         query: (payload) => ({
-          url: '/admin/sub-categories/reorder',
+          url: '/admin/subcategories/reorder',
           method: 'POST',
           body: payload,
         }),
@@ -111,7 +111,7 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     ),
 
     /* --------------------------------------------------------- */
-    /* TOGGLE ACTIVE – PATCH /api/admin/sub-categories/:id/active*/
+    /* TOGGLE ACTIVE – PATCH /api/admin/subcategories/:id/active*/
     /* Body: { is_active: boolean }                              */
     /* --------------------------------------------------------- */
     toggleSubCategoryActiveAdmin: build.mutation<
@@ -119,7 +119,7 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
       { id: string; is_active: boolean }
     >({
       query: ({ id, is_active }) => ({
-        url: `/admin/sub-categories/${encodeURIComponent(id)}/active`,
+        url: `/admin/subcategories/${encodeURIComponent(id)}/active`,
         method: 'PATCH',
         body: { is_active },
       }),
@@ -127,7 +127,7 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     }),
 
     /* --------------------------------------------------------- */
-    /* TOGGLE FEATURED – PATCH /admin/sub-categories/:id/featured*/
+    /* TOGGLE FEATURED – PATCH /admin/subcategories/:id/featured*/
     /* Body: { is_featured: boolean }                            */
     /* --------------------------------------------------------- */
     toggleSubCategoryFeaturedAdmin: build.mutation<
@@ -135,7 +135,7 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
       { id: string; is_featured: boolean }
     >({
       query: ({ id, is_featured }) => ({
-        url: `/admin/sub-categories/${encodeURIComponent(id)}/featured`,
+        url: `/admin/subcategories/${encodeURIComponent(id)}/featured`,
         method: 'PATCH',
         body: { is_featured },
       }),
@@ -143,13 +143,13 @@ export const subCategoriesAdminApi = baseApi.injectEndpoints({
     }),
 
     /* --------------------------------------------------------- */
-    /* SET IMAGE – PATCH /api/admin/sub-categories/:id/image     */
+    /* SET IMAGE – PATCH /api/admin/subcategories/:id/image     */
     /* Body: { asset_id?: string|null, alt?: string|null }       */
     /*  👉 Kategori ile aynı payload imzası                      */
     /* --------------------------------------------------------- */
     setSubCategoryImageAdmin: build.mutation<SubCategoryDto, SubCategorySetImagePayload>({
       query: ({ id, asset_id, alt }) => ({
-        url: `/admin/sub-categories/${encodeURIComponent(id)}/image`,
+        url: `/admin/subcategories/${encodeURIComponent(id)}/image`,
         method: 'PATCH',
         body: {
           asset_id: asset_id ?? null,

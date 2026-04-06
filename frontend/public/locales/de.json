@@ -1,36 +1,57 @@
 {
   "nav": {
     "home": "Startseite",
-    "projects": "Projekte",
+    "projects": "Produkte",
     "services": "Leistungen",
     "about": "Über uns",
     "gallery": "Galerie",
     "blog": "Nachrichten",
+    "knowledgeHub": "Wissenszentrum",
+    "catalogs": "Kataloge",
+    "products": "Sortiment",
     "contact": "Kontakt",
     "offer": "Angebot anfordern",
     "login": "Anmelden",
     "register": "Registrieren",
-    "residential": "Wohnprojekte",
-    "commercial": "Gewerbeprojekte",
-    "mixed": "Mischnutzung",
-    "restoration": "Restaurierung",
-    "construction": "Bau & Generalunternehmer",
-    "project_management": "Projektmanagement",
-    "architectural_design": "Architektonische Planung",
-    "interior_design": "Innenarchitektur",
+    "dealerLogin": "Händler-Login",
+    "dealerRegister": "Händler-Antrag",
+    "dealerNetwork": "Händlernetz",
+    "residential": "Gemüse-Jungpflanzen",
+    "commercial": "Obst-Jungpflanzen",
+    "mixed": "Zierpflanzen",
+    "restoration": "Sortiment Samen",
+    "construction": "Jungpflanzen- & Samenproduktion",
+    "project_management": "Auftragsverfolgung",
+    "architectural_design": "Produktionsberatung",
+    "interior_design": "Landschaftslösungen",
     "corporate": "Unternehmen",
     "vision": "Unsere Vision",
     "team": "Unser Team",
     "career": "Karriere",
-    "tagline": "Führendes Bauunternehmen der Türkei",
+    "tagline": "Zuverlässiger Produzent von Gemüse-, Obst- und Zierpflanzen-Setzlingen in der Türkei",
+    "ariaPrimaryNavigation": "Hauptnavigation",
+    "ariaToggleMenu": "Menü öffnen oder schließen",
+    "ariaSearch": "Websitesuche öffnen",
+    "ariaLanguage": "Sprachauswahl öffnen",
+    "ariaContactInfo": "Kontaktinformationen öffnen",
+    "ariaSocialLinks": "Social-Media-Links öffnen",
+    "searchPlaceholder": "Produkte, Leistungen oder Seiten suchen...",
+    "trendingSearches": "Beliebte Suchen:",
+    "trendSeedling": "Jungpflanze",
+    "trendGrafted": "Veredelt",
+    "trendTomato": "Tomate",
     "profile": "Mein Profil",
     "logout": "Abmelden"
   },
   "footer": {
-    "description": "Zuverlässige Bau- und Architekturlösungen für Wohn-, Gewerbe- und Mischnutzungsprojekte.",
+    "description": "Zuverlässige Produktion und Lieferung von Gemüse-, Obst- und Zierpflanzen-Setzlingen.",
     "rights": "Alle Rechte vorbehalten",
     "privacy": "Datenschutzerklärung",
     "terms": "Nutzungsbedingungen",
+    "qualityPolicy": "Qualitätspolitik",
+    "servicePolicy": "Servicepolitik",
+    "dataProtectionNotice": "Datenschutzhinweis (KVKK)",
+    "cookiePolicy": "Cookie-Richtlinie",
     "sections": {
       "explore": "Entdecken",
       "company": "Unternehmen",
@@ -59,8 +80,8 @@
       "daysAgo": "vor {days} Tagen"
     },
     "requestOffer": "Angebot anfordern",
-    "offerCtaTitle": "Kostenlose Besichtigung und Angebot für Ihr Projekt",
-    "offerCtaDescription": "Für Ihre Wohn-, Gewerbe- oder Mischnutzungsprojekte klären wir gemeinsam Projektumfang, Zeitplan und Budgeterwartungen und erstellen Ihnen ein maßgeschneidertes Angebot.",
+    "offerCtaTitle": "Kostenloses Angebot für Ihre Jungpflanzen-Bestellung",
+    "offerCtaDescription": "Für Gemüse-, Obst- oder Zierpflanzen-Jungpflanzen klären wir gemeinsam Sorte, Menge und Liefererwartungen und erstellen Ihnen ein individuelles Angebot.",
     "freeOfObligation": "Kostenlos und unverbindlich",
     "send": "Senden",
     "name": "Vollständiger Name",
@@ -72,92 +93,93 @@
     "required": "Pflichtfeld",
     "success": "Erfolgreich",
     "noResults": "Keine Ergebnisse gefunden",
-    "relatedProducts": "Verwandte Projekte",
+    "relatedProducts": "Verwandte Produkte",
     "relatedGallery": "Verwandte Galerien",
-    "relatedArticles": "Verwandte Artikel"
+    "relatedArticles": "Verwandte Artikel",
+    "relatedKnowledgePosts": "Aus der Wissensdatenbank"
   },
   "home": {
     "hero": {
-      "title": "Ihr zuverlässiger Partner für Bau und Architektur",
-      "subtitle": "Von der Planung bis zur Übergabe bieten wir qualitativ hochwertige, termingerechte und transparente Bauleistungen für Wohn-, Gewerbe- und Mischnutzungsprojekte.",
-      "cta": "Unsere Projekte entdecken",
+      "title": "Ihr zuverlässiger Partner für qualitätsvolle Jungpflanzen- und Samenproduktion",
+      "subtitle": "Vom Saatgut bis zur Ernte bieten wir qualitativ hochwertige, gesunde und ertragsstarke Jungpflanzen für Gemüse, Obst und Zierpflanzen.",
+      "cta": "Unser Sortiment entdecken",
       "ctaSecondary": "Angebot anfordern",
       "badge": "Bereket Fide",
-      "newProjectBadge": "Neues Projekt",
-      "workflowLabel": "Projektablauf",
-      "workflowTitle": "Individuelle Planung und Umsetzung für Ihr Projekt",
+      "newProjectBadge": "Neues Produkt",
+      "workflowLabel": "Produktionsablauf",
+      "workflowTitle": "Planung und Produktion nach Ihren Anforderungen",
       "workflowBadgeTitle": "Transparent",
       "workflowBadgeSubtitle": "Ablauf und Kommunikation",
       "metrics": {
-        "prototypeTitle": "Vorplanung",
-        "prototypeDesc": "Machbarkeitsstudie, Konzeptentwurf und erste Kostenschätzung",
-        "productionTitle": "Umsetzung",
-        "productionDesc": "Qualitätskontrolle, Terminverfolgung und transparente Kommunikation",
-        "engineeringTitle": "Ingenieurwesen",
-        "engineeringDesc": "Statik, Baugrundgutachten und technische Lösungsunterstützung"
+        "prototypeTitle": "Sortenwahl",
+        "prototypeDesc": "Klima, Bodenanalyse und Auswahl der passenden Jungpflanzen-Sorten",
+        "productionTitle": "Produktion",
+        "productionDesc": "Qualitätskontrolle, Wachstumsüberwachung und gesunde Jungpflanzen-Aufzucht",
+        "engineeringTitle": "Technische Betreuung",
+        "engineeringDesc": "Pflanzanleitung, Bewässerungsplanung und landwirtschaftliche Beratung"
       },
       "steps": {
-        "oneTitle": "1. Anforderungsanalyse",
-        "oneDesc": "Gemeinsam klären wir Standort, Nutzungszweck, Fläche, Budget und Terminerwartungen.",
-        "twoTitle": "2. Planung und Ingenieurwesen",
-        "twoDesc": "Wir erstellen Architekturentwürfe, Tragwerksplanungen und Ingenieurlösungen.",
-        "threeTitle": "3. Umsetzung und Übergabe",
-        "threeDesc": "Von der Baugenehmigung bis zur Übergabe steuern wir den gesamten Prozess und gewährleisten Qualität und Termintreue."
+        "oneTitle": "1. Bedarfsanalyse",
+        "oneDesc": "Gemeinsam klären wir Region, Klima, Bodenstruktur und Produktionsziele.",
+        "twoTitle": "2. Jungpflanzenproduktion",
+        "twoDesc": "Wir führen Aussaat, Keimung und Aufzucht entsprechend der gewählten Sorten durch.",
+        "threeTitle": "3. Lieferung und Support",
+        "threeDesc": "Verpackung und Lieferung gesunder Jungpflanzen sowie technische Unterstützung nach der Pflanzung."
       },
       "stats": {
         "stepsValue": "3+",
-        "stepsLabel": "Zentrale Projektphasen",
+        "stepsLabel": "Kernphasen der Produktion",
         "b2bValue": "15+",
-        "b2bLabel": "Jahre Branchenerfahrung"
+        "b2bLabel": "Jahre Erfahrung in der Landwirtschaft"
       }
     },
     "projects": {
-      "title": "Ausgewählte Projekte",
-      "subtitle": "Eine Auswahl abgeschlossener und laufender Projekte aus dem Wohn-, Gewerbe- und Mischnutzungsbereich"
+      "title": "Ausgewählte Produkte",
+      "subtitle": "Eine Auswahl hochwertiger Gemüse-, Obst- und Zierpflanzen-Jungpflanzen"
     },
     "latestProjects": {
-      "title": "Neueste Projekte",
-      "subtitle": "Entdecken Sie unsere aktuellsten Projekte"
+      "title": "Neueste Produkte",
+      "subtitle": "Entdecken Sie unsere aktuellsten Sorten und Jungpflanzen"
     },
     "services": {
       "title": "Unsere Leistungsbereiche",
-      "subtitle": "Umfassende Lösungen von der Architekturplanung über den Bau bis zur Projektsteuerung und Übergabe"
+      "subtitle": "Umfassende Lösungen von der Sortenwahl über die Jungpflanzenproduktion bis zu Beratung und Lieferung"
     },
     "whyUs": {
       "title": "Warum Bereket Fide?",
-      "subtitle": "Mit einer auf Qualität, Vertrauen und Termintreue ausgerichteten Bauphilosophie machen wir bei jedem Projekt den Unterschied",
+      "subtitle": "Mit einem Fokus auf Qualität, Vertrauen und pünktliche Lieferung machen wir bei jeder Bestellung den Unterschied",
       "quality": "Hohe Qualität",
-      "qualityDesc": "Vollständige Einhaltung der Qualitätsstandards in jeder Phase, von der Materialauswahl bis zur Ausführung",
+      "qualityDesc": "Einhaltung der Qualitätsstandards von der Saatgutauswahl bis zur Lieferung",
       "experience": "Erfahrung",
-      "experienceDesc": "Ihr zuverlässiger Partner mit über 15 Jahren Branchenerfahrung und mehr als 100 abgeschlossenen Projekten",
+      "experienceDesc": "Ihr zuverlässiger Partner mit über 15 Jahren Erfahrung in der Landwirtschaft und Tausenden zufriedenen Kunden",
       "custom": "Individuelle Lösungen",
-      "customDesc": "Ein projektspezifischer Planungs- und Umsetzungsansatz — nicht Standard, sondern maßgeschneidert",
-      "delivery": "Termingerechte Übergabe",
-      "deliveryDesc": "Terminzusage und transparentes Prozessmanagement vom Projektstart bis zur Übergabe"
+      "customDesc": "Produktionsansatz abgestimmt auf Region und Klima — nicht Standard, sondern auf Sie zugeschnitten",
+      "delivery": "Pünktliche Lieferung",
+      "deliveryDesc": "Terminzusage und transparentes Prozessmanagement von der Bestellung bis zur Lieferung"
     },
     "brands": {
-      "title": "Referenzmarken",
-      "subtitle": "Weltweit führende Marken, mit denen wir in unseren Projekten zusammenarbeiten"
+      "title": "Partner und Zulieferer",
+      "subtitle": "Verlässliche Unternehmen, mit denen wir in Produktion und Lieferkette zusammenarbeiten"
     },
     "gallery": {
       "title": "Galerie",
-      "subtitle": "Ausgewählte Fotografien aus unseren abgeschlossenen Projekten und Bauprozessen"
+      "subtitle": "Ausgewählte Aufnahmen aus unseren Gewächshäusern, Produktionsprozessen und Sortimenten"
     },
     "blog": {
-      "title": "Nachrichten und Einblicke",
-      "subtitle": "Aktuelle Inhalte aus der Baubranche, Architekturtrends und unseren Projekterfahrungen",
+      "title": "Wissensdatenbank",
+      "subtitle": "Praxisnahe Inhalte zu Jungpflanzenproduktion, Anbauverfahren und landwirtschaftlichem Know-how",
       "featuredLabel": "Hervorgehobener Beitrag",
-      "spotlightTitle": "Nachhaltiges Bauen: Green Building Zertifizierung und LEED-Standards",
-      "spotlightBodyPrimary": "Nachhaltiges Bauen wird in Bezug auf Energieeffizienz, Wassereinsparung und gesunde Innenraumbedingungen zu einem immer wichtigeren Standard. Die LEED-Zertifizierung (Leadership in Energy and Environmental Design) ist ein internationales Referenzsystem, das Gebäude als umweltfreundlich zertifiziert.",
-      "spotlightBodySecondary": "Bei Bereket Fide streben wir danach, nachhaltige Materialauswahl und energieeffiziente Designprinzipien in jedes Projekt zu integrieren. Nachhaltigkeitsziele können ohne richtige Planung nicht erreicht werden — deshalb planen wir von Anfang an einen umweltbewussten Ansatz für jedes Projekt.",
-      "insightLabel": "Was dieser Artikel behandelt",
-      "insightText": "Standards für grünes Bauen, Zertifizierungsprozess und der Mehrwert für Ihr Projekt",
+      "spotlightTitle": "Nachhaltige Landwirtschaft: Bio-Jungpflanzenproduktion und Zertifizierungsstandards",
+      "spotlightBodyPrimary": "Nachhaltige Landwirtschaft gewinnt hinsichtlich Bodengesundheit, Wasserschonung und naturnaher Produktion immer mehr an Bedeutung. Die Bio-Zertifizierung von Jungpflanzen ist ein wichtiges Referenzsystem für umweltverträgliche Produktion.",
+      "spotlightBodySecondary": "Bei Bereket Fide verfolgen wir das Ziel, nachhaltige Saatgutauswahl und ökologisch orientierte Produktionsprinzipien in jede Kultur zu integrieren. Ohne klare Planung von Anfang an sind Ertragsziele kaum erreichbar — deshalb planen wir jeden Zyklus von Tag eins mit Blick auf Umwelt und Qualität.",
+      "insightLabel": "Inhalt",
+      "insightText": "Bio-Standards, Zertifizierungsablauf und Mehrwert für Ihre Ernte",
       "archiveLabel": "Weitere Inhalte",
-      "archiveSubtitle": "Weitere Inhalte zu Bau, Architektur und Projektmanagement"
+      "archiveSubtitle": "Weitere Artikel zu Landwirtschaft, Jungpflanzenproduktion und Pflanzenpflege"
     },
     "newsletter": {
       "title": "Abonnieren Sie unseren Newsletter",
-      "subtitle": "Bleiben Sie über neue Projekte und Branchenentwicklungen informiert.",
+      "subtitle": "Neue Sorten, Saisonangebote und Neuigkeiten aus der Pflanzenproduktion.",
       "placeholder": "Ihre E-Mail-Adresse",
       "subscribe": "Abonnieren",
       "success": "Erfolgreich abonniert!",
@@ -165,57 +187,77 @@
     },
     "contact": {
       "title": "Kontaktieren Sie uns",
-      "subtitle": "Teilen Sie uns Ihre Projektidee, Angebotsanfrage oder Fragen mit"
+      "subtitle": "Bestellung, Angebot oder Fragen zu unserem Sortiment — wir melden uns gern bei Ihnen"
     }
   },
   "projects": {
-    "title": "Unsere Projekte",
-    "description": "Unsere abgeschlossenen und laufenden Projekte im Wohn-, Gewerbe- und Mischnutzungsbereich verbinden Qualität, Ästhetik und Funktionalität.",
+    "title": "Unsere Produkte",
+    "description": "Entdecken Sie unser breites Sortiment hochwertiger Gemüse-, Obst- und Zierpflanzen-Jungpflanzen.",
     "categories": "Kategorien",
-    "allCategories": "Alle Projekte",
+    "allCategories": "Alle Produkte",
     "results": "Ergebnisse",
     "images": "Bilder",
-    "emptyStateNote": "Derzeit sind keine veröffentlichten Projekte vorhanden. Beispiele aus unseren vergangenen Projekten werden angezeigt.",
-    "search": "Projekte suchen...",
-    "noProjects": "In dieser Kategorie sind noch keine Projekte vorhanden.",
-    "specs": "Projektdetails",
-    "requestOffer": "Informationen zu diesem Projekt anfordern",
+    "emptyStateNote": "Derzeit sind keine veröffentlichten Produkte vorhanden. Beispiele aus unserem Sortiment werden angezeigt.",
+    "search": "Produkte suchen...",
+    "noProjects": "In dieser Kategorie sind noch keine Produkte vorhanden.",
+    "specs": "Produktdetails",
+    "requestOffer": "Informationen zu diesem Produkt anfordern",
     "manufacturers": "Hersteller",
-    "saveProject": "Projekt speichern",
-    "viewProject": "Projekt ansehen",
-    "allProjects": "Alle Projekte",
-    "loveTitle": "Projekte, die Ihnen gefallen werden",
-    "getQuoteTitle": "Angebot für Ihr Projekt anfordern",
-    "getQuoteDesc": "Kontaktieren Sie uns für eine kostenlose Besichtigung und ein Angebot.",
+    "saveProject": "Produkt speichern",
+    "viewProject": "Produkt ansehen",
+    "allProjects": "Alle Produkte",
+    "loveTitle": "Produkte, die Ihnen gefallen werden",
+    "getQuoteTitle": "Angebot für Ihre Bestellung anfordern",
+    "getQuoteDesc": "Kontaktieren Sie uns für ein kostenloses Angebot zu Ihrem Jungpflanzen-Bedarf.",
+    "similarByTagsTitle": "Ähnliche Produkte",
+    "aboutProducerTitle": "Über diesen Erzeuger",
+    "agronomySectionTitle": "Anbau- und Produktionsdaten",
+    "agronomy": {
+      "botanicalName": "Botanischer Name",
+      "plantingSeasons": "Aussaat-/Pflanzzeit",
+      "harvestDays": "Tage bis zur Ernte",
+      "climateZones": "Klima / Region",
+      "soilTypes": "Bodentyp",
+      "waterNeed": "Wasserbedarf",
+      "sunExposure": "Licht / Sonne",
+      "tempRange": "Temperaturbereich",
+      "minTemp": "Mindesttemperatur",
+      "maxTemp": "Höchsttemperatur",
+      "germinationDays": "Keimdauer (Tage)",
+      "seedDepthCm": "Saattiefe (cm)",
+      "rowSpacingCm": "Reihenabstand (cm)",
+      "plantSpacingCm": "Pflanzabstand (cm)",
+      "yieldPerSqm": "Ertrag pro m²"
+    },
     "filters": {
-      "type": "Projekttyp",
-      "location": "Standort",
-      "architects": "Architekten",
+      "type": "Produkttyp",
+      "location": "Region",
+      "architects": "Erzeuger",
       "city": "Stadt",
       "year": "Jahr",
-      "materials": "Material",
-      "area": "Fläche",
-      "floors": "Stockwerke",
-      "client": "Auftraggeber",
+      "materials": "Sorte",
+      "area": "Anbaufläche",
+      "floors": "Menge",
+      "client": "Kunde",
       "status": "Status",
       "all": "Alle",
       "search": "Suchen",
-      "residential": "Wohnen",
-      "commercial": "Gewerbe",
-      "mixed": "Mischnutzung",
-      "completed": "Abgeschlossen",
-      "ongoing": "In Bearbeitung"
+      "residential": "Gemüse",
+      "commercial": "Obst",
+      "mixed": "Zierpflanze",
+      "completed": "Auf Lager",
+      "ongoing": "In Produktion"
     },
     "detail": {
-      "location": "Standort",
-      "area": "Fläche",
+      "location": "Region",
+      "area": "Anbaufläche",
       "year": "Jahr",
       "type": "Typ",
       "status": "Status",
-      "client": "Auftraggeber",
-      "architect": "Architekt",
-      "floors": "Stockwerke",
-      "units": "Einheiten"
+      "client": "Kunde",
+      "architect": "Erzeuger",
+      "floors": "Menge",
+      "units": "Packungsinhalt"
     },
     "comments": {
       "title": "Kommentare",
@@ -242,34 +284,34 @@
   },
   "services": {
     "title": "Unsere Leistungsbereiche",
-    "description": "Umfassende Bau- und Architekturleistungen von der Architekturplanung über den Bau bis hin zur Restaurierung und Projektsteuerung.",
+    "description": "Umfassende Leistungen von der Sortenwahl über Jungpflanzenproduktion und landwirtschaftliche Beratung bis zur Lieferung.",
     "viewAll": "Alle Leistungen",
     "noServices": "Noch keine Leistungen vorhanden.",
     "learnMore": "DETAILS",
     "emptyStateNote": "Bis Live-Inhalte verfügbar sind, werden unten Beispiel-Leistungsbeschreibungen angezeigt.",
     "requestService": "Angebot für diese Leistung anfordern",
     "items": {
-      "residential": "Wohnprojekte",
-      "commercial": "Gewerbeprojekte",
-      "restoration": "Restaurierung",
-      "projectManagement": "Projektmanagement",
-      "architecturalDesign": "Architektonische Planung",
-      "interiorDesign": "Innenarchitektur"
+      "residential": "Gemüse-Jungpflanzen",
+      "commercial": "Obst-Jungpflanzen",
+      "restoration": "Sortiment Samen",
+      "projectManagement": "Auftragsverfolgung",
+      "architecturalDesign": "Produktionsberatung",
+      "interiorDesign": "Landschaftslösungen"
     }
   },
   "gallery": {
     "title": "Galerie",
-    "description": "Eine Fotogalerie aus unseren abgeschlossenen Projekten, Bauprozessen und architektonischen Details.",
+    "description": "Fotos aus unseren Gewächshäusern, Produktionsabläufen und Jungpflanzen-Sorten.",
     "viewAll": "Alle Bilder",
     "backToList": "Zur Galerie",
     "noGalleries": "Noch keine Galerien vorhanden.",
     "results": "Galerien",
     "photos": "Fotos",
-    "emptyStateNote": "Bis Live-Projektbilder verfügbar sind, werden unten Beispiel-Galerietitel angezeigt."
+    "emptyStateNote": "Bis Live-Bilder verfügbar sind, werden unten Beispiel-Galerietitel angezeigt."
   },
   "blog": {
     "title": "Nachrichten",
-    "description": "Architektur, Bautechnologien und aktuelle Entwicklungen von Bereket Fide.",
+    "description": "Jungpflanzenproduktion, Anbautechnik und aktuelle Entwicklungen von Bereket Fide.",
     "viewPost": "Nachricht lesen",
     "allPosts": "Alle Nachrichten",
     "all": "Alle",
@@ -304,9 +346,15 @@
       "buttonTitle": "Teilen:"
     }
   },
+  "careerPage": {
+    "title": "Karriere",
+    "description": "Bewerbung und Kontakt für unsere Produktions- und Betriebsteams.",
+    "fallbackContent": "<p>Bereket Fide wächst mit Vertrauen, Lernen und Teamarbeit. Für Stellen und Bewerbungen schreiben Sie an <strong>info@bereketfide.com.tr</strong>.</p>",
+    "contactCta": "Zur Kontaktseite →"
+  },
   "contact": {
     "title": "Kontakt",
-    "description": "Kontaktieren Sie unser Team für Ihre Projektidee, Angebotsanfrage oder Fragen — gemeinsam finden wir die beste Lösung.",
+    "description": "Kontaktieren Sie unser Team für Bestellungen, Angebotsanfragen oder Fragen zu unserem Sortiment — gemeinsam finden wir die passende Lösung.",
     "form": {
       "title": "Nachricht senden",
       "namePlaceholder": "Ihr vollständiger Name",
@@ -329,30 +377,30 @@
     "response": {
       "title": "Unser Kontaktprozess",
       "items": {
-        "one": "Wir prüfen Ihre Anfrage und klären Projektumfang, Standort, Nutzungszweck und Budgeterwartungen.",
-        "two": "Bei Bedarf fordern wir Projektdetails, technische Spezifikationen oder zusätzliche Informationen an.",
-        "three": "Anschließend erstellen wir Ihnen schnellstmöglich ein maßgeschneidertes Angebot, eine Machbarkeitsbewertung und einen Projektplan."
+        "one": "Wir prüfen Ihre Anfrage und klären Sortiment, Menge, Lieferregion und Terminwünsche.",
+        "two": "Bei Bedarf bitten wir um Anbaufläche, gewünschte Kultur oder technische Details.",
+        "three": "Anschließend erstellen wir Ihnen zeitnah ein individuelles Angebot und einen Lieferplan."
       }
     }
   },
   "offer": {
     "title": "Angebotsanfrage",
-    "description": "Basierend auf Projekttyp, Standort, Fläche, Budget und Terminerwartungen erstellen wir Ihnen eine individuelle Besichtigung und ein Angebot.",
+    "description": "Basierend auf Kultur, Menge, Lieferregion und Liefertermin erstellen wir Ihnen ein individuelles Angebot für Jungpflanzen und Saatgut.",
     "benefits": {
       "title": "Was wir im Angebot klären",
       "items": {
-        "one": "Projekttyp: Wohnen, Gewerbe, Mischnutzung oder Restaurierung",
-        "two": "Umfang: Architekturplanung, Bau, Projektmanagement oder schlüsselfertige Gesamtlösung",
-        "three": "Budgetrahmen, Terminerwartungen, Standort und technische Anforderungen"
+        "one": "Kultur: Gemüse, Obst oder Zierpflanzen — gewünschte Sorten",
+        "two": "Menge, Lieferfenster und Qualitätsanforderungen",
+        "three": "Anbauregion, Logistik und technische Fragen zur Pflanzung"
       }
     },
     "form": {
-      "productInterest": "Gewünschte Leistung",
-      "quantity": "Fläche (m²)",
-      "deadline": "Zieltermin",
-      "details": "Projektdetails",
-      "detailsPlaceholder": "Erzählen Sie uns von Ihrem Projekt (Standort, Nutzungszweck, Budgetrahmen usw.)",
-      "attachFile": "Datei anhängen (Vorentwurf, Lageplan, technische Spezifikation usw.)",
+      "productInterest": "Gewünschtes Produkt / Kultur",
+      "quantity": "Menge (Stück oder Tray)",
+      "deadline": "Gewünschter Liefertermin",
+      "details": "Details zur Anfrage",
+      "detailsPlaceholder": "Beschreiben Sie Ihre Anfrage (Region, Anbaufläche, Sorte, besondere Wünsche usw.)",
+      "attachFile": "Datei anhängen (optional: Liste, technische Angaben)",
       "submit": "Angebot anfordern",
       "success": "Ihre Angebotsanfrage wurde empfangen. Unser Team wird sich in Kürze bei Ihnen melden.",
       "error": "Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
@@ -360,39 +408,39 @@
   },
   "about": {
     "title": "Über uns",
-    "description": "Bereket Fide bietet zuverlässige, qualitativ hochwertige und termingerechte Bauleistungen für Wohn- und Gewerbeprojekte von der Planung bis zur Übergabe.",
-    "intro": "Unser Team verwaltet jedes Projekt sorgfältig mit Architekturplanung, Ingenieurlösungen und einem erfahrenen Umsetzungsteam vor Ort. Kundenzufriedenheit, Qualität und termingerechte Lieferung sind unsere Grundwerte.",
+    "description": "Bereket Fide steht für zuverlässige Produktion und Lieferung von Gemüse-, Obst- und Zierpflanzen-Jungpflanzen — von der Sortenwahl bis zur termingerechten Lieferung.",
+    "intro": "Unser Team begleitet Aufzucht, Qualitätskontrolle und Logistik mit Erfahrung in der Jungpflanzenproduktion. Kundenzufriedenheit, Pflanzengesundheit und verlässliche Liefertermine sind unsere Grundwerte.",
     "sections": {
-      "expertiseTitle": "Unsere Fachgebiete",
+      "expertiseTitle": "Unsere Schwerpunkte",
       "expertiseItems": {
-        "one": "Wohnprojekte: Villen, Mehrfamilienhäuser, Residenzen und Wohnanlagen",
-        "two": "Gewerbeprojekte: Büros, Einkaufszentren und Mischnutzungsgebäude",
-        "three": "Restaurierung, Renovierung und statische Ertüchtigungsprojekte"
+        "one": "Gemüse-Jungpflanzen für Freiland und Gewächshaus",
+        "two": "Obst-Jungpflanzen und ausgewählte Sortimente",
+        "three": "Zierpflanzen sowie Beratung zu Anbau und Versand"
       },
       "processTitle": "Unser Arbeitsmodell",
       "processItems": {
-        "one": "Verständnis der Projektanforderungen und Kundenerwartungen",
-        "two": "Management von Architekturplanung, Ingenieurwesen und Genehmigungsverfahren",
-        "three": "Qualitätskontrollierte, termingerechte und vollständige Projektübergabe"
+        "one": "Gemeinsame Klärung von Region, Klima und Sortenwahl",
+        "two": "Produktion mit Qualitätskontrolle und dokumentierten Abläufen",
+        "three": "Verpackung, Lieferung und Support nach der Pflanzung"
       },
-      "sectorsTitle": "Unsere Tätigkeitsbereiche",
+      "sectorsTitle": "Wen wir beliefern",
       "sectorsItems": {
-        "one": "Einzelne Immobilieninvestoren und Familien",
-        "two": "Gewerbeimmobilienentwickler und Institutionen",
-        "three": "Öffentliche Projekte und Stadterneuerungsmaßnahmen"
+        "one": "Landwirtschaftliche Betriebe und Produzenten",
+        "two": "Gärtnereien, Baumschulen und Wiederverkäufer",
+        "three": "Export- und Inlandspartner mit regelmäßigem Bedarf"
       },
       "stats": {
         "experience": "Jahre Erfahrung",
-        "projects": "Abgeschlossene Projekte",
-        "team": "Expertenteam"
+        "projects": "Gelieferte Aufträge",
+        "team": "Fachteam"
       }
     }
   },
   "auth": {
     "loginTitle": "Melden Sie sich bei Ihrem Bereket Fide Konto an",
-    "loginSubtitle": "Verfolgen Sie Ihre Projekte, sehen Sie den Angebotsstatus und greifen Sie auf exklusive Inhalte zu.",
+    "loginSubtitle": "Verfolgen Sie Bestellungen und Angebote und greifen Sie auf Ihre Kontoinhalte zu.",
     "registerTitle": "Erstellen Sie Ihr Bereket Fide Konto",
-    "registerSubtitle": "Verfolgen Sie Ihre Projekte, sehen Sie den Angebotsstatus und greifen Sie auf exklusive Inhalte zu.",
+    "registerSubtitle": "Verfolgen Sie Bestellungen und Angebote und greifen Sie auf Ihre Kontoinhalte zu.",
     "continueWithGoogle": "Mit Google fortfahren",
     "orUseEmail": "oder verwenden Sie Ihre E-Mail-Adresse",
     "email": "E-Mail",
@@ -438,7 +486,10 @@
       "account_disabled": "Ihr Konto wurde deaktiviert.",
       "too_many_attempts": "Zu viele Versuche. Bitte warten Sie einen Moment.",
       "google_oauth_not_configured": "Anmeldung mit Google ist derzeit nicht verfügbar.",
-      "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+      "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "validation_error": "Einige Felder fehlen oder sind ungültig.",
+      "rate_limited": "Zu viele Anträge von dieser Verbindung. Bitte versuchen Sie es später erneut.",
+      "rules_accepted_required": "Bitte aktivieren Sie das Zustimmungsfeld, um fortzufahren."
     }
   },
   "catalog": {
@@ -456,15 +507,47 @@
   "legal": {
     "title": "Rechtliches",
     "privacy": "Datenschutzerklärung",
-    "privacyDesc": "Zusammenfassung der Handhabung von Kontakt-, Angebots- und technischen Projektdaten, die mit Bereket Fide geteilt werden.",
-    "privacyContent": "<p>Bereket Fide verwendet über Kontakt- und Angebotsformulare übermittelte Daten ausschließlich zur Bewertung von Anfragen, zur Angebotserstellung und zur Pflege der Projektkommunikation.</p><p>Wir fordern keine unnötigen personenbezogenen Daten an und beschränken den Zugriff auf Projektdateien, Zeichnungen und technische Dokumente auf die relevanten Betriebsteams.</p><p>Für Datenaktualisierungen oder Löschanfragen können Sie uns über die auf der Kontaktseite angegebenen Kanäle erreichen.</p>",
+    "privacyDesc": "Überblick, wie Bereket Fide Kontakt-, Angebots- und technische Produktdaten verarbeitet.",
+    "privacyContent": "<p>Bereket Fide nutzt über Kontakt- und Angebotsformulare übermittelte Daten ausschließlich zur Bearbeitung von Anfragen, zur Angebotserstellung und zur Kommunikation im Produktions- und Lieferprozess.</p><p>Wir fordern keine unnötigen personenbezogenen Daten an und beschränken den Zugriff auf Produktdateien und technische Unterlagen auf die zuständigen Betriebsteams.</p><p>Für Datenaktualisierungen oder Löschanfragen erreichen Sie uns über die auf der Kontaktseite angegebenen Kanäle.</p>",
     "terms": "Nutzungsbedingungen",
     "termsDesc": "Allgemeine Bedingungen für die Nutzung der Bereket Fide Website, technischer Inhalte und Angebotskommunikationskanäle.",
-    "termsContent": "<p>Die auf dieser Website veröffentlichten Informationen dienen der allgemeinen technischen und kommerziellen Orientierung. Der endgültige Produktumfang, die Materialauswahl und die Produktionsbedingungen werden im Rahmen der Projektprüfung festgelegt.</p><p>Bilder, technische Hinweise und Beschreibungen auf der Website stellen allein kein verbindliches Endangebot dar.</p><p>Alle Angebots- und Lieferzusagen werden erst nach gegenseitiger Bestätigung im Geschäftsprozess gültig.</p>"
+    "termsContent": "<p>Die auf dieser Website veröffentlichten Informationen dienen der allgemeinen technischen und kommerziellen Orientierung. Endgültiger Produktumfang, Sortenauswahl und Produktionsbedingungen werden im Bestellprozess geklärt.</p><p>Bilder, technische Hinweise und Beschreibungen stellen für sich allein kein verbindliches Endangebot dar.</p><p>Angebots- und Lieferzusagen werden erst nach gegenseitiger Bestätigung im Geschäftsprozess gültig.</p>",
+    "qualityPolicy": "Qualitätspolitik",
+    "qualityPolicyDesc": "Kurzüberblick zu Qualität, Rückverfolgbarkeit und kontinuierlicher Verbesserung in der Setzlingsproduktion.",
+    "qualityPolicyContent": "<p>Wir orientieren uns an gesunden Pflanzen, gleichbleibender Sortenleistung und Kundenzufriedenheit. Produktion folgt Rückverfolgbarkeit, Hygiene und technischen Standards.</p><p>Wenn der vollständige Text im CMS veröffentlicht ist, aktualisiert sich diese Seite automatisch.</p>",
+    "servicePolicy": "Servicepolitik",
+    "servicePolicyDesc": "Überblick zu Kommunikation, Angebotsbearbeitung und Kundensupport.",
+    "servicePolicyContent": "<p>Anfragen werden geprüft; endgültige Bedingungen werden schriftlich bestätigt. Unsere Teams unterstützen bei Sortenwahl und Lieferung.</p><p>Feedback senden Sie bitte an info@bereketfide.com.tr.</p>",
+    "dataProtectionNotice": "Hinweis zum Datenschutz (KVKK)",
+    "dataProtectionNoticeDesc": "Kurzinformation zur Verarbeitung personenbezogener Daten nach türkischem Gesetz Nr. 6698 (KVKK).",
+    "dataProtectionNoticeContent": "<p>Verantwortliche Stelle: Bereket Fide Tarım San. ve Tic. Ltd. Şti. Identitäts- und Kontaktdaten aus Kontakt-, Angebots- und Bestellprozessen werden zur Bearbeitung Ihrer Anfragen, zur Vertragserfüllung und zur Erfüllung gesetzlicher Pflichten verarbeitet.</p><p>Für Rechte und Anfragen wenden Sie sich an <strong>info@bereketfide.com.tr</strong>. Wenn der vollständige Text im CMS veröffentlicht ist, aktualisiert sich diese Seite automatisch.</p>",
+    "cookiePolicy": "Cookie-Richtlinie",
+    "cookiePolicyDesc": "Wie wir Cookies auf dieser Website einsetzen.",
+    "cookiePolicyContent": "<p>Cookies können für grundlegende Funktionen, Einstellungen und Sicherheit genutzt werden. Sie können Cookies in Ihren Browsereinstellungen verwalten.</p><p>Wenn die vollständige Richtlinie im CMS veröffentlicht ist, aktualisiert sich diese Seite automatisch.</p>"
   },
   "seo": {
     "defaultTitle": "Bereket Fide | Qualitäts-Setzlinge und Pflanzenproduktion",
     "defaultDescription": "Hochwertige, zuverlässige Setzlinge und Pflanzenproduktion. Entdecken Sie unser Sortiment an Gemüse-, Obst- und Zierpflanzensetzlingen bei Bereket Fide.",
-    "keywords": "Bau, Architektur, Wohnprojekte, Gewerbeprojekte, Villa, Wohnhaus, Projektmanagement, schlüsselfertig"
+    "keywords": "Setzling, Jungpflanze, Gemüsepflanze, veredelte Pflanze, Tomatenpflanze, Gewächshaus, Landwirtschaft, Antalya, Bereket Fide",
+    "searchTitle": "Websitesuche",
+    "searchDescription": "Produkte, Kataloge, Leistungen, Nachrichten, Wissensartikel sowie Unternehmens- und Rechtsseiten auf der Bereket-Fide-Website durchsuchen."
+  },
+  "searchPage": {
+    "titleResults": "Ergebnisse für „{query}“",
+    "titlePrompt": "Suche",
+    "lead": "Suche in Produkten, Katalogen, Leistungen, Unternehmens- und Rechtsseiten, Nachrichten und Wissensartikeln.",
+    "loading": "Ergebnisse werden geladen…",
+    "noResultsTitle": "Keine Treffer",
+    "noResultsBody": "Zu „{query}“ wurde nichts gefunden. Versuchen Sie es mit einem anderen oder allgemeineren Begriff.",
+    "backHome": "Zur Startseite",
+    "hintToolbar": "Geben Sie Ihre Suche oben im Menü ein.",
+    "queryTooShort": "Bitte mindestens 2 Zeichen eingeben.",
+    "typeProduct": "Produkt",
+    "typeService": "Leistung",
+    "typeNews": "Nachricht",
+    "typeBlog": "Wissensartikel",
+    "typeCatalog": "Katalog",
+    "typeLegal": "Rechtstext",
+    "typeCorporate": "Unternehmen"
   }
 }

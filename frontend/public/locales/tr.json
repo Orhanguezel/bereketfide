@@ -1,5 +1,8 @@
 {
-  "nav": {
+    "nav": {
+    "dealerLogin": "Bayi Girişi",
+    "dealerNetwork": "Bayi Ağı",
+    "dealerRegister": "Bayi Başvurusu",
     "home": "Ana Sayfa",
     "products": "Ürünler",
     "projects": "Ürünler",
@@ -7,6 +10,8 @@
     "about": "Hakkımızda",
     "gallery": "Galeri",
     "blog": "Bilgi Bankası",
+    "knowledgeHub": "Bilgi Merkezi",
+    "catalogs": "Kataloglar",
     "news": "Haberler",
     "contact": "İletişim",
     "offer": "Teklif Al",
@@ -33,6 +38,12 @@
     "tagline": "Türkiye'nin güvenilir fide ve tohum üreticisi",
     "profile": "Profilim",
     "logout": "Çıkış Yap",
+    "ariaPrimaryNavigation": "Ana gezinme",
+    "ariaToggleMenu": "Menüyü aç veya kapat",
+    "ariaSearch": "Site içi aramayı aç",
+    "ariaLanguage": "Dil seçeneklerini aç",
+    "ariaContactInfo": "İletişim bilgilerini aç",
+    "ariaSocialLinks": "Sosyal medya bağlantılarını aç",
     "searchPlaceholder": "Ürün, hizmet veya sayfa ara...",
     "viewAll": "Tümünü Gör →",
     "viewAllProducts": "Tüm ürünleri görüntüle",
@@ -43,6 +54,10 @@
     "rights": "Tüm hakları saklıdır",
     "privacy": "Gizlilik Politikası",
     "terms": "Kullanım Koşulları",
+    "qualityPolicy": "Kalite Politikamız",
+    "servicePolicy": "Hizmet Politikamız",
+    "dataProtectionNotice": "KVKK Aydınlatma Metni",
+    "cookiePolicy": "Çerez Politikası",
     "sections": {
       "explore": "Keşfet",
       "company": "Şirket",
@@ -87,7 +102,8 @@
     "noResults": "Sonuç bulunamadı",
     "relatedProducts": "İlgili Ürünler",
     "relatedGallery": "İlgili Galeriler",
-    "relatedArticles": "İlgili Yazılar"
+    "relatedArticles": "İlgili Yazılar",
+    "relatedKnowledgePosts": "Bilgi bankasından"
   },
   "home": {
     "hero": {
@@ -214,6 +230,26 @@
     "loveTitle": "Beğeneceğiniz Ürünler",
     "getQuoteTitle": "Fide Siparişiniz İçin Teklif Alın",
     "getQuoteDesc": "Ücretsiz fiyat teklifi için hemen iletişime geçin.",
+    "similarByTagsTitle": "Benzer ürünler",
+    "aboutProducerTitle": "Bu üretici hakkında",
+    "agronomySectionTitle": "Üretim ve yetiştirme bilgileri",
+    "agronomy": {
+      "botanicalName": "Botanik ad",
+      "plantingSeasons": "Ekim dönemi",
+      "harvestDays": "Hasada gün",
+      "climateZones": "İklim / bölge",
+      "soilTypes": "Toprak tipi",
+      "waterNeed": "Su ihtiyacı",
+      "sunExposure": "Güneşlenme",
+      "tempRange": "Sıcaklık aralığı",
+      "minTemp": "Minimum sıcaklık",
+      "maxTemp": "Maksimum sıcaklık",
+      "germinationDays": "Çimlenme (gün)",
+      "seedDepthCm": "Tohum derinliği (cm)",
+      "rowSpacingCm": "Sıra arası (cm)",
+      "plantSpacingCm": "Bitki arası (cm)",
+      "yieldPerSqm": "Verim / m²"
+    },
     "filters": {
       "type": "Ürün Tipi",
       "location": "Bölge",
@@ -333,6 +369,12 @@
       "copyError": "Link kopyalanamadı.",
       "buttonTitle": "Paylaş:"
     }
+  },
+  "careerPage": {
+    "title": "İnsan Kaynakları",
+    "description": "Üretim ve operasyon ekiplerimize katılmak isteyen adaylar için başvuru ve iletişim bilgileri.",
+    "fallbackContent": "<p>Bereket Fide, güven, sürekli öğrenme ve ekip çalışması değerleriyle büyümeye devam ediyor. Güncel ilanlar ve başvurular için <strong>info@bereketfide.com.tr</strong> adresine yazabilirsiniz.</p>",
+    "contactCta": "İletişim sayfası →"
   },
   "contact": {
     "title": "İletişim",
@@ -454,11 +496,177 @@
       "role": "Hesap türü",
       "roles": {
         "admin": "Yönetici",
+        "editor": "Editör",
         "moderator": "Moderatör",
+        "carrier": "Kargo / Taşıyıcı",
+        "customer": "Müşteri",
+        "dealer": "Bayi",
         "user": "Kullanıcı"
       },
       "notLoggedIn": "Bu sayfayı görüntülemek için giriş yapmanız gerekiyor.",
       "goToLogin": "Giriş Yap"
+    },
+    "bayi": {
+      "loginTitle": "Bayi Girişi",
+      "loginSubtitle": "Yetkili bayi hesabınızla B2B sipariş ve cari özetinize erişin.",
+      "pendingApproval": "Hesabınız henüz onaylanmadı. Başvurunuz incelendikten sonra giriş yapabileceksiniz.",
+      "email": "E-posta",
+      "password": "Şifre",
+      "submit": "Giriş Yap",
+      "submitting": "Giriş yapılıyor…",
+      "unauthorized": "Bu sayfa yalnızca bayi hesapları içindir.",
+      "devHint": "Geliştirme: bayi@example.com — şifre yönetici ile aynı (seed).",
+      "registerTitle": "Bayi başvurusu",
+      "registerSubtitle": "Firma ve iletişim bilgilerinizi gönderin. Yönetici onayından sonra bayi paneline giriş yapabilirsiniz.",
+      "registerSubmit": "Başvuruyu gönder",
+      "registerSubmitting": "Gönderiliyor…",
+      "registerSuccess": "Başvurunuz alındı. Onay sonrası e-posta adresinizle giriş yapabileceksiniz.",
+      "registerGoLogin": "Bayi girişine git",
+      "fullName": "Ad soyad",
+      "phone": "Telefon",
+      "companyName": "Şirket / ticari unvan",
+      "taxNumber": "Vergi numarası",
+      "taxOffice": "Vergi dairesi",
+      "city": "İl / şehir",
+      "region": "Bölge",
+      "passwordConfirm": "Şifre (tekrar)",
+      "rulesLabel": "Kullanım koşullarını ve kişisel veri işlemeyi okudum, kabul ediyorum.",
+      "passwordMismatch": "Şifreler eşleşmiyor.",
+      "hasAccount": "Zaten hesabınız var mı?"
+    },
+    "panel": {
+      "nav": {
+        "overview": "Özet",
+        "orders": "Siparişler",
+        "finance": "Cari / Finans",
+        "account": "Hesap",
+        "logout": "Çıkış",
+        "dealerPortal": "Bayi paneli",
+        "limitLabel": "Kullanılabilir limit"
+      },
+      "dashboard": {
+        "title": "Bayi paneli",
+        "lead": "Sipariş ve cari işlemleriniz için menüyü kullanın."
+      },
+      "orders": {
+        "title": "Siparişler",
+        "lead": "Bayi kataloğundan ürün seçin, gram cinsinden miktar girin ve siparişi oluşturun. Ödeme: havale bildirimi veya cari hesap.",
+        "catalog": "Ürün kataloğu",
+        "searchPlaceholder": "Ürün adında ara…",
+        "loading": "Yükleniyor…",
+        "loadMore": "Daha fazla göster",
+        "addToCart": "Sepete ekle",
+        "cart": "Sepet",
+        "emptyCart": "Henüz ürün eklemediniz.",
+        "quantityGrams": "Miktar (gram)",
+        "remove": "Kaldır",
+        "notes": "Sipariş notu",
+        "cartTotal": "Tahmini tutar",
+        "submitOrder": "Siparişi oluştur",
+        "submitting": "Gönderiliyor…",
+        "created": "Sipariş kaydedildi. Ödeme adımını seçin.",
+        "nextStep": "Ödeme",
+        "orderRef": "Sipariş: {id}…",
+        "payBank": "Havale ile ödeyeceğim",
+        "payBankCard": "Kredi/Banka Kartı ile Öde",
+        "payCard": "Kart ile öde (İyzico)",
+        "payCredit": "Cari hesaptan öde",
+        "iyzicoIframeHint": "Ödeme formu aşağıda yüklenir. Tamamladıktan sonra yönlendirilirsiniz.",
+        "cardRedirectHint": "Banka ödeme sayfasına yönlendiriliyorsunuz. Lütfen bekleyin.",
+        "iyzicoPaymentSuccess": "Ödeme başarılı. Sipariş onaylandı.",
+        "iyzicoPaymentFail": "Ödeme tamamlanamadı veya doğrulanamadı. Gerekirse sipariş detayından yeniden deneyin.",
+        "cancelOrder": "Siparişi iptal et",
+        "openDetail": "Detay sayfası",
+        "confirmCancel": "Bu siparişi iptal etmek istediğinize emin misiniz?",
+        "cancelled": "Sipariş iptal edildi.",
+        "bankMarked": "Havale ile ödeme seçildi. Onay sonrası ödeme bekleniyor.",
+        "creditPaid": "Sipariş cari hesabınızdan tahsil edildi.",
+        "recent": "Son siparişler",
+        "refresh": "Yenile",
+        "noOrders": "Henüz sipariş yok.",
+        "detail": "Detay",
+        "detailTitle": "Sipariş detayı",
+        "notFound": "Sipariş bulunamadı.",
+        "backList": "← Sipariş listesi",
+        "lines": "Kalemler",
+        "col": {
+          "date": "Tarih",
+          "total": "Tutar",
+          "status": "Durum",
+          "payment": "Ödeme",
+          "product": "Ürün",
+          "qty": "Miktar",
+          "lineTotal": "Satır"
+        },
+        "status": {
+          "pending": "Beklemede",
+          "confirmed": "Onaylandı",
+          "shipped": "Kargoda",
+          "completed": "Tamamlandı",
+          "cancelled": "İptal"
+        },
+        "pay": {
+          "unpaid": "Ödenmedi",
+          "pending": "Ödeme bekleniyor",
+          "paid": "Ödendi",
+          "failed": "Başarısız"
+        },
+        "errors": {
+          "loadCatalog": "Katalog yüklenemedi.",
+          "loadOrders": "Siparişler yüklenemedi.",
+          "loadOrder": "Sipariş yüklenemedi.",
+          "generic": "İşlem tamamlanamadı ({code}).",
+          "insufficient_credit": "Kullanılabilir cari limitiniz bu sipariş için yetersiz.",
+          "already_paid": "Bu sipariş zaten ödendi.",
+          "order_cancelled": "Sipariş iptal edilmiş.",
+          "products_not_found": "Bazı ürünler bulunamadı.",
+          "only_pending_orders_can_be_cancelled": "Yalnızca beklemedeki siparişler iptal edilebilir.",
+          "order_not_found": "Sipariş bulunamadı.",
+          "dealer_not_found": "Bayi profili bulunamadı.",
+          "iyzico_feature_disabled": "Kart ödemesi şu an kapalı.",
+          "iyzico_not_configured": "Ödeme altyapısı yapılandırılmamış.",
+          "iyzico_init_failed": "Ödeme oturumu başlatılamadı.",
+          "basket_total_mismatch": "Sepet tutarı siparişle uyuşmuyor; destek ile iletişime geçin.",
+          "order_has_no_items": "Siparişte ürün satırı yok."
+        }
+      },
+      "finance": {
+        "title": "Cari / Finans",
+        "lead": "Limit, bakiye ve son cari hareketler. Ekstre PDF olarak indirilebilir.",
+        "loading": "Yükleniyor…",
+        "downloadPdf": "Ekstre indir (PDF)",
+        "pdfWorking": "Hazırlanıyor…",
+        "movements": "Hareketler",
+        "noMovements": "Gösterilecek hareket yok.",
+        "totalsByType": "Tiplere göre toplamlar",
+        "meta": "Toplam {count} hareket · Vadesi geçen: {overdue}",
+        "cards": {
+          "limit": "Kredi limiti",
+          "balance": "Güncel bakiye",
+          "available": "Kullanılabilir",
+          "discount": "İskonto oranı"
+        },
+        "col": {
+          "date": "Tarih",
+          "type": "Tip",
+          "amount": "Tutar",
+          "balance": "Bakiye sonrası"
+        },
+        "txType": {
+          "order": "Sipariş",
+          "payment": "Ödeme",
+          "adjustment": "Düzeltme",
+          "refund": "İade"
+        },
+        "warnings": {
+          "low_credit": "Kullanılabilir limitiniz düşük.",
+          "overdue_due": "Vadesi geçmiş kayıtlarınız var."
+        },
+        "errors": {
+          "load": "Özet yüklenemedi.",
+          "pdf": "PDF indirilemedi."
+        }
+      }
     },
     "errors": {
       "user_exists": "Bu e-posta adresi zaten kayıtlı. Giriş yapmayı deneyin.",
@@ -468,7 +676,10 @@
       "account_disabled": "Hesabınız devre dışı bırakılmış.",
       "too_many_attempts": "Çok fazla deneme. Lütfen bir süre bekleyin.",
       "google_oauth_not_configured": "Google ile giriş şu anda kullanılamıyor.",
-      "generic": "Bir hata oluştu. Lütfen tekrar deneyin."
+      "generic": "Bir hata oluştu. Lütfen tekrar deneyin.",
+      "validation_error": "Formda eksik veya hatalı alanlar var.",
+      "rate_limited": "Çok sık başvuru gönderildi. Lütfen bir süre sonra tekrar deneyin.",
+      "rules_accepted_required": "Devam etmek için onay kutusunu işaretleyin."
     }
   },
   "catalog": {
@@ -483,6 +694,21 @@
     "sidebarCtaDesc": "Güncel ürün kataloglarımıza buradan ulaşın.",
     "noFile": "Bu katalog için henüz dosya eklenmedi."
   },
+  "bayiNetwork": {
+    "title": "Bayi ağımız",
+    "lead": "Onaylı iş ortaklarımızı şehir ve bölgeye göre arayın. Harita bağlantısı koordinat paylaşan kayıtlar için gösterilir.",
+    "metaTitle": "Bayi ağı | Bereket Fide",
+    "metaDescription": "Bereket Fide yetkili bayi ve iş ortakları listesi.",
+    "search": "Ara",
+    "searchPlaceholder": "Şirket adı ara…",
+    "loading": "Yükleniyor…",
+    "empty": "Kayıt bulunamadı.",
+    "loadError": "Liste yüklenemedi. Daha sonra tekrar deneyin.",
+    "count": "Toplam {n} kayıt",
+    "unnamed": "İsimsiz kayıt",
+    "phone": "Telefon",
+    "openMap": "Haritada aç"
+  },
   "legal": {
     "title": "Yasal",
     "privacy": "Gizlilik Politikası",
@@ -490,11 +716,43 @@
     "privacyContent": "<p>Bereket Fide, iletişim ve teklif formları üzerinden iletilen verileri yalnızca talepleri değerlendirmek, teklif hazırlamak ve iletişimini sürdürmek amacıyla kullanır.</p><p>Gereksiz kişisel veri talep etmeyiz; ürün dosyaları ve teknik dokümanlara erişimi ilgili operasyon ekipleriyle sınırlı tutarız.</p><p>Veri güncelleme veya silme talepleri için iletişim sayfasındaki kanallar üzerinden bize ulaşabilirsiniz.</p>",
     "terms": "Kullanım Koşulları",
     "termsDesc": "Bereket Fide web sitesi, teknik içerikler ve teklif iletişim kanallarının kullanımına dair genel koşullar.",
-    "termsContent": "<p>Bu sitede yer alan bilgiler genel teknik ve ticari yönlendirme amacıyla sunulur. Nihai ürün kapsamı, çeşit seçimi ve üretim koşulları sipariş sürecinde netleştirilir.</p><p>Sitedeki görseller, teknik notlar ve açıklamalar tek başına bağlayıcı nihai teklif niteliğinde değildir.</p><p>Teklif, termin ve teslim kapsamındaki taahhütler ancak ticari süreçte karşılıklı teyit sonrasında geçerli olur.</p>"
+    "termsContent": "<p>Bu sitede yer alan bilgiler genel teknik ve ticari yönlendirme amacıyla sunulur. Nihai ürün kapsamı, çeşit seçimi ve üretim koşulları sipariş sürecinde netleştirilir.</p><p>Sitedeki görseller, teknik notlar ve açıklamalar tek başına bağlayıcı nihai teklif niteliğinde değildir.</p><p>Teklif, termin ve teslim kapsamındaki taahhütler ancak ticari süreçte karşılıklı teyit sonrasında geçerli olur.</p>",
+    "qualityPolicy": "Kalite Politikamız",
+    "qualityPolicyDesc": "Fide üretiminde kalite, izlenebilirlik ve sürekli iyileştirme taahhüdümüzün özeti.",
+    "qualityPolicyContent": "<p>Kalite anlayışımız; sağlıklı fide, tutarlı çeşit performansı ve müşteri memnuniyetini merkeze alır. Üretim süreçlerinde izlenebilirlik, hijyen ve teknik standartlar uygulanır.</p><p>Detaylı metin CMS üzerinden yayınlandığında bu sayfa otomatik güncellenir.</p>",
+    "servicePolicy": "Hizmet Politikamız",
+    "servicePolicyDesc": "İletişim, teklif değerlendirme ve müşteri desteği süreçlerimize dair özet.",
+    "servicePolicyContent": "<p>Teklif talepleriniz değerlendirilir; nihai koşullar yazılı teyitle netleşir. Çeşit seçimi ve teslimat konularında ekiplerimizden destek alabilirsiniz.</p><p>Geri bildirimlerinizi info@bereketfide.com.tr adresine iletebilirsiniz.</p>",
+    "dataProtectionNotice": "KVKK Aydınlatma Metni",
+    "dataProtectionNoticeDesc": "6698 sayılı KVKK kapsamında kişisel verilerinizin işlenmesi ve haklarınızın özeti.",
+    "dataProtectionNoticeContent": "<p>Veri sorumlusu Bereket Fide Tarım San. ve Tic. Ltd. Şti. İletişim, teklif ve sipariş süreçlerinde toplanan kimlik ve iletişim verileri; talebin karşılanması, sözleşmenin ifası ve yasal yükümlülükler için işlenir.</p><p>Haklarınız ve başvuru için <strong>info@bereketfide.com.tr</strong> adresini kullanabilirsiniz. Güncel ve ayrıntılı metin yönetim panelinden yayınlandığında bu sayfa otomatik güncellenir.</p>",
+    "cookiePolicy": "Çerez Politikası",
+    "cookiePolicyDesc": "Web sitemizde çerez kullanımı hakkında özet bilgi.",
+    "cookiePolicyContent": "<p>Çerezler; site işleyişi, tercih hatırlama ve güvenlik için kullanılabilir. Tarayıcı ayarlarınızdan çerezleri yönetebilirsiniz.</p><p>Ayrıntılı metin CMS üzerinden yayınlandığında bu sayfa otomatik güncellenir.</p>"
   },
   "seo": {
     "defaultTitle": "Bereket Fide | Güvenilir Fide ve Tohum Üretimi",
     "defaultDescription": "Sebze, meyve ve süs bitkisi fidelerinde kaliteli, sağlıklı ve güvenilir üretim çözümleri. Bereket Fide ile bereketli bir hasada hazırlanın.",
-    "keywords": "fide, tohum, sebze fideleri, meyve fideleri, aşılı fide, domates fidesi, sera, tarım"
+    "keywords": "fide, tohum, sebze fideleri, meyve fideleri, aşılı fide, domates fidesi, sera, tarım",
+    "searchTitle": "Site içi arama",
+    "searchDescription": "Ürün, katalog, faaliyet, haber, bilgi bankası ve kurumsal/yasal sayfalarda arama. Bereket Fide web sitesi."
+  },
+  "searchPage": {
+    "titleResults": "“{query}” için sonuçlar",
+    "titlePrompt": "Arama",
+    "lead": "Ürünler, kataloglar, faaliyetler, kurumsal ve yasal sayfalar, haberler ile bilgi bankasında arama yapın.",
+    "loading": "Sonuçlar yükleniyor…",
+    "noResultsTitle": "Sonuç bulunamadı",
+    "noResultsBody": "“{query}” ile eşleşen bir kayıt bulunamadı. Farklı bir kelime veya daha genel bir ifade deneyin.",
+    "backHome": "Ana sayfaya dön",
+    "hintToolbar": "Üst menüdeki arama alanından sorgu gönderebilirsiniz.",
+    "queryTooShort": "Aramak için en az 2 karakter girin.",
+    "typeProduct": "Ürün",
+    "typeService": "Faaliyet",
+    "typeNews": "Haber",
+    "typeBlog": "Bilgi bankası",
+    "typeCatalog": "Katalog",
+    "typeLegal": "Yasal metin",
+    "typeCorporate": "Kurumsal"
   }
 }

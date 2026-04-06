@@ -12,7 +12,7 @@ import { SeoIssueBeacon } from '@/components/monitoring/SeoIssueBeacon';
 import { fetchSetting } from '@/i18n/server';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 
-const GALLERY_PLACEHOLDER_SRC = '/media/gallery-placeholder.svg';
+import { GALLERY_IMAGE_PLACEHOLDER } from '@/lib/placeholders';
 
 async function fetchGalleries(locale: string) {
   try {
@@ -74,11 +74,11 @@ export default async function GalleryPage({
         @media(min-width:640px){.gl-grid{grid-template-columns:repeat(2,1fr)}}
         @media(min-width:1024px){.gl-grid{grid-template-columns:repeat(3,1fr)}}
         .gl-card{display:block;text-decoration:none;border:1px solid var(--color-border);background:var(--color-surface);transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);overflow:hidden}
-        .gl-card:hover{border-color:var(--color-brand);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.1)}
+        .gl-card:hover{border-color:var(--color-brand);transform:translateY(-4px);box-shadow:0 20px 40px color-mix(in srgb,var(--color-bg-dark) 10%,transparent)}
         .gl-card-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--color-bg-muted)}
         .gl-card-media img{transition:transform .5s cubic-bezier(0.4, 0, 0.2, 1)}
         .gl-card:hover .gl-card-media img{transform:scale(1.08)}
-        .gl-card-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(20,20,20,0.7);color:#fff;font-size:12px;font-weight:600;position:absolute;top:16px;right:16px;z-index:2;backdrop-filter:blur(8px);border-radius:2px}
+        .gl-card-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:color-mix(in srgb,var(--color-bg-dark) 70%,transparent);color:var(--section-bg-white);font-size:12px;font-weight:600;position:absolute;top:16px;right:16px;z-index:2;backdrop-filter:blur(8px);border-radius:2px}
         .gl-card-body{padding:20px 20px 24px}
         .gl-card-title{font-family:var(--font-heading);font-size:20px;font-weight:800;color:var(--color-text-primary);line-height:1.3;margin:0;transition:color .2s ease}
         .gl-card:hover .gl-card-title{color:var(--color-brand)}
@@ -167,7 +167,7 @@ export default async function GalleryPage({
               >
                 <div className="gl-card-media">
                   <OptimizedImage
-                    src={absoluteAssetUrl(g.cover_image_url) || g.cover_image || g.imageSrc || GALLERY_PLACEHOLDER_SRC}
+                    src={absoluteAssetUrl(g.cover_image_url) || g.cover_image || g.imageSrc || GALLERY_IMAGE_PLACEHOLDER}
                     alt={buildMediaAlt({
                       locale,
                       kind: 'gallery-cover',

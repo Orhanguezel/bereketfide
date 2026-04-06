@@ -44,9 +44,11 @@ const PROFILE_PREFIXES: Record<NonNullable<Flags['profile']>, string[]> = {
     '200', '201', '220', '230', '240', '241',
     // ── Bereket Fide'a özgü veri dosyaları ───────────────────────────────
     '299', '300', '301', '302', '303', '304', '305', '306', '307', '308', '309', '310', '311', '312', '313',
+    '314', '315', '316', '317',
     // 309 (auth_role_patch) atlandı: role kolonu artık 001_auth_schema.sql'de mevcut
-    // Atlananlar (Bereket Fide-özgü veri): 011,012,021-024,051-055,071,101,
-    //   121,131,141,151,161,171,181,191,202,203,211,212,231-233
+    // 012: sadece sub_categories şeması (eski omurgaya ait toplu veri silindi).
+    // Repodan kaldırılan / profilde olmayan örnekler: 011, 051*, 061, 141, 151, 171, 181, 191.
+    // Atlanan prefix'ler: 021-024, 055, 071, 101, 121, 131, 161, 202, 203, 211, 212, 231-233
   ],
 };
 

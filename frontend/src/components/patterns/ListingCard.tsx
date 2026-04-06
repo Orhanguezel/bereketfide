@@ -29,7 +29,7 @@ export function ListingCard({
       className="surface-card group overflow-hidden rounded-xl transition-shadow hover:shadow-lg"
     >
       {imageSrc ? (
-        <div className={`relative overflow-hidden bg-[var(--color-border)] ${imageAspectClassName}`}>
+        <div className={`relative overflow-hidden bg-(--color-border) ${imageAspectClassName}`}>
           <OptimizedImage
             src={imageSrc}
             alt={imageAlt}
@@ -42,7 +42,7 @@ export function ListingCard({
       <div className="p-5">
         <h3 className="font-semibold line-clamp-2">{title}</h3>
         {description ? (
-          <p className="mt-2 text-sm text-[var(--color-text-secondary)] line-clamp-3">{description}</p>
+          <p className="mt-2 text-sm text-(--color-text-secondary) line-clamp-3">{description}</p>
         ) : null}
         {footer ? <div className="mt-3">{footer}</div> : null}
       </div>

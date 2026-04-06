@@ -20,10 +20,13 @@ const requiredFiles = [
 const pageFiles = [
   path.join(APP_DIR, 'page.tsx'),
   path.join(APP_DIR, 'hakkimizda', 'page.tsx'),
-  path.join(APP_DIR, 'projeler', 'page.tsx'),
-  path.join(APP_DIR, 'projeler', '[slug]', 'page.tsx'),
+  path.join(APP_DIR, 'insan-kaynaklari', 'page.tsx'),
+  path.join(APP_DIR, 'urunler', 'page.tsx'),
+  path.join(APP_DIR, 'urunler', '[slug]', 'page.tsx'),
   path.join(APP_DIR, 'haberler', 'page.tsx'),
   path.join(APP_DIR, 'haberler', '[slug]', 'page.tsx'),
+  path.join(APP_DIR, 'blog', 'page.tsx'),
+  path.join(APP_DIR, 'blog', '[slug]', 'page.tsx'),
   path.join(APP_DIR, 'galeri', 'page.tsx'),
   path.join(APP_DIR, 'galeri', '[slug]', 'page.tsx'),
   path.join(APP_DIR, 'hizmetler', 'page.tsx'),
@@ -58,8 +61,10 @@ for (const file of pageFiles) {
 }
 
 for (const file of [
-  path.join(APP_DIR, 'projeler', '[slug]', 'page.tsx'),
+  path.join(APP_DIR, 'hakkimizda', 'page.tsx'),
+  path.join(APP_DIR, 'urunler', '[slug]', 'page.tsx'),
   path.join(APP_DIR, 'haberler', '[slug]', 'page.tsx'),
+  path.join(APP_DIR, 'blog', '[slug]', 'page.tsx'),
   path.join(APP_DIR, 'galeri', '[slug]', 'page.tsx'),
   path.join(APP_DIR, 'hizmetler', '[slug]', 'page.tsx'),
 ]) {
@@ -89,7 +94,7 @@ if (
 }
 
 const sitemapSource = await readFile(path.join(ROOT, 'src', 'app', 'sitemap.ts'), 'utf8');
-for (const pattern of ['/projeler', '/galeri', '/haberler', '/legal']) {
+for (const pattern of ['/urunler', '/galeri', '/haberler', '/blog', '/legal']) {
   if (!sitemapSource.includes(pattern)) {
     failures.push(`src/app/sitemap.ts: missing ${pattern} coverage`);
   }

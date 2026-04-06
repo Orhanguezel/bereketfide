@@ -52,7 +52,7 @@ export function ProjectGallery({ images, priority }: Props) {
         .pg-hero{position:relative;width:100%;overflow:hidden;background:var(--color-bg-muted);cursor:pointer;aspect-ratio:16/10}
         .pg-hero img{transition:transform .3s ease;width:100%;height:100%;object-fit:cover}
         .pg-hero:hover img{transform:scale(1.02)}
-        .pg-hero-zoom{position:absolute;bottom:12px;right:16px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);border-radius:50%;color:#fff;opacity:.7;transition:opacity .2s;pointer-events:none}
+        .pg-hero-zoom{position:absolute;bottom:12px;right:16px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--color-bg-dark) 50%,transparent);border-radius:50%;color:var(--section-bg-white);opacity:.7;transition:opacity .2s;pointer-events:none}
         .pg-hero:hover .pg-hero-zoom{opacity:1}
         .pg-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto}
         .pg-thumb{position:relative;width:120px;height:80px;flex-shrink:0;overflow:hidden;background:var(--color-bg-muted);cursor:pointer;border:2px solid transparent;transition:border-color .15s}

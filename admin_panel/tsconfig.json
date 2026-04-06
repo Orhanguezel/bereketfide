@@ -24,6 +24,7 @@
       }
     ],
     "paths": {
+      "@agro/shared-ui/*": ["../../../packages/shared-ui/*"],
       "@/*": [
         "./src/*"
       ],

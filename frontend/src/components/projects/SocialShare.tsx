@@ -28,12 +28,12 @@ export function SocialShare({ url, title, description, locale, saveLabel: saveLa
     <>
       <style>{`
         .ss-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-        .ss-btn{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;border:none;cursor:pointer;transition:opacity .15s;color:#fff;flex-shrink:0}
+        .ss-btn{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;border:none;cursor:pointer;transition:opacity .15s;color:var(--section-bg-white);flex-shrink:0}
         .ss-btn:hover{opacity:.85}
         .ss-btn-fb{background:#3b5998}
         .ss-btn-tw{background:#1da1f2}
         .ss-btn-li{background:#0077b5}
-        .ss-btn-em{background:#555}
+        .ss-btn-em{background:var(--soil-600)}
         .ss-btn-pi{background:#e60023}
         .ss-save{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--color-border);border-radius:2px;background:var(--color-bg);color:var(--color-text-primary);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;margin-left:auto;white-space:nowrap}
         .ss-save:hover{border-color:var(--color-text-primary);background:var(--color-text-primary);color:var(--color-bg)}

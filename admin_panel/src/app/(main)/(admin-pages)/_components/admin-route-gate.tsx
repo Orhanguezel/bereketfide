@@ -17,6 +17,8 @@ const ALLOWED_PREFIXES = [
   '/reviews',
   '/site-settings',
   '/contacts',
+  '/orders',
+  '/dealers',
   '/menuitem',
   '/library',
   '/references',

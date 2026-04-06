@@ -84,7 +84,7 @@ export function LoginClient({ locale }: { locale: string }) {
         zIndex: 100,
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        background: 'rgba(0, 0, 0, 0.4)',
+        background: 'color-mix(in srgb, var(--color-bg-dark) 40%, transparent)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -102,7 +102,7 @@ export function LoginClient({ locale }: { locale: string }) {
           background: 'var(--color-bg)',
           borderRadius: 8,
           padding: '48px 40px 36px',
-          boxShadow: '0 8px 40px rgba(0,0,0,0.2)',
+          boxShadow: '0 8px 40px color-mix(in srgb, var(--color-bg-dark) 20%, transparent)',
         }}
       >
         <button
@@ -168,9 +168,9 @@ export function LoginClient({ locale }: { locale: string }) {
               padding: '10px 14px',
               marginBottom: 16,
               borderRadius: 4,
-              background: 'rgba(220, 38, 38, 0.08)',
-              border: '1px solid rgba(220, 38, 38, 0.2)',
-              color: '#dc2626',
+              background: 'color-mix(in srgb, var(--status-danger) 8%, transparent)',
+              border: '1px solid color-mix(in srgb, var(--status-danger) 20%, transparent)',
+              color: 'var(--status-danger)',
               fontSize: 13,
               textAlign: 'center',
             }}

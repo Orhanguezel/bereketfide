@@ -6,6 +6,24 @@ Bereket Fide icin gelistirilen kurumsal web sitesi, urun katalog yapisi ve iceri
 Domain: `https://www.bereketfide.com.tr`
 Marka yonu: temiz, dogal, guven veren, basak-altin tonlu kurumsal gorunum.
 
+## @agro/shared-backend Entegrasyonu
+
+Bu proje `@agro/shared-backend` workspace paketini kullanacak. Gecis planlaniyor.
+
+```bash
+# Calismaya baslamadan once (root dizinde):
+bun install && bun run build:shared
+
+# Sonra proje backend'inde:
+cd projects/bereketfide/backend && bun run dev
+```
+
+- Detayli rehber: `packages/KULLANIM.md`
+- Ortak modul degistiginde: root'tan `bun run build:shared` calistir
+
+### Proje-Spesifik Moduller (bu repoda kalacak)
+offer, services, menuItems, comments
+
 ## Workspace Yapisi
 
 ```txt

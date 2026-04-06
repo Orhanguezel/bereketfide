@@ -62,7 +62,7 @@ export function ContactFormClient({ locale }: { locale: string }) {
         >
           {sending ? (
             <>
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-(--color-on-brand)/30 border-t-(--color-on-brand)" />
               {tc('loading')}
             </>
           ) : t('submit')}

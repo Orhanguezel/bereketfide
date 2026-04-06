@@ -1,3 +1,4 @@
+import { log } from '@agro/shared-backend/core/app-logger';
 /**
  * Startup: uploads/ klasörünü tarar, storage_assets tablosunda eksik dosyaları ekler.
  * Hot reload'da DB sıfırlansa bile dosyalar tekrar kaydedilir.
@@ -6,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { randomUUID } from 'crypto';
 import { db } from '@/db/client';
-import { storageAssets } from '@/modules/storage/schema';
+import { storageAssets } from '@agro/shared-backend/modules/storage/schema';
 import { sql, eq } from 'drizzle-orm';
 
 const MIME_MAP: Record<string, string> = {
@@ -82,5 +83,5 @@ export async function syncUploadsToStorage() {
     });
   }
 
-  console.log(`[sync-uploads] ${toInsert.length} new files registered in storage_assets`);
+  log.info(`[sync-uploads] ${toInsert.length} new files registered in storage_assets`);
 }

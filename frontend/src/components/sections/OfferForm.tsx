@@ -45,7 +45,8 @@ export function OfferFormClient({
     }
   }
 
-  const cls = 'w-full rounded border border-[#ccc] bg-white px-4 py-3 text-sm text-[#333] placeholder-[#999] outline-none focus:border-[#946e1c] focus:ring-1 focus:ring-[#946e1c]/30';
+  const cls =
+    'w-full rounded border border-(--color-border) bg-(--color-bg-secondary) px-4 py-3 text-sm text-(--color-text-primary) outline-none placeholder:text-(--color-text-muted) focus:border-(--color-brand) focus:ring-1 focus:ring-(--color-brand)/30';
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">

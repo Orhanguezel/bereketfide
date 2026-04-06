@@ -18,7 +18,7 @@ const routeChecks = [
     patterns: ['data-theme-template="bereket-harvest"', 'data-theme-mode="light"', '<link rel="canonical"'],
   },
   {
-    pathname: '/tr/projeler',
+    pathname: '/tr/urunler',
     patterns: ['data-theme-template="bereket-harvest"', 'Bereket Fide'],
   },
   {
@@ -35,7 +35,7 @@ const routeChecks = [
   },
   {
     pathname: '/sitemap.xml',
-    patterns: ['<urlset', '/tr/projeler', '/tr/haberler'],
+    patterns: ['<urlset', '/tr/urunler', '/tr/haberler'],
   },
 ];
 

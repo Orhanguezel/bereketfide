@@ -4,7 +4,7 @@
 // FILE: src/app/(main)/admin/users/_components/users-list-client.tsx
 // FINAL — Admin Users List (users_admin.endpoints uyumlu)
 // - route: /admin/users
-// - roles: admin | moderator | user
+// - roles: admin | editor | carrier | customer | dealer
 // =============================================================
 
 import * as React from 'react';
@@ -93,9 +93,20 @@ export default function UsersListClient() {
   const t = useAdminT('admin.users');
 
   function roleLabel(r: UserRoleName) {
-    if (r === 'admin') return t('roles.admin');
-    if (r === 'moderator') return t('roles.moderator');
-    return t('roles.user');
+    switch (r) {
+      case 'admin':
+        return t('roles.admin');
+      case 'editor':
+        return t('roles.editor');
+      case 'carrier':
+        return t('roles.carrier');
+      case 'customer':
+        return t('roles.customer');
+      case 'dealer':
+        return t('roles.dealer');
+      default:
+        return r;
+    }
   }
 
   function statusBadge(u: AdminUserView) {
@@ -207,8 +218,10 @@ export default function UsersListClient() {
                 <SelectContent>
                   <SelectItem value="all">{t('roles.all')}</SelectItem>
                   <SelectItem value="admin">{t('roles.admin')}</SelectItem>
-                  <SelectItem value="moderator">{t('roles.moderator')}</SelectItem>
-                  <SelectItem value="user">{t('roles.user')}</SelectItem>
+                  <SelectItem value="editor">{t('roles.editor')}</SelectItem>
+                  <SelectItem value="carrier">{t('roles.carrier')}</SelectItem>
+                  <SelectItem value="customer">{t('roles.customer')}</SelectItem>
+                  <SelectItem value="dealer">{t('roles.dealer')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -306,7 +319,7 @@ export default function UsersListClient() {
                     <TableCell>{statusBadge(u)}</TableCell>
                     <TableCell>
                       <Badge variant={u.roles.includes('admin') ? 'default' : 'secondary'}>
-                        {roleLabel(u.roles[0] ?? 'user')}
+                        {roleLabel(u.roles[0] ?? 'customer')}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right">

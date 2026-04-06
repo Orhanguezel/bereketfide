@@ -1,131 +1,215 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { Search, Package, Newspaper, Briefcase, LayoutGrid, ArrowRight } from 'lucide-react';
-
-interface SearchResult {
-  id: string;
-  title: string;
-  type: 'product' | 'service' | 'news' | 'project';
-  url: string;
-  description?: string;
-}
+import {
+  Search,
+  Package,
+  Newspaper,
+  Briefcase,
+  BookOpen,
+  ArrowRight,
+  FolderOpen,
+  Scale,
+  Building2,
+} from 'lucide-react';
+import { localizedPath } from '@/seo';
+import {
+  fetchSiteSearch,
+  siteSearchQueryValid,
+  type SiteSearchHit,
+  type SiteSearchHitType,
+} from '@/lib/site-search';
 
 export default function SearchPage() {
+  const params = useParams();
+  const locale = typeof params.locale === 'string' ? params.locale : 'tr';
   const searchParams = useSearchParams();
-  const query = searchParams.get('q') || '';
-  const t = useTranslations('nav');
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const query = (searchParams.get('q') || '').trim();
+  const t = useTranslations('searchPage');
+  const tNav = useTranslations('nav');
+
+  const [results, setResults] = useState<SiteSearchHit[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const queryOk = useMemo(() => siteSearchQueryValid(query), [query]);
 
   useEffect(() => {
-    // Simple mock/local search for demonstration or replace with real API call
-    const fetchResults = async () => {
+    if (!queryOk) {
+      setResults([]);
+      setIsLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    (async () => {
       setIsLoading(true);
       try {
-        // This would normally be a backend call like `/api/search?q=${query}`
-        // For now, let's pretend we have data or show no results
-        // In a real app, I'd implement a search endpoint in the backend
-        
-        // Let's at least show the query
-        await new Promise(resolve => setTimeout(resolve, 800));
-        setResults([]);
+        const hits = await fetchSiteSearch(locale, query);
+        if (!cancelled) setResults(hits);
+      } catch {
+        if (!cancelled) setResults([]);
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
-    };
+    })();
 
-    if (query) fetchResults();
-    else setIsLoading(false);
-  }, [query]);
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, query, queryOk]);
+
+  const homeHref = localizedPath(locale, '/');
 
   return (
-    <div className="section-py min-h-[60vh] bg-gray-50/50">
+    <div
+      className="section-py min-h-[60vh]"
+      style={{ background: 'var(--color-bg-alt)' }}
+    >
       <div className="container-tight">
-        
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold font-display text-[#1a1a1a] mb-4">
-            {query ? `"${query}" için arama sonuçları` : 'Arama yapın'}
+        <div className="mb-10">
+          <h1 className="font-display text-3xl font-bold text-(--color-text-primary) sm:text-4xl lg:text-5xl">
+            {queryOk ? t('titleResults', { query }) : t('titlePrompt')}
           </h1>
-          <p className="text-gray-500 max-w-2xl">
-            Aradığınız ürün, hizmet veya haberleri aşağıda bulabilirsiniz.
-          </p>
+          <p className="mt-3 max-w-2xl text-(--color-text-secondary)">{t('lead')}</p>
+          {!queryOk && query.length > 0 ? (
+            <p className="mt-2 text-sm text-(--color-text-muted)">{t('queryTooShort')}</p>
+          ) : null}
         </div>
 
-        {/* Content */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-4">
-            <div className="w-12 h-12 border-4 border-[#319760]/20 border-t-[#319760] rounded-full animate-spin"></div>
-            <p className="text-gray-400 font-medium">Sonuçlar aranıyor...</p>
+          <div className="flex flex-col items-center justify-center space-y-4 py-20">
+            <div
+              className="h-12 w-12 animate-spin rounded-full border-4 border-transparent"
+              style={{
+                borderTopColor: 'var(--color-brand)',
+                borderRightColor: 'var(--color-border)',
+                borderBottomColor: 'var(--color-border)',
+                borderLeftColor: 'var(--color-border)',
+              }}
+            />
+            <p className="font-medium text-(--color-text-muted)">{t('loading')}</p>
           </div>
-        ) : query && results.length > 0 ? (
-          <div className="grid gap-6">
+        ) : queryOk && results.length > 0 ? (
+          <div className="grid gap-4">
             {results.map((item) => (
-              <Link 
+              <Link
                 key={`${item.type}-${item.id}`}
                 href={item.url}
-                className="group flex flex-col md:flex-row md:items-center justify-between p-6 bg-white border border-gray-100 rounded-xl hover:shadow-xl hover:border-[#319760]/30 transition-all"
+                className="group flex flex-col justify-between gap-4 rounded-xl border p-5 transition-all sm:flex-row sm:items-center"
+                style={{
+                  borderColor: 'var(--color-border)',
+                  background: 'var(--color-bg)',
+                }}
               >
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gray-50 text-[#319760] rounded-lg group-hover:bg-[#319760] group-hover:text-white transition-colors">
+                <div className="flex min-w-0 flex-1 items-start gap-4">
+                  <div
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg transition-colors"
+                    style={{
+                      background: 'var(--color-bg-alt)',
+                      color: 'var(--color-brand)',
+                    }}
+                  >
                     {getTypeIcon(item.type)}
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#1a1a1a] group-hover:text-[#319760] transition-colors">{item.title}</h3>
-                    <p className="text-sm text-gray-500 uppercase font-semibold tracking-wider mt-1">{getTypeLabel(item.type)}</p>
+                  <div className="min-w-0">
+                    <h2 className="text-lg font-semibold text-(--color-text-primary) group-hover:text-(--color-brand)">
+                      {item.title}
+                    </h2>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-(--color-text-muted)">
+                      {typeLabel(t, item.type)}
+                    </p>
+                    {item.description ? (
+                      <p className="mt-2 line-clamp-2 text-sm text-(--color-text-secondary)">
+                        {item.description}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
-                <ArrowRight size={24} className="text-gray-300 group-hover:text-[#319760] group-hover:translate-x-2 transition-all mt-4 md:mt-0" />
+                <ArrowRight
+                  size={22}
+                  className="shrink-0 text-(--color-text-muted) transition-transform group-hover:translate-x-1 group-hover:text-(--color-brand)"
+                />
               </Link>
             ))}
           </div>
-        ) : query ? (
-          <div className="bg-white p-16 rounded-3xl text-center shadow-sm border border-gray-100">
-            <div className="w-20 h-20 bg-gray-50 text-gray-300 flex items-center justify-center rounded-full mx-auto mb-8">
+        ) : queryOk ? (
+          <div
+            className="rounded-3xl border p-12 text-center shadow-sm sm:p-16"
+            style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
+          >
+            <div
+              className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full"
+              style={{ background: 'var(--color-bg-alt)', color: 'var(--color-text-muted)' }}
+            >
               <Search size={40} />
             </div>
-            <h2 className="text-2xl font-bold text-[#1a1a1a] mb-2">Sonuç bulunamadı</h2>
-            <p className="text-gray-500 mb-8 max-w-md mx-auto">
-              "{query}" ile eşleşen bir sonuç bulamadık. Daha genel bir kelime ile tekrar deneyebilirsiniz.
+            <h2 className="mb-2 text-2xl font-bold text-(--color-text-primary)">
+              {t('noResultsTitle')}
+            </h2>
+            <p className="mx-auto mb-8 max-w-md text-(--color-text-secondary)">
+              {t('noResultsBody', { query })}
             </p>
-            <Link 
-              href="/"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#319760] text-white font-bold rounded-lg hover:bg-[#267a4e] transition-colors"
+            <Link
+              href={homeHref}
+              className="inline-flex items-center justify-center rounded-lg bg-(--color-brand) px-8 py-3 text-sm font-semibold text-(--color-on-brand)"
             >
-              Ana Sayfaya Dön
+              {t('backHome')}
             </Link>
           </div>
         ) : (
-           <div className="text-center py-20">
-             <p className="text-gray-400">Üstteki arama ikonuna tıklayarak aramaya başlayabilirsiniz.</p>
-           </div>
+          <div className="py-16 text-center">
+            <p className="text-(--color-text-muted)">{t('hintToolbar')}</p>
+            <p className="mt-2 text-sm text-(--color-text-muted)">
+              {tNav('searchPlaceholder')}
+            </p>
+          </div>
         )}
-
       </div>
     </div>
   );
 }
 
-function getTypeIcon(type: string) {
+function getTypeIcon(type: SiteSearchHitType) {
   switch (type) {
-    case 'product': return <Package size={24} />;
-    case 'service': return <Briefcase size={24} />;
-    case 'news': return <Newspaper size={24} />;
-    case 'project': return <LayoutGrid size={24} />;
-    default: return <Search size={24} />;
+    case 'product':
+      return <Package size={24} />;
+    case 'service':
+      return <Briefcase size={24} />;
+    case 'news':
+      return <Newspaper size={24} />;
+    case 'blog':
+      return <BookOpen size={24} />;
+    case 'catalog':
+      return <FolderOpen size={24} />;
+    case 'legal':
+      return <Scale size={24} />;
+    case 'corporate':
+      return <Building2 size={24} />;
+    default:
+      return <Search size={24} />;
   }
 }
 
-function getTypeLabel(type: string) {
+function typeLabel(t: (key: string) => string, type: SiteSearchHitType): string {
   switch (type) {
-    case 'product': return 'Ürün';
-    case 'service': return 'Hizmet';
-    case 'news': return 'Haber / Blog';
-    case 'project': return 'Proje';
-    default: return 'Sayfa';
+    case 'product':
+      return t('typeProduct');
+    case 'service':
+      return t('typeService');
+    case 'news':
+      return t('typeNews');
+    case 'blog':
+      return t('typeBlog');
+    case 'catalog':
+      return t('typeCatalog');
+    case 'legal':
+      return t('typeLegal');
+    case 'corporate':
+      return t('typeCorporate');
+    default:
+      return type;
   }
 }

@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { BEREKET_PALETTE_HEX as C } from '@/lib/bereketfide-palette-hex';
 
 export const runtime = 'nodejs';
 export const size = {
@@ -17,15 +18,15 @@ export default function AppleIcon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#111827',
-          color: '#ea580c',
+          background: C.gold950,
+          color: C.gold400,
           borderRadius: 36,
           fontSize: 76,
           fontWeight: 700,
-          fontFamily: 'Inter, Arial, sans-serif',
+          fontFamily: 'Arial, sans-serif',
         }}
       >
-        MK
+        B
       </div>
     ),
     size,

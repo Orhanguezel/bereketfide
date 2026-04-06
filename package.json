@@ -2,12 +2,7 @@
   "name": "bereketfide-workspace",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "frontend",
-    "admin_panel",
-    "backend"
-  ],
-  "scripts": {
+    "scripts": {
     "dev:frontend": "npm run --prefix frontend dev",
     "build:frontend": "npm run --prefix frontend build",
     "start:frontend": "npm run --prefix frontend start",

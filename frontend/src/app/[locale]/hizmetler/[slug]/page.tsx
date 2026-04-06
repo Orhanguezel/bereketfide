@@ -10,6 +10,8 @@ import { JsonLd, buildPageMetadata, jsonld, localizedPath, localizedUrl, organiz
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { buildMediaAlt } from '@/lib/media-seo';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { RelatedLinks } from '@/components/seo/RelatedLinks';
+import { fetchRelatedContent } from '@/lib/related-content';
 
 async function fetchService(slug: string, locale: string) {
   try {
@@ -85,9 +87,21 @@ export default async function ServiceDetailPage({
   const content = normalizeRichContent(service.content);
   const org = organizationJsonLd(locale);
   const imageSrc = absoluteAssetUrl(service.image_url);
-  const [otherServices, relatedProjects] = await Promise.all([
+  const serviceTags: string[] = Array.isArray(service.tags) ? service.tags : [];
+
+  const [otherServices, relatedProjects, related] = await Promise.all([
     fetchOtherServices(locale, slug, 5),
     fetchRelatedProjects(locale, 4),
+    fetchRelatedContent(
+      {
+        title: service.title,
+        description: service.description || null,
+        slug: service.slug || slug,
+        tags: serviceTags,
+      },
+      slug,
+      locale,
+    ),
   ]);
 
   const breadcrumbs = [
@@ -100,7 +114,7 @@ export default async function ServiceDetailPage({
     <>
       <style>{`
         .sd-title{font-family:var(--font-heading);font-size:36px;font-weight:800;color:var(--color-text-primary);line-height:1.2;margin:16px 0 24px}
-        .sd-hero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--color-bg-muted);border-radius:16px;box-shadow:0 12px 24px rgba(0,0,0,0.06);margin-bottom:32px}
+        .sd-hero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--color-bg-muted);border-radius:16px;box-shadow:0 12px 24px color-mix(in srgb,var(--color-bg-dark) 6%,transparent);margin-bottom:32px}
         .sd-desc{font-size:18px;color:var(--color-text-secondary);line-height:1.7;margin-top:0;margin-bottom:24px;font-weight:500;max-width:800px}
         .sd-content{margin-top:32px;font-size:16px;line-height:1.8;color:var(--color-text-secondary)}
         .sd-content p{margin-bottom:20px}
@@ -114,7 +128,7 @@ export default async function ServiceDetailPage({
         .sd-tag{padding:6px 14px;border-radius:24px;border:1px solid var(--color-border);font-size:13px;font-weight:600;color:var(--color-text-secondary);background:var(--color-surface);transition:all .2s ease}
         .sd-tag:hover{border-color:var(--color-brand);color:var(--color-brand)}
         .sd-sidebar-card{background:var(--color-surface);border:1px solid var(--color-border);padding:28px 24px;border-radius:16px;margin-bottom:24px;transition:box-shadow .3s ease}
-        .sd-sidebar-card:hover{box-shadow:0 12px 24px rgba(0,0,0,0.06)}
+        .sd-sidebar-card:hover{box-shadow:0 12px 24px color-mix(in srgb,var(--color-bg-dark) 6%,transparent)}
         .sd-sidebar-card h3{font-family:var(--font-heading);font-size:18px;font-weight:800;color:var(--color-text-primary);margin:0 0 20px;text-transform:uppercase;letter-spacing:0.05em}
         .sd-sidebar-project{display:flex;gap:16px;text-decoration:none;margin-bottom:20px;align-items:center}
         .sd-sidebar-project:last-child{margin-bottom:0}
@@ -194,20 +208,48 @@ export default async function ServiceDetailPage({
             )}
 
             {/* Tags */}
-            {service.tags && Array.isArray(service.tags) && service.tags.length > 0 && (
+            {serviceTags.length > 0 && (
               <div style={{ marginTop: 28 }}>
                 <h3 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-text-muted)', marginBottom: 10 }}>
                   {isEn ? 'Tags' : 'Etiketler'}
                 </h3>
                 <div className="sd-tags">
-                  {service.tags.map((tag: string) => (
+                  {serviceTags.map((tag: string) => (
                     <span key={tag} className="sd-tag">{tag}</span>
                   ))}
                 </div>
               </div>
             )}
 
-
+            <div
+              style={{
+                marginTop: 48,
+                display: 'grid',
+                gap: 24,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              }}
+            >
+              <RelatedLinks
+                title={t('common.relatedProducts')}
+                hrefBase={localizedPath(locale, '/urunler')}
+                items={related.products}
+              />
+              <RelatedLinks
+                title={t('common.relatedArticles')}
+                hrefBase={localizedPath(locale, '/haberler')}
+                items={related.blogPosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedKnowledgePosts')}
+                hrefBase={localizedPath(locale, '/blog')}
+                items={related.knowledgePosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedGallery')}
+                hrefBase={localizedPath(locale, '/galeri')}
+                items={related.galleries}
+              />
+            </div>
           </div>
 
           {/* RIGHT SIDEBAR */}
@@ -279,7 +321,7 @@ export default async function ServiceDetailPage({
               </p>
               <Link
                 href={localizedPath(locale, '/teklif')}
-                className="mt-5 flex items-center justify-center rounded-lg bg-(--color-brand) px-5 py-3 text-sm font-bold uppercase tracking-wide text-white no-underline transition-opacity hover:opacity-85"
+                className="mt-5 flex items-center justify-center rounded-lg bg-(--color-brand) px-5 py-3 text-sm font-bold uppercase tracking-wide text-(--color-on-brand) no-underline transition-opacity hover:opacity-85"
               >
                 {t('common.requestOffer')}
               </Link>
@@ -288,7 +330,7 @@ export default async function ServiceDetailPage({
             {/* All services link */}
             <Link
               href={localizedPath(locale, '/hizmetler')}
-              className="flex items-center justify-center rounded-lg border-2 border-(--color-brand) px-4 py-3.5 text-sm font-bold text-(--color-brand-text) no-underline transition-colors hover:bg-(--color-brand) hover:text-white"
+              className="flex items-center justify-center rounded-lg border-2 border-(--color-brand) px-4 py-3.5 text-sm font-bold text-(--color-brand-text) no-underline transition-colors hover:bg-(--color-brand) hover:text-(--color-on-brand)"
             >
               {isEn ? '← All Activities' : '← Tüm Faaliyetler'}
             </Link>

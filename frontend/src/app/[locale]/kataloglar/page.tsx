@@ -68,7 +68,7 @@ export default async function CatalogPage({
   const catalogs = await fetchCatalogs(locale);
 
   return (
-    <div className="bg-white py-16 lg:py-24">
+    <div className="bg-(--color-bg-secondary) py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="mb-10">
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-(--color-brand-text)">
@@ -94,7 +94,7 @@ export default async function CatalogPage({
               <Link
                 key={catalog.id}
                 href={href}
-                className="group flex h-full flex-col border border-(--color-border) bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="group flex h-full flex-col border border-(--color-border) bg-(--color-bg-secondary) transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 {image ? (
                   <div className="relative aspect-4/3 overflow-hidden bg-(--color-bg-muted)">

@@ -13,8 +13,7 @@ import { fetchSetting } from '@/i18n/server';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import type { ProjectViewItem } from '@/components/projects/ProjectsView';
 import specKeysData from '@shared/spec-keys.json';
-
-const PROJECT_PLACEHOLDER = '/media/gallery-placeholder.svg';
+import { GALLERY_IMAGE_PLACEHOLDER } from '@/lib/placeholders';
 
 async function fetchProjects(locale: string) {
   const params = new URLSearchParams({
@@ -85,7 +84,7 @@ function toViewItem(p: any, locale: string): ProjectViewItem {
     href: p.slug
       ? localizedPath(locale, `/urunler/${p.slug}`)
       : `${localizedPath(locale, '/teklif')}?proje=${encodeURIComponent(p.title)}`,
-    imageSrc: absoluteAssetUrl(p.featured_image) || absoluteAssetUrl(p.image_url) || absoluteAssetUrl(p.images?.[0]) || PROJECT_PLACEHOLDER,
+    imageSrc: absoluteAssetUrl(p.featured_image) || absoluteAssetUrl(p.image_url) || absoluteAssetUrl(p.images?.[0]) || GALLERY_IMAGE_PLACEHOLDER,
     alt: buildMediaAlt({
       locale,
       kind: 'project',

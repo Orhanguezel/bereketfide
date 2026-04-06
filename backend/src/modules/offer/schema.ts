@@ -15,7 +15,7 @@ import {
 } from 'drizzle-orm/mysql-core';
 import { sql } from 'drizzle-orm';
 
-import { products } from '@/modules/products/schema';
+import { products } from '@agro/shared-backend/modules/products/schema';
 
 // LONGTEXT custom type
 const longtext = customType<{ data: string | null; driverData: string }>({

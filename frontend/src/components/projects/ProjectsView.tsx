@@ -190,7 +190,7 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
       <style>{`
         /* ── Tabs ── */
         .pv-tabs{display:flex;gap:24px}
-        .pv-tab{position:relative;padding:10px 0;font-size:14px;font-weight:500;color:#666666;border:none;background:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+        .pv-tab{position:relative;padding:10px 0;font-size:14px;font-weight:500;color:var(--color-text-muted);border:none;background:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
         .pv-tab svg{opacity:.7}
         /* ── View toggle ── */
         .pv-vbtn{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--color-border);cursor:pointer;transition:all .15s;background:var(--color-bg);color:var(--color-text-primary)}
@@ -198,16 +198,16 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
         [data-view="grid"] .pv-vbtn-grid{background:var(--color-text-primary);color:var(--color-bg);border-color:var(--color-text-primary)}
         [data-view="list"] .pv-vbtn-list{background:var(--color-text-primary);color:var(--color-bg);border-color:var(--color-text-primary)}
         /* ── Filter buttons ── */
-        .pv-filter-btn{padding:6px 14px;border-radius:2px;border:1px solid #e5e5e5;background:#ffffff;color:#2B2B2B;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .15s}
-        .pv-filter-btn:hover{border-color:#b98e3d; color:#b98e3d}
-        .pv-filter-btn[data-active="true"]{border-color:#b98e3d;background:#b98e3d;color:#ffffff}
-        .pv-filter-btn[data-open="true"]{border-color:#b98e3d;color:#b98e3d}
+        .pv-filter-btn{padding:6px 14px;border-radius:2px;border:1px solid var(--color-border);background:var(--color-bg-secondary);color:var(--color-text-primary);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .15s}
+        .pv-filter-btn:hover{border-color:var(--color-brand);color:var(--color-brand)}
+        .pv-filter-btn[data-active="true"]{border-color:var(--color-brand);background:var(--color-brand);color:var(--color-on-brand)}
+        .pv-filter-btn[data-open="true"]{border-color:var(--color-brand);color:var(--color-brand)}
         .pv-filter-btn svg.pv-chevron{width:10px;height:10px;flex-shrink:0;transition:transform .15s}
         .pv-filter-btn[data-open="true"] svg.pv-chevron{transform:rotate(180deg)}
-        .pv-clear-btn{padding:6px 12px;border-radius:2px;border:none;background:none;color:#666666;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;text-decoration:underline;text-underline-offset:2px}
-        .pv-clear-btn:hover{color:#2B2B2B}
+        .pv-clear-btn{padding:6px 12px;border-radius:2px;border:none;background:none;color:var(--color-text-muted);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;text-decoration:underline;text-underline-offset:2px}
+        .pv-clear-btn:hover{color:var(--color-text-primary)}
         /* ── Filter panel (ArchDaily style) ── */
-        .pv-panel{border:1px solid var(--color-border);background:var(--color-bg);box-shadow:0 4px 16px rgba(0,0,0,.08);padding:20px 24px 24px;margin-top:8px;position:relative}
+        .pv-panel{border:1px solid var(--color-border);background:var(--color-bg);box-shadow:0 4px 16px color-mix(in srgb,var(--color-bg-dark) 8%,transparent);padding:20px 24px 24px;margin-top:8px;position:relative}
         .pv-panel-search{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--color-border);padding-bottom:14px;margin-bottom:16px}
         .pv-panel-search svg{width:18px;height:18px;color:var(--color-text-muted);flex-shrink:0}
         .pv-panel-search input{flex:1;border:none;outline:none;background:transparent;font-size:14px;font-family:inherit;color:var(--color-text-primary);padding:0}
@@ -218,9 +218,9 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
         .pv-panel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
         @media(min-width:640px){.pv-panel-grid{grid-template-columns:repeat(3,1fr)}}
         @media(min-width:1024px){.pv-panel-grid{grid-template-columns:repeat(4,1fr)}}
-        .pv-panel-option{padding:10px 12px;font-size:13px;color:#444444;cursor:pointer;border:none;background:none;text-align:left;font-family:inherit;transition:all .1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:4px}
-        .pv-panel-option:hover{color:#b98e3d;background:rgba(185,142,61,0.05)}
-        .pv-panel-option[data-selected="true"]{font-weight:700;color:#b98e3d;background:rgba(185,142,61,0.1)}
+        .pv-panel-option{padding:10px 12px;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border:none;background:none;text-align:left;font-family:inherit;transition:all .1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:4px}
+        .pv-panel-option:hover{color:var(--color-brand);background:color-mix(in srgb,var(--color-brand) 5%,transparent)}
+        .pv-panel-option[data-selected="true"]{font-weight:700;color:var(--color-brand);background:color-mix(in srgb,var(--color-brand) 10%,transparent)}
         /* ── Card shared ── */
         .pv-card{text-decoration:none;display:block}
         .pv-card-img{position:relative;overflow:hidden;background:var(--color-bg-muted)}
@@ -246,15 +246,15 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
         .pv-list-meta{padding:12px 0 0}
         @media(min-width:768px){.pv-list-meta{padding:4px 0 0}}
         /* ── Tab visibility ── */
-        [data-tab="projects"] .pv-tab-projects{color:#b98e3d;font-weight:700}
-        [data-tab="projects"] .pv-tab-projects svg{opacity:1;color:#b98e3d}
-        [data-tab="projects"] .pv-tab-projects::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:#b98e3d}
-        [data-tab="projects"] .pv-tab-images{color:#666666;font-weight:500}
+        [data-tab="projects"] .pv-tab-projects{color:var(--color-brand);font-weight:700}
+        [data-tab="projects"] .pv-tab-projects svg{opacity:1;color:var(--color-brand)}
+        [data-tab="projects"] .pv-tab-projects::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--color-brand)}
+        [data-tab="projects"] .pv-tab-images{color:var(--color-text-muted);font-weight:500}
         [data-tab="projects"] .pv-tab-images::after{display:none}
-        [data-tab="images"] .pv-tab-images{color:#b98e3d;font-weight:700}
-        [data-tab="images"] .pv-tab-images svg{opacity:1;color:#b98e3d}
-        [data-tab="images"] .pv-tab-images::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:#b98e3d}
-        [data-tab="images"] .pv-tab-projects{color:#666666;font-weight:500}
+        [data-tab="images"] .pv-tab-images{color:var(--color-brand);font-weight:700}
+        [data-tab="images"] .pv-tab-images svg{opacity:1;color:var(--color-brand)}
+        [data-tab="images"] .pv-tab-images::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--color-brand)}
+        [data-tab="images"] .pv-tab-projects{color:var(--color-text-muted);font-weight:500}
         [data-tab="images"] .pv-tab-projects::after{display:none}
         [data-tab="projects"] .pv-projects-content{display:block}
         [data-tab="projects"] .pv-images-content{display:none}
@@ -268,7 +268,7 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
         .pv-masonry-item{break-inside:avoid;margin-bottom:16px;display:block;text-decoration:none;position:relative;overflow:hidden}
         .pv-masonry-item img{display:block;width:100%;height:auto;transition:transform .3s ease}
         .pv-masonry-item:hover img{transform:scale(1.03)}
-        .pv-masonry-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.55));opacity:0;transition:opacity .25s}
+        .pv-masonry-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;background:linear-gradient(transparent,color-mix(in srgb,var(--color-bg-dark) 55%,transparent));opacity:0;transition:opacity .25s}
         .pv-masonry-item:hover .pv-masonry-overlay{opacity:1}
       `}</style>
 
@@ -333,7 +333,10 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
             aria-label="List view"
             onClick={() => setView('list')}
             style={{
-              background: viewMode === 'list' ? 'rgba(185, 142, 61, 0.12)' : 'var(--color-bg)',
+              background:
+                viewMode === 'list'
+                  ? 'color-mix(in srgb, var(--color-brand) 12%, transparent)'
+                  : 'var(--color-bg)',
               color: viewMode === 'list' ? 'var(--color-brand)' : 'var(--color-text-primary)',
               borderColor: viewMode === 'list' ? 'var(--color-brand)' : 'var(--color-border)',
             }}
@@ -341,7 +344,7 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
             <List
               size={16}
               strokeWidth={2.2}
-              color={viewMode === 'list' ? 'var(--color-brand)' : '#111111'}
+              color={viewMode === 'list' ? 'var(--color-brand)' : 'var(--color-text-primary)'}
             />
           </button>
           <button
@@ -349,7 +352,10 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
             aria-label="Grid view"
             onClick={() => setView('grid')}
             style={{
-              background: viewMode === 'grid' ? 'rgba(185, 142, 61, 0.12)' : 'var(--color-bg)',
+              background:
+                viewMode === 'grid'
+                  ? 'color-mix(in srgb, var(--color-brand) 12%, transparent)'
+                  : 'var(--color-bg)',
               color: viewMode === 'grid' ? 'var(--color-brand)' : 'var(--color-text-primary)',
               borderColor: viewMode === 'grid' ? 'var(--color-brand)' : 'var(--color-border)',
             }}
@@ -357,7 +363,7 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
             <LayoutGrid
               size={16}
               strokeWidth={2.2}
-              color={viewMode === 'grid' ? 'var(--color-brand)' : '#111111'}
+              color={viewMode === 'grid' ? 'var(--color-brand)' : 'var(--color-text-primary)'}
             />
           </button>
         </div>
@@ -458,7 +464,14 @@ export function ProjectsView({ projects, locale, labels, filterLabels, detailLab
                 sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
               />
               <div className="pv-masonry-overlay">
-                <span style={{ fontSize: 14, fontWeight: 600, color: '#fff', lineHeight: 1.3 }}>
+                <span
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: 'var(--section-bg-white)',
+                    lineHeight: 1.3,
+                  }}
+                >
                   {p.title}
                 </span>
               </div>

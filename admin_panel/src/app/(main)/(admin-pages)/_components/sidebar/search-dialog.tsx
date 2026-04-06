@@ -58,9 +58,8 @@ export function SearchDialog() {
   const hits = React.useMemo<SearchHit[]>(() => {
     return [
       { group: 'Sayfalar', label: 'Dashboard', href: '/dashboard' },
-      // İleride Tavvuk modülleri:
-      // { group: 'Sayfalar', label: 'Siparişler', href: '/dashboard/orders' },
-      // { group: 'Sayfalar', label: 'Kullanıcılar', href: '/dashboard/users' },
+      { group: 'B2B', label: 'B2B Siparişler', href: '/orders', keywords: 'siparis order' },
+      { group: 'B2B', label: 'Bayiler', href: '/dealers', keywords: 'dealer cari' },
     ];
   }, []);
 

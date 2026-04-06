@@ -2,83 +2,83 @@
   "project": [
     {
       "id": "type",
-      "keys": { "tr": "Tip", "en": "Type" },
-      "labels": { "tr": "Tip", "en": "Type" }
+      "keys": { "tr": "Tip", "en": "Type", "de": "Typ" },
+      "labels": { "tr": "Tip", "en": "Type", "de": "Typ" }
     },
     {
       "id": "location",
-      "keys": { "tr": "Konum", "en": "Location" },
-      "labels": { "tr": "Konum", "en": "Location" }
+      "keys": { "tr": "Konum", "en": "Location", "de": "Standort" },
+      "labels": { "tr": "Konum", "en": "Location", "de": "Standort" }
     },
     {
       "id": "year",
-      "keys": { "tr": "Yıl", "en": "Year" },
-      "labels": { "tr": "Yıl", "en": "Year" }
+      "keys": { "tr": "Yıl", "en": "Year", "de": "Jahr" },
+      "labels": { "tr": "Yıl", "en": "Year", "de": "Jahr" }
     },
     {
       "id": "area",
-      "keys": { "tr": "Alan", "en": "Area" },
-      "labels": { "tr": "Alan", "en": "Area" }
+      "keys": { "tr": "Alan", "en": "Area", "de": "Fläche" },
+      "labels": { "tr": "Alan", "en": "Area", "de": "Fläche" }
     },
     {
       "id": "status",
-      "keys": { "tr": "Durum", "en": "Status" },
-      "labels": { "tr": "Durum", "en": "Status" }
+      "keys": { "tr": "Durum", "en": "Status", "de": "Status" },
+      "labels": { "tr": "Durum", "en": "Status", "de": "Status" }
     },
     {
       "id": "architects",
-      "keys": { "tr": "Ziraat Mühendisleri", "en": "Agri. Engineers" },
-      "labels": { "tr": "Ziraat Mühendisleri", "en": "Agri. Engineers" }
+      "keys": { "tr": "Ziraat Mühendisleri", "en": "Agri. Engineers", "de": "Landwirtschaftsingenieure" },
+      "labels": { "tr": "Ziraat Mühendisleri", "en": "Agri. Engineers", "de": "Landwirtschaftsingenieure" }
     },
     {
       "id": "lead_architect",
-      "keys": { "tr": "Üretim Sorumlusu", "en": "Production Lead" },
-      "labels": { "tr": "Üretim Sorumlusu", "en": "Production Lead" }
+      "keys": { "tr": "Üretim Sorumlusu", "en": "Production Lead", "de": "Produktionsleitung" },
+      "labels": { "tr": "Üretim Sorumlusu", "en": "Production Lead", "de": "Produktionsleitung" }
     },
     {
       "id": "manufacturers",
-      "keys": { "tr": "Üreticiler", "en": "Manufacturers" },
-      "labels": { "tr": "Üreticiler", "en": "Manufacturers" }
+      "keys": { "tr": "Üreticiler", "en": "Manufacturers", "de": "Erzeuger" },
+      "labels": { "tr": "Üreticiler", "en": "Manufacturers", "de": "Erzeuger" }
     },
     {
       "id": "project_team",
-      "keys": { "tr": "Üretim Ekibi", "en": "Production Team" },
-      "labels": { "tr": "Üretim Ekibi", "en": "Production Team" }
+      "keys": { "tr": "Üretim Ekibi", "en": "Production Team", "de": "Produktionsteam" },
+      "labels": { "tr": "Üretim Ekibi", "en": "Production Team", "de": "Produktionsteam" }
     },
     {
       "id": "landscape_architecture",
-      "keys": { "tr": "Gelişim Özellikleri", "en": "Growth Features" },
-      "labels": { "tr": "Gelişim Özellikleri", "en": "Growth Features" }
+      "keys": { "tr": "Gelişim Özellikleri", "en": "Growth Features", "de": "Wachstumsmerkmale" },
+      "labels": { "tr": "Gelişim Özellikleri", "en": "Growth Features", "de": "Wachstumsmerkmale" }
     },
     {
       "id": "interior_design",
-      "keys": { "tr": "Tohum Çeşidi", "en": "Seed Variety" },
-      "labels": { "tr": "Tohum Çeşidi", "en": "Seed Variety" }
+      "keys": { "tr": "Tohum Çeşidi", "en": "Seed Variety", "de": "Saatgutsorte" },
+      "labels": { "tr": "Tohum Çeşidi", "en": "Seed Variety", "de": "Saatgutsorte" }
     },
     {
       "id": "engineering",
-      "keys": { "tr": "Teknik Destek", "en": "Technical Support" },
-      "labels": { "tr": "Teknik Destek", "en": "Technical Support" }
+      "keys": { "tr": "Teknik Destek", "en": "Technical Support", "de": "Technischer Support" },
+      "labels": { "tr": "Teknik Destek", "en": "Technical Support", "de": "Technischer Support" }
     },
     {
       "id": "general_construction",
-      "keys": { "tr": "Üretim Metodu", "en": "Production Method" },
-      "labels": { "tr": "Üretim Metodu", "en": "Production Method" }
+      "keys": { "tr": "Üretim Metodu", "en": "Production Method", "de": "Produktionsmethode" },
+      "labels": { "tr": "Üretim Metodu", "en": "Production Method", "de": "Produktionsmethode" }
     },
     {
       "id": "city",
-      "keys": { "tr": "Bölge", "en": "Region" },
-      "labels": { "tr": "Bölge", "en": "Region" }
+      "keys": { "tr": "Bölge", "en": "Region", "de": "Region" },
+      "labels": { "tr": "Bölge", "en": "Region", "de": "Region" }
     },
     {
       "id": "country",
-      "keys": { "tr": "Ülke", "en": "Country" },
-      "labels": { "tr": "Ülke", "en": "Country" }
+      "keys": { "tr": "Ülke", "en": "Country", "de": "Land" },
+      "labels": { "tr": "Ülke", "en": "Country", "de": "Land" }
     },
     {
       "id": "contractor",
-      "keys": { "tr": "Tedarikçi", "en": "Supplier" },
-      "labels": { "tr": "Tedarikçi", "en": "Supplier" }
+      "keys": { "tr": "Tedarikçi", "en": "Supplier", "de": "Lieferant" },
+      "labels": { "tr": "Tedarikçi", "en": "Supplier", "de": "Lieferant" }
     }
   ]
 }

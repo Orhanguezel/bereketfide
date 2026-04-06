@@ -2,6 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
+import { showFooterNewsletter } from '@/config/public-features';
+import { NewsletterForm } from '@/components/sections/NewsletterForm';
+import { localizedPath } from '@/seo';
+import { legalComplianceSlug, legalPageSlug } from '@/lib/navigation-fallback';
+
 interface FooterSection {
   title?: string;
   items?: { label?: string; url?: string }[];
@@ -47,6 +52,7 @@ export function Footer({
   logoDarkUrl?: string;
 }) {
   const t = useTranslations('footer');
+  const tNews = useTranslations('home.newsletter');
   const normalized = normalizeSections(sections);
   const year = new Date().getFullYear();
 
@@ -121,26 +127,67 @@ export function Footer({
           ))}
         </div>
 
+        {showFooterNewsletter ? (
+          <div className="surface-dark-border mt-12 border-t pt-10">
+            <div className="mx-auto max-w-lg text-center lg:text-left">
+              <h3 className="surface-dark-text text-base font-semibold tracking-wide">
+                {tNews('title')}
+              </h3>
+              <p className="surface-dark-text mt-2 text-sm opacity-75">{tNews('subtitle')}</p>
+              <NewsletterForm locale={locale} />
+            </div>
+          </div>
+        ) : null}
+
         <div className="surface-dark-border mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 sm:flex-row">
           <p className="surface-dark-text text-xs">
             &copy; {year} {companyProfile?.company_name || 'Bereket Fide'}. {t('rights')}
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:justify-end">
             <Link
-              href={`/${locale}/legal/privacy`}
+              href={localizedPath(locale, `/legal/${legalPageSlug(locale, 'privacy')}`)}
               className="surface-dark-link inline-flex min-h-9 items-center py-1 text-xs"
             >
               {t('privacy')}
             </Link>
             <Link
-              href={`/${locale}/legal/terms`}
+              href={localizedPath(locale, `/legal/${legalPageSlug(locale, 'terms')}`)}
               className="surface-dark-link inline-flex min-h-9 items-center py-1 text-xs"
             >
               {t('terms')}
             </Link>
-            <span className="surface-dark-text inline-flex min-h-9 items-center py-1 text-xs ml-2 sm:ml-4 border-l border-gray-700 pl-4 sm:pl-6">
+            <Link
+              href={localizedPath(locale, `/legal/${legalPageSlug(locale, 'quality')}`)}
+              className="surface-dark-link inline-flex min-h-9 items-center py-1 text-xs"
+            >
+              {t('qualityPolicy')}
+            </Link>
+            <Link
+              href={localizedPath(locale, `/legal/${legalPageSlug(locale, 'service')}`)}
+              className="surface-dark-link inline-flex min-h-9 items-center py-1 text-xs"
+            >
+              {t('servicePolicy')}
+            </Link>
+            <Link
+              href={localizedPath(locale, `/legal/${legalComplianceSlug(locale, 'dataNotice')}`)}
+              className="surface-dark-link inline-flex min-h-9 items-center py-1 text-xs"
+            >
+              {t('dataProtectionNotice')}
+            </Link>
+            <Link
+              href={localizedPath(locale, `/legal/${legalComplianceSlug(locale, 'cookies')}`)}
+              className="surface-dark-link inline-flex min-h-9 items-center py-1 text-xs"
+            >
+              {t('cookiePolicy')}
+            </Link>
+            <span className="surface-dark-text surface-dark-border ml-2 inline-flex min-h-9 items-center border-l py-1 pl-4 text-xs sm:ml-4 sm:pl-6">
               Design by{' '}
-              <a href="https://guezelwebdesign.com" target="_blank" rel="nofollow noopener noreferrer" className="ml-1 text-(--color-brand-light) hover:text-white transition-colors hover:underline font-medium tracking-wide">
+              <a
+                href="https://guezelwebdesign.com"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="ml-1 font-medium tracking-wide text-(--color-brand-light) transition-colors hover:text-(--section-bg-white) hover:underline"
+              >
                 GWD
               </a>
             </span>

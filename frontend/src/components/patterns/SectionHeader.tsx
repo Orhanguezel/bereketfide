@@ -20,7 +20,7 @@ export function SectionHeader({
       <div>
         <h2 className="text-3xl font-bold">{title}</h2>
         {description ? (
-          <p className={`mt-2 text-[var(--color-text-secondary)] ${isCentered ? 'max-w-2xl' : ''}`}>
+          <p className={`mt-2 text-(--color-text-secondary) ${isCentered ? 'max-w-2xl' : ''}`}>
             {description}
           </p>
         ) : null}

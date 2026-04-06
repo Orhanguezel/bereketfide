@@ -13,6 +13,8 @@ import { SocialShare } from '@/components/projects/SocialShare';
 import { ProjectComments } from '@/components/projects/ProjectComments';
 import { NewsImageGallery } from '@/components/news/NewsImageGallery';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { RelatedLinks } from '@/components/seo/RelatedLinks';
+import { fetchRelatedContent } from '@/lib/related-content';
 
 function resolveNewsImage(post: any): string | null {
   return absoluteAssetUrl(
@@ -31,7 +33,7 @@ function resolveNewsImage(post: any): string | null {
 async function fetchPost(slug: string, locale: string) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/custom_pages/by-slug/${encodeURIComponent(slug)}?locale=${locale}`,
+      `${API_BASE_URL}/custom-pages/by-slug/${encodeURIComponent(slug)}?locale=${locale}`,
       { next: { revalidate: 300 } },
     );
     if (!res.ok) return null;
@@ -44,7 +46,7 @@ async function fetchPost(slug: string, locale: string) {
 async function fetchSidebarNews(locale: string, excludeSlug: string, limit = 4) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/custom_pages?module_key=news&is_published=1&locale=${locale}&limit=${limit + 1}&sort=created_at&order=desc`,
+      `${API_BASE_URL}/custom-pages?module_key=news&is_published=1&locale=${locale}&limit=${limit + 1}&sort=created_at&order=desc`,
       { next: { revalidate: 300 } },
     );
     if (!res.ok) return [];
@@ -59,7 +61,7 @@ async function fetchSidebarNews(locale: string, excludeSlug: string, limit = 4) 
 async function fetchRelatedArticles(locale: string, excludeSlug: string, limit = 3) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/custom_pages?module_key=news&is_published=1&locale=${locale}&limit=${limit + 1}&sort=created_at&order=desc`,
+      `${API_BASE_URL}/custom-pages?module_key=news&is_published=1&locale=${locale}&limit=${limit + 1}&sort=created_at&order=desc`,
       { next: { revalidate: 300 } },
     );
     if (!res.ok) return [];
@@ -147,9 +149,21 @@ export default async function NewsDetailPage({
     .filter((img): img is { src: string; alt: string } => Boolean(img));
   const author = post.author_name || 'Bereket Fide';
 
-  const [sidebarPosts, relatedArticles] = await Promise.all([
+  const postTags: string[] = Array.isArray(post.tags) ? post.tags : [];
+
+  const [sidebarPosts, relatedArticles, related] = await Promise.all([
     fetchSidebarNews(locale, slug, 4),
     fetchRelatedArticles(locale, slug, 3),
+    fetchRelatedContent(
+      {
+        title: post.title,
+        description: post.summary || post.description || null,
+        slug: post.slug || slug,
+        tags: postTags,
+      },
+      slug,
+      locale,
+    ),
   ]);
 
   const breadcrumbs = [
@@ -197,10 +211,10 @@ export default async function NewsDetailPage({
       <JsonLd
         data={jsonld.graph([
           jsonld.org(org),
-          jsonld.article({
+          jsonld.newsArticle({
             headline: post.title,
             description: post.description,
-            image: post.image_url,
+            image: imageSrc || undefined,
             datePublished: post.created_at,
             dateModified: post.updated_at,
             author: post.author_name || org.name,
@@ -304,18 +318,48 @@ export default async function NewsDetailPage({
             {/* Thumbnail strip is rendered inside NewsImageGallery */}
 
             {/* Tags */}
-            {post.tags && Array.isArray(post.tags) && post.tags.length > 0 && (
+            {postTags.length > 0 && (
               <div style={{ marginTop: 28 }}>
                 <h3 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-text-muted)', marginBottom: 10 }}>
                   {isEn ? 'Tags' : 'Etiketler'}
                 </h3>
                 <div className="nd-tags">
-                  {post.tags.map((tag: string) => (
+                  {postTags.map((tag: string) => (
                     <span key={tag} className="nd-tag">{tag}</span>
                   ))}
                 </div>
               </div>
             )}
+
+            <div
+              style={{
+                marginTop: 48,
+                display: 'grid',
+                gap: 24,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              }}
+            >
+              <RelatedLinks
+                title={t('common.relatedProducts')}
+                hrefBase={localizedPath(locale, '/urunler')}
+                items={related.products}
+              />
+              <RelatedLinks
+                title={t('common.relatedArticles')}
+                hrefBase={localizedPath(locale, '/haberler')}
+                items={related.blogPosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedKnowledgePosts')}
+                hrefBase={localizedPath(locale, '/blog')}
+                items={related.knowledgePosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedGallery')}
+                hrefBase={localizedPath(locale, '/galeri')}
+                items={related.galleries}
+              />
+            </div>
 
             {/* CTA */}
             <div
@@ -334,7 +378,13 @@ export default async function NewsDetailPage({
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-text-on-dark)', margin: 0 }}>
                   {t('projects.requestOffer')}
                 </h3>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', marginTop: 4 }}>
+                <p
+                  style={{
+                    fontSize: 14,
+                    marginTop: 4,
+                    color: 'color-mix(in srgb, var(--section-bg-white) 70%, transparent)',
+                  }}
+                >
                   {t('common.offerCtaDescription')}
                 </p>
               </div>
@@ -343,7 +393,7 @@ export default async function NewsDetailPage({
                 style={{
                   padding: '10px 24px',
                   background: 'var(--color-brand)',
-                  color: '#fff',
+                  color: 'var(--color-on-brand)',
                   fontWeight: 600,
                   fontSize: 14,
                   textDecoration: 'none',
@@ -460,7 +510,7 @@ export default async function NewsDetailPage({
                   marginTop: 12,
                   padding: '8px 20px',
                   background: 'var(--color-brand)',
-                  color: '#fff',
+                  color: 'var(--color-on-brand)',
                   fontWeight: 600,
                   fontSize: 13,
                   textDecoration: 'none',

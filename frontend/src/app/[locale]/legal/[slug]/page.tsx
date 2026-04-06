@@ -15,7 +15,7 @@ type LegalFallback = {
 async function fetchLegalPage(slug: string, locale: string) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/custom_pages/by-slug/${encodeURIComponent(slug)}?locale=${locale}`,
+      `${API_BASE_URL}/custom-pages/by-slug/${encodeURIComponent(slug)}?locale=${locale}`,
       { next: { revalidate: 3600 } },
     );
     if (!res.ok) return null;
@@ -25,8 +25,25 @@ async function fetchLegalPage(slug: string, locale: string) {
   }
 }
 
+const LEGAL_FALLBACK_KIND = {
+  privacy: 'privacy',
+  terms: 'terms',
+  'kalite-politikasi': 'quality',
+  'quality-policy': 'quality',
+  qualitaetspolitik: 'quality',
+  'hizmet-politikasi': 'service',
+  'service-policy': 'service',
+  servicepolitik: 'service',
+  'kvkk-aydinlatma-metni': 'dataProtection',
+  'pdpl-information-notice': 'dataProtection',
+  cookies: 'cookies',
+} as const;
+
 function getLegalFallback(t: any, slug: string): LegalFallback | null {
-  if (slug === 'privacy') {
+  const kind = LEGAL_FALLBACK_KIND[slug as keyof typeof LEGAL_FALLBACK_KIND];
+  if (!kind) return null;
+
+  if (kind === 'privacy') {
     return {
       title: t('legal.privacy'),
       description: t('legal.privacyDesc'),
@@ -34,7 +51,7 @@ function getLegalFallback(t: any, slug: string): LegalFallback | null {
     };
   }
 
-  if (slug === 'terms') {
+  if (kind === 'terms') {
     return {
       title: t('legal.terms'),
       description: t('legal.termsDesc'),
@@ -42,7 +59,35 @@ function getLegalFallback(t: any, slug: string): LegalFallback | null {
     };
   }
 
-  return null;
+  if (kind === 'quality') {
+    return {
+      title: t('legal.qualityPolicy'),
+      description: t('legal.qualityPolicyDesc'),
+      content: t('legal.qualityPolicyContent'),
+    };
+  }
+
+  if (kind === 'dataProtection') {
+    return {
+      title: t('legal.dataProtectionNotice'),
+      description: t('legal.dataProtectionNoticeDesc'),
+      content: t('legal.dataProtectionNoticeContent'),
+    };
+  }
+
+  if (kind === 'cookies') {
+    return {
+      title: t('legal.cookiePolicy'),
+      description: t('legal.cookiePolicyDesc'),
+      content: t('legal.cookiePolicyContent'),
+    };
+  }
+
+  return {
+    title: t('legal.servicePolicy'),
+    description: t('legal.servicePolicyDesc'),
+    content: t('legal.servicePolicyContent'),
+  };
 }
 
 import { fetchSeoPage } from '@/seo/server';

@@ -1,3 +1,4 @@
+import { log } from '@agro/shared-backend/core/app-logger';
 // =============================================================
 // FILE: src/modules/offer/pdfTemplate.ts
 // Bereket Fide – Offer PDF HTML Template
@@ -8,9 +9,9 @@
 // =============================================================
 
 import type { OfferRow } from './schema';
-import { getAppLocales, getDefaultLocale } from '@/modules/siteSettings/service';
+import { getAppLocales, getDefaultLocale } from '@agro/shared-backend/modules/siteSettings/service';
 import { db } from '@/db/client';
-import { siteSettings } from '@/modules/siteSettings/schema';
+import { siteSettings } from '@agro/shared-backend/modules/siteSettings/schema';
 import { and, inArray, eq } from 'drizzle-orm';
 
 type PdfTemplateContext = OfferRow & {
@@ -177,7 +178,7 @@ async function ensureAppLocales(): Promise<string[]> {
       }
     }
   } catch (err) {
-    console.error('offer_pdf:getAppLocales_failed', err);
+    log.error({ err }, 'offer_pdf:getAppLocales_failed');
   }
 
   // fallback
@@ -196,7 +197,7 @@ async function ensureDefaultLocale(): Promise<string | null> {
       return n;
     }
   } catch (err) {
-    console.error('offer_pdf:getDefaultLocale_failed', err);
+    log.error({ err }, 'offer_pdf:getDefaultLocale_failed');
   }
 
   return null;
@@ -308,11 +309,11 @@ async function getCompanyBrandSettings(runtimeLocale: string): Promise<CompanyBr
             parsed.logo && typeof parsed.logo.height === 'number' ? parsed.logo.height : null,
         };
       } catch (err) {
-        console.error('offer_pdf:parse_company_brand_failed', err);
+        log.error({ err }, 'offer_pdf:parse_company_brand_failed');
       }
     }
   } catch (err) {
-    console.error('offer_pdf:load_company_brand_failed', err);
+    log.error({ err }, 'offer_pdf:load_company_brand_failed');
   }
 
   companyBrandCache.set(runtimeLocale, brand);

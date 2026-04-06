@@ -107,15 +107,15 @@ export function Header({
 
   return (
     <>
-      {/* ═══════════════════════════════════════════
-          MAIN HEADER — Sticky, açık/beyaz ton (Humintech ref)
-      ═══════════════════════════════════════════ */}
+      {/* Ana üst menü — yapışkan, açık/beyaz zemin */}
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: 'rgba(255, 255, 255, 0.95)',
+          background: 'color-mix(in srgb, var(--color-bg-secondary) 95%, transparent)',
           backdropFilter: 'blur(10px)',
-          boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none',
+          boxShadow: scrolled
+            ? '0 2px 20px color-mix(in srgb, var(--color-bg-dark) 8%, transparent)'
+            : 'none',
           height: 80,
         }}
       >
@@ -131,19 +131,22 @@ export function Header({
               onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center justify-center transition-all duration-300 hover:scale-105"
               style={{
-                width: 52, 
+                width: 52,
                 height: 52,
                 background: 'var(--color-brand)',
-                color: '#ffffff',
+                color: 'var(--color-on-brand)',
                 borderRadius: 'var(--radius-sm)',
               }}
-              aria-label="Menü"
+              aria-label={t('ariaToggleMenu')}
+              aria-expanded={menuOpen}
             >
               {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
             </button>
 
-            {/* Desktop menü linkleri (Humintech style) */}
-            <nav className="hidden lg:flex items-center gap-8 ml-4">
+            <nav
+              className="ml-4 hidden items-center gap-8 lg:flex"
+              aria-label={t('ariaPrimaryNavigation')}
+            >
                 {items.filter((item) => item.url && !item.url.includes('/teklif')).slice(0, 8).map((item) => {
                   const isActive = item.url === l('/') ? pathname === item.url : pathname.startsWith(item.url || '');
                   return (
@@ -153,7 +156,7 @@ export function Header({
                       title={item.title}
                       className="group relative text-[13px] font-bold uppercase tracking-[0.15em] transition-colors"
                       style={{
-                        color: isActive ? 'var(--color-brand)' : '#1a1a1a',
+                        color: isActive ? 'var(--color-brand)' : 'var(--color-text-primary)',
                       }}
                     >
                       {item.title}
@@ -174,7 +177,7 @@ export function Header({
             <Link
               href={l('/')}
               title="Bereket Fide"
-              className="flex items-center shrink-0 border-l border-gray-100 pl-8 h-10"
+              className="flex h-10 shrink-0 items-center border-l border-(--color-border) pl-8"
             >
               <Image
                 src={logoSrc}
@@ -210,7 +213,9 @@ export function Header({
           {/* Backdrop */}
           <div
             className="absolute inset-0"
-            style={{ background: 'rgba(0,0,0,0.5)' }}
+            style={{
+              background: 'color-mix(in srgb, var(--color-bg-dark) 50%, transparent)',
+            }}
             onClick={() => setMenuOpen(false)}
           />
 
@@ -406,6 +411,42 @@ export function Header({
                       onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
                     >
                       {t('about') || 'Hakkımızda'}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={l('/bayi-agi')}
+                      className="text-sm transition-colors block py-0.5"
+                      style={{ color: 'var(--color-text-on-dark)' }}
+                      onClick={() => setMenuOpen(false)}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
+                    >
+                      {t('dealerNetwork')}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={l('/bayi-kayit')}
+                      className="text-sm transition-colors block py-0.5"
+                      style={{ color: 'var(--color-text-on-dark)' }}
+                      onClick={() => setMenuOpen(false)}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
+                    >
+                      {t('dealerRegister')}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={l('/bayi-girisi')}
+                      className="text-sm transition-colors block py-0.5"
+                      style={{ color: 'var(--color-text-on-dark)' }}
+                      onClick={() => setMenuOpen(false)}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
+                    >
+                      {t('dealerLogin')}
                     </Link>
                   </li>
                 </ul>

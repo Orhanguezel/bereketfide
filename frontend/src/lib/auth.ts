@@ -1,5 +1,16 @@
 import api from './axios';
 
+/** @agro/shared-backend user_roles + JWT primary role */
+export type AuthUserRole =
+  | 'admin'
+  | 'editor'
+  | 'carrier'
+  | 'customer'
+  | 'dealer'
+  /** eski DB uyumu */
+  | 'moderator'
+  | 'user';
+
 export type AuthUser = {
   id: string;
   email: string;
@@ -7,7 +18,7 @@ export type AuthUser = {
   phone: string | null;
   email_verified: number;
   is_active: number;
-  role: 'admin' | 'moderator' | 'user';
+  role: AuthUserRole;
 };
 
 type AuthResponse = {

@@ -31,12 +31,12 @@ function guessDevBackend(): string {
       const loc = window.location;
       const host = loc?.hostname || 'localhost';
       const proto = loc?.protocol || 'http:';
-      return `${proto}//${host}:8086/api`;
+      return `${proto}//${host}:8086/api/v1`;
     }
   } catch {
     // ignore
   }
-  return 'http://localhost:8086/api';
+  return 'http://localhost:8086/api/v1';
 }
 
 /**
@@ -70,7 +70,7 @@ export function resolveBaseUrl(): string {
 
   // 4) fallbacks
   if (IS_DEV) return guessDevBackend();
-  return '/api';
+  return '/api/v1';
 }
 
 export const BASE_URL = resolveBaseUrl();

@@ -7,7 +7,7 @@ import type { UserRoleName } from '@/integrations/shared';
 
 /**
  * Backend rolleri:
- *   "admin" | "moderator" | "user"
+ *   "admin" | "editor" | "carrier" | "customer" | "dealer"
  * Zaten UserRoleName ile uyumlu.
  */
 export type AdminUserRoleName = UserRoleName;

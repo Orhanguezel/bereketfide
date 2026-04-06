@@ -55,7 +55,7 @@ type SectionDef = { titleKey: string; fields: FieldDef[]; testEndpoint?: string 
 const SECTIONS: SectionDef[] = [
   {
     titleKey: 'googleOAuth',
-    testEndpoint: '/api/admin/site_settings/test/google',
+    testEndpoint: '/api/v1/admin/site-settings/test/google',
     fields: [
       { key: 'google_client_id', labelKey: 'clientId', placeholder: '...apps.googleusercontent.com' },
       { key: 'google_client_secret', labelKey: 'clientSecret', type: 'password' },
@@ -63,7 +63,7 @@ const SECTIONS: SectionDef[] = [
   },
   {
     titleKey: 'cloudinary',
-    testEndpoint: '/api/admin/site_settings/test/cloudinary',
+    testEndpoint: '/api/v1/admin/site-settings/test/cloudinary',
     fields: [
       { key: 'cloudinary_cloud_name', labelKey: 'cloudName' },
       { key: 'cloudinary_api_key', labelKey: 'apiKey' },
@@ -81,7 +81,7 @@ const SECTIONS: SectionDef[] = [
   },
   {
     titleKey: 'groq',
-    testEndpoint: '/api/admin/site_settings/test/groq',
+    testEndpoint: '/api/v1/admin/site-settings/test/groq',
     fields: [
       { key: 'groq_api_key', labelKey: 'apiKey', type: 'password' },
       { key: 'groq_model', labelKey: 'model', placeholder: 'llama-3.3-70b-versatile' },
@@ -89,7 +89,7 @@ const SECTIONS: SectionDef[] = [
   },
   {
     titleKey: 'openai',
-    testEndpoint: '/api/admin/site_settings/test/openai',
+    testEndpoint: '/api/v1/admin/site-settings/test/openai',
     fields: [
       { key: 'openai_api_key', labelKey: 'apiKey', type: 'password' },
       { key: 'openai_model', labelKey: 'model', placeholder: 'gpt-4o-mini' },
@@ -97,7 +97,7 @@ const SECTIONS: SectionDef[] = [
   },
   {
     titleKey: 'anthropic',
-    testEndpoint: '/api/admin/site_settings/test/anthropic',
+    testEndpoint: '/api/v1/admin/site-settings/test/anthropic',
     fields: [
       { key: 'anthropic_api_key', labelKey: 'apiKey', type: 'password' },
       { key: 'anthropic_model', labelKey: 'model', placeholder: 'claude-3-5-haiku-latest' },
@@ -105,7 +105,7 @@ const SECTIONS: SectionDef[] = [
   },
   {
     titleKey: 'grok',
-    testEndpoint: '/api/admin/site_settings/test/grok',
+    testEndpoint: '/api/v1/admin/site-settings/test/grok',
     fields: [
       { key: 'xai_api_key', labelKey: 'apiKey', type: 'password' },
       { key: 'xai_model', labelKey: 'model', placeholder: 'grok-2-latest' },

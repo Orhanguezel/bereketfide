@@ -6,7 +6,7 @@ SET time_zone = '+00:00';
 CREATE TABLE IF NOT EXISTS `user_roles` (
   `id` CHAR(36) NOT NULL,
   `user_id` CHAR(36) NOT NULL,
-  `role` ENUM('admin','moderator','user') NOT NULL DEFAULT 'user',
+  `role` ENUM('admin','editor','carrier','customer','dealer') NOT NULL DEFAULT 'customer',
   `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   PRIMARY KEY (`id`),
 

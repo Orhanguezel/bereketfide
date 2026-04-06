@@ -48,7 +48,7 @@ async function fetchNewsCategories(locale: string): Promise<NewsCategory[]> {
 
 async function fetchNews(locale: string, categoryId?: string) {
   try {
-    let url = `${API_BASE_URL}/custom_pages?module_key=blog&is_published=1&locale=${locale}&limit=50`;
+    let url = `${API_BASE_URL}/custom-pages?module_key=blog&is_published=1&locale=${locale}&limit=50`;
     if (categoryId) url += `&category_id=${encodeURIComponent(categoryId)}`;
     const res = await fetch(url, { next: { revalidate: 300 } });
     if (!res.ok) return [];
@@ -62,7 +62,7 @@ async function fetchNews(locale: string, categoryId?: string) {
 async function fetchSidebarNews(locale: string, limit = 4) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/custom_pages?module_key=blog&is_published=1&locale=${locale}&limit=${limit}&sort=created_at&order=desc`,
+      `${API_BASE_URL}/custom-pages?module_key=blog&is_published=1&locale=${locale}&limit=${limit}&sort=created_at&order=desc`,
       { next: { revalidate: 300 } },
     );
     if (!res.ok) return [];
@@ -154,22 +154,22 @@ export default async function BlogPage({
       <style>{`
         .nw-page-title{font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--color-text-primary);line-height:1.2;margin:0 0 16px}
         .nw-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-        .nw-chip{display:inline-block;padding:6px 16px;border:1px solid #e5e5e5;font-size:13px;font-weight:600;color:#2B2B2B;text-decoration:none;border-radius:2px;transition:all .15s;background:#ffffff}
-        .nw-chip:hover{border-color:#b98e3d;color:#b98e3d}
-        .nw-chip-active{border-color:#b98e3d;background:#b98e3d;color:#fff}
-        .nw-chip-active:hover{background:#a37d35;border-color:#a37d35;color:#fff}
+        .nw-chip{display:inline-block;padding:6px 16px;border:1px solid var(--color-border);font-size:13px;font-weight:600;color:var(--color-text-primary);text-decoration:none;border-radius:2px;transition:all .15s;background:var(--color-bg-secondary)}
+        .nw-chip:hover{border-color:var(--color-brand);color:var(--color-brand)}
+        .nw-chip-active{border-color:var(--color-brand);background:var(--color-brand);color:var(--color-on-brand)}
+        .nw-chip-active:hover{background:var(--color-brand-dark);border-color:var(--color-brand-dark);color:var(--color-on-brand)}
         .nw-featured{display:block;text-decoration:none;margin-bottom:32px}
         .nw-featured-img{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--color-bg-muted)}
         .nw-featured-title{font-family:var(--font-heading);font-size:22px;font-weight:700;color:var(--color-text-primary);line-height:1.3;margin:12px 0 4px}
-        .nw-featured:hover .nw-featured-title{color:#b98e3d}
-        .nw-featured-time{font-size:12px;color:#666666;font-weight:500}
+        .nw-featured:hover .nw-featured-title{color:var(--color-brand)}
+        .nw-featured-time{font-size:12px;color:var(--color-text-muted);font-weight:500}
         .nw-cat-badge{display:inline-block;padding:2px 8px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--color-brand);border:1px solid var(--color-brand);margin-bottom:6px}
         .nw-article{display:flex;gap:16px;text-decoration:none;padding:20px 0;border-top:1px solid var(--color-border)}
-        .nw-article:hover .nw-article-title{color:#b98e3d}
+        .nw-article:hover .nw-article-title{color:var(--color-brand)}
         .nw-article-body{flex:1;min-width:0}
         .nw-article-title{font-family:var(--font-heading);font-size:17px;font-weight:700;color:var(--color-text-primary);line-height:1.35;margin:0 0 6px;transition:color .15s}
         .nw-article-excerpt{font-size:14px;color:var(--color-text-secondary);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-        .nw-article-time{font-size:12px;color:#666666;margin-top:8px;font-weight:500}
+        .nw-article-time{font-size:12px;color:var(--color-text-muted);margin-top:8px;font-weight:500}
         .nw-article-thumb{position:relative;width:200px;height:140px;flex-shrink:0;overflow:hidden;background:var(--color-bg-muted)}
         .nw-sidebar-card{border:1px solid var(--color-border);padding:20px;margin-bottom:20px}
         .nw-sidebar-card h3{font-family:var(--font-heading);font-size:18px;font-weight:700;color:var(--color-text-primary);margin:0 0 16px}
@@ -433,7 +433,7 @@ export default async function BlogPage({
                   marginTop: 12,
                   padding: '8px 20px',
                   background: 'var(--color-brand)',
-                  color: '#fff',
+                  color: 'var(--color-on-brand)',
                   fontWeight: 600,
                   fontSize: 13,
                   textDecoration: 'none',

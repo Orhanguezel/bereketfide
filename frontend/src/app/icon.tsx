@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+import { BEREKET_PALETTE_HEX as C } from '@/lib/bereketfide-palette-hex';
 
 export const runtime = 'nodejs';
 export const size = { width: 64, height: 64 };
@@ -25,8 +26,8 @@ export default async function Icon() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: '#1a3a0e',
-            color: '#b8862d',
+            background: C.green900,
+            color: C.gold500,
             borderRadius: 14,
             fontSize: 38,
             fontWeight: 700,

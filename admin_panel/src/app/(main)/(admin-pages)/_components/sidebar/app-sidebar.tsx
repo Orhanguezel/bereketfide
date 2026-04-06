@@ -21,6 +21,7 @@ import {
 
 import { buildAdminSidebarItems } from '@/navigation/sidebar/sidebar-items';
 import type { NavGroup } from '@/navigation/sidebar/sidebar-items';
+import { isAdminSidebarNavItemEnabled } from '@/config/admin-features';
 
 import { useAdminUiCopy } from '@/app/(main)/(admin-pages)/_components/common/useAdminUiCopy';
 import { useAdminT } from '@/app/(main)/(admin-pages)/_components/common/useAdminT';
@@ -96,7 +97,7 @@ export function AppSidebar({
 
   // ✅ admin ise tüm menu, değilse sadece dashboard
   const groupsForMe: NavGroup[] = hasRole(currentUser as any, 'admin')
-    ? buildAdminSidebarItems(copy.nav, wrappedT)
+    ? buildAdminSidebarItems(copy.nav, wrappedT, isAdminSidebarNavItemEnabled)
     : [
         {
           id: 1,

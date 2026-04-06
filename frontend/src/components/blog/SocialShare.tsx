@@ -56,7 +56,7 @@ export function SocialShare({ url, title, texts }: SocialShareProps) {
 
   return (
     <div className="surface-card mt-8 flex flex-wrap items-center gap-3 rounded-[1.5rem] p-4">
-      <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
+      <p className="text-sm font-semibold uppercase tracking-[0.14em] text-(--color-text-secondary)">
         {texts.label}
       </p>
       <div className="flex flex-wrap items-center gap-2">
@@ -66,7 +66,7 @@ export function SocialShare({ url, title, texts }: SocialShareProps) {
             href={item.href}
             target="_blank"
             rel="nofollow noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-brand)] hover:text-[var(--color-brand)]"
+            className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface) px-3 py-2 text-sm text-(--color-text-primary) transition-colors hover:border-(--color-brand) hover:text-(--color-brand)"
             title={`${texts.buttonTitle} ${item.name}`}
             aria-label={`${texts.buttonTitle} ${item.name}`}
           >
@@ -77,7 +77,7 @@ export function SocialShare({ url, title, texts }: SocialShareProps) {
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-brand)] hover:text-[var(--color-brand)]"
+          className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface) px-3 py-2 text-sm text-(--color-text-primary) transition-colors hover:border-(--color-brand) hover:text-(--color-brand)"
         >
           <Link2 className="size-4" />
           <span>{texts.copyLink}</span>

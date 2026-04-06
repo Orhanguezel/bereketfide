@@ -83,7 +83,7 @@ export function LanguageSwitcher({ locale, activeLocales }: { locale: string; ac
                 onClick={() => switchLocale(code)}
                 className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition-colors ${
                   isActive
-                    ? 'bg-(--color-brand) text-white font-semibold'
+                    ? 'bg-(--color-brand) font-semibold text-(--color-on-brand)'
                     : 'text-(--color-text-secondary) hover:bg-(--color-bg-muted) hover:text-(--color-text-primary)'
                 }`}
               >
@@ -92,7 +92,7 @@ export function LanguageSwitcher({ locale, activeLocales }: { locale: string; ac
                   <span className="truncate">{label}</span>
                 </div>
                 {isActive && (
-                  <div className="size-1.5 rounded-full bg-white ml-2" />
+                  <div className="ml-2 size-1.5 rounded-full bg-(--color-on-brand)" />
                 )}
               </button>
             );

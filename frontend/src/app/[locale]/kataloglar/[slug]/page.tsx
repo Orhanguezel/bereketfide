@@ -121,7 +121,7 @@ export default async function CatalogDetailPage({
   const sidebarItems = relatedCatalogs.filter((item) => item.id !== catalog.id).slice(0, 3);
 
   return (
-    <div className="bg-white py-16 lg:py-24">
+    <div className="bg-(--color-bg-secondary) py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <Link
           href={localizedPath(locale, '/kataloglar')}

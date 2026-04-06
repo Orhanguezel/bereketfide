@@ -7,6 +7,7 @@ import api from '@/lib/axios';
 
 export function NewsletterForm({ locale }: { locale: string }) {
   const t = useTranslations('home.newsletter');
+  const tCommon = useTranslations('common');
   const [sending, setSending] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -34,7 +35,7 @@ export function NewsletterForm({ locale }: { locale: string }) {
         name="email"
         type="email"
         placeholder={t('placeholder')}
-        className="field-input flex-1 rounded-lg px-4 py-2.5 text-sm focus:border-[var(--color-brand)] focus:outline-none"
+        className="field-input flex-1 rounded-lg px-4 py-2.5 text-sm focus:border-(--color-brand) focus:outline-none"
         required
       />
       <button
@@ -42,7 +43,7 @@ export function NewsletterForm({ locale }: { locale: string }) {
         disabled={sending}
         className="btn-primary rounded-lg px-6 py-2.5 text-sm font-medium transition-colors disabled:opacity-50"
       >
-        {sending ? '...' : t('subscribe')}
+        {sending ? tCommon('sending') : t('subscribe')}
       </button>
     </form>
   );

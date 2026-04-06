@@ -15,10 +15,17 @@ import type { SpecItem } from '@/components/projects/ProjectSpecs';
 import { ProjectComments } from '@/components/projects/ProjectComments';
 import { buildMediaAlt } from '@/lib/media-seo';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { RelatedLinks } from '@/components/seo/RelatedLinks';
+import { fetchRelatedContent } from '@/lib/related-content';
 import { Reveal } from '@/components/motion/Reveal';
 import specKeysData from '@shared/spec-keys.json';
 
-const PROJECT_PLACEHOLDER = '/media/gallery-placeholder.svg';
+import { GALLERY_IMAGE_PLACEHOLDER } from '@/lib/placeholders';
+import {
+  coerceProductSpecifications,
+  productSpecificationsToItems,
+} from '@/lib/product-specifications';
+import { bereketfideAgronomySpecItems } from '@/lib/bereketfide-product-agronomy';
 
 /** Build a lookup: spec id → all possible locale keys */
 type SpecEntry = { id: string; keys: Record<string, string>; labels: Record<string, string> };
@@ -120,7 +127,7 @@ export default async function ProjectDetailPage({
   const projectTags: string[] = project.tags || [];
 
   // Parallel sidebar fetches — all dynamic from API
-  const [sameCategoryProjects, featuredProjects, recentProjects, similarByTagsProjects] =
+  const [sameCategoryProjects, featuredProjects, recentProjects, similarByTagsProjects, related] =
     await Promise.all([
       categoryId
         ? fetchSidebarProjects(locale, { excludeId: projectId, categoryId, limit: 4 })
@@ -130,9 +137,20 @@ export default async function ProjectDetailPage({
       projectTags.length > 0
         ? fetchSidebarProjects(locale, { excludeId: projectId, tags: projectTags, limit: 4 })
         : Promise.resolve([]),
+      fetchRelatedContent(
+        {
+          title: project.title,
+          description: project.description || project.meta_description || null,
+          slug: project.slug || slug,
+          tags: projectTags,
+        },
+        slug,
+        locale,
+      ),
     ]);
 
-  const specs = (project.specifications || {}) as Record<string, string>;
+  const specs = coerceProductSpecifications(project.specifications);
+  const isBereketfide = String(project.item_type || '').toLowerCase() === 'bereketfide';
   const isEn = locale.startsWith('en');
 
   /** Resolve spec value by id — searches all locale key variants */
@@ -153,7 +171,14 @@ export default async function ProjectDetailPage({
   const location = sv('location');
   const year = sv('year');
   const area = sv('area');
-  const projectType = sv('type') || project.category_name || null;
+  const projectType = isBereketfide
+    ? specs.kategori ||
+      specs.category ||
+      project.category_name ||
+      specs.tip ||
+      specs.type ||
+      null
+    : sv('type') || project.category_name || null;
   const status = sv('status');
   const architects = sv('architects');
   const leadArchitect = sv('lead_architect');
@@ -191,8 +216,15 @@ export default async function ProjectDetailPage({
     contractor && { icon: 'default', label: sl('contractor'), value: contractor },
   ].filter(Boolean) as SpecItem[];
 
+  const genericSpecItems = isBereketfide ? productSpecificationsToItems(specs) : [];
+  const constructionSpecItems = [...primarySpecs, ...secondarySpecs];
+  const agronomySpecs = isBereketfide
+    ? bereketfideAgronomySpecItems(project as Record<string, unknown>, (key) => t(key))
+    : [];
+  const displaySpecs = !isBereketfide ? constructionSpecItems : [];
+
   const rawGalleryImages: string[] = Array.isArray(project.images) ? project.images : [];
-  const heroImage = absoluteAssetUrl(project.image_url) || absoluteAssetUrl(rawGalleryImages[0]) || PROJECT_PLACEHOLDER;
+  const heroImage = absoluteAssetUrl(project.image_url) || absoluteAssetUrl(rawGalleryImages[0]) || GALLERY_IMAGE_PLACEHOLDER;
 
   // Build serializable gallery images array for the client component
   const galleryImages: GalleryImage[] = [
@@ -200,7 +232,7 @@ export default async function ProjectDetailPage({
     ...rawGalleryImages
       .filter((img) => absoluteAssetUrl(img) !== heroImage)
       .map((img, i) => ({
-        src: absoluteAssetUrl(img) || PROJECT_PLACEHOLDER,
+        src: absoluteAssetUrl(img) || GALLERY_IMAGE_PLACEHOLDER,
         alt: `${project.title} — ${i + 2}`,
       })),
   ];
@@ -232,13 +264,25 @@ export default async function ProjectDetailPage({
       <JsonLd
         data={jsonld.graph([
           jsonld.org(organizationJsonLd(locale)),
-          jsonld.creativeWork({
+          jsonld.product({
             name: project.title,
             description: project.meta_description || project.description,
             image: heroImage,
             url: localizedUrl(locale, `/urunler/${slug}`),
-            locationCreated: location ?? undefined,
-            dateCreated: year ? String(year) : undefined,
+            brand: 'Bereket Fide',
+            category: project.category_name || projectType || undefined,
+            sku: project.product_code || undefined,
+            offers: {
+              priceCurrency: 'TRY',
+              price: project.price || undefined,
+              availability: project.stock_quantity > 0
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+            },
+            aggregateRating: project.rating && project.review_count
+              ? { ratingValue: project.rating, reviewCount: project.review_count }
+              : undefined,
+            manufacturer: { '@id': 'https://www.bereketfide.com.tr/#organization' },
           }),
           jsonld.breadcrumb(
             breadcrumbs.map((item) => ({
@@ -301,10 +345,51 @@ export default async function ProjectDetailPage({
               )}
             </div>
 
-            {/* ── Product specs (Single List) ── */}
-            <div style={{ marginTop: 16, borderTop: '1px solid var(--color-border)', paddingTop: 16 }}>
-              <ProjectSpecs specs={[...primarySpecs, ...secondarySpecs]} />
-            </div>
+            {/* Bereket Fide: şema alanları (API) + isteğe bağlı specifications JSON */}
+            {isBereketfide && (agronomySpecs.length > 0 || genericSpecItems.length > 0) ? (
+              <div style={{ marginTop: 16, borderTop: '1px solid var(--color-border)', paddingTop: 16 }}>
+                {agronomySpecs.length > 0 ? (
+                  <>
+                    <h2
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        color: 'var(--color-text-muted)',
+                        margin: '0 0 12px',
+                      }}
+                    >
+                      {t('projects.agronomySectionTitle')}
+                    </h2>
+                    <ProjectSpecs specs={agronomySpecs} />
+                  </>
+                ) : null}
+                {genericSpecItems.length > 0 ? (
+                  <div style={{ marginTop: agronomySpecs.length > 0 ? 28 : 0 }}>
+                    <h2
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        color: 'var(--color-text-muted)',
+                        margin: '0 0 12px',
+                      }}
+                    >
+                      {t('projects.specs')}
+                    </h2>
+                    <ProjectSpecs specs={genericSpecItems} />
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+
+            {!isBereketfide && displaySpecs.length > 0 ? (
+              <div style={{ marginTop: 16, borderTop: '1px solid var(--color-border)', paddingTop: 16 }}>
+                <ProjectSpecs specs={displaySpecs} />
+              </div>
+            ) : null}
 
             {/* ── Scroll-trigger gallery flow ── */}
             {galleryImages.length > 1 && (
@@ -369,7 +454,13 @@ export default async function ProjectDetailPage({
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-text-on-dark)', margin: 0 }}>
                   {t('projects.requestOffer')}
                 </h3>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', marginTop: 4 }}>
+                <p
+                  style={{
+                    fontSize: 14,
+                    marginTop: 4,
+                    color: 'color-mix(in srgb, var(--section-bg-white) 70%, transparent)',
+                  }}
+                >
                   {t('common.offerCtaDescription')}
                 </p>
               </div>
@@ -378,7 +469,7 @@ export default async function ProjectDetailPage({
                 style={{
                   padding: '10px 24px',
                   background: 'var(--color-brand)',
-                  color: '#fff',
+                  color: 'var(--color-on-brand)',
                   fontWeight: 600,
                   fontSize: 14,
                   textDecoration: 'none',
@@ -388,6 +479,36 @@ export default async function ProjectDetailPage({
               >
                 {t('nav.offer')}
               </Link>
+            </div>
+
+            <div
+              style={{
+                marginTop: 48,
+                display: 'grid',
+                gap: 24,
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              }}
+            >
+              <RelatedLinks
+                title={t('common.relatedProducts')}
+                hrefBase={localizedPath(locale, '/urunler')}
+                items={related.products}
+              />
+              <RelatedLinks
+                title={t('common.relatedArticles')}
+                hrefBase={localizedPath(locale, '/haberler')}
+                items={related.blogPosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedKnowledgePosts')}
+                hrefBase={localizedPath(locale, '/blog')}
+                items={related.knowledgePosts}
+              />
+              <RelatedLinks
+                title={t('common.relatedGallery')}
+                hrefBase={localizedPath(locale, '/galeri')}
+                items={related.galleries}
+              />
             </div>
 
             {/* ── Comments ── */}
@@ -456,14 +577,14 @@ export default async function ProjectDetailPage({
                 projects={recentProjects.slice(0, 4)}
                 locale={locale}
                 moreHref={localizedPath(locale, '/urunler')}
-                moreLabel={isEn ? 'All Projects »' : 'Tüm Projeler »'}
+                moreLabel={isEn ? 'All products »' : 'Tüm ürünler »'}
               />
             )}
 
             {/* ── 4. Benzer İçerikler (tag-based) ── */}
             {similarByTagsProjects.length > 0 && (
               <TagBasedSection
-                title={isEn ? 'Explore Similar Work' : 'Bunları da Keşfedin'}
+                title={t('projects.similarByTagsTitle')}
                 projects={similarByTagsProjects}
                 matchingTags={tags}
                 locale={locale}
@@ -474,7 +595,7 @@ export default async function ProjectDetailPage({
             {/* ── 5. About this producer ── */}
             {architects && (
               <div className="pd-sidebar-card">
-                <h3 style={{ fontSize: 15 }}>{isEn ? 'About This Producer' : 'Bu Üretici Hakkında'}</h3>
+                <h3 style={{ fontSize: 15 }}>{t('projects.aboutProducerTitle')}</h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
                   <div
                     style={{
@@ -539,7 +660,7 @@ export default async function ProjectDetailPage({
                   marginTop: 12,
                   padding: '8px 20px',
                   background: 'var(--color-brand)',
-                  color: '#fff',
+                  color: 'var(--color-on-brand)',
                   fontWeight: 600,
                   fontSize: 13,
                   textDecoration: 'none',
@@ -581,7 +702,7 @@ function SidebarSection({
         >
           <div className="pd-sidebar-thumb">
             <OptimizedImage
-              src={absoluteAssetUrl(rp.image_url) || PROJECT_PLACEHOLDER}
+              src={absoluteAssetUrl(rp.image_url) || GALLERY_IMAGE_PLACEHOLDER}
               alt={rp.title}
               fill
               className="object-cover"
@@ -664,7 +785,7 @@ function TagBasedSection({
         >
           <div className="pd-sidebar-thumb">
             <OptimizedImage
-              src={absoluteAssetUrl(rp.image_url) || PROJECT_PLACEHOLDER}
+              src={absoluteAssetUrl(rp.image_url) || GALLERY_IMAGE_PLACEHOLDER}
               alt={rp.title}
               fill
               className="object-cover"

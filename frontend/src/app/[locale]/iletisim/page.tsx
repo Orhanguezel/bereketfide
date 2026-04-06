@@ -49,13 +49,16 @@ export default async function ContactPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale });
-  const [contactSetting, companyProfileSetting] = await Promise.all([
+  const [contactSetting, companyProfileSetting, socialsSetting] = await Promise.all([
      fetchContactInfo(locale),
-     fetchSetting('company_profile', locale)
+     fetchSetting('company_profile', locale),
+     fetchSetting('socials', locale),
   ]);
 
   const info = readSettingValue(contactSetting) as Record<string, string>;
   const companyProfile = readSettingValue(companyProfileSetting) as Record<string, string>;
+  const socials = readSettingValue(socialsSetting) as Record<string, string>;
+  const sameAs = Object.values(socials).filter((v) => typeof v === 'string' && /^https?:\/\//.test(v));
 
   const companyName = info.company_name || companyProfile?.company_name || 'Bereket Fide';
   const address = info.address || '';
@@ -69,8 +72,8 @@ export default async function ContactPage({
     <div style={{ background: 'var(--color-bg)', minHeight: '100vh' }}>
       <style>{`
         .ct-info-card{background:var(--color-surface);border:1px solid var(--color-border);padding:24px;border-radius:16px;transition:all .3s ease}
-        .ct-info-card:hover{border-color:var(--color-brand);box-shadow:0 12px 24px rgba(0,0,0,0.06)}
-        .ct-icon-box{width:48px;height:48px;border-radius:12px;background:rgba(185, 142, 61, 0.1);color:var(--color-brand);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+        .ct-info-card:hover{border-color:var(--color-brand);box-shadow:0 12px 24px color-mix(in srgb,var(--color-bg-dark) 6%,transparent)}
+        .ct-icon-box{width:48px;height:48px;border-radius:12px;background:color-mix(in srgb,var(--color-brand) 10%,transparent);color:var(--color-brand);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
         .ct-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);margin-bottom:8px;display:block}
         .ct-value{font-size:15px;color:var(--color-text-primary);line-height:1.6;font-weight:500;text-decoration:none;transition:color .2s ease}
         .ct-value:hover{color:var(--color-brand)}
@@ -90,6 +93,7 @@ export default async function ContactPage({
                 email,
                 telephone: phone,
                 address,
+                sameAs,
               }),
             ),
             jsonld.localBusiness({
@@ -98,8 +102,23 @@ export default async function ContactPage({
               description: t('contact.description'),
               email,
               telephone: phone,
-              address,
+              address: {
+                streetAddress: address || 'Fatih Mah. Isparta Yolu',
+                addressLocality: 'Aksu',
+                addressRegion: 'Antalya',
+                postalCode: '07112',
+                addressCountry: 'TR',
+              },
+              geo: { latitude: 36.9392215, longitude: 30.8525091 },
               openingHours: hours,
+              openingHoursSpecification: [
+                {
+                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                  opens: '08:00',
+                  closes: '18:00',
+                },
+              ],
+              sameAs,
             }),
           ])}
         />

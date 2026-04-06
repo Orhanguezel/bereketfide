@@ -91,8 +91,8 @@ export default async function ServicesPage({
         .sv-sidebar-item:last-child{border-bottom:none}
         .sv-cta{margin-top:48px;padding:32px;background:var(--color-bg-dark);text-align:center}
         .sv-cta h2{font-family:var(--font-heading);font-size:22px;font-weight:700;color:var(--color-text-on-dark);margin:0 0 8px}
-        .sv-cta p{font-size:14px;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto 20px;line-height:1.6}
-        .sv-cta a{display:inline-block;padding:10px 28px;background:var(--color-brand);color:#fff;font-weight:600;font-size:14px;text-decoration:none;border-radius:2px}
+        .sv-cta p{font-size:14px;color:color-mix(in srgb,var(--color-text-on-dark) 70%,transparent);max-width:560px;margin:0 auto 20px;line-height:1.6}
+        .sv-cta a{display:inline-block;padding:10px 28px;background:var(--color-brand);color:var(--color-on-brand);font-weight:600;font-size:14px;text-decoration:none;border-radius:2px}
         @media(min-width:1024px){.sv-layout{display:grid;grid-template-columns:1fr 340px;gap:40px}}
         @media(max-width:640px){.sv-article-thumb{width:120px;height:90px}.sv-article-title{font-size:15px}}
       `}</style>
@@ -230,7 +230,7 @@ export default async function ServicesPage({
                   marginTop: 12,
                   padding: '8px 20px',
                   background: 'var(--color-brand)',
-                  color: '#fff',
+                  color: 'var(--color-on-brand)',
                   fontWeight: 600,
                   fontSize: 13,
                   textDecoration: 'none',

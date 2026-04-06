@@ -2,20 +2,20 @@ import type { FastifyInstance, RouteHandler } from 'fastify';
 import { db } from '@/db/client';
 import { sql } from 'drizzle-orm';
 
-import { products } from '@/modules/products/schema';
-import { categories } from '@/modules/categories/schema';
-import { subCategories } from '@/modules/subcategories/schema';
-import { contact_messages } from '@/modules/contact/schema';
-import { customPages } from '@/modules/customPages/schema';
+import { products } from '@agro/shared-backend/modules/products/schema';
+import { categories } from '@agro/shared-backend/modules/categories/schema';
+import { subCategories } from '@agro/shared-backend/modules/subcategories/schema';
+import { contact_messages } from '@agro/shared-backend/modules/contact/schema';
+import { customPages } from '@agro/shared-backend/modules/customPages/schema';
 import { menuItems } from '@/modules/menuItems/schema';
-import { galleries } from '@/modules/gallery/schema';
-import { siteSettings } from '@/modules/siteSettings/schema';
-import { users } from '@/modules/auth/schema';
-import { storageAssets } from '@/modules/storage/schema';
-import { notifications } from '@/modules/notifications/schema';
-import { auditRequestLogs } from '@/modules/audit/schema';
+import { galleries } from '@agro/shared-backend/modules/gallery/schema';
+import { siteSettings } from '@agro/shared-backend/modules/siteSettings/schema';
+import { users } from '@agro/shared-backend/modules/auth/schema';
+import { storageAssets } from '@agro/shared-backend/modules/storage/schema';
+import { notifications } from '@agro/shared-backend/modules/notifications/schema';
+import { auditRequestLogs } from '@agro/shared-backend/modules/audit/schema';
 import { offersTable } from '@/modules/offer/schema';
-import { library } from '@/modules/library/schema';
+import { library } from '@agro/shared-backend/modules/library/schema';
 
 async function countTable(table: any): Promise<number> {
   try {

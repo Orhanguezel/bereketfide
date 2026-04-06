@@ -5,7 +5,7 @@
 Bereket Fide icin hazirlanan bu proje; modern kurumsal tanitim, urun gruplarinin duzenli sunumu,
 bilgi merkezi icerikleri ve iletisim/talep akislari icin olusturulan Next.js tabanli web platformudur.
 
-**Canli Site:** [https://www.bereketfide.com](https://www.bereketfide.com)
+**Canli site:** [https://www.bereketfide.com.tr](https://www.bereketfide.com.tr)
 
 ---
 
@@ -26,8 +26,8 @@ bilgi merkezi icerikleri ve iletisim/talep akislari icin olusturulan Next.js tab
 ```txt
 bereketfide/
   frontend/         <- Next.js 16, port 3030
-  backend/          <- Fastify + Drizzle ORM + MySQL, port 8096
-  admin_panel/      <- React admin paneli, port 3044
+  backend/          <- Fastify + Drizzle ORM + MySQL, port 8086
+  admin_panel/      <- Next.js admin, port 3004
   package.json      <- workspace root
   CLAUDE.md         <- calisma kurallari
   THEMA.md          <- tema kontrati
@@ -69,15 +69,17 @@ bereketfide/
 
 ## Calistirma
 
+Ekosistem kokunden (tercihen): `bun install && bun run build:shared`. Sonra:
+
 ```bash
 # Frontend (port 3030)
-cd frontend && npm install && npm run dev
+cd frontend && bun install && bun run dev
 
-# Backend (port 8096)
-cd backend && npm install && npm run dev
+# Backend (API, port 8086)
+cd backend && bun install && bun run dev
 
-# Admin panel (port 3044)
-cd admin_panel && npm install && npm run dev
+# Admin panel (port 3004)
+cd admin_panel && bun install && bun run dev
 ```
 
 ---
@@ -86,11 +88,8 @@ cd admin_panel && npm install && npm run dev
 
 - **VPS:** Nginx reverse proxy + PM2
 - **SSL:** Let's Encrypt (certbot, otomatik yenileme)
-- **Domain:** www.bereketfide.com (canonical, non-www → www redirect)
-- **PM2 Servisleri:**
-  - `bereketfide-frontend` (port 3040 — standalone build)
-  - `bereketfide-backend` (port 8096)
-  - `bereketfide-admin` (port 3044)
+- **Domain:** `www.bereketfide.com.tr` (canonical; apex → www yonlendirme)
+- **PM2 (ornek isimler):** `bereketfide-frontend`, `bereketfide-backend`, `bereketfide-admin` — portlar Nginx ile uyumlu (`CLAUDE.md`)
 
 ---
 

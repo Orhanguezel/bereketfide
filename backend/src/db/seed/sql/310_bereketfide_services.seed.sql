@@ -18,7 +18,7 @@ DELETE FROM services WHERE id IN (
 
 -- 1) Aşılı Fide Üretimi (mevcut resim)
 INSERT INTO services (id, module_key, is_active, is_featured, display_order, image_url, storage_asset_id)
-VALUES ('sv010001-0001-4001-9001-000000000001', 'bereketfide', 1, 1, 1, '/uploads/products/WhatsApp%20Image%202026-03-17%20at%2023.28.07%20(1).jpeg', NULL);
+VALUES ('sv010001-0001-4001-9001-000000000001', 'bereketfide', 1, 1, 1, '/uploads/products/23.28.07%20(1).jpeg', NULL);
 
 INSERT INTO services_i18n (service_id, locale, title, slug, description, content, alt, tags, meta_title, meta_description)
 VALUES
@@ -35,7 +35,7 @@ VALUES
 
 -- 2) Standart Fide Üretimi (mevcut resim)
 INSERT INTO services (id, module_key, is_active, is_featured, display_order, image_url, storage_asset_id)
-VALUES ('sv010001-0001-4001-9001-000000000002', 'bereketfide', 1, 1, 2, '/uploads/products/WhatsApp%20Image%202026-03-17%20at%2023.28.08%20(3).jpeg', NULL);
+VALUES ('sv010001-0001-4001-9001-000000000002', 'bereketfide', 1, 1, 2, '/uploads/products/23.28.08%20(3).jpeg', NULL);
 
 INSERT INTO services_i18n (service_id, locale, title, slug, description, content, alt, tags, meta_title, meta_description)
 VALUES

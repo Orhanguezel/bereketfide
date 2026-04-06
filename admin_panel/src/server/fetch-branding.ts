@@ -9,12 +9,12 @@ const BRAND_PREFIX = process.env.NEXT_PUBLIC_BRAND_PREFIX || 'bereketfide__';
 
 function getServerApiUrl(): string {
   const panel = (process.env.PANEL_API_URL || '').trim().replace(/\/+$/, '');
-  if (panel) return `${panel}/api`;
+  if (panel) return `${panel}/api/v1`;
 
   const pub = (process.env.NEXT_PUBLIC_API_URL || '').trim().replace(/\/+$/, '');
   if (pub) return pub;
 
-  return 'http://127.0.0.1:8086/api';
+  return 'http://127.0.0.1:8086/api/v1';
 }
 
 function parseSettingValue(value: unknown): unknown {

@@ -6,7 +6,7 @@ module.exports = {
       url: [
         'http://127.0.0.1:3122/tr',
         'http://127.0.0.1:3122/en',
-        'http://127.0.0.1:3122/tr/projeler',
+        'http://127.0.0.1:3122/tr/urunler',
         'http://127.0.0.1:3122/tr/haberler',
         'http://127.0.0.1:3122/tr/galeri',
         'http://127.0.0.1:3122/tr/iletisim',

@@ -16,14 +16,14 @@ export interface BlogPost {
 
 export const blogService = {
   getAll: async (params?: Record<string, unknown>): Promise<BlogPost[]> => {
-    const res = await api.get('/custom_pages', {
+    const res = await api.get('/custom-pages', {
       params: { module_key: 'news', is_published: 1, ...params },
     });
     return Array.isArray(res.data) ? res.data : (res.data as any)?.items ?? [];
   },
 
   getBySlug: async (slug: string, locale?: string): Promise<BlogPost> => {
-    const res = await api.get(`/custom_pages/by-slug/${encodeURIComponent(slug)}`, {
+    const res = await api.get(`/custom-pages/by-slug/${encodeURIComponent(slug)}`, {
       params: locale ? { locale } : undefined,
     });
     return res.data;

@@ -6,11 +6,11 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8096/api';
+  process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8086/api/v1';
 
 // Resmi barındıran sunucu (API URL'inden /api kısmını çıkarıyoruz)
 export const ASSETS_URL =
-  process.env.NEXT_PUBLIC_ASSETS_URL ?? API_BASE_URL.replace(/\/api$/, '');
+  process.env.NEXT_PUBLIC_ASSETS_URL ?? API_BASE_URL.replace(/\/api(\/v\d+)?$/, '');
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.bereketfide.com.tr';

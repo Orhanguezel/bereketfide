@@ -20,7 +20,7 @@ export function DownloadButton({ catalogId, fileUrl, label, variant = 'primary',
   };
 
   const className = variant === 'primary'
-    ? 'inline-flex rounded-full bg-(--color-brand) px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90'
+    ? 'inline-flex rounded-full bg-(--color-brand) px-6 py-3 text-sm font-semibold text-(--color-on-brand) transition hover:opacity-90'
     : 'inline-flex rounded-full border border-(--color-border) px-6 py-3 text-sm font-semibold text-(--color-text-primary) transition hover:border-(--color-brand) hover:text-(--color-brand-text)';
 
   return (

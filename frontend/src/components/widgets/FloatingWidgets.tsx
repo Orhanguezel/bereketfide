@@ -27,6 +27,7 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
   const locale = useLocale();
   const pathname = usePathname();
   const t = useTranslations('nav');
+  const tCommon = useTranslations('common');
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Close when escaping
@@ -69,10 +70,12 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
     <>
       {/* ── SEARCH OVERLAY (Moved outside transformed parent) ── */}
       {activeTab === 'search' && (
-        <div className="fixed inset-0 bg-[#0a0a0a]/95 backdrop-blur-3xl z-9999 flex items-center justify-center pointer-events-auto overflow-hidden animate-in fade-in duration-500">
-          <button 
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-black/95 backdrop-blur-3xl pointer-events-auto animate-in fade-in duration-500">
+          <button
+            type="button"
             onClick={() => setActiveTab('none')}
-            className="absolute top-10 right-10 text-white/50 hover:text-white transition-colors"
+            className="absolute right-10 top-10 text-(--section-bg-white)/50 transition-colors hover:text-(--section-bg-white)"
+            aria-label={tCommon('closeMenu')}
           >
             <X size={48} strokeWidth={1} />
           </button>
@@ -84,18 +87,39 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t('searchPlaceholder') || 'Ürün, hizmet veya sayfa ara...'}
-                className="w-full bg-transparent border-b-2 border-white/20 pb-4 pr-16 text-3xl lg:text-5xl text-white outline-none focus:border-white/60 transition-colors font-medium tracking-tight"
+                placeholder={t('searchPlaceholder')}
+                className="w-full border-b-2 border-(--color-glass-border) bg-transparent pb-4 pr-16 text-3xl font-medium tracking-tight text-(--section-bg-white) outline-none transition-colors focus:border-(--color-glass-hover) lg:text-5xl"
               />
-              <button type="submit" className="absolute right-0 bottom-6 text-white/40 hover:text-white transition-colors">
+              <button
+                type="submit"
+                className="absolute bottom-6 right-0 text-(--section-bg-white)/40 transition-colors hover:text-(--section-bg-white)"
+              >
                 <Search size={32} />
               </button>
             </form>
-            <div className="mt-12 flex flex-wrap gap-8 text-white/40 text-sm font-bold uppercase tracking-widest">
-              <span className="text-[#319760]">{t('trendingSearches')}</span>
-              <button type="button" onClick={() => setSearchQuery(t('trendSeedling'))} className="hover:text-white transition-colors">{t('trendSeedling')}</button>
-              <button type="button" onClick={() => setSearchQuery(t('trendGrafted'))} className="hover:text-white transition-colors">{t('trendGrafted')}</button>
-              <button type="button" onClick={() => setSearchQuery(t('trendTomato'))} className="hover:text-white transition-colors">{t('trendTomato')}</button>
+            <div className="mt-12 flex flex-wrap gap-8 text-sm font-bold uppercase tracking-widest text-(--section-bg-white)/40">
+              <span style={{ color: 'var(--color-brand-light)' }}>{t('trendingSearches')}</span>
+              <button
+                type="button"
+                onClick={() => setSearchQuery(t('trendSeedling'))}
+                className="transition-colors hover:text-(--section-bg-white)"
+              >
+                {t('trendSeedling')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setSearchQuery(t('trendGrafted'))}
+                className="transition-colors hover:text-(--section-bg-white)"
+              >
+                {t('trendGrafted')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setSearchQuery(t('trendTomato'))}
+                className="transition-colors hover:text-(--section-bg-white)"
+              >
+                {t('trendTomato')}
+              </button>
             </div>
           </div>
         </div>
@@ -104,14 +128,23 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-9000 flex flex-col pointer-events-none">
         
         {/* ── FLOATING BAR ── */}
-        <div className="flex flex-col pointer-events-auto bg-[#2b2b2b] shadow-2xl mr-0 w-[60px] relative">
+        <div
+          className="relative mr-0 flex w-[60px] flex-col shadow-2xl pointer-events-auto"
+          style={{ background: 'var(--color-bg-dark)' }}
+        >
           
           {/* Search Button */}
           <div className="relative">
             <button
+              type="button"
               onClick={() => toggleTab('search')}
-              aria-label="Ara"
-              className={`w-[60px] h-[60px] flex items-center justify-center transition-colors ${activeTab === 'search' ? 'bg-[#319760] text-white' : 'text-white/70 hover:bg-white/5'}`}
+              aria-label={t('ariaSearch')}
+              className={`flex h-[60px] w-[60px] items-center justify-center transition-colors ${
+                activeTab === 'search'
+                  ? 'text-(--color-on-brand)'
+                  : 'text-(--section-bg-white)/70 hover:bg-(--color-glass-hover)'
+              }`}
+              style={activeTab === 'search' ? { background: 'var(--color-brand)' } : undefined}
             >
               <Search size={22} />
             </button>
@@ -120,22 +153,35 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
           {/* Language Switcher */}
           <div className="relative">
             {activeTab === 'lang' && (
-              <div className="absolute right-full top-0 flex bg-[#333333] h-[60px] animate-in slide-in-from-right-10 duration-300 shadow-xl">
-                {activeLocales.map(loc => (
-                  <Link 
-                    key={loc.code} 
+              <div
+                className="absolute right-full top-0 flex h-[60px] animate-in slide-in-from-right-10 duration-300 shadow-xl"
+                style={{ background: 'var(--color-bg-dark)' }}
+              >
+                {activeLocales.map((loc) => (
+                  <Link
+                    key={loc.code}
                     href={pathname.replace(`/${locale}`, `/${loc.code}`)}
                     onClick={() => setActiveTab('none')}
-                    className={`flex items-center justify-center min-w-[60px] px-4 text-xs font-bold uppercase hover:bg-white/10 transition-colors border-r border-white/5 ${locale === loc.code ? 'text-[#319760]' : 'text-white/60'}`}
+                    className={`flex min-w-[60px] items-center justify-center border-r border-(--color-border-on-dark) px-4 text-xs font-bold uppercase transition-colors hover:bg-(--color-glass-bg-strong) ${
+                      locale === loc.code ? '' : 'text-(--section-bg-white)/60'
+                    }`}
+                    style={locale === loc.code ? { color: 'var(--color-brand-light)' } : undefined}
                   >
                     {loc.code}
                   </Link>
                 ))}
               </div>
             )}
-            <button 
+            <button
+              type="button"
               onClick={() => toggleTab('lang')}
-              className={`w-[60px] h-[60px] flex items-center justify-center transition-colors border-t border-white/5 uppercase text-xs font-bold ${activeTab === 'lang' ? 'bg-[#319760] text-white' : 'text-white/70 hover:bg-white/5'}`}
+              aria-label={t('ariaLanguage')}
+              className={`flex h-[60px] w-[60px] items-center justify-center border-t border-(--color-border-on-dark) text-xs font-bold uppercase transition-colors ${
+                activeTab === 'lang'
+                  ? 'text-(--color-on-brand)'
+                  : 'text-(--section-bg-white)/70 hover:bg-(--color-glass-hover)'
+              }`}
+              style={activeTab === 'lang' ? { background: 'var(--color-brand)' } : undefined}
             >
               {locale}
             </button>
@@ -144,21 +190,29 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
           {/* Info Button */}
           <div className="relative">
             {activeTab === 'info' && (
-              <div className="absolute right-full top-0 w-[300px] bg-white p-8 shadow-2xl animate-in slide-in-from-right-10 duration-300">
+              <div className="absolute right-full top-0 w-[300px] bg-(--color-bg-secondary) p-8 shadow-2xl animate-in slide-in-from-right-10 duration-300">
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-[#1a1a1a] font-bold text-lg mb-2">{contactInfo.company_name || 'Bereket Fide'}</h4>
-                    <div className="flex gap-3 text-gray-500 text-sm leading-relaxed">
-                      <MapPin size={18} className="shrink-0 text-[#319760]" />
+                    <h4 className="mb-2 text-lg font-bold text-(--color-text-primary)">
+                      {contactInfo.company_name || 'Bereket Fide'}
+                    </h4>
+                    <div className="flex gap-3 text-sm leading-relaxed text-(--color-text-muted)">
+                      <MapPin size={18} className="shrink-0" style={{ color: 'var(--color-brand)' }} />
                       <span>{contactInfo.address}<br />{contactInfo.city}</span>
                     </div>
                   </div>
-                  <div className="space-y-3 pt-4 border-t border-gray-100">
-                    <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-3 text-gray-600 hover:text-[#319760] transition-colors font-medium">
+                  <div className="space-y-3 border-t border-(--color-border) pt-4">
+                    <a
+                      href={`tel:${contactInfo.phone}`}
+                      className="flex items-center gap-3 font-medium text-(--color-text-secondary) transition-colors hover:text-(--color-brand)"
+                    >
                       <Phone size={18} />
                       <span>{contactInfo.phone}</span>
                     </a>
-                    <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 text-gray-600 hover:text-[#319760] transition-colors font-medium">
+                    <a
+                      href={`mailto:${contactInfo.email}`}
+                      className="flex items-center gap-3 font-medium text-(--color-text-secondary) transition-colors hover:text-(--color-brand)"
+                    >
                       <Mail size={18} />
                       <span>{contactInfo.email}</span>
                     </a>
@@ -167,9 +221,15 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
               </div>
             )}
             <button
+              type="button"
               onClick={() => toggleTab('info')}
-              aria-label="İletişim bilgileri"
-              className={`w-[60px] h-[60px] flex items-center justify-center transition-colors border-t border-white/5 ${activeTab === 'info' ? 'bg-[#319760] text-white' : 'text-white/70 hover:bg-white/5'}`}
+              aria-label={t('ariaContactInfo')}
+              className={`flex h-[60px] w-[60px] items-center justify-center border-t border-(--color-border-on-dark) transition-colors ${
+                activeTab === 'info'
+                  ? 'text-(--color-on-brand)'
+                  : 'text-(--section-bg-white)/70 hover:bg-(--color-glass-hover)'
+              }`}
+              style={activeTab === 'info' ? { background: 'var(--color-brand)' } : undefined}
             >
               <User size={22} />
             </button>
@@ -178,14 +238,17 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
           {/* Social Share */}
           <div className="relative">
             {activeTab === 'social' && (
-              <div className="absolute right-full top-0 flex bg-[#333333] h-[60px] animate-in slide-in-from-right-10 duration-300 shadow-xl">
+              <div
+                className="absolute right-full top-0 flex h-[60px] animate-in slide-in-from-right-10 duration-300 shadow-xl"
+                style={{ background: 'var(--color-bg-dark)' }}
+              >
                 {socialIcons.map((s) => (
                   <a 
                     key={s.key} 
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-[60px] text-white/50 hover:text-white hover:bg-white/10 transition-colors border-r border-white/5"
+                    className="flex w-[60px] items-center justify-center border-r border-(--color-border-on-dark) text-(--section-bg-white)/50 transition-colors hover:bg-(--color-glass-bg-strong) hover:text-(--section-bg-white)"
                   >
                     <s.icon size={20} />
                   </a>
@@ -193,18 +256,25 @@ export function FloatingWidgets({ activeLocales = [], socials = {}, contactInfo 
               </div>
             )}
             <button
+              type="button"
               onClick={() => toggleTab('social')}
-              aria-label="Sosyal medya"
-              className={`w-[60px] h-[60px] flex items-center justify-center transition-colors border-t border-white/5 ${activeTab === 'social' ? 'bg-[#319760] text-white' : 'text-white/70 hover:bg-white/5'}`}
+              aria-label={t('ariaSocialLinks')}
+              className={`flex h-[60px] w-[60px] items-center justify-center border-t border-(--color-border-on-dark) transition-colors ${
+                activeTab === 'social'
+                  ? 'text-(--color-on-brand)'
+                  : 'text-(--section-bg-white)/70 hover:bg-(--color-glass-hover)'
+              }`}
+              style={activeTab === 'social' ? { background: 'var(--color-brand)' } : undefined}
             >
               <Share2 size={22} />
             </button>
           </div>
 
           {/* Teklif Al Widget */}
-          <Link 
+          <Link
             href={`/${locale}/teklif`}
-            className="w-[60px] h-[80px] bg-[#267a4e] text-white flex flex-col items-center justify-center hover:bg-[#1e6b40] transition-all border-t border-white/10 group overflow-hidden"
+            className="group flex h-[80px] w-[60px] flex-col items-center justify-center overflow-hidden border-t border-(--color-border-on-dark) text-(--color-on-brand) transition-all hover:opacity-95"
+            style={{ background: 'var(--color-brand-dark)' }}
           >
             <ClipboardList size={22} className="group-hover:scale-110 transition-transform mb-1" />
             <span className="text-[10px] font-bold uppercase tracking-tighter text-center leading-none">{t('offerWidgetLine1')}<br/>{t('offerWidgetLine2')}</span>

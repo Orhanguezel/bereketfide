@@ -47,7 +47,7 @@ export function OptimizedImage({
     return (
       <div
         className={cn(
-          'flex items-center justify-center bg-[var(--color-border)] text-[var(--color-text-muted)]',
+          'flex items-center justify-center bg-(--color-border) text-(--color-text-muted)',
           fallbackClassName ?? className,
         )}
         role="img"

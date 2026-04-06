@@ -72,18 +72,18 @@ export function ProjectLightbox({ images, initialIndex, onClose }: Props) {
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        background: 'rgba(0,0,0,.92)',
+        background: 'color-mix(in srgb, var(--color-bg-dark) 92%, transparent)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
       <style>{`
-        .lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:28px;cursor:pointer;border-radius:50%;transition:background .2s}
-        .lb-btn:hover{background:rgba(255,255,255,.25)}
-        .lb-close{position:absolute;top:16px;right:16px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;opacity:.7;transition:opacity .2s}
+        .lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--section-bg-white) 10%,transparent);border:none;color:var(--section-bg-white);font-size:28px;cursor:pointer;border-radius:50%;transition:background .2s}
+        .lb-btn:hover{background:color-mix(in srgb,var(--section-bg-white) 25%,transparent)}
+        .lb-close{position:absolute;top:16px;right:16px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--section-bg-white);font-size:28px;cursor:pointer;opacity:.7;transition:opacity .2s}
         .lb-close:hover{opacity:1}
-        .lb-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.8);font-size:14px;font-weight:500;letter-spacing:.04em}
+        .lb-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:color-mix(in srgb,var(--section-bg-white) 80%,transparent);font-size:14px;font-weight:500;letter-spacing:.04em}
         .lb-img{max-width:90vw;max-height:85vh;object-fit:contain;user-select:none}
       `}</style>
 

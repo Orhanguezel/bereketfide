@@ -50,3 +50,10 @@ vista-logo-exact/
 karbonkompozit/
 kompozit_admin_panel/
 kompozit_backend/
+docs/banka-pos-entegrasyon.md
+
+*.png
+*.jpg
+*.jpeg
+.claude/
+*.bak

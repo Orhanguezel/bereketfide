@@ -37,6 +37,8 @@ import {
   Package,
   Send,
   Settings,
+  ShoppingBag,
+  Store,
   Users,
   Wrench,
   type LucideIcon,
@@ -82,6 +84,8 @@ export type AdminNavItemKey =
   | 'footer_sections'
   | 'faqs'
   | 'contacts'
+  | 'b2b_orders'
+  | 'b2b_dealers'
   | 'reviews'
   | 'mail'
   | 'users'
@@ -145,6 +149,8 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
       { key: 'services', url: '/services', icon: Briefcase },
       { key: 'bereket_offers', url: '/offer?module=bereketfide', icon: DollarSign },
       { key: 'contacts', url: '/contacts', icon: Contact2 },
+      { key: 'b2b_orders', url: '/orders', icon: ShoppingBag },
+      { key: 'b2b_dealers', url: '/dealers', icon: Store },
     ],
   },
   {
@@ -204,6 +210,8 @@ const FALLBACK_TITLES: Record<AdminNavItemKey, string> = {
   offers: 'Offers',
   catalog_requests: 'Catalog Requests',
   contacts: 'Contacts',
+  b2b_orders: 'B2B Orders',
+  b2b_dealers: 'Dealers',
   reviews: 'Reviews',
   mail: 'Mail',
   users: 'Users',
@@ -237,37 +245,35 @@ const FALLBACK_TITLES: Record<AdminNavItemKey, string> = {
 export function buildAdminSidebarItems(
   copy?: Partial<AdminNavCopy> | null,
   t?: TranslateFn,
+  itemEnabled: (key: AdminNavItemKey) => boolean = () => true,
 ): NavGroup[] {
   const labels = copy?.labels ?? ({} as AdminNavCopy['labels']);
   const items = copy?.items ?? ({} as AdminNavCopy['items']);
 
-  return adminNavConfig.map((group) => {
-    // 1. Try copy.labels[group.key]
-    // 2. Try t(`admin.sidebar.groups.${group.key}`)
-    // 3. Fallback to empty (or key)
-    const label =
-      labels[group.key] || (t ? t(`admin.sidebar.groups.${group.key}` as any) : '') || '';
+  return adminNavConfig
+    .map((group) => {
+      const label =
+        labels[group.key] || (t ? t(`admin.sidebar.groups.${group.key}` as any) : '') || '';
 
-    return {
-      id: group.id,
-      label,
-      items: group.items.map((item) => {
-        // 1. Try copy.items[item.key]
-        // 2. Try t(`admin.dashboard.items.${item.key}`)
-        // 3. Fallback to FALLBACK_TITLES
-        // 4. Fallback to key
-        const title =
-          items[item.key] ||
-          (t ? t(`admin.dashboard.items.${item.key}` as any) : '') ||
-          FALLBACK_TITLES[item.key] ||
-          item.key;
+      const visibleItems = group.items.filter((item) => itemEnabled(item.key));
 
-        return {
-          title,
-          url: item.url,
-          icon: item.icon,
-        };
-      }),
-    };
-  });
+      return {
+        id: group.id,
+        label,
+        items: visibleItems.map((item) => {
+          const title =
+            items[item.key] ||
+            (t ? t(`admin.dashboard.items.${item.key}` as any) : '') ||
+            FALLBACK_TITLES[item.key] ||
+            item.key;
+
+          return {
+            title,
+            url: item.url,
+            icon: item.icon,
+          };
+        }),
+      };
+    })
+    .filter((group) => group.items.length > 0);
 }

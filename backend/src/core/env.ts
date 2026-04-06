@@ -18,7 +18,7 @@ const toList = (v: string | undefined) =>
     .map((s) => s.trim())
     .filter(Boolean);
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3030';
 const CORS_LIST = toList(process.env.CORS_ORIGIN);
 const CORS_ORIGIN = CORS_LIST.length ? CORS_LIST : [FRONTEND_URL];
 
@@ -30,7 +30,7 @@ const STORAGE_DRIVER = (RAW_STORAGE_DRIVER === 'local' ? 'local' : 'cloudinary')
 
 export const env = {
   NODE_ENV: process.env.NODE_ENV ?? 'development',
-  PORT: toInt(process.env.PORT, 8083),
+  PORT: toInt(process.env.PORT, 8086),
 
   // Storage driver (fallback). Asıl driver site_settings.storage_driver ile gelebilir.
   STORAGE_DRIVER,
@@ -90,8 +90,10 @@ export const env = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? '',
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET ?? '',
 
-  PUBLIC_URL: process.env.PUBLIC_URL || 'https://www.bereketfide.com',
+  PUBLIC_URL: process.env.PUBLIC_URL || 'https://www.bereketfide.com.tr',
   FRONTEND_URL: FRONTEND_URL,
+  /** Iyzico callback sonrasi yonlendirme: `/{locale}/panel/siparisler` */
+  FRONTEND_DEFAULT_LOCALE: process.env.FRONTEND_DEFAULT_LOCALE || 'tr',
 
   // ✅ SMTP / Mail (sadece fallback; asıl değerler site_settings.smtp_* ile gelebilir)
   SMTP_HOST: process.env.SMTP_HOST || '',
@@ -127,6 +129,51 @@ export const env = {
   GROQ_API_KEY: process.env.GROQ_API_KEY || '',
   GROQ_API_BASE: process.env.GROQ_API_BASE || 'https://api.groq.com/openai/v1',
   GROQ_MODEL: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
+
+  /** Iyzico / kart */
+  FEATURE_IYZICO_PAYMENT: toBool(process.env.FEATURE_IYZICO_PAYMENT, false),
+  IYZICO_API_KEY: process.env.IYZICO_API_KEY || '',
+  IYZICO_SECRET_KEY: process.env.IYZICO_SECRET_KEY || '',
+  IYZICO_BASE_URL: process.env.IYZICO_BASE_URL || 'https://sandbox-api.iyzipay.com',
+  IYZICO_SUB_MERCHANT_KEY: process.env.IYZICO_SUB_MERCHANT_KEY || '',
+
+  // =========================================================
+  // Banka Sanal POS / Tarım Kart (İş İmece | Ziraat Başak | Halkbank)
+  // =========================================================
+  FEATURE_BANK_CARD_PAYMENT: toBool(process.env.FEATURE_BANK_CARD_PAYMENT, false),
+  /** Aktif sağlayıcı: craftgate | nestpay_isbank | nestpay_halkbank | ziraatpay */
+  PAYMENT_CARD_PROVIDER: process.env.PAYMENT_CARD_PROVIDER || 'craftgate',
+
+  // Craftgate — tek entegrasyonla 3 banka (sandbox hazır)
+  CRAFTGATE_API_KEY: process.env.CRAFTGATE_API_KEY || '',
+  CRAFTGATE_SECRET_KEY: process.env.CRAFTGATE_SECRET_KEY || '',
+  CRAFTGATE_BASE_URL:
+    process.env.CRAFTGATE_BASE_URL || 'https://sandbox-api.craftgate.io',
+
+  // NestPay — İş Bankası (sözleşme sonrası panel'den alınır)
+  NESTPAY_ISBANK_MERCHANT_ID: process.env.NESTPAY_ISBANK_MERCHANT_ID || '',
+  NESTPAY_ISBANK_API_USER: process.env.NESTPAY_ISBANK_API_USER || '',
+  NESTPAY_ISBANK_API_PASS: process.env.NESTPAY_ISBANK_API_PASS || '',
+  NESTPAY_ISBANK_STORE_KEY: process.env.NESTPAY_ISBANK_STORE_KEY || '',
+  NESTPAY_ISBANK_API_URL:
+    process.env.NESTPAY_ISBANK_API_URL || 'https://sanalpos.isbank.com.tr/fim/api',
+  NESTPAY_ISBANK_3D_URL:
+    process.env.NESTPAY_ISBANK_3D_URL || 'https://sanalpos.isbank.com.tr/fim/est3Dgate',
+
+  // NestPay — Halkbank (sözleşme sonrası panel'den alınır)
+  NESTPAY_HALKBANK_MERCHANT_ID: process.env.NESTPAY_HALKBANK_MERCHANT_ID || '',
+  NESTPAY_HALKBANK_API_USER: process.env.NESTPAY_HALKBANK_API_USER || '',
+  NESTPAY_HALKBANK_API_PASS: process.env.NESTPAY_HALKBANK_API_PASS || '',
+  NESTPAY_HALKBANK_STORE_KEY: process.env.NESTPAY_HALKBANK_STORE_KEY || '',
+  NESTPAY_HALKBANK_3D_URL:
+    process.env.NESTPAY_HALKBANK_3D_URL || 'https://sanalpos.halkbank.com.tr/halk/est3Dgate',
+
+  // ZiraatPay REST API v2 (döküman: vpos.ziraatpay.com.tr/ziraatpay/api/v2/doc)
+  ZIRAATPAY_MERCHANT: process.env.ZIRAATPAY_MERCHANT || '',
+  ZIRAATPAY_MERCHANT_USER: process.env.ZIRAATPAY_MERCHANT_USER || '',
+  ZIRAATPAY_MERCHANT_PASSWORD: process.env.ZIRAATPAY_MERCHANT_PASSWORD || '',
+  ZIRAATPAY_BASE_URL:
+    process.env.ZIRAATPAY_BASE_URL || 'https://test.ziraatpay.com.tr/ziraatpay/api/v2',
 } as const;
 
 export type AppEnv = typeof env;

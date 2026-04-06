@@ -293,7 +293,7 @@ export function ProjectFeed({
               </p>
               <Link
                 href={localePath(locale, '/teklif')}
-                className="mt-3 inline-block bg-(--color-brand) px-4 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
+                className="mt-3 inline-block bg-(--color-brand) px-4 py-2 text-xs font-semibold text-(--color-on-brand) transition-opacity hover:opacity-90"
               >
                 {t('nav.offer')}
               </Link>
@@ -311,7 +311,7 @@ export function ProjectFeed({
               </p>
               <Link
                 href={localePath(locale, '/kataloglar')}
-                className="mt-3 inline-block bg-(--color-brand) px-4 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
+                className="mt-3 inline-block bg-(--color-brand) px-4 py-2 text-xs font-semibold text-(--color-on-brand) transition-opacity hover:opacity-90"
               >
                 {t('catalog.viewCatalog')}
               </Link>

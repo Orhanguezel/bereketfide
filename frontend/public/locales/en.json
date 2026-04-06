@@ -1,5 +1,8 @@
 {
   "nav": {
+    "dealerLogin": "Dealer login",
+    "dealerRegister": "Dealer application",
+    "dealerNetwork": "Dealer network",
     "home": "Home",
     "products": "Products",
     "projects": "Products",
@@ -7,6 +10,8 @@
     "about": "About",
     "gallery": "Gallery",
     "blog": "Knowledge Base",
+    "knowledgeHub": "Knowledge hub",
+    "catalogs": "Catalogs",
     "news": "News",
     "contact": "Contact",
     "offer": "Get Quote",
@@ -33,6 +38,12 @@
     "tagline": "Turkey's reliable seedling and seed producer",
     "profile": "My Profile",
     "logout": "Log Out",
+    "ariaPrimaryNavigation": "Primary navigation",
+    "ariaToggleMenu": "Open or close menu",
+    "ariaSearch": "Open site search",
+    "ariaLanguage": "Open language options",
+    "ariaContactInfo": "Open contact information",
+    "ariaSocialLinks": "Open social media links",
     "searchPlaceholder": "Search products, services or pages...",
     "viewAll": "View All →",
     "viewAllProducts": "View all products",
@@ -43,6 +54,10 @@
     "rights": "All rights reserved",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
+    "qualityPolicy": "Quality Policy",
+    "servicePolicy": "Service Policy",
+    "dataProtectionNotice": "PDPL Information Notice",
+    "cookiePolicy": "Cookie Policy",
     "sections": {
       "explore": "Explore",
       "company": "Company",
@@ -86,7 +101,8 @@
     "noResults": "No results found",
     "relatedProducts": "Related Products",
     "relatedGallery": "Related Galleries",
-    "relatedArticles": "Related Articles"
+    "relatedArticles": "Related Articles",
+    "relatedKnowledgePosts": "From the knowledge hub"
   },
   "home": {
     "hero": {
@@ -199,6 +215,26 @@
     "loveTitle": "Products You'll Love",
     "getQuoteTitle": "Get a Quote for Your Order",
     "getQuoteDesc": "Contact us for a free quote on your seedling needs.",
+    "similarByTagsTitle": "Similar products",
+    "aboutProducerTitle": "About this producer",
+    "agronomySectionTitle": "Growing and production details",
+    "agronomy": {
+      "botanicalName": "Botanical name",
+      "plantingSeasons": "Planting season",
+      "harvestDays": "Days to harvest",
+      "climateZones": "Climate / region",
+      "soilTypes": "Soil type",
+      "waterNeed": "Water needs",
+      "sunExposure": "Sun exposure",
+      "tempRange": "Temperature range",
+      "minTemp": "Minimum temperature",
+      "maxTemp": "Maximum temperature",
+      "germinationDays": "Germination (days)",
+      "seedDepthCm": "Seed depth (cm)",
+      "rowSpacingCm": "Row spacing (cm)",
+      "plantSpacingCm": "Plant spacing (cm)",
+      "yieldPerSqm": "Yield per m²"
+    },
     "filters": {
       "type": "Product Type",
       "location": "Location",
@@ -277,7 +313,7 @@
     "noGalleries": "No galleries found.",
     "results": "galleries",
     "photos": "photos",
-    "emptyStateNote": "Sample gallery topics are shown below until live project visuals become available."
+    "emptyStateNote": "Sample gallery topics are shown below until live production photos are available."
   },
   "blog": {
     "title": "Knowledge Base",
@@ -318,6 +354,12 @@
       "copyError": "Link could not be copied.",
       "buttonTitle": "Share on"
     }
+  },
+  "careerPage": {
+    "title": "Careers",
+    "description": "How to apply and get in touch if you want to join our production and operations teams.",
+    "fallbackContent": "<p>Bereket Fide keeps growing with trust, continuous learning and teamwork. For open roles and applications, email <strong>info@bereketfide.com.tr</strong>.</p>",
+    "contactCta": "Go to contact page →"
   },
   "contact": {
     "title": "Contact",
@@ -394,7 +436,7 @@
       "sectorsItems": {
         "one": "Individual growers and farmers",
         "two": "Industrial agricultural enterprises and cooperatives",
-        "three": "Landscape firms and municipality projects"
+        "three": "Nurseries, garden centers and wholesale partners"
       },
       "stats": {
         "experience": "Years of Experience",
@@ -439,11 +481,177 @@
       "role": "Account type",
       "roles": {
         "admin": "Administrator",
+        "editor": "Editor",
         "moderator": "Moderator",
+        "carrier": "Carrier",
+        "customer": "Customer",
+        "dealer": "Dealer",
         "user": "User"
       },
       "notLoggedIn": "You need to log in to view this page.",
       "goToLogin": "Log In"
+    },
+    "bayi": {
+      "loginTitle": "Dealer login",
+      "loginSubtitle": "Sign in with your authorized dealer account for B2B orders and account summary.",
+      "pendingApproval": "Your account is not approved yet. You can sign in after an administrator reviews your application.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "unauthorized": "This page is only for dealer accounts.",
+      "devHint": "Development: bayi@example.com — same password as admin seed.",
+      "registerTitle": "Dealer application",
+      "registerSubtitle": "Submit your company and contact details. After approval you can access the dealer portal.",
+      "registerSubmit": "Submit application",
+      "registerSubmitting": "Submitting…",
+      "registerSuccess": "Application received. Once approved, sign in with your email address.",
+      "registerGoLogin": "Go to dealer login",
+      "fullName": "Full name",
+      "phone": "Phone",
+      "companyName": "Company / trade name",
+      "taxNumber": "Tax ID",
+      "taxOffice": "Tax office",
+      "city": "City",
+      "region": "Region",
+      "passwordConfirm": "Password (confirm)",
+      "rulesLabel": "I have read and accept the terms of use and privacy notice.",
+      "passwordMismatch": "Passwords do not match.",
+      "hasAccount": "Already have an account?"
+    },
+    "panel": {
+      "nav": {
+        "overview": "Overview",
+        "orders": "Orders",
+        "finance": "Account / Finance",
+        "account": "Account",
+        "logout": "Log out",
+        "dealerPortal": "Dealer portal",
+        "limitLabel": "Available limit"
+      },
+      "dashboard": {
+        "title": "Dealer portal",
+        "lead": "Use the menu for orders and finance."
+      },
+      "orders": {
+        "title": "Orders",
+        "lead": "Pick products from the dealer catalog, enter quantity in grams, then place your order. Pay by bank transfer or on account.",
+        "catalog": "Product catalog",
+        "searchPlaceholder": "Search by product name…",
+        "loading": "Loading…",
+        "loadMore": "Load more",
+        "addToCart": "Add to cart",
+        "cart": "Cart",
+        "emptyCart": "Your cart is empty.",
+        "quantityGrams": "Quantity (grams)",
+        "remove": "Remove",
+        "notes": "Order notes",
+        "cartTotal": "Estimated total",
+        "submitOrder": "Place order",
+        "submitting": "Submitting…",
+        "created": "Order saved. Choose how to pay.",
+        "nextStep": "Payment",
+        "orderRef": "Order: {id}…",
+        "payBank": "I will pay by bank transfer",
+        "payBankCard": "Pay by Credit / Debit Card",
+        "payCard": "Pay by card (Iyzico)",
+        "payCredit": "Pay on account",
+        "iyzicoIframeHint": "The payment form loads below. You will be redirected when done.",
+        "cardRedirectHint": "You are being redirected to the bank payment page. Please wait.",
+        "iyzicoPaymentSuccess": "Payment successful. Your order is confirmed.",
+        "iyzicoPaymentFail": "Payment could not be completed or verified. Try again from the order detail if needed.",
+        "cancelOrder": "Cancel order",
+        "openDetail": "Open details",
+        "confirmCancel": "Cancel this order?",
+        "cancelled": "Order cancelled.",
+        "bankMarked": "Bank transfer selected. Awaiting payment confirmation.",
+        "creditPaid": "Order charged to your account.",
+        "recent": "Recent orders",
+        "refresh": "Refresh",
+        "noOrders": "No orders yet.",
+        "detail": "Details",
+        "detailTitle": "Order details",
+        "notFound": "Order not found.",
+        "backList": "← Back to orders",
+        "lines": "Line items",
+        "col": {
+          "date": "Date",
+          "total": "Total",
+          "status": "Status",
+          "payment": "Payment",
+          "product": "Product",
+          "qty": "Qty",
+          "lineTotal": "Line"
+        },
+        "status": {
+          "pending": "Pending",
+          "confirmed": "Confirmed",
+          "shipped": "Shipped",
+          "completed": "Completed",
+          "cancelled": "Cancelled"
+        },
+        "pay": {
+          "unpaid": "Unpaid",
+          "pending": "Payment pending",
+          "paid": "Paid",
+          "failed": "Failed"
+        },
+        "errors": {
+          "loadCatalog": "Could not load catalog.",
+          "loadOrders": "Could not load orders.",
+          "loadOrder": "Could not load order.",
+          "generic": "Something went wrong ({code}).",
+          "insufficient_credit": "Available credit is not enough for this order.",
+          "already_paid": "This order is already paid.",
+          "order_cancelled": "This order was cancelled.",
+          "products_not_found": "Some products were not found.",
+          "only_pending_orders_can_be_cancelled": "Only pending orders can be cancelled.",
+          "order_not_found": "Order not found.",
+          "dealer_not_found": "Dealer profile not found.",
+          "iyzico_feature_disabled": "Card payments are currently disabled.",
+          "iyzico_not_configured": "Payment provider is not configured.",
+          "iyzico_init_failed": "Could not start the payment session.",
+          "basket_total_mismatch": "Basket total does not match the order; contact support.",
+          "order_has_no_items": "This order has no line items."
+        }
+      },
+      "finance": {
+        "title": "Account / Finance",
+        "lead": "Credit limit, balance and recent ledger entries. Download a PDF statement.",
+        "loading": "Loading…",
+        "downloadPdf": "Download statement (PDF)",
+        "pdfWorking": "Preparing…",
+        "movements": "Transactions",
+        "noMovements": "No transactions to show.",
+        "totalsByType": "Totals by type",
+        "meta": "{count} transactions total · Overdue: {overdue}",
+        "cards": {
+          "limit": "Credit limit",
+          "balance": "Current balance",
+          "available": "Available",
+          "discount": "Discount rate"
+        },
+        "col": {
+          "date": "Date",
+          "type": "Type",
+          "amount": "Amount",
+          "balance": "Balance after"
+        },
+        "txType": {
+          "order": "Order",
+          "payment": "Payment",
+          "adjustment": "Adjustment",
+          "refund": "Refund"
+        },
+        "warnings": {
+          "low_credit": "Your available credit is low.",
+          "overdue_due": "You have overdue items."
+        },
+        "errors": {
+          "load": "Could not load summary.",
+          "pdf": "Could not download PDF."
+        }
+      }
     },
     "errors": {
       "user_exists": "This email is already registered. Try logging in instead.",
@@ -453,7 +661,10 @@
       "account_disabled": "Your account has been disabled.",
       "too_many_attempts": "Too many attempts. Please wait a moment.",
       "google_oauth_not_configured": "Google sign-in is currently unavailable.",
-      "generic": "An error occurred. Please try again."
+      "generic": "An error occurred. Please try again.",
+      "validation_error": "Some fields are missing or invalid.",
+      "rate_limited": "Too many applications from this connection. Please try again later.",
+      "rules_accepted_required": "Please check the consent box to continue."
     }
   },
   "catalog": {
@@ -468,6 +679,21 @@
     "sidebarCtaDesc": "Access our current product catalogs from here.",
     "noFile": "No file has been added for this catalog yet."
   },
+  "bayiNetwork": {
+    "title": "Our dealer network",
+    "lead": "Search approved partners by name. Map links appear when coordinates are published.",
+    "metaTitle": "Dealer network | Bereket Fide",
+    "metaDescription": "List of authorised Bereket Fide dealers and partners.",
+    "search": "Search",
+    "searchPlaceholder": "Search by company name…",
+    "loading": "Loading…",
+    "empty": "No records found.",
+    "loadError": "Could not load the list. Please try again later.",
+    "count": "{n} records total",
+    "unnamed": "Unnamed entry",
+    "phone": "Phone",
+    "openMap": "Open in Maps"
+  },
   "legal": {
     "title": "Legal",
     "privacy": "Privacy Policy",
@@ -475,11 +701,43 @@
     "privacyContent": "<p>Bereket Fide uses submitted contact and quotation data only to evaluate requests, prepare offers and maintain production communication.</p><p>We do not request unnecessary personal data and we limit access to product files and technical documents to relevant operational teams.</p><p>For data updates or removal requests, you can contact us via the communication details provided on the contact page.</p>",
     "terms": "Terms of Use",
     "termsDesc": "General terms for using the Bereket Fide website, technical content and quotation communication channels.",
-    "termsContent": "<p>Information published on this website is provided for general technical and commercial guidance. Final product scope, variety selection and production conditions are clarified during the order process.</p><p>Visuals, technical notes and descriptions on the site do not constitute a final binding offer on their own.</p><p>All quotation and delivery commitments become valid only after mutual confirmation within the commercial process.</p>"
+    "termsContent": "<p>Information published on this website is provided for general technical and commercial guidance. Final product scope, variety selection and production conditions are clarified during the order process.</p><p>Visuals, technical notes and descriptions on the site do not constitute a final binding offer on their own.</p><p>All quotation and delivery commitments become valid only after mutual confirmation within the commercial process.</p>",
+    "qualityPolicy": "Quality Policy",
+    "qualityPolicyDesc": "Summary of our commitment to quality, traceability and continuous improvement in seedling production.",
+    "qualityPolicyContent": "<p>We focus on healthy seedlings, consistent variety performance and customer satisfaction. Production follows traceability, hygiene and technical standards.</p><p>When the full policy is published in the CMS, this page updates automatically.</p>",
+    "servicePolicy": "Service Policy",
+    "servicePolicyDesc": "Overview of communication, quotation handling and customer support.",
+    "servicePolicyContent": "<p>Quote requests are evaluated and final terms are confirmed in writing. Our teams can help with variety selection and delivery topics.</p><p>You can share feedback at info@bereketfide.com.tr.</p>",
+    "dataProtectionNotice": "PDPL Information Notice",
+    "dataProtectionNoticeDesc": "Summary of personal data processing and your rights under Turkish Law No. 6698 (PDPL / KVKK).",
+    "dataProtectionNoticeContent": "<p>Bereket Fide Tarım San. ve Tic. Ltd. Şti. processes identity and contact data collected through contact, quote and order flows to respond to requests, perform contracts and meet legal obligations.</p><p>For rights and requests, contact <strong>info@bereketfide.com.tr</strong>. When the full notice is published via the CMS, this page updates automatically.</p>",
+    "cookiePolicy": "Cookie Policy",
+    "cookiePolicyDesc": "How we use cookies on this website.",
+    "cookiePolicyContent": "<p>Cookies may be used for core functionality, preferences and security. You can manage cookies in your browser settings.</p><p>When the full policy is published via the CMS, this page updates automatically.</p>"
   },
   "seo": {
     "defaultTitle": "Bereket Fide | Reliable Seedling and Seed Production Services",
     "defaultDescription": "Quality, healthy and reliable seedling production solutions for vegetable, fruit and ornamental plants. Bring your harvest to life with Bereket Fide.",
-    "keywords": "seedling, seed, vegetable seedlings, fruit seedlings, grafted seedlings, tomato seedlings, greenhouse, agriculture"
+    "keywords": "seedling, seed, vegetable seedlings, fruit seedlings, grafted seedlings, tomato seedlings, greenhouse, agriculture",
+    "searchTitle": "Site search",
+    "searchDescription": "Search products, catalogs, services, news, knowledge base and corporate/legal pages on the Bereket Fide website."
+  },
+  "searchPage": {
+    "titleResults": "Results for “{query}”",
+    "titlePrompt": "Search",
+    "lead": "Search products, catalogs, services, corporate and legal pages, news and knowledge base articles.",
+    "loading": "Loading results…",
+    "noResultsTitle": "No results found",
+    "noResultsBody": "We could not find anything matching “{query}”. Try a different or broader keyword.",
+    "backHome": "Back to home",
+    "hintToolbar": "Enter your query in the search field in the top menu.",
+    "queryTooShort": "Enter at least 2 characters to search.",
+    "typeProduct": "Product",
+    "typeService": "Service",
+    "typeNews": "News",
+    "typeBlog": "Knowledge base",
+    "typeCatalog": "Catalog",
+    "typeLegal": "Legal",
+    "typeCorporate": "Corporate"
   }
 }

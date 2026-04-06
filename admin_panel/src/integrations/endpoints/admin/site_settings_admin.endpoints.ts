@@ -27,8 +27,8 @@ export type GetSiteSettingAdminByKeyArg =
       locale?: string | null;
     };
 
-const ADMIN_BASE = '/admin/site_settings';
-const ADMIN_LIST = '/admin/site_settings/list'; // ✅ List endpoint
+const ADMIN_BASE = '/admin/site-settings';
+const ADMIN_LIST = '/admin/site-settings/list'; // ✅ List endpoint
 
 const extendedApi = baseApi.enhanceEndpoints({ addTagTypes: ['SiteSettings'] as const });
 
@@ -69,7 +69,7 @@ export const siteSettingsAdminApi = extendedApi.injectEndpoints({
       },
     }),
 
-    // /admin/site_settings/app-locales
+    // /admin/site-settings/app-locales
     getAppLocalesAdmin: b.query<AppLocaleMeta[], void>({
       query: () => ({ url: `${ADMIN_BASE}/app-locales`, method: 'GET' }),
       transformResponse: (res: unknown): AppLocaleMeta[] => normalizeAppLocalesPublic(res),
@@ -77,7 +77,7 @@ export const siteSettingsAdminApi = extendedApi.injectEndpoints({
       keepUnusedDataFor: 60,
     }),
 
-    // /admin/site_settings/default-locale
+    // /admin/site-settings/default-locale
     getDefaultLocaleAdmin: b.query<string, void>({
       query: () => ({ url: `${ADMIN_BASE}/default-locale`, method: 'GET' }),
       transformResponse: (res: unknown): string => normalizeDefaultLocalePublic(res),

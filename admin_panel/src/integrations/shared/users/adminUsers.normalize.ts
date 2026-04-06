@@ -2,8 +2,11 @@
 import type { AdminUserRaw, AdminUserView, UserRoleName } from './users';
 
 const asRole = (v: unknown): UserRoleName | null => {
-  const s = String(v ?? '').toLowerCase();
-  return s === 'admin' || s === 'moderator' || s === 'user' ? (s as UserRoleName) : null;
+  const s = String(v ?? '').toLowerCase().trim();
+  if (s === 'moderator') return 'editor';
+  if (s === 'user') return 'customer';
+  const ok: UserRoleName[] = ['admin', 'editor', 'carrier', 'customer', 'dealer'];
+  return (ok as string[]).includes(s) ? (s as UserRoleName) : null;
 };
 
 const toBool = (v: unknown): boolean => (typeof v === 'boolean' ? v : Number(v ?? 0) === 1);

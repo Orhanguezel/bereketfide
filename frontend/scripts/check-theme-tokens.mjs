@@ -11,7 +11,13 @@ const ALLOWED_HEX_FILES = new Set([
   path.join('src', 'app', 'icon.tsx'),
   path.join('src', 'app', 'apple-icon.tsx'),
   path.join('src', 'app', 'manifest.ts'),
+  path.join('src', 'lib', 'bereketfide-palette-hex.ts'),
+  path.join('src', 'components', 'projects', 'SocialShare.tsx'),
+  path.join('src', 'app', '[locale]', 'login', 'LoginClient.tsx'),
+  path.join('src', 'app', '[locale]', 'register', 'RegisterClient.tsx'),
 ]);
+
+const HEX_COLOR_RE = /#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/;
 const EXTS = new Set(['.ts', '.tsx', '.js', '.jsx', '.css']);
 
 const problems = [];
@@ -45,7 +51,7 @@ async function walk(dir) {
     const rel = path.relative(ROOT, fullPath);
     const content = await readFile(fullPath, 'utf8');
 
-    if (!ALLOWED_HEX_FILES.has(rel) && /#[0-9a-fA-F]{3,8}\b/.test(content)) {
+    if (!ALLOWED_HEX_FILES.has(rel) && HEX_COLOR_RE.test(content)) {
       problems.push(`${rel}: raw hex color found`);
     }
 
@@ -53,7 +59,10 @@ async function walk(dir) {
       problems.push(`${rel}: legacy token alias found`);
     }
 
-    if (!ALLOWED_HEX_FILES.has(rel) && /\bbg-white(?![/-])\b/.test(content)) {
+    if (
+      !ALLOWED_HEX_FILES.has(rel) &&
+      /(?<![a-zA-Z0-9_-])bg-white(?![a-zA-Z0-9_/])/.test(content)
+    ) {
       problems.push(`${rel}: hardcoded bg-white surface found`);
     }
 

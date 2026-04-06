@@ -4,7 +4,17 @@
 // =============================================================
 
 import { z } from 'zod';
-import { boolLike } from '@/modules/_shared';
+
+/** Yerel tanim: shared `boolLike` farkli `zod` kopyasiyla gelince `.extend()` tipi kiriliyor. */
+const boolLike = z.union([
+  z.boolean(),
+  z.literal(0),
+  z.literal(1),
+  z.literal('0'),
+  z.literal('1'),
+  z.literal('true'),
+  z.literal('false'),
+]);
 
 // Teklif durumları – hem DB hem API için ortak enum
 export const OFFER_STATUSES = [

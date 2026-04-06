@@ -1,3 +1,4 @@
+import { log } from '@agro/shared-backend/core/app-logger';
 // =============================================================
 // FILE: src/modules/offer/service.ts
 // Bereket Fide – Offer Module Service
@@ -17,8 +18,8 @@ import { randomUUID } from 'crypto';
 import { eq, and, inArray, desc } from 'drizzle-orm';
 
 import { db } from '@/db/client';
-import { siteSettings } from '@/modules/siteSettings/schema';
-import { notifications, type NotificationType } from '@/modules/notifications/schema';
+import { siteSettings } from '@agro/shared-backend/modules/siteSettings/schema';
+import { notifications, type NotificationType } from '@agro/shared-backend/modules/notifications/schema';
 
 import { offersTable, type OfferRow } from './schema';
 import { updateOffer } from './repository';
@@ -29,10 +30,10 @@ import {
   sendBereketOfferCustomerMail,
   sendBereketOfferRequestAdminMail,
 } from '@/core/bereket-mail';
-import { telegramNotify } from '@/modules/telegram/telegram.notifier';
+import { telegramNotify } from '@agro/shared-backend/modules/telegram/helpers/telegram.notifier';
 
 // ✅ Product schema (i18n)
-import { products, productI18n } from '@/modules/products/schema';
+import { products, productI18n } from '@agro/shared-backend/modules/products/schema';
 
 import type { OfferListItem } from './repository';
 
@@ -63,11 +64,11 @@ const POSSIBLE_EXECUTABLE_PATHS: string[] = [
 function resolvePuppeteerExecutable(): string | undefined {
   for (const p of POSSIBLE_EXECUTABLE_PATHS) {
     if (fsSync.existsSync(p)) {
-      console.log('[offer] Using puppeteer executable:', p);
+      log.info({ puppeteerExecutable: p }, '[offer] Using puppeteer executable');
       return p;
     }
   }
-  console.warn(
+  log.warn(
     '[offer] No explicit puppeteer executable found, Puppeteer will use its bundled browser (if installed).',
   );
   return undefined;
@@ -263,7 +264,7 @@ async function getProductTitleById(opts: {
     if (!base.length) return null;
     return null;
   } catch (err) {
-    console.error('offer:getProductTitleById_failed', err);
+    log.error({ err }, 'offer:getProductTitleById_failed');
     return null;
   }
 }
@@ -422,7 +423,7 @@ export async function generateAndAttachOfferPdf(
 
     return { pdf_url, pdf_asset_id };
   } catch (err) {
-    console.error('generateAndAttachOfferPdf_failed', err);
+    log.error({ err }, 'generateAndAttachOfferPdf_failed');
 
     const { pdf_url, pdf_asset_id } = await saveOfferErrorFile(offer.id, err, offer.locale ?? null);
 
@@ -519,21 +520,23 @@ Teklif ID: ${offer.id}`;
   });
 
   try {
+    const createdAt =
+      offer.created_at instanceof Date ? offer.created_at.toISOString() : new Date().toISOString();
     await telegramNotify({
-      event: 'new_offer_request',
-      data: {
-        customer_name: offer.customer_name,
-        customer_email: offer.email,
-        customer_phone: offer.phone ?? '',
-        company_name: offer.company_name ?? '',
-        product_service: offer.subject ?? '',
-        message: offer.message ?? '',
-        created_at:
-          offer.created_at instanceof Date ? offer.created_at.toISOString() : new Date().toISOString(),
-      },
+      title: 'Yeni Teklif Talebi',
+      message: [
+        `Müşteri: ${offer.customer_name}`,
+        `E-posta: ${offer.email}`,
+        `Telefon: ${offer.phone ?? ''}`,
+        `Firma: ${offer.company_name ?? ''}`,
+        `Konu: ${offer.subject ?? ''}`,
+        `Mesaj: ${offer.message ?? ''}`,
+        `Oluşturulma: ${createdAt}`,
+      ].join('\n'),
+      type: 'new_offer_request',
     });
   } catch (err) {
-    console.error('offer_request_telegram_failed', err);
+    log.error({ err }, 'offer_request_telegram_failed');
   }
 
   try {
@@ -556,7 +559,7 @@ Teklif ID: ${offer.id}`;
       );
     }
   } catch (err) {
-    console.error('offer_request_admin_mail_failed', err);
+    log.error({ err }, 'offer_request_admin_mail_failed');
   }
 }
 
@@ -579,14 +582,14 @@ export async function sendOfferEmailsAndNotifications(
   try {
     customerSent = await sendCustomerOfferMail(ctx);
   } catch (err) {
-    console.error('sendCustomerOfferMail failed', err);
+    log.error({ err }, 'sendCustomerOfferMail failed');
     customerSent = false;
   }
 
   try {
     adminSent = await sendAdminOfferMail(ctx);
   } catch (err) {
-    console.error('sendAdminOfferMail failed', err);
+    log.error({ err }, 'sendAdminOfferMail failed');
     adminSent = false;
   }
 
@@ -619,7 +622,7 @@ E-posta: ${offer.email}`;
       type: 'offer_sent',
     });
   } catch (err) {
-    console.error('offer_sent_telegram_failed', err);
+    log.error({ err }, 'offer_sent_telegram_failed');
   }
 
   await db

@@ -22,12 +22,15 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
+    const status = err?.response?.status as number | undefined;
     const message =
       err?.response?.data?.error?.message ||
       err?.response?.data?.message ||
       err?.message ||
       'Network error';
-    return Promise.reject(new Error(message));
+    const wrapped = new Error(String(message)) as Error & { status?: number };
+    if (status != null) wrapped.status = status;
+    return Promise.reject(wrapped);
   },
 );
 

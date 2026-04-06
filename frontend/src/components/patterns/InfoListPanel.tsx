@@ -15,7 +15,7 @@ export function InfoListPanel({
       <div className="mt-8 space-y-6">
         {items.map((item, idx) => (
           <div key={idx} className="flex gap-4 group">
-            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-(--color-brand)/10 text-(--color-brand) flex items-center justify-center font-bold text-sm transition-colors group-hover:bg-(--color-brand) group-hover:text-white">
+            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-(--color-brand)/10 text-sm font-bold text-(--color-brand) transition-colors group-hover:bg-(--color-brand) group-hover:text-(--color-on-brand)">
               {idx + 1}
             </div>
             <p className="text-sm leading-6 text-(--color-text-secondary) pt-1 group-hover:text-(--color-text-primary) transition-colors">{item}</p>
