@@ -1,18 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { localizedPath } from '@/seo';
-
-const ThemeToggle = dynamic(
-  () => import('@/components/theme/ThemeToggle').then((m) => m.ThemeToggle),
-  { ssr: false, loading: () => <span className="inline-block h-7 w-7" /> },
-);
 
 /* ── Types ── */
 
@@ -31,6 +25,79 @@ function normalizeItems(raw: Record<string, unknown>[]): MenuItem[] {
       children: Array.isArray(r.children) ? normalizeItems(r.children as any) : [],
     }))
     .filter((i) => i.title);
+}
+
+function ChevronDown({ className }: { className?: string }) {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className={className} aria-hidden>
+      <path
+        d="M2.5 3.75L5 6.25L7.5 3.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function isNavActive(pathname: string, url: string, locale: string): boolean {
+  const home = localizedPath(locale, '/');
+  if (url === home) return pathname === url;
+  return pathname.startsWith(url || '');
+}
+
+function itemOrChildActive(pathname: string, item: MenuItem, locale: string): boolean {
+  if (isNavActive(pathname, item.url ?? '', locale)) return true;
+  return (item.children ?? []).some((c) => isNavActive(pathname, c.url ?? '', locale));
+}
+
+function MegaMenuBranch({
+  items,
+  onNavigate,
+  depth,
+}: {
+  items: MenuItem[];
+  onNavigate: () => void;
+  depth: number;
+}): ReactNode {
+  return (
+    <ul className={depth === 0 ? 'space-y-2' : 'space-y-1 pl-2 border-l border-white/10'}>
+      {items.map((item, i) => {
+        if (item.children?.length) {
+          return (
+            <li key={`m-${depth}-${i}-${item.title}`} className="list-none">
+              <div
+                className="text-xs font-bold uppercase tracking-wider mb-2"
+                style={{ color: 'var(--color-brand)', letterSpacing: '0.1em' }}
+              >
+                {item.title}
+              </div>
+              <MegaMenuBranch items={item.children} onNavigate={onNavigate} depth={depth + 1} />
+            </li>
+          );
+        }
+        return (
+          <li key={`m-${depth}-${i}-${item.url}`} className="list-none">
+            <Link
+              href={item.url || '#'}
+              className="text-sm transition-colors block py-0.5"
+              style={{ color: 'var(--color-text-on-dark)' }}
+              onClick={onNavigate}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-brand-light)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text-on-dark)';
+              }}
+            >
+              {item.title}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
 }
 
 /* ── Props ── */
@@ -64,7 +131,18 @@ export function Header({
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const items = normalizeItems(menuItems);
+
+  const handleDropdownEnter = useCallback((key: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenDropdown(key);
+  }, []);
+
+  const handleDropdownLeave = useCallback(() => {
+    closeTimer.current = setTimeout(() => setOpenDropdown(null), 150);
+  }, []);
 
   const companyName = companyProfile?.shortName || companyProfile?.company_name || 'Bereket Fide';
   const companySlogan = companyProfile?.headline || t('tagline');
@@ -73,7 +151,23 @@ export function Header({
   // Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
+    setOpenDropdown(null);
   }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!openDropdown) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenDropdown(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [openDropdown]);
 
   // Lock body scroll
   useEffect(() => {
@@ -144,34 +238,128 @@ export function Header({
             </button>
 
             <nav
-              className="ml-4 hidden items-center gap-8 lg:flex"
+              className="ml-2 hidden flex-wrap items-center gap-4 xl:gap-6 lg:flex"
               aria-label={t('ariaPrimaryNavigation')}
             >
-                {items.filter((item) => item.url && !item.url.includes('/teklif')).slice(0, 8).map((item) => {
-                  const isActive = item.url === l('/') ? pathname === item.url : pathname.startsWith(item.url || '');
+              {items.map((item, idx) => {
+                const dKey = `dd-${idx}`;
+                const hasChildren = Boolean(item.children?.length);
+                const active = itemOrChildActive(pathname, item, locale);
+
+                if (!hasChildren) {
                   return (
                     <Link
-                      key={item.url}
+                      key={dKey}
                       href={item.url || '#'}
                       title={item.title}
-                      className="group relative text-[13px] font-bold uppercase tracking-[0.15em] transition-colors"
+                      className="group relative text-[12px] font-bold uppercase tracking-[0.12em] transition-colors xl:text-[13px] xl:tracking-[0.15em]"
                       style={{
-                        color: isActive ? 'var(--color-brand)' : 'var(--color-text-primary)',
+                        color: active ? 'var(--color-brand)' : 'var(--color-text-primary)',
                       }}
                     >
                       {item.title}
-                      <span 
-                        className="absolute -bottom-1 left-0 h-0.5 bg-(--color-brand) transition-all duration-300" 
-                        style={{ width: isActive ? '100%' : '0' }}
+                      <span
+                        className="absolute -bottom-1 left-0 h-0.5 bg-(--color-brand) transition-all duration-300"
+                        style={{ width: active ? '100%' : '0' }}
                       />
                     </Link>
                   );
-                })}
+                }
+
+                return (
+                  <div
+                    key={dKey}
+                    className="relative"
+                    onMouseEnter={() => handleDropdownEnter(dKey)}
+                    onMouseLeave={handleDropdownLeave}
+                  >
+                    <Link
+                      href={item.url || '#'}
+                      title={item.title}
+                      className="group relative inline-flex items-center gap-1 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors xl:text-[13px] xl:tracking-[0.15em]"
+                      style={{
+                        color: active ? 'var(--color-brand)' : 'var(--color-text-primary)',
+                      }}
+                      aria-expanded={openDropdown === dKey}
+                    >
+                      {item.title}
+                      <ChevronDown
+                        className={`shrink-0 transition-transform duration-200 ${openDropdown === dKey ? 'rotate-180' : ''}`}
+                      />
+                      <span
+                        className="absolute -bottom-1 left-0 h-0.5 bg-(--color-brand) transition-all duration-300"
+                        style={{ width: active ? '100%' : '0' }}
+                      />
+                    </Link>
+                    {openDropdown === dKey && (
+                      <div
+                        className="absolute left-0 top-full z-[60] pt-2"
+                        onMouseEnter={() => handleDropdownEnter(dKey)}
+                        onMouseLeave={handleDropdownLeave}
+                      >
+                        <div
+                          className="min-w-[220px] py-2"
+                          style={{
+                            background: 'var(--color-bg-secondary)',
+                            border: '1px solid var(--color-border)',
+                            borderRadius: 'var(--radius-sm)',
+                            boxShadow:
+                              '0 12px 40px color-mix(in srgb, var(--color-bg-dark) 14%, transparent)',
+                          }}
+                          role="menu"
+                        >
+                          {item.children!.map((ch, ci) => {
+                            const subActive = isNavActive(pathname, ch.url ?? '', locale);
+                            return (
+                              <Link
+                                key={`${dKey}-sub-${ci}`}
+                                href={ch.url ?? '#'}
+                                role="menuitem"
+                                className="block px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors xl:text-[12px]"
+                                style={{
+                                  color: subActive ? 'var(--color-brand)' : 'var(--color-text-primary)',
+                                  background: subActive
+                                    ? 'color-mix(in srgb, var(--color-brand) 8%, transparent)'
+                                    : 'transparent',
+                                }}
+                                onMouseEnter={(e) => {
+                                  if (!subActive) {
+                                    e.currentTarget.style.background =
+                                      'color-mix(in srgb, var(--color-brand) 5%, transparent)';
+                                  }
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.background = subActive
+                                    ? 'color-mix(in srgb, var(--color-brand) 8%, transparent)'
+                                    : 'transparent';
+                                }}
+                              >
+                                {ch.title}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
           </div>
 
-          {/* ── Sağ: Logo + İkonlar ── */}
-          <div className="flex items-center gap-8 h-full">
+          {/* ── Sağ: Bayi girişi + Logo ── */}
+          <div className="flex items-center gap-4 sm:gap-8 h-full">
+            <Link
+              href={l('/bayi-girisi')}
+              className="inline-flex shrink-0 items-center justify-center px-3 py-2 text-[10px] font-bold uppercase tracking-[0.1em] transition-opacity hover:opacity-90 sm:text-[11px] sm:tracking-[0.12em]"
+              style={{
+                background: 'var(--color-brand)',
+                color: 'var(--color-on-brand)',
+                borderRadius: 'var(--radius-sm)',
+              }}
+            >
+              {t('dealerLogin')}
+            </Link>
 
             {/* Logo — Humintech style on the right */}
             <Link
@@ -244,22 +432,7 @@ export function Header({
                 >
                   {companyName}
                 </h3>
-                <ul className="space-y-2">
-                  {items.map((item) => (
-                    <li key={item.url}>
-                      <Link
-                        href={item.url || '#'}
-                        className="text-sm transition-colors block py-0.5"
-                        style={{ color: 'var(--color-text-on-dark)' }}
-                        onClick={() => setMenuOpen(false)}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                      >
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <MegaMenuBranch items={items} onNavigate={() => setMenuOpen(false)} depth={0} />
               </div>
 
               {/* Kolom 2: Ürün Kategorileri */}

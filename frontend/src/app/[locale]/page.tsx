@@ -266,13 +266,13 @@ export default async function HomePage({
       {/* ═══════════════════════════════════════════
           HERO — Dynamic industrial/premium redesign
       ═══════════════════════════════════════════ */}
-      <section className="relative flex min-h-[900px] w-full flex-col overflow-hidden px-0 pt-24 pb-12 sm:min-h-[980px] sm:pt-28 md:min-h-[860px] md:pt-32 lg:h-screen lg:min-h-[700px] lg:items-center lg:justify-center lg:pt-0 lg:pb-0">
+      <section className="home-hero relative flex min-h-[900px] w-full flex-col overflow-hidden px-0 pt-24 pb-12 sm:min-h-[980px] sm:pt-28 md:min-h-[860px] md:pt-32 lg:h-screen lg:min-h-[700px] lg:items-center lg:justify-center lg:pt-0 lg:pb-0">
         {/* Background Overlay / Video */}
         {heroVideoUrl ? (
           <HeroBackgroundVideo src={heroVideoUrl} poster={heroPoster || undefined} />
         ) : (
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 z-0"
             style={{
               background:
                 'linear-gradient(135deg, var(--gold-950) 0%, var(--soil-900) 42%, color-mix(in srgb, var(--gold-900) 50%, var(--soil-800) 50%) 100%)',
@@ -280,31 +280,21 @@ export default async function HomePage({
             aria-hidden="true"
           />
         )}
-        <div 
-          className="absolute inset-0 opacity-80"
-          style={{
-            background:
-              'linear-gradient(to bottom, color-mix(in srgb, var(--green-900) 40%, transparent) 0%, color-mix(in srgb, var(--green-900) 85%, transparent) 100%)',
-          }}
-        />
+        {/* Kontrast katmanı — globals.css .home-hero-media-scrim (DB ile ezilmez) */}
+        <div className="home-hero-media-scrim" aria-hidden="true" />
 
         {/* Hero Content — Centered Heading */}
         <div className="relative z-10 mb-10 w-full max-w-7xl px-6 text-center sm:mb-12 lg:mb-16">
           <Reveal>
-            <h1
-              className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl"
-              style={{
-                fontFamily: 'var(--font-heading)',
-                color: 'var(--color-brand-light)',
-                lineHeight: 1.05,
-              }}
-            >
+            <h1 className="home-hero-title text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl">
               {heroTitle}
             </h1>
             {heroSubtitle && (
-              <p className="mx-auto mt-4 max-w-3xl text-base font-medium text-(--section-bg-white)/85 sm:mt-5 sm:text-lg md:text-xl lg:mt-6 lg:text-2xl">
-                {heroSubtitle}
-              </p>
+              <div className="home-hero-subtitle-wrap mt-4 sm:mt-5 lg:mt-6">
+                <p className="home-hero-subtitle text-base sm:text-lg md:text-xl lg:text-2xl">
+                  {heroSubtitle}
+                </p>
+              </div>
             )}
           </Reveal>
         </div>
@@ -325,18 +315,15 @@ export default async function HomePage({
                     alt={p.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover opacity-60 group-hover:opacity-100 transition-all duration-700"
+                    className="object-cover opacity-60 transition-all duration-700 group-hover:opacity-100"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/10 transition-opacity duration-500 group-hover:opacity-90" />
+                  <div className="home-hero-product-card-overlay" aria-hidden="true" />
                   <div className="relative z-10 text-left w-full">
-                    <h2
-                      className="mb-2 text-lg font-black uppercase tracking-wider text-(--section-bg-white) drop-shadow-[1px_1px_4px_color-mix(in_srgb,var(--color-bg-dark)_60%,transparent)] sm:text-xl"
-                      style={{ fontFamily: 'var(--font-heading)' }}
-                    >
+                    <h2 className="home-hero-product-title text-lg sm:text-xl">
                       {p.title}
                     </h2>
                     {p.summary && (
-                      <p className="mb-2 line-clamp-2 text-sm font-medium text-(--section-bg-white)/90 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                      <p className="home-hero-product-summary mb-2 line-clamp-2 text-sm font-medium opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                         {p.summary}
                       </p>
                     )}

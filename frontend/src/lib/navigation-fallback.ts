@@ -83,23 +83,95 @@ function isLegacyNavPath(key: string): boolean {
   return k.startsWith('/galeri/') || k.startsWith('/gallery/');
 }
 
-/** PLAN §4 omurgasi: ana, kurumsal, urunler, faaliyetler, bilgi merkezi, iletisim */
+/**
+ * VistaSeed benzeri omurga: ust seviye + alt menuler (CMS `nested=true` ile uyumlu).
+ * Bayi girisi ayri buton olarak Header'da; burada yalnizca Bayi alt linkleri.
+ */
 export function buildDefaultMenu(locale: string, t: TranslateFn): MenuItemLike[] {
+  const l = (path: string) => localizedPath(locale, path);
   return [
-    { title: t('home'), url: localizedPath(locale, '/') },
-    { title: t('corporate'), url: localizedPath(locale, '/hakkimizda') },
-    { title: t('products'), url: localizedPath(locale, '/urunler') },
-    { title: t('services'), url: localizedPath(locale, '/hizmetler') },
-    { title: t('knowledgeHub'), url: localizedPath(locale, '/haberler') },
-    { title: t('career'), url: localizedPath(locale, HR_LIST_PATH) },
-    { title: t('offer'), url: localizedPath(locale, '/teklif') },
-    { title: t('contact'), url: localizedPath(locale, '/iletisim') },
+    { title: t('home'), url: l('/') },
+    { title: t('products'), url: l('/urunler') },
+    {
+      title: t('corporate'),
+      url: l('/hakkimizda'),
+      children: [
+        { title: t('about'), url: l('/hakkimizda') },
+        { title: t('catalogs'), url: l('/kataloglar') },
+        { title: t('career'), url: l(HR_LIST_PATH) },
+      ],
+    },
+    { title: t('services'), url: l('/hizmetler') },
+    {
+      title: t('knowledgeHub'),
+      url: l('/haberler'),
+      children: [
+        { title: t('blog'), url: l('/blog') },
+        { title: t('gallery'), url: l('/galeri') },
+      ],
+    },
+    { title: t('contact'), url: l('/iletisim') },
+    { title: t('offer'), url: l('/teklif') },
+    {
+      title: t('dealerNav'),
+      url: l('/bayi-agi'),
+      children: [
+        { title: t('dealerNetwork'), url: l('/bayi-agi') },
+        { title: t('dealerRegister'), url: l('/bayi-kayit') },
+      ],
+    },
   ];
 }
 
+function collectApiByPath(
+  input: Record<string, unknown>[],
+  locale: string,
+): Map<string, Record<string, unknown>> {
+  const apiByPath = new Map<string, Record<string, unknown>>();
+
+  function walk(rows: Record<string, unknown>[]) {
+    for (const raw of rows) {
+      const url = String(raw.url ?? raw.href ?? '').trim();
+      if (url && url !== '#') {
+        const key = menuPathKey(locale, url);
+        if (!isLegacyNavPath(key)) {
+          apiByPath.set(key, raw);
+        }
+      }
+      if (Array.isArray(raw.children)) {
+        walk(raw.children as Record<string, unknown>[]);
+      }
+    }
+  }
+
+  walk(input);
+  return apiByPath;
+}
+
+function mergeMenuTree(
+  defaults: MenuItemLike[],
+  apiByPath: Map<string, Record<string, unknown>>,
+  locale: string,
+): Record<string, unknown>[] {
+  return defaults.map((def) => {
+    const key = menuPathKey(locale, def.url);
+    const raw = apiByPath.get(key);
+    const title = raw
+      ? String(raw.title ?? (raw as { label?: string }).label ?? def.title).trim() || def.title
+      : def.title;
+    const children = def.children?.length
+      ? mergeMenuTree(def.children, apiByPath, locale)
+      : undefined;
+    const out: Record<string, unknown> = { title, url: def.url };
+    if (children?.length) {
+      out.children = children;
+    }
+    return out;
+  });
+}
+
 /**
- * CMS menüsünden yalnizca izinli path'lerde baslik override alir; eski insaat / gereksiz
- * linkler ust menude gosterilmez. Sirada PLAN omurgasi korunur.
+ * CMS menüsünden (duz veya nested) yalnizca izinli path'lerde baslik override alir.
  */
 export function ensureMenuItems(
   input: Record<string, unknown>[],
@@ -107,24 +179,8 @@ export function ensureMenuItems(
   t: TranslateFn,
 ): Record<string, unknown>[] {
   const defaults = buildDefaultMenu(locale, t);
-  const apiByPath = new Map<string, Record<string, unknown>>();
-
-  for (const raw of input) {
-    const url = String(raw.url ?? raw.href ?? '').trim();
-    if (!url) continue;
-    const key = menuPathKey(locale, url);
-    if (isLegacyNavPath(key)) continue;
-    apiByPath.set(key, raw);
-  }
-
-  return defaults.map((def) => {
-    const key = menuPathKey(locale, def.url);
-    const raw = apiByPath.get(key);
-    const title = raw
-      ? String(raw.title ?? (raw as { label?: string }).label ?? def.title).trim() || def.title
-      : def.title;
-    return { title, url: def.url } as unknown as Record<string, unknown>;
-  });
+  const apiByPath = collectApiByPath(input, locale);
+  return mergeMenuTree(defaults, apiByPath, locale);
 }
 
 export function buildDefaultFooterSections(

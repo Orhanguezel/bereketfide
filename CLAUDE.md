@@ -50,6 +50,17 @@ bereketfide/
 5. `dark:` odakli tasarim mantigi yerine token tabanli mode sistemi kullanilir
 6. Public sitede gereksiz moduller hemen silinmez; once gizleme/pasiflestirme dusunulur
 
+## DB Schema Kurali — ALTER TABLE YASAK
+
+**Lokal ortamda `ALTER TABLE` KULLANILMAZ. Hicbir kosulda.**
+
+Schema'ya yeni kolon/tablo eklemek icin:
+1. `backend/src/db/seed/sql/` altindaki ilgili `*_schema.sql` dosyasini ac
+2. `CREATE TABLE` tanimina kolonu ekle (Drizzle schema ile senkron tut)
+3. `bun run build && bun run db:seed:bereketfide:fresh` ile DB'yi sifirdan olustur
+
+Bu kural ihlal edilirse: seed ile DB arasi farklilasir, her fresh deploy'da kolon kaybolur.
+
 ## Icerik Modulleri
 
 Birinci oncelik:

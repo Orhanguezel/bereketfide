@@ -56,7 +56,7 @@ export async function fetchSliders(locale?: string): Promise<Record<string, unkn
 export async function fetchMenuItems(locale: string): Promise<Record<string, unknown>[]> {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/menu-items?locale=${encodeURIComponent(locale)}&is_active=1&site_id=bereketfide`,
+      `${API_BASE_URL}/menu-items?locale=${encodeURIComponent(locale)}&is_active=1&site_id=bereketfide&nested=true`,
       { next: { revalidate: 300 } },
     );
     if (!res.ok) return [];

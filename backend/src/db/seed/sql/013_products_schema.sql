@@ -1,9 +1,10 @@
 -- =============================================================
 -- 013_products_schema.sql (FINAL / SCHEMA+VALIDATION ALIGNED)
 -- Products + Product_i18n + Specs + FAQs + Reviews + Options + Stock + Images Pool
--- - products.item_type: product|sparepart
+-- - products.item_type: ENUM('product','sparepart','bereketfide') — Drizzle schema ile senkron
 -- - storage_asset_id: VARCHAR(64) (validation: assetId max(64), NOT uuid-only)
 -- - adds: product_images table (pool)
+-- - adds: 14 tarımsal alan (botanical_name, planting_seasons, ...)
 -- =============================================================
 
 SET NAMES utf8mb4;
@@ -15,8 +16,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 CREATE TABLE IF NOT EXISTS products (
   id                 CHAR(36)      NOT NULL,
 
-  -- 🔑 Ürün tipi (product | sparepart)
-  item_type          VARCHAR(64) NOT NULL DEFAULT 'product',
+  -- 🔑 Ürün tipi — Drizzle mysqlEnum ile senkron
+  item_type          ENUM('product','sparepart','bereketfide') NOT NULL DEFAULT 'product',
 
   category_id        CHAR(36)      NOT NULL,
   sub_category_id    CHAR(36)      DEFAULT NULL,

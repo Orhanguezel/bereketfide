@@ -61,25 +61,24 @@ export function BrandCarousel({ brands }: { brands: BrandItem[] }) {
             const TileContent = (
               <div
                 className={cn(
-                  'group relative flex h-32 w-52 items-center justify-center overflow-hidden transition-all duration-500 md:h-36 md:w-64',
-                  'rounded-xl border border-border bg-card shadow-sm',
-                  'hover:scale-[1.04] hover:border-(--color-brand-light) hover:bg-card hover:shadow-2xl hover:shadow-(--color-brand)/5',
+                  'group relative flex h-28 w-44 items-center justify-center overflow-hidden transition-all duration-500 md:h-32 md:w-52',
+                  'rounded-lg border border-white/20 bg-white shadow-md',
+                  'hover:scale-[1.04] hover:border-(--color-brand) hover:shadow-xl',
                   brand.website_url && 'cursor-pointer'
                 )}
               >
-                {/* Logo with grayscale to color transition */}
-                <div className="relative h-full w-full grayscale-[0.5] opacity-80 transition duration-500 group-hover:grayscale-0 group-hover:opacity-100">
+                <div className="relative h-full w-full">
                   <Image
                     src={logoSrc!}
                     alt={brand.title}
                     fill
-                    sizes="(max-width: 768px) 208px, 256px"
-                    className="object-contain p-4 md:p-5 opacity-70 grayscale-[0.3] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
-                    unoptimized={logoSrc!.endsWith('.svg')}
+                    sizes="(max-width: 768px) 176px, 208px"
+                    className="object-contain p-4 md:p-5 opacity-75 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+                    unoptimized
                   />
                 </div>
-                
-                {/* Subtle gold accent line on hover */}
+
+                {/* Gold accent line on hover */}
                 <div className="absolute inset-x-0 bottom-0 h-[2px] w-0 bg-linear-to-r from-transparent via-(--color-brand) to-transparent transition-all duration-700 group-hover:w-full" />
               </div>
             );

@@ -29,10 +29,10 @@ VALUES
 ('dd010005-4005-4005-8005-dd0000000005', NULL, 'header', NULL, 'bereketfide', 'custom', NULL, NULL, 4, 1), -- Kurumsal
 ('dd010006-4006-4006-8006-dd0000000006', NULL, 'header', NULL, 'bereketfide', 'custom', NULL, NULL, 5, 1), -- İletişim
 ('dd010007-4007-4007-8007-dd0000000007', NULL, 'header', NULL, 'bereketfide', 'custom', NULL, NULL, 6, 1), -- Teklif Al
-
--- =============================================================
--- 2) FOOTER — Keşfet
--- =============================================================
+('dd010008-4008-4008-8008-dd0000000008', NULL, 'header', NULL, 'bereketfide', 'custom', NULL, NULL, 7, 1),
+('dd010081-4081-4081-8081-dd0000000081', 'dd010008-4008-4008-8008-dd0000000008', 'header', NULL, 'bereketfide', 'custom', NULL, NULL, 0, 1),
+('dd010082-4082-4082-8082-dd0000000082', 'dd010008-4008-4008-8008-dd0000000008', 'header', NULL, 'bereketfide', 'custom', NULL, NULL, 1, 1),
+('dd010083-4083-4083-8083-dd0000000083', 'dd010008-4008-4008-8008-dd0000000008', 'header', NULL, 'bereketfide', 'custom', NULL, NULL, 2, 1),
 ('dd030001-4001-4001-8001-dd0000000001', NULL, 'footer', 'ee010001-4001-4001-8001-ee0000000001', 'bereketfide', 'custom', NULL, NULL, 0, 1),
 ('dd030002-4002-4002-8002-dd0000000002', NULL, 'footer', 'ee010001-4001-4001-8001-ee0000000001', 'bereketfide', 'custom', NULL, NULL, 1, 1),
 ('dd030003-4003-4003-8003-dd0000000003', NULL, 'footer', 'ee010001-4001-4001-8001-ee0000000001', 'bereketfide', 'custom', NULL, NULL, 2, 1),
@@ -73,7 +73,11 @@ VALUES
 (UUID(), 'dd010004-4004-4004-8004-dd0000000004', 'tr', 'Galeri',         '/galeri',    NOW(3), NOW(3)),
 (UUID(), 'dd010005-4005-4005-8005-dd0000000005', 'tr', 'Kurumsal',       '/hakkimizda',NOW(3), NOW(3)),
 (UUID(), 'dd010006-4006-4006-8006-dd0000000006', 'tr', 'İletişim',       '/iletisim',  NOW(3), NOW(3)),
-(UUID(), 'dd010007-4007-4007-8007-dd0000000007', 'tr', 'Teklif Al',      '/teklif',    NOW(3), NOW(3)),
+(UUID(), 'dd010007-4007-4007-8007-dd0000000007', 'tr', 'Teklif Al',      '/teklif',     NOW(3), NOW(3)),
+(UUID(), 'dd010008-4008-4008-8008-dd0000000008', 'tr', 'Bayi',          '#',           NOW(3), NOW(3)),
+(UUID(), 'dd010081-4081-4081-8081-dd0000000081', 'tr', 'Bayi Ağı',      '/bayi-agi',   NOW(3), NOW(3)),
+(UUID(), 'dd010082-4082-4082-8082-dd0000000082', 'tr', 'Bayi Başvurusu','/bayi-kayit', NOW(3), NOW(3)),
+(UUID(), 'dd010083-4083-4083-8083-dd0000000083', 'tr', 'Bayi Girişi',   '/bayi-girisi',NOW(3), NOW(3)),
 
 -- FOOTER: Keşfet
 (UUID(), 'dd030001-4001-4001-8001-dd0000000001', 'tr', 'Ana Sayfa',      '/',          NOW(3), NOW(3)),
@@ -108,7 +112,11 @@ VALUES
 (UUID(), 'dd010004-4004-4004-8004-dd0000000004', 'en', 'Gallery',        '/galeri',    NOW(3), NOW(3)),
 (UUID(), 'dd010005-4005-4005-8005-dd0000000005', 'en', 'Corporate',      '/hakkimizda',NOW(3), NOW(3)),
 (UUID(), 'dd010006-4006-4006-8006-dd0000000006', 'en', 'Contact',        '/iletisim',  NOW(3), NOW(3)),
-(UUID(), 'dd010007-4007-4007-8007-dd0000000007', 'en', 'Request Quote',  '/teklif',    NOW(3), NOW(3)),
+(UUID(), 'dd010007-4007-4007-8007-dd0000000007', 'en', 'Request Quote',  '/teklif',      NOW(3), NOW(3)),
+(UUID(), 'dd010008-4008-4008-8008-dd0000000008', 'en', 'Dealer',        '#',            NOW(3), NOW(3)),
+(UUID(), 'dd010081-4081-4081-8081-dd0000000081', 'en', 'Dealer Network','/bayi-agi',    NOW(3), NOW(3)),
+(UUID(), 'dd010082-4082-4082-8082-dd0000000082', 'en', 'Dealer Apply',  '/bayi-kayit',  NOW(3), NOW(3)),
+(UUID(), 'dd010083-4083-4083-8083-dd0000000083', 'en', 'Dealer Login',  '/bayi-girisi', NOW(3), NOW(3)),
 
 -- FOOTER: Discover
 (UUID(), 'dd030001-4001-4001-8001-dd0000000001', 'en', 'Home',           '/',          NOW(3), NOW(3)),
