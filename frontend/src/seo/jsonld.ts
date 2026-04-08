@@ -198,6 +198,7 @@ export function article(input: {
     name: string;
     logo?: string;
   };
+  speakable?: { cssSelector: string[] };
 }): Thing {
   return {
     '@type': 'Article',
@@ -217,6 +218,9 @@ export function article(input: {
             ...(input.publisher.logo ? { logo: input.publisher.logo } : {}),
           },
         }
+      : {}),
+    ...(input.speakable?.cssSelector?.length
+      ? { speakable: { '@type': 'SpeakableSpecification', cssSelector: input.speakable.cssSelector } }
       : {}),
   };
 }
@@ -342,6 +346,7 @@ export function newsArticle(input: {
     name: string;
     logo?: string;
   };
+  speakable?: { cssSelector: string[] };
 }): Thing {
   return {
     '@type': 'NewsArticle',
@@ -362,6 +367,58 @@ export function newsArticle(input: {
           },
         }
       : {}),
+    ...(input.speakable?.cssSelector?.length
+      ? { speakable: { '@type': 'SpeakableSpecification', cssSelector: input.speakable.cssSelector } }
+      : {}),
+  };
+}
+
+export function howTo(input: {
+  name: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  steps?: { name: string; text: string }[];
+}): Thing {
+  return {
+    '@type': 'HowTo',
+    name: input.name,
+    ...(input.description ? { description: input.description } : {}),
+    ...(input.image ? { image: input.image } : {}),
+    ...(input.url ? { url: input.url } : {}),
+    ...(input.steps?.length
+      ? {
+          step: input.steps.map((s, i) => ({
+            '@type': 'HowToStep',
+            position: i + 1,
+            name: s.name,
+            text: s.text,
+          })),
+        }
+      : {}),
+  };
+}
+
+export function dataset(input: {
+  name: string;
+  description?: string;
+  url: string;
+  temporalCoverage?: string;
+  spatialCoverage?: string;
+  keywords?: string[];
+  creator?: string;
+  variableMeasured?: string;
+}): Thing {
+  return {
+    '@type': 'Dataset',
+    name: input.name,
+    url: input.url,
+    ...(input.description ? { description: input.description } : {}),
+    ...(input.temporalCoverage ? { temporalCoverage: input.temporalCoverage } : {}),
+    ...(input.spatialCoverage ? { spatialCoverage: { '@type': 'Place', name: input.spatialCoverage } } : {}),
+    ...(input.keywords?.length ? { keywords: input.keywords } : {}),
+    ...(input.creator ? { creator: { '@type': 'Organization', name: input.creator } } : {}),
+    ...(input.variableMeasured ? { variableMeasured: input.variableMeasured } : {}),
   };
 }
 

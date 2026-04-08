@@ -4,6 +4,9 @@ import type { FastifyInstance } from 'fastify';
 import { registerMenuItems } from '@/modules/menuItems/router';
 import { registerOffer } from '@/modules/offer/router';
 import { registerServices } from '@/modules/services/router';
+import { registerFeed } from '@/modules/feed/router';
+import { registerNewsletter } from '@/modules/newsletter/router';
+import { registerEcosystem } from '@/modules/ecosystem/router';
 
 // Proje-spesifik admin moduller
 import { registerMenuItemsAdmin } from '@/modules/menuItems/admin.routes';
@@ -24,6 +27,9 @@ export async function registerProjectPublic(api: FastifyInstance) {
   await registerOrders(api);
   await registerDealerFinance(api);
   await registerCommentsPublic(api);
+  await registerFeed(api);
+  await registerNewsletter(api);
+  await registerEcosystem(api);
 }
 
 export async function registerProjectAdmin(api: FastifyInstance) {

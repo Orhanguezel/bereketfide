@@ -149,6 +149,7 @@ export default async function ServiceDetailPage({
             description: service.description,
             url: localizedUrl(locale, `/hizmetler/${slug}`),
             image: imageSrc || undefined,
+            provider: org.name,
           }),
           jsonld.breadcrumb(
             breadcrumbs.map((item) => ({

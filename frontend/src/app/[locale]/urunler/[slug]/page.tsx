@@ -58,6 +58,20 @@ async function fetchProject(slug: string, locale: string) {
   }
 }
 
+async function fetchProductFaqs(productId: string, locale: string) {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/products/faqs?product_id=${encodeURIComponent(productId)}&only_active=1&locale=${locale}`,
+      { next: { revalidate: 300 } },
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : (data as any)?.items ?? [];
+  } catch {
+    return [];
+  }
+}
+
 async function fetchSidebarProjects(
   locale: string,
   opts: {
@@ -127,7 +141,7 @@ export default async function ProjectDetailPage({
   const projectTags: string[] = project.tags || [];
 
   // Parallel sidebar fetches — all dynamic from API
-  const [sameCategoryProjects, featuredProjects, recentProjects, similarByTagsProjects, related] =
+  const [sameCategoryProjects, featuredProjects, recentProjects, similarByTagsProjects, related, productFaqs] =
     await Promise.all([
       categoryId
         ? fetchSidebarProjects(locale, { excludeId: projectId, categoryId, limit: 4 })
@@ -147,6 +161,7 @@ export default async function ProjectDetailPage({
         slug,
         locale,
       ),
+      projectId ? fetchProductFaqs(projectId, locale) : Promise.resolve([]),
     ]);
 
   const specs = coerceProductSpecifications(project.specifications);
@@ -284,6 +299,9 @@ export default async function ProjectDetailPage({
               : undefined,
             manufacturer: { '@id': 'https://www.bereketfide.com.tr/#organization' },
           }),
+          ...(productFaqs.length > 0
+            ? [jsonld.faqPage(productFaqs.map((f: any) => ({ question: f.question, answer: f.answer })))]
+            : []),
           jsonld.breadcrumb(
             breadcrumbs.map((item) => ({
               name: item.label,
@@ -504,6 +522,13 @@ export default async function ProjectDetailPage({
                 hrefBase={localizedPath(locale, '/blog')}
                 items={related.knowledgePosts}
               />
+              {related.knowledgeBasePosts.length > 0 && (
+                <RelatedLinks
+                  title={isEn ? 'Growing Guides' : 'Yetiştirme Rehberleri'}
+                  hrefBase={localizedPath(locale, '/bilgi-bankasi')}
+                  items={related.knowledgeBasePosts}
+                />
+              )}
               <RelatedLinks
                 title={t('common.relatedGallery')}
                 hrefBase={localizedPath(locale, '/galeri')}

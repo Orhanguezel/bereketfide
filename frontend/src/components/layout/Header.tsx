@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -52,53 +52,6 @@ function itemOrChildActive(pathname: string, item: MenuItem, locale: string): bo
   return (item.children ?? []).some((c) => isNavActive(pathname, c.url ?? '', locale));
 }
 
-function MegaMenuBranch({
-  items,
-  onNavigate,
-  depth,
-}: {
-  items: MenuItem[];
-  onNavigate: () => void;
-  depth: number;
-}): ReactNode {
-  return (
-    <ul className={depth === 0 ? 'space-y-2' : 'space-y-1 pl-2 border-l border-white/10'}>
-      {items.map((item, i) => {
-        if (item.children?.length) {
-          return (
-            <li key={`m-${depth}-${i}-${item.title}`} className="list-none">
-              <div
-                className="text-xs font-bold uppercase tracking-wider mb-2"
-                style={{ color: 'var(--color-brand)', letterSpacing: '0.1em' }}
-              >
-                {item.title}
-              </div>
-              <MegaMenuBranch items={item.children} onNavigate={onNavigate} depth={depth + 1} />
-            </li>
-          );
-        }
-        return (
-          <li key={`m-${depth}-${i}-${item.url}`} className="list-none">
-            <Link
-              href={item.url || '#'}
-              className="text-sm transition-colors block py-0.5"
-              style={{ color: 'var(--color-text-on-dark)' }}
-              onClick={onNavigate}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--color-brand-light)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--color-text-on-dark)';
-              }}
-            >
-              {item.title}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
 
 /* ── Props ── */
 
@@ -424,7 +377,7 @@ export function Header({
                 gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
               }}
             >
-              {/* Kolom 1: Ana Sayfalar */}
+              {/* Kolom 1: Kurumsal */}
               <div>
                 <h3
                   className="text-sm font-bold uppercase tracking-wider mb-4"
@@ -432,56 +385,100 @@ export function Header({
                 >
                   {companyName}
                 </h3>
-                <MegaMenuBranch items={items} onNavigate={() => setMenuOpen(false)} depth={0} />
-              </div>
-
-              {/* Kolom 2: Ürün Kategorileri */}
-              {categories.length > 0 && (
-                <div>
-                  <h3
-                    className="text-sm font-bold uppercase tracking-wider mb-4"
-                    style={{ color: 'var(--color-brand)', letterSpacing: '0.1em' }}
-                  >
-                    {t('products') || 'Ürünler'}
-                  </h3>
-                  <ul className="space-y-2">
-                    {(categories as any[]).map((c) => (
-                      <li key={c.id || c.slug}>
-                        <Link
-                          href={l(`/urunler?category=${encodeURIComponent(c.name || c.title)}`)}
-                          className="text-sm transition-colors block py-0.5"
-                          style={{ color: 'var(--color-text-on-dark)' }}
-                          onClick={() => setMenuOpen(false)}
-                          onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                        >
-                          {c.title || c.name}
-                        </Link>
-                      </li>
-                    ))}
-                    <li>
+                <ul className="space-y-2">
+                  {[
+                    { label: t('home'),         href: l('/') },
+                    { label: t('about'),        href: l('/hakkimizda') },
+                    { label: t('news'),         href: l('/haberler') },
+                    { label: t('blog'),         href: l('/bilgi-bankasi') },
+                    { label: t('catalogs'),     href: l('/kataloglar') },
+                    { label: t('career'),       href: l('/kariyer') },
+                    { label: 'Referanslar',     href: l('/referanslar') },
+                    { label: 'Fiyat Listesi',   href: l('/fiyat-listesi') },
+                    { label: 'Ekim Takvimi',    href: l('/ekim-takvimi') },
+                  ].map(({ label, href }) => (
+                    <li key={href}>
                       <Link
-                        href={l('/urunler')}
-                        className="text-xs font-semibold uppercase tracking-wider mt-2 inline-block"
-                        style={{ color: 'var(--color-brand)' }}
+                        href={href}
+                        className="text-sm transition-colors block py-0.5"
+                        style={{ color: 'var(--color-text-on-dark)' }}
                         onClick={() => setMenuOpen(false)}
-                        aria-label={t('viewAllProducts') || 'Tüm ürünleri görüntüle'}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
                       >
-                        {t('viewAll') || 'Tümünü Gör →'}
+                        {label}
                       </Link>
                     </li>
-                  </ul>
-                </div>
-              )}
+                  ))}
+                </ul>
+              </div>
 
-              {/* Kolom 3: Hizmetler */}
+              {/* Kolom 2: Ürünler */}
+              <div>
+                <h3
+                  className="text-sm font-bold uppercase tracking-wider mb-4"
+                  style={{ color: 'var(--color-brand)', letterSpacing: '0.1em' }}
+                >
+                  {t('products')}
+                </h3>
+                <ul className="space-y-2">
+                  {/* Kategoriler */}
+                  {(categories as any[]).map((c) => (
+                    <li key={c.id || c.slug}>
+                      <Link
+                        href={l(`/urunler?category=${encodeURIComponent(c.slug || c.name || c.title)}`)}
+                        className="text-sm transition-colors block py-0.5"
+                        style={{ color: 'var(--color-text-on-dark)' }}
+                        onClick={() => setMenuOpen(false)}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
+                      >
+                        {c.title || c.name}
+                      </Link>
+                    </li>
+                  ))}
+                  {/* Hızlı bağlantılar */}
+                  <li style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                    <Link
+                      href={l('/urunler')}
+                      className="text-xs font-semibold uppercase tracking-wider inline-block"
+                      style={{ color: 'var(--color-brand)' }}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {t('viewAll')}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={l('/fiyat-listesi')}
+                      className="text-xs font-semibold uppercase tracking-wider inline-block"
+                      style={{ color: 'var(--color-brand)' }}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Fiyat Listesi →
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={l('/teklif')}
+                      className="text-xs font-semibold uppercase tracking-wider inline-block"
+                      style={{ color: 'var(--color-brand)' }}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {t('offer')} →
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Kolom 3: Faaliyetler */}
               {services.length > 0 && (
                 <div>
                   <h3
                     className="text-sm font-bold uppercase tracking-wider mb-4"
                     style={{ color: 'var(--color-brand)', letterSpacing: '0.1em' }}
                   >
-                    {t('services') || 'Hizmetler'}
+                    {t('services')}
                   </h3>
                   <ul className="space-y-2">
                     {(services as any[]).slice(0, 8).map((s) => (
@@ -509,7 +506,7 @@ export function Header({
                     className="text-sm font-bold uppercase tracking-wider mb-4"
                     style={{ color: 'var(--color-brand)', letterSpacing: '0.1em' }}
                   >
-                    {t('news') || 'Haberler'}
+                    {t('news')}
                   </h3>
                   <ul className="space-y-2">
                     {(news as any[]).slice(0, 5).map((n) => (
@@ -526,15 +523,14 @@ export function Header({
                         </Link>
                       </li>
                     ))}
-                    <li>
+                    <li style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                       <Link
                         href={l('/haberler')}
-                        className="text-xs font-semibold uppercase tracking-wider mt-2 inline-block"
+                        className="text-xs font-semibold uppercase tracking-wider inline-block"
                         style={{ color: 'var(--color-brand)' }}
                         onClick={() => setMenuOpen(false)}
-                        aria-label={t('viewAllNews') || 'Tüm haberleri görüntüle'}
                       >
-                        {t('viewAll') || 'Tümünü Gör →'}
+                        {t('viewAll')}
                       </Link>
                     </li>
                   </ul>
@@ -547,81 +543,30 @@ export function Header({
                   className="text-sm font-bold uppercase tracking-wider mb-4"
                   style={{ color: 'var(--color-brand)', letterSpacing: '0.1em' }}
                 >
-                  {t('contact') || 'İletişim'}
+                  {t('contact')}
                 </h3>
                 <ul className="space-y-2">
-                  <li>
-                    <Link
-                      href={l('/iletisim')}
-                      className="text-sm transition-colors block py-0.5"
-                      style={{ color: 'var(--color-text-on-dark)' }}
-                      onClick={() => setMenuOpen(false)}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                    >
-                      {t('contact') || 'İletişim'}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={l('/teklif')}
-                      className="text-sm transition-colors block py-0.5"
-                      style={{ color: 'var(--color-text-on-dark)' }}
-                      onClick={() => setMenuOpen(false)}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                    >
-                      {t('offer') || 'Teklif Al'}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={l('/hakkimizda')}
-                      className="text-sm transition-colors block py-0.5"
-                      style={{ color: 'var(--color-text-on-dark)' }}
-                      onClick={() => setMenuOpen(false)}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                    >
-                      {t('about') || 'Hakkımızda'}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={l('/bayi-agi')}
-                      className="text-sm transition-colors block py-0.5"
-                      style={{ color: 'var(--color-text-on-dark)' }}
-                      onClick={() => setMenuOpen(false)}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                    >
-                      {t('dealerNetwork')}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={l('/bayi-kayit')}
-                      className="text-sm transition-colors block py-0.5"
-                      style={{ color: 'var(--color-text-on-dark)' }}
-                      onClick={() => setMenuOpen(false)}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                    >
-                      {t('dealerRegister')}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={l('/bayi-girisi')}
-                      className="text-sm transition-colors block py-0.5"
-                      style={{ color: 'var(--color-text-on-dark)' }}
-                      onClick={() => setMenuOpen(false)}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
-                    >
-                      {t('dealerLogin')}
-                    </Link>
-                  </li>
+                  {[
+                    { label: t('contact'),        href: l('/iletisim') },
+                    { label: t('offer'),          href: l('/teklif') },
+                    { label: t('about'),          href: l('/hakkimizda') },
+                    { label: t('dealerNetwork'),  href: l('/bayi-agi') },
+                    { label: t('dealerRegister'), href: l('/bayi-kayit') },
+                    { label: t('dealerLogin'),    href: l('/bayi-girisi') },
+                  ].map(({ label, href }) => (
+                    <li key={href}>
+                      <Link
+                        href={href}
+                        className="text-sm transition-colors block py-0.5"
+                        style={{ color: 'var(--color-text-on-dark)' }}
+                        onClick={() => setMenuOpen(false)}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-light)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-on-dark)'; }}
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

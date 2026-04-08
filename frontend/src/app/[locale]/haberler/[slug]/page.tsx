@@ -222,6 +222,7 @@ export default async function NewsDetailPage({
               name: org.name,
               logo: org.logo as string | undefined,
             },
+            speakable: { cssSelector: ['h1.nd-title', '.nd-content'] },
           }),
           jsonld.breadcrumb(
             breadcrumbs.map((item) => ({

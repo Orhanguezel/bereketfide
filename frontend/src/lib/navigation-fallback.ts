@@ -97,6 +97,7 @@ export function buildDefaultMenu(locale: string, t: TranslateFn): MenuItemLike[]
       url: l('/hakkimizda'),
       children: [
         { title: t('about'), url: l('/hakkimizda') },
+        { title: t('news'), url: l('/haberler') },
         { title: t('catalogs'), url: l('/kataloglar') },
         { title: t('career'), url: l(HR_LIST_PATH) },
       ],
@@ -104,9 +105,9 @@ export function buildDefaultMenu(locale: string, t: TranslateFn): MenuItemLike[]
     { title: t('services'), url: l('/hizmetler') },
     {
       title: t('knowledgeHub'),
-      url: l('/haberler'),
+      url: l('/bilgi-bankasi'),
       children: [
-        { title: t('blog'), url: l('/blog') },
+        { title: t('blog'), url: l('/bilgi-bankasi') },
         { title: t('gallery'), url: l('/galeri') },
       ],
     },
@@ -194,7 +195,7 @@ export function buildDefaultFooterSections(
       items: [
         { label: navT('products'), url: localizedPath(locale, '/urunler') },
         { label: navT('services'), url: localizedPath(locale, '/hizmetler') },
-        { label: navT('knowledgeHub'), url: localizedPath(locale, '/haberler') },
+        { label: navT('knowledgeHub'), url: localizedPath(locale, '/bilgi-bankasi') },
         { label: navT('career'), url: localizedPath(locale, HR_LIST_PATH) },
         { label: navT('catalogs'), url: localizedPath(locale, '/kataloglar') },
         { label: navT('corporate'), url: localizedPath(locale, '/hakkimizda') },

@@ -64,7 +64,8 @@
       "company": "Company",
       "legal": "Legal",
       "quickLinks": "Quick Links"
-    }
+    },
+    "ecosystemLabel": "Our Ecosystem"
   },
   "common": {
     "loading": "Loading...",
@@ -190,7 +191,11 @@
       "placeholder": "Your email address",
       "subscribe": "Subscribe",
       "success": "Successfully subscribed!",
-      "error": "An error occurred, please try again."
+      "error": "An error occurred, please try again.",
+      "segmentsLabel": "Topics of interest (optional):",
+      "seg_urunler": "Products & Catalog",
+      "seg_haberler": "News & Announcements",
+      "seg_bilgi-bankasi": "Farming Guides"
     },
     "contact": {
       "title": "Get in Touch",

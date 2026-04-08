@@ -91,10 +91,10 @@
 
 ### Icerik Islemleri (Admin Panel / Manuel)
 
-- [ ] **Urun sayfalarinda FAQ icerik girisi**
-  - Backend'de `product_faqs` tablosu mevcut
-  - Admin panel'den her urun icin 5-8 SSS girisi yapilmali
-  - Frontend'de FAQPage sema builder'i hazir, sayfa koduna entegre edilmeli
+- [x] **Urun sayfalarinda FAQPage semasi entegre edildi** ✅ 8 Nisan 2026
+  - `frontend/src/app/[locale]/urunler/[slug]/page.tsx` — `fetchProductFaqs()` fonksiyonu eklendi (`GET /api/products/faqs?product_id=&only_active=1&locale=`)
+  - FAQ varsa `jsonld.faqPage()` JSON-LD graph'a ekleniyor
+  - **Admin panelden her urun icin 5-8 SSS girisi yapilmali** (veri eksik, kod hazir)
 
 - [ ] **Mevcut blog yazilarini zenginlestirme**
   - 3 mevcut blog yazisini 1.000-2.000 kelimeye genislet
@@ -140,12 +140,13 @@
 
 ### Gelecek Teknik Iyilestirmeler (Oncelik: Dusuk-Orta)
 
-- [ ] **speakable ozeligi ekleme**
-  - Article ve NewsArticle semalarina speakable CSS selector'lari ekle
-  - AI asistanlarinin sesli okuma/alinti icin kullanacagi bloklar
+- [x] **speakable ozeligi eklendi** ✅ 8 Nisan 2026
+  - `frontend/src/seo/jsonld.ts` — article() ve newsArticle() builder'larina `speakable: { cssSelector }` destegi eklendi
+  - `frontend/src/app/[locale]/blog/[slug]/page.tsx` — `['h1.nd-title', '.nd-content']` CSS selector'lari ile aktif
+  - `frontend/src/app/[locale]/haberler/[slug]/page.tsx` — Ayni selector'lar ile aktif
 
-- [ ] **Service semasi hizmet sayfalarinda dogrulama**
-  - Mevcut Service semasi builder'i var, hizmet sayfalarinda kullanildigi dogrulanmali
+- [x] **Service semasi hizmet sayfalarinda dogrulandi** ✅ 8 Nisan 2026
+  - `hizmetler/[slug]/page.tsx` zaten `jsonld.service()` kullaniyor — `provider` alani eklendi
 
 - [ ] **Hero gorselinde fetchpriority="high" ekleme**
   - LCP iyilestirmesi icin hero gorsel onceliklendirilmeli

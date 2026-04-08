@@ -135,3 +135,11 @@ hazirlanmistir. Kapsam disi gelismeler ayrica planlanir ve fiyatlandirilir.
 
 *Sorulariniz icin her zaman ulasabilirsiniz.*  
 **Orhan Guzel** — orhanguzell@gmail.com | +49 172 3846068
+
+
+Giriş bilgisi
+Alan	Değer
+E-posta
+bayi@example.com
+Şifre
+admin123

@@ -51,35 +51,35 @@ Mevcut `/haberler` ve `/blog` route'lari var ama icerik az.
   - `sektor-haberleri` — Tarim sektoru, piyasa, devlet destekleri
   - `mevsimsel-ipuclari` — Aylik ekim/dikim onerileri
   - `teknoloji` — Tarim teknolojisi, IoT, AI
-- [ ] Blog sayfasinda kategori filtreleme ekle (frontend)
-- [ ] Blog makale sayfasina "Ilgili Yazilar" bolumu ekle
-- [ ] RSS feed endpointi olustur (backend: `GET /api/feed/rss`)
+- [x] Blog sayfasinda kategori filtreleme ekle (frontend) — mevcut haberler/blog sayfalarinda var
+- [x] Blog makale sayfasina "Ilgili Yazilar" bolumu ekle — RelatedLinks bileseni ile yapildi
+- [x] RSS feed endpointi olustur (backend: `GET /api/feed/rss`) — 8 Nisan 2026
   - Bu endpoint gelecekte ziraat haber portalini besleyecek
-- [ ] Icerik uretim takvimi olustur: **haftalik 2 makale hedefi**
+- [ ] Icerik uretim takvimi olustur: **haftalik 2 makale hedefi** — editorial, teknik degil
 
 **2.1.2 Bilgi Bankasi Sayfasi Ekle**
 
 VistaSeed'de var, Bereketfide'de yok. Ekosistem icin kritik.
 
-- [ ] `/bilgi-bankasi` route olustur (frontend)
-- [ ] `/bilgi-bankasi/[slug]` detay sayfasi
-- [ ] Backend: mevcut `customPages` modulu kullanilabilir veya ayri `knowledgeBase` modulu
-- [ ] Icerik turleri:
+- [x] `/bilgi-bankasi` route olustur (frontend) — 8 Nisan 2026
+- [x] `/bilgi-bankasi/[slug]` detay sayfasi — 8 Nisan 2026
+- [x] Backend: mevcut `customPages` modulu kullanildi (`module_key=bilgi-bankasi`)
+- [ ] Icerik turleri (admin panelde girilecek — teknik hazir):
   - Fide yetistirme rehberleri (domates, biber, patlican, salatalik...)
   - Sera kurulum rehberi
   - Sulama ve gubreleme kilavuzlari
   - Hastalik teshis rehberi (gorsel destekli)
-- [ ] Her bilgi bankasi sayfasinda ilgili urunlere link (cross-sell)
-- [ ] JSON-LD: `HowTo` ve `Article` schema ekle
+- [x] Her bilgi bankasi sayfasinda ilgili urunlere link — RelatedLinks bileseni ile yapildi
+- [x] JSON-LD: `HowTo` ve `Article` schema ekle — 8 Nisan 2026
 
 **2.1.3 Ekim Takvimi Sayfasi**
 
-- [ ] `/ekim-takvimi` route olustur
-- [ ] Bolgesel secim (Akdeniz, Ege, Marmara, Ic Anadolu, Karadeniz)
-- [ ] Aylik gorunum: hangi fide ne zaman dikilir
-- [ ] Her fide turune link (urun sayfasi)
-- [ ] Bu veri gelecekte Sera SaaS ve Verim Tahmini motorunu besleyecek
-- [ ] JSON-LD: `Event` veya `Schedule` schema
+- [x] `/ekim-takvimi` route olustur — 8 Nisan 2026
+- [x] Bolgesel secim (7 bolge: Akdeniz, Ege, Marmara, Ic/Dogu/Guneydogu Anadolu, Karadeniz) — 8 Nisan 2026
+- [x] Aylik gorunum: hangi fide ne zaman dikilir — 12 sutunlu ay tablosu
+- [x] Her fide turune link (urun sayfasi) — slug eslesmesi ile API'den cekiliyor
+- [ ] Bu veri gelecekte Sera SaaS ve Verim Tahmini motorunu besleyecek — P3
+- [ ] JSON-LD: `Event` veya `Schedule` schema — eksik, eklenecek
 
 ---
 
@@ -102,11 +102,11 @@ Ekosistem platformlari arasi link yapisi.
 
 #### 2.3 Fiyat Listesi / Sezonluk Kampanya Sayfasi
 
-- [ ] `/fiyat-listesi` route olustur
-- [ ] Urun kategorisine gore fiyat tablosu
-- [ ] Sezonluk kampanya alani (admin'den yonetilebilir)
-- [ ] "Toplu siparis icin teklif alin" CTA (mevcut `/teklif` formuna link)
-- [ ] Bu sayfa gelecekte Hal Fiyatlari platformuyla entegre olacak
+- [x] `/fiyat-listesi` route olustur — 8 Nisan 2026
+- [x] Urun kategorisine gore fiyat tablosu — kategori chip filtreleme ile
+- [x] Sezonluk kampanya alani — `bereketfide__fiyat_listesi_notu` site_settings key'i ile yonetilebilir
+- [x] "Toplu siparis icin teklif alin" CTA — hem tablo altinda hem sidebar'da
+- [ ] Bu sayfa gelecekte Hal Fiyatlari platformuyla entegre olacak — P2
 
 ---
 
@@ -116,37 +116,37 @@ Ekosistem platformlari arasi link yapisi.
 
 Mevcut SEO altyapisi guclu. Ekosistem icin genisletilmeli.
 
-- [ ] JSON-LD genisletme:
-  - Blog makaleler icin `Article` schema (mevcut `Product` ve `Organization` var)
-  - Bilgi bankasi icin `HowTo` schema
-  - SSS icin `FAQPage` schema
-  - Ekim takvimi icin `Event` schema
-- [ ] `llms.txt` guncelle: ekosistem baglantilari ve yeni sayfalar ekle
+- [x] JSON-LD genisletme:
+  - [x] Blog makaleler icin `Article` + `speakable` schema — 8 Nisan 2026
+  - [x] Bilgi bankasi icin `HowTo` + `Article` schema — 8 Nisan 2026
+  - [x] SSS icin `FAQPage` schema — urun detay sayfasina eklendi, 8 Nisan 2026
+  - [x] Ekim takvimi icin `Dataset` schema — 8 Nisan 2026
+- [x] `llms.txt` guncelle: yeni sayfalar eklendi — 8 Nisan 2026
 - [ ] Internal linking stratejisi:
-  - Her urun sayfasindan ilgili bilgi bankasi makalesine link
-  - Her blog yazisinda ilgili urunlere link
-  - Footer'da ekosistem platformlari bolumu (gelecek icin placeholder)
-- [ ] Sitemap'e yeni route'lari ekle (otomatik — Next.js)
-- [ ] Meta description sablonlari olustur (kategori, urun, blog, bilgi bankasi)
+  - [x] Her blog yazisinda ilgili urunlere link — RelatedLinks ile yapildi
+  - [x] Her urun sayfasindan ilgili bilgi bankasi makalesine link — 8 Nisan 2026 (knowledgeBasePosts)
+  - [x] Footer'da ekosistem platformlari bolumu — 8 Nisan 2026 (VistaSeed + yakinda gelecekler)
+- [ ] Sitemap'e yeni route'lari ekle — Next.js otomatik sitemap kontrol edilecek
+- [ ] Meta description sablonlari — her sayfada inline tanimli, merkezi sablon yok
 
 #### 2.5 Referanslar / Musteri Hikayeleri Sayfasi
 
-- [ ] `/referanslar` route olustur
-- [ ] Sera projeleri, musteri yorumlari, basari hikayeleri
-- [ ] Gorsel galeri ile destekle (mevcut gallery modulu kullanilabilir)
-- [ ] Bu icerik gelecekte Danismanlik Pazaryeri'ni besleyecek
-- [ ] JSON-LD: `Review` schema
+- [x] `/referanslar` route olustur — 8 Nisan 2026
+- [x] Sera projeleri, musteri yorumlari, basari hikayeleri — kart grid + liste gorünümü
+- [ ] Gorsel galeri ile destekle — mevcut featured_image var, tam galeri entegrasyonu eksik
+- [ ] Bu icerik gelecekte Danismanlik Pazaryeri'ni besleyecek — P2
+- [x] JSON-LD: `Review` schema — rating varsa otomatik ekleniyor, 8 Nisan 2026
 
 #### 2.6 Newsletter Genisletme
 
-- [ ] Mevcut newsletter modulu aktif mi kontrol et
-- [ ] Abone segmentasyonu ekle:
-  - `genel` — Tum haberler
-  - `sera` — Sera yonetimi odakli
-  - `fide` — Fide bakimi odakli
-  - `kampanya` — Fiyat/kampanya bildirimleri
-- [ ] Backend: subscriber tablosuna `segments` JSON alani ekle
-- [ ] Gelecekte ekosistem genelinde ortak newsletter sistemiyle entegre olacak
+- [x] Mevcut newsletter modulu aktif — shared-backend'den geliyor, admin route'lar kayitli
+- [x] Abone segmentasyonu eklendi — 8 Nisan 2026:
+  - `urunler` — Urun & Katalog
+  - `haberler` — Haberler & Duyurular
+  - `bilgi-bankasi` — Tarim Rehberleri
+- [x] Backend: `segments` meta JSON alanina kaydediliyor (ALTER gerektirmeden)
+- [x] Frontend: NewsletterForm.tsx segment checkbox'lari eklendi
+- [ ] Gelecekte ekosistem genelinde ortak newsletter sistemiyle entegre olacak — P3
 
 ---
 
@@ -156,20 +156,13 @@ Mevcut SEO altyapisi guclu. Ekosistem icin genisletilmeli.
 
 Bereketfide icerigini diger ekosistem platformlarina acan API.
 
-- [ ] Backend: `/api/v1/ecosystem/content` endpoint'i olustur
-  ```typescript
-  // GET /api/v1/ecosystem/content
-  // Query: source=bereketfide&type=blog&category=sera-yonetimi&limit=5
-  // Response: { items: [{ title, slug, excerpt, image, url, publishedAt }] }
-  ```
-- [ ] Rate limiting: IP bazli, gunluk 1000 istek
-- [ ] API key authentication (ekosistem platformlari icin)
-- [ ] Desteklenen icerik tipleri:
-  - `blog` — Blog/haber makaleleri
-  - `product` — Urun katalogu
-  - `knowledge` — Bilgi bankasi
-  - `event` — Ekim takvimi
-- [ ] Cache: Redis veya in-memory (5 dk TTL)
+- [x] Backend: `GET /api/v1/ecosystem/content` endpoint'i olusturuldu — 8 Nisan 2026
+  - `?type=blog|product|knowledge|event&locale=tr|en&limit=1-20&category=...`
+  - Response: `{ source, type, locale, items: [{ title, slug, excerpt, image, url, publishedAt }] }`
+- [ ] Rate limiting: IP bazli — Fastify rate-limit plugin ile eklenecek (P2 tamamlaninca)
+- [ ] API key authentication — site_settings uzerinden ECOSYSTEM_API_KEY ile eklenebilir
+- [x] Desteklenen icerik tipleri: blog, product, knowledge, event — 8 Nisan 2026
+- [x] Cache: in-memory 5 dk TTL — 8 Nisan 2026
 
 #### 2.8 Urun Verisi Zenginlestirme
 
@@ -195,18 +188,13 @@ Mevcut urun modulu standart e-ticaret yapisi. Tarimsal metadata eklenmeli.
 
 Ekosistem SSO icin Bereketfide tarafindaki hazirlicklar.
 
-- [ ] Mevcut `auth` modulu inceleme:
-  - users tablosunda `email`, `role`, `password_hash` alanlari var mi? -> Evet
-  - Eksik alanlar: `phone`, `avatar_url`, `email_verified_at`
-- [ ] users tablosuna ekosistem alanlari ekle:
-  ```
-  phone               VARCHAR(20)
-  avatar_url          TEXT
-  email_verified_at   TIMESTAMP NULL
-  ecosystem_id        VARCHAR(36) NULL  — gelecekte ortak user ID
-  ```
-- [ ] Email dogrulama akisi ekle (henuz zorunlu degil, opsiyonel)
-- [ ] Bu alanlar VistaSeed ile ayni semada tutulmali (ortak migration)
+- [x] Mevcut `auth` modulu incelendi — 8 Nisan 2026
+  - `phone`, `ecosystem_id`, `email_verified` zaten shared-backend schema'da mevcut
+  - `avatar_url` profiles tablosunda mevcut
+  - Seed SQL'de eksik olan `ecosystem_id`, `rules_accepted_at` eklendi
+- [x] users seed SQL (001_auth_schema.sql) Drizzle schema ile senkronize edildi — 8 Nisan 2026
+- [ ] Email dogrulama akisi ekle — opsiyonel, ileride eklenecek
+- [ ] Bu alanlar VistaSeed ile ayni semada tutulmali — VistaSeed'in seed SQL'i kontrol edilecek
 
 ---
 

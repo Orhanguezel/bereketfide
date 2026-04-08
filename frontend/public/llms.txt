@@ -14,9 +14,18 @@
 ## Hizmetler
 - [Hizmetler](https://www.bereketfide.com.tr/tr/hizmetler): Asili uretim, standart uretim, teknik destek, lojistik, sozlesmeli uretim, cesit denemeleri
 
-## Bilgi Bankasi
+## Bilgi ve Rehberler
 - [Blog](https://www.bereketfide.com.tr/tr/blog): Tarimsal rehberler ve inovasyon yazilari
 - [Haberler](https://www.bereketfide.com.tr/tr/haberler): Sirket haberleri ve etkinlikler
+- [Bilgi Bankasi](https://www.bereketfide.com.tr/tr/bilgi-bankasi): Fide yetistirme rehberleri, sera tavsiyeleri ve tarim bilgisi
+- [Ekim Takvimi](https://www.bereketfide.com.tr/tr/ekim-takvimi): Turkiye'nin 7 bolgesine gore sebze ekim ve dikim takvimi
+
+## Fiyat ve Referanslar
+- [Fiyat Listesi](https://www.bereketfide.com.tr/tr/fiyat-listesi): Guncel sezon fide fiyatlari kategorilere gore
+- [Referanslar](https://www.bereketfide.com.tr/tr/referanslar): Musteri basari hikayeleri ve sera projeleri
+
+## Veri Akislari
+- [RSS Beslemesi](https://www.bereketfide.com.tr/api/v1/feed/rss?locale=tr): Blog ve haberler RSS 2.0 beslemesi
 
 ## Iletisim
 - Telefon: +90-242-464-19-25

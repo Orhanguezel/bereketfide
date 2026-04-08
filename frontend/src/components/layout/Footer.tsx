@@ -127,6 +127,29 @@ export function Footer({
           ))}
         </div>
 
+        {/* Ecosystem platforms strip */}
+        <div className="surface-dark-border mt-10 border-t pt-8">
+          <p className="surface-dark-text mb-3 text-xs font-semibold uppercase tracking-widest opacity-60">
+            {t('ecosystemLabel')}
+          </p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <a
+              href="https://www.vistaseed.com.tr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="surface-dark-link inline-flex items-center gap-1 text-sm transition-colors"
+            >
+              VistaSeed <span className="opacity-50">↗</span>
+            </a>
+            <span className="surface-dark-link text-sm opacity-40" aria-hidden>
+              Ziraat Haber (Yakında)
+            </span>
+            <span className="surface-dark-link text-sm opacity-40" aria-hidden>
+              Hal Fiyatları (Yakında)
+            </span>
+          </div>
+        </div>
+
         {showFooterNewsletter ? (
           <div className="surface-dark-border mt-12 border-t pt-10">
             <div className="mx-auto max-w-lg text-center lg:text-left">
