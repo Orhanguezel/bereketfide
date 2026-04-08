@@ -2,7 +2,7 @@ import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { db } from '@/db/client';
 import { customPages, customPagesI18n } from '@agro/shared-backend/modules/customPages/schema';
 import { products, productI18n } from '@agro/shared-backend/modules/products/schema';
-import { eq, and, desc, like, inArray } from 'drizzle-orm';
+import { eq, and, desc, inArray } from 'drizzle-orm';
 import { env } from '@/core/env';
 
 const SITE_URL = env.PUBLIC_URL || 'https://www.bereketfide.com.tr';
@@ -60,7 +60,7 @@ async function fetchBlog(locale: string, limit: number) {
   }));
 }
 
-async function fetchProducts(locale: string, category: string | undefined, limit: number) {
+async function fetchProducts(locale: string, _category: string | undefined, limit: number) {
   const rows = await db
     .select({
       slug: productI18n.slug,
@@ -77,8 +77,7 @@ async function fetchProducts(locale: string, category: string | undefined, limit
     .where(
       and(
         eq(products.item_type, 'bereketfide'),
-        eq(products.is_active, 1),
-        category ? like(products.category_name, `%${category}%`) : undefined,
+        eq(products.is_active, true),
       ),
     )
     .orderBy(desc(products.created_at))

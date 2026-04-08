@@ -57,7 +57,7 @@ async function subscribe(req: FastifyRequest, reply: FastifyReply) {
   await db.insert(newsletterSubscribers).values({
     id: randomUUID(),
     email: email.toLowerCase().trim(),
-    is_verified: 0,
+    is_verified: false,
     locale: locale || 'tr',
     meta,
   });
