@@ -85,6 +85,7 @@ export type AdminNavItemKey =
   | 'faqs'
   | 'contacts'
   | 'b2b_orders'
+  | 'b2b_payment_attempts'
   | 'b2b_dealers'
   | 'reviews'
   | 'mail'
@@ -150,6 +151,7 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
       { key: 'bereket_offers', url: '/offer?module=bereketfide', icon: DollarSign },
       { key: 'contacts', url: '/contacts', icon: Contact2 },
       { key: 'b2b_orders', url: '/orders', icon: ShoppingBag },
+      { key: 'b2b_payment_attempts', url: '/orders/payment-attempts', icon: ClipboardList },
       { key: 'b2b_dealers', url: '/dealers', icon: Store },
     ],
   },
@@ -211,6 +213,7 @@ const FALLBACK_TITLES: Record<AdminNavItemKey, string> = {
   catalog_requests: 'Catalog Requests',
   contacts: 'Contacts',
   b2b_orders: 'B2B Orders',
+  b2b_payment_attempts: 'Payment Attempts',
   b2b_dealers: 'Dealers',
   reviews: 'Reviews',
   mail: 'Mail',

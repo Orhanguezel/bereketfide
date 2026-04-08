@@ -4,6 +4,7 @@
     "dealerNav": "Dealers",
     "dealerRegister": "Dealer application",
     "dealerNetwork": "Dealer network",
+    "dealerPayment": "Direct payment",
     "home": "Home",
     "products": "Products",
     "projects": "Products",
@@ -105,6 +106,55 @@
     "relatedGallery": "Related Galleries",
     "relatedArticles": "Related Articles",
     "relatedKnowledgePosts": "From the knowledge hub"
+  },
+  "dealerPayment": {
+    "metaTitle": "Dealer Payment",
+    "metaDescription": "Quick access to direct dealer debt payments and account balance actions.",
+    "eyebrow": "Dealer payment center",
+    "title": "Start your payment in the fastest way",
+    "subtitle": "Pay old balances directly from the dealer finance screen with an amount and a note, without creating an order.",
+    "ctaOrders": "Go to order payment",
+    "ctaDirect": "Go to direct payment",
+    "ctaBalance": "View account balance",
+    "stepOne": {
+      "title": "Sign in with your dealer account",
+      "desc": "After login, we send you directly to the screen where you can complete payment."
+    },
+    "stepTwo": {
+      "title": "Enter amount and payment note",
+      "desc": "Clearly describe in the finance note field which old balance you are closing."
+    },
+    "stepThree": {
+      "title": "Complete the card flow",
+      "desc": "Finish the payment on the bank screen and let your account balance update automatically on success."
+    },
+    "cardOrders": {
+      "eyebrow": "Order-based payment",
+      "title": "Close your pending orders",
+      "desc": "Open the order detail and move the outstanding balance directly into the payment flow.",
+      "item1": "List pending orders",
+      "item2": "Choose card, bank transfer, or dealer credit",
+      "item3": "See the payment result immediately on the order screen",
+      "cta": "Pay from my orders"
+    },
+    "cardDirect": {
+      "eyebrow": "Direct collection",
+      "title": "Pay old debt with a note",
+      "desc": "Enter an amount, explain which old balance it belongs to, and start card collection without opening an order.",
+      "item1": "Enter the amount you want to pay",
+      "item2": "Describe the related old debt in the note field",
+      "item3": "Let your account balance update automatically after payment",
+      "cta": "Make direct payment"
+    },
+    "cardBalance": {
+      "eyebrow": "Account tracking",
+      "title": "Open the dealer finance screen",
+      "desc": "Track your dealer limit, transaction history, and payment-related movements from one place.",
+      "item1": "Check your available limit",
+      "item2": "Review past transactions",
+      "item3": "See the same data as the finance team",
+      "cta": "Open account balance"
+    }
   },
   "home": {
     "hero": {
@@ -561,7 +611,10 @@
         "payBank": "I will pay by bank transfer",
         "payBankCard": "Pay by Credit / Debit Card",
         "payCard": "Pay by card (Iyzico)",
+        "payCardInstallment": "Pay in installments (Iyzico)",
         "payCredit": "Pay on account",
+        "installment": "Installment",
+        "installmentOption": "{count} installments",
         "iyzicoIframeHint": "The payment form loads below. You will be redirected when done.",
         "cardRedirectHint": "You are being redirected to the bank payment page. Please wait.",
         "iyzicoPaymentSuccess": "Payment successful. Your order is confirmed.",
@@ -600,7 +653,8 @@
           "unpaid": "Unpaid",
           "pending": "Payment pending",
           "paid": "Paid",
-          "failed": "Failed"
+          "failed": "Failed",
+          "refunded": "Refunded"
         },
         "errors": {
           "loadCatalog": "Could not load catalog.",
@@ -614,6 +668,11 @@
           "only_pending_orders_can_be_cancelled": "Only pending orders can be cancelled.",
           "order_not_found": "Order not found.",
           "dealer_not_found": "Dealer profile not found.",
+          "payment_already_in_progress": "There is already a pending payment attempt for this order.",
+          "already_refunded": "This order has already been refunded.",
+          "order_not_paid": "The order must already be paid before it can be refunded.",
+          "refund_not_supported_for_payment_method": "Automatic refund is not yet supported for this payment method.",
+          "installment_not_supported": "The selected payment provider does not currently support installments.",
           "iyzico_feature_disabled": "Card payments are currently disabled.",
           "iyzico_not_configured": "Payment provider is not configured.",
           "iyzico_init_failed": "Could not start the payment session.",
@@ -627,6 +686,24 @@
         "loading": "Loading…",
         "downloadPdf": "Download statement (PDF)",
         "pdfWorking": "Preparing…",
+        "directPayment": {
+          "eyebrow": "Direct payment",
+          "title": "Close old balances from this screen",
+          "lead": "Enter an amount and a note without creating an order. When payment succeeds, your account balance is reduced automatically.",
+          "amount": "Payment amount",
+          "note": "Payment note",
+          "notePlaceholder": "Example: Old shipment balance / prior debt settlement",
+          "installment": "Installment",
+          "installmentOption": "{count} installments",
+          "outstanding": "Outstanding balance",
+          "useFullBalance": "Use full outstanding balance",
+          "hint": "When you start card payment, you will be redirected to the bank screen.",
+          "disabled": "Card payment is currently disabled.",
+          "processing": "Redirecting…",
+          "cta": "Pay directly by card",
+          "success": "Direct payment was received successfully and applied to your account balance.",
+          "redirectHint": "The bank screen opened below. Follow the bank steps to complete the payment."
+        },
         "movements": "Transactions",
         "noMovements": "No transactions to show.",
         "totalsByType": "Totals by type",
@@ -655,7 +732,21 @@
         },
         "errors": {
           "load": "Could not load summary.",
-          "pdf": "Could not download PDF."
+          "pdf": "Could not download PDF.",
+          "generic": "Something went wrong during the operation ({code}).",
+          "invalidAmount": "Please enter a valid payment amount.",
+          "noteRequired": "Please write which old debt this payment belongs to.",
+          "bank_card_feature_disabled": "Direct card payment is currently disabled.",
+          "nestpay_not_configured": "Bank card settings are not configured yet.",
+          "ziraatpay_not_configured": "ZiraatPay settings are not configured yet.",
+          "craftgate_init_failed": "Could not start the card payment session.",
+          "ziraatpay_init_failed": "Could not start the ZiraatPay session.",
+          "payment_failed": "The bank returned the payment as failed.",
+          "hash_mismatch": "Callback verification failed.",
+          "payment_not_found": "Payment record was not found.",
+          "amount_exceeds_balance": "The entered amount cannot exceed your outstanding balance.",
+          "no_outstanding_balance": "There is no outstanding balance to pay.",
+          "invalid_payment_state": "This payment record is no longer in a payable state."
         }
       }
     },

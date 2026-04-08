@@ -28,6 +28,13 @@ export function BayiGirisClient({ locale }: { locale: string }) {
     }
   }, [searchParams, t]);
 
+  function resolveNextPath() {
+    const raw = searchParams.get('next');
+    if (!raw || !raw.startsWith('/')) return localizedPath(locale, '/bayi-dashboard');
+    if (raw.startsWith('//')) return localizedPath(locale, '/bayi-dashboard');
+    return raw;
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -54,7 +61,7 @@ export function BayiGirisClient({ locale }: { locale: string }) {
           throw e;
         }
       }
-      router.push(localizedPath(locale, '/bayi-dashboard'));
+      router.push(resolveNextPath());
       router.refresh();
     } catch {
       setError(tc('errors.invalid_credentials'));

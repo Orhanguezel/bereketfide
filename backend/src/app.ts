@@ -15,6 +15,7 @@ import { registerErrorHandlers } from '@agro/shared-backend/core/error';
 import { loggerConfig } from '@agro/shared-backend/core/logger';
 import { registerSharedPublic, registerSharedAdmin, shouldSkipAuditLog, writeRequestAuditLog, startRetentionJob } from './routes/shared';
 import { registerProjectPublic, registerProjectAdmin } from './routes/project';
+import { startPaymentTimeoutJob } from '@agro/shared-backend/modules/orders/payment-timeout.service';
 import { jsonSchemaTransform, serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
 
 function parseCorsOrigins(v?: string | string[]): boolean | string[] {
@@ -131,6 +132,7 @@ export async function createApp() {
 
   registerErrorHandlers(app);
   startRetentionJob();
+  startPaymentTimeoutJob(app.log);
   import('@/db/sync-uploads').then((m) => m.syncUploadsToStorage()).catch(() => {});
 
   return app;

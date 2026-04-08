@@ -17,6 +17,15 @@ interface MenuItem {
   [key: string]: unknown;
 }
 
+function safeNavLabel(t: (key: string) => string, key: string, fallback: string): string {
+  try {
+    const value = t(key);
+    return value || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 function normalizeItems(raw: Record<string, unknown>[]): MenuItem[] {
   return raw
     .map((r) => ({
@@ -150,7 +159,7 @@ export function Header({
 
   const fallbackLogo = '/logo/bereket-logo-light.png';
   const logoSrc = isDark ? (logoDarkUrl || logoUrl || fallbackLogo) : (logoUrl || fallbackLogo);
-  const needsUnoptimized = logoSrc.endsWith('.svg') || logoSrc.startsWith('/uploads/');
+  void logoSrc; // mevcut site ayarından gelen logo ileride kullanılabilir
 
   return (
     <>
@@ -314,22 +323,35 @@ export function Header({
               {t('dealerLogin')}
             </Link>
 
-            {/* Logo — Humintech style on the right */}
+            {/* Logo */}
             <Link
               href={l('/')}
               title="Bereket Fide"
-              className="flex h-10 shrink-0 items-center border-l border-(--color-border) pl-8"
+              className="flex h-full shrink-0 items-center gap-3 border-l border-(--color-border) pl-8"
             >
               <Image
-                src={logoSrc}
-                alt={companyName}
-                width={200}
-                height={64}
-                className="object-contain"
-                style={{ height: 48, width: 'auto' }}
+                src="/logo/bereket-favicon.png"
+                alt="Bereket Fide"
+                width={52}
+                height={52}
+                className="object-contain shrink-0"
+                style={{ height: 48, width: 48 }}
                 priority
-                unoptimized={needsUnoptimized}
               />
+              <span className="hidden sm:flex flex-col leading-tight">
+                <span
+                  className="font-bold tracking-[0.06em] uppercase"
+                  style={{ fontSize: 15, color: 'var(--color-brand)' }}
+                >
+                  Bereket Fide
+                </span>
+                <span
+                  className="font-medium tracking-[0.04em] uppercase"
+                  style={{ fontSize: 9, color: 'var(--color-text-secondary)', letterSpacing: '0.08em' }}
+                >
+                  Ltd. Şti.
+                </span>
+              </span>
             </Link>
           </div>
         </div>
@@ -547,12 +569,13 @@ export function Header({
                 </h3>
                 <ul className="space-y-2">
                   {[
-                    { label: t('contact'),        href: l('/iletisim') },
-                    { label: t('offer'),          href: l('/teklif') },
-                    { label: t('about'),          href: l('/hakkimizda') },
-                    { label: t('dealerNetwork'),  href: l('/bayi-agi') },
-                    { label: t('dealerRegister'), href: l('/bayi-kayit') },
-                    { label: t('dealerLogin'),    href: l('/bayi-girisi') },
+                    { label: safeNavLabel(t, 'contact', 'İletişim'), href: l('/iletisim') },
+                    { label: safeNavLabel(t, 'offer', 'Teklif Al'), href: l('/teklif') },
+                    { label: safeNavLabel(t, 'about', 'Hakkımızda'), href: l('/hakkimizda') },
+                    { label: safeNavLabel(t, 'dealerNetwork', 'Bayi Ağı'), href: l('/bayi-agi') },
+                    { label: safeNavLabel(t, 'dealerPayment', 'Doğrudan Ödeme'), href: l('/bayi-odeme') },
+                    { label: safeNavLabel(t, 'dealerRegister', 'Bayi Başvurusu'), href: l('/bayi-kayit') },
+                    { label: safeNavLabel(t, 'dealerLogin', 'Bayi Girişi'), href: l('/bayi-girisi') },
                   ].map(({ label, href }) => (
                     <li key={href}>
                       <Link

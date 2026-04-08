@@ -31,6 +31,7 @@ import {
   useAdminB2bOrderStatusMutation,
   useAdminB2bOrderSellerMutation,
   useAdminB2bOrderDeleteMutation,
+  useAdminB2bOrderRefundMutation,
 } from '@/integrations/hooks';
 
 const STATUSES = ['pending', 'confirmed', 'shipped', 'completed', 'cancelled'] as const;
@@ -59,6 +60,7 @@ export default function AdminOrderDetailClient() {
   const [patchStatus, patchStatusState] = useAdminB2bOrderStatusMutation();
   const [patchSeller, patchSellerState] = useAdminB2bOrderSellerMutation();
   const [del, delState] = useAdminB2bOrderDeleteMutation();
+  const [refund, refundState] = useAdminB2bOrderRefundMutation();
 
   React.useEffect(() => {
     if (q.isError) toast.error(t('loadError'));
@@ -93,6 +95,17 @@ export default function AdminOrderDetailClient() {
       window.location.href = '/orders';
     } catch {
       toast.error(t('loadError'));
+    }
+  }
+
+  async function onRefund() {
+    if (!id || !window.confirm(t('confirmRefund'))) return;
+    const reason = window.prompt(t('refundReasonPrompt'))?.trim();
+    try {
+      await refund({ id, reason }).unwrap();
+      toast.success(t('refunded'));
+    } catch {
+      toast.error(t('refundError'));
     }
   }
 
@@ -202,11 +215,28 @@ export default function AdminOrderDetailClient() {
         <span>
           {t('colPayment')}: {t(`pay.${o.payment_status}` as 'pay.unpaid')}
         </span>
+        {o.payment_ref ? (
+          <span>
+            <Link href={`/orders/payment-attempts/${encodeURIComponent(o.payment_ref)}`} className="hover:underline">
+              {t('attemptLink')}
+            </Link>
+          </span>
+        ) : null}
       </div>
 
-      <Button type="button" variant="destructive" onClick={() => void onDelete()} disabled={delState.isLoading}>
-        {t('delete')}
-      </Button>
+      <div className="flex flex-wrap gap-3">
+        <Button type="button" variant="outline" asChild>
+          <Link href="/orders/payment-attempts">{t('attemptsTitle')}</Link>
+        </Button>
+        {o.payment_method === 'dealer_credit' && o.payment_status === 'paid' ? (
+          <Button type="button" variant="secondary" onClick={() => void onRefund()} disabled={refundState.isLoading}>
+            {refundState.isLoading ? t('saving') : t('refund')}
+          </Button>
+        ) : null}
+        <Button type="button" variant="destructive" onClick={() => void onDelete()} disabled={delState.isLoading}>
+          {t('delete')}
+        </Button>
+      </div>
     </div>
   );
 }

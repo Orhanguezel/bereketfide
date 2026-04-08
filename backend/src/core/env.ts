@@ -138,10 +138,12 @@ export const env = {
   IYZICO_SUB_MERCHANT_KEY: process.env.IYZICO_SUB_MERCHANT_KEY || '',
 
   // =========================================================
-  // Banka Sanal POS / Tarım Kart (İş İmece | Ziraat Başak | Halkbank)
+  // Banka Sanal POS / Tarim Kart (Is Imece | Ziraat Basak | Halk Ode)
   // =========================================================
   FEATURE_BANK_CARD_PAYMENT: toBool(process.env.FEATURE_BANK_CARD_PAYMENT, false),
-  /** Aktif sağlayıcı: craftgate | nestpay_isbank | nestpay_halkbank | ziraatpay */
+  PAYMENT_PENDING_TIMEOUT_MINUTES: toInt(process.env.PAYMENT_PENDING_TIMEOUT_MINUTES, 30),
+  PAYMENT_CLEANUP_INTERVAL_MS: toInt(process.env.PAYMENT_CLEANUP_INTERVAL_MS, 60_000),
+  /** Aktif saglayici: craftgate | nestpay_isbank | halkode | ziraatpay */
   PAYMENT_CARD_PROVIDER: process.env.PAYMENT_CARD_PROVIDER || 'craftgate',
 
   // Craftgate — tek entegrasyonla 3 banka (sandbox hazır)
@@ -160,13 +162,12 @@ export const env = {
   NESTPAY_ISBANK_3D_URL:
     process.env.NESTPAY_ISBANK_3D_URL || 'https://sanalpos.isbank.com.tr/fim/est3Dgate',
 
-  // NestPay — Halkbank (sözleşme sonrası panel'den alınır)
-  NESTPAY_HALKBANK_MERCHANT_ID: process.env.NESTPAY_HALKBANK_MERCHANT_ID || '',
-  NESTPAY_HALKBANK_API_USER: process.env.NESTPAY_HALKBANK_API_USER || '',
-  NESTPAY_HALKBANK_API_PASS: process.env.NESTPAY_HALKBANK_API_PASS || '',
-  NESTPAY_HALKBANK_STORE_KEY: process.env.NESTPAY_HALKBANK_STORE_KEY || '',
-  NESTPAY_HALKBANK_3D_URL:
-    process.env.NESTPAY_HALKBANK_3D_URL || 'https://sanalpos.halkbank.com.tr/halk/est3Dgate',
+  // Halk Ode
+  HALKODE_MERCHANT_ID: process.env.HALKODE_MERCHANT_ID || '',
+  HALKODE_API_USER: process.env.HALKODE_API_USER || '',
+  HALKODE_API_PASS: process.env.HALKODE_API_PASS || '',
+  HALKODE_STORE_KEY: process.env.HALKODE_STORE_KEY || '',
+  HALKODE_3D_URL: process.env.HALKODE_3D_URL || 'https://sanalpos.halkbank.com.tr/halk/est3Dgate',
 
   // ZiraatPay REST API v2 (döküman: vpos.ziraatpay.com.tr/ziraatpay/api/v2/doc)
   ZIRAATPAY_MERCHANT: process.env.ZIRAATPAY_MERCHANT || '',

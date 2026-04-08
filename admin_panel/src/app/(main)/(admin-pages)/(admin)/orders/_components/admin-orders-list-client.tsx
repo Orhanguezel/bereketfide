@@ -56,10 +56,15 @@ export default function AdminOrdersListClient() {
           <h1 className="text-2xl font-bold tracking-tight">{t('title')}</h1>
           <p className="text-muted-foreground text-sm">{t('subtitle')}</p>
         </div>
-        <Button type="button" variant="outline" size="sm" onClick={() => void q.refetch()} disabled={q.isFetching}>
-          <RefreshCcw className="mr-2 size-4" />
-          {t('refresh')}
-        </Button>
+        <div className="flex gap-2">
+          <Button type="button" variant="outline" size="sm" asChild>
+            <Link href="/orders/payment-attempts">{t('attemptsTitle')}</Link>
+          </Button>
+          <Button type="button" variant="outline" size="sm" onClick={() => void q.refetch()} disabled={q.isFetching}>
+            <RefreshCcw className="mr-2 size-4" />
+            {t('refresh')}
+          </Button>
+        </div>
       </div>
 
       <Card>

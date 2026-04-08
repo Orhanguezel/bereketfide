@@ -9,11 +9,18 @@ import { registerCategories } from '@agro/shared-backend/modules/categories/rout
 import { registerSubCategories } from '@agro/shared-backend/modules/subcategories/router';
 import { registerContacts } from '@agro/shared-backend/modules/contact/router';
 import { registerLibrary } from '@agro/shared-backend/modules/library/router';
+import { registerMenuItems } from '@agro/shared-backend/modules/menuItems/router';
+import { registerNewsletter } from '@agro/shared-backend/modules/newsletter/router';
 import { registerProducts } from '@agro/shared-backend/modules/products/router';
 import { registerGallery } from '@agro/shared-backend/modules/gallery/router';
 import { registerNotifications } from '@agro/shared-backend/modules/notifications/router';
 import { registerReferences } from '@agro/shared-backend/modules/references/router';
 import { registerTheme } from '@agro/shared-backend/modules/theme/router';
+import { registerCommentsPublic } from '@agro/shared-backend/modules/comments/public.routes';
+import { registerOffer } from '@agro/shared-backend/modules/offer/router';
+import { registerOrders } from '@agro/shared-backend/modules/orders/router';
+import { registerDealerFinance } from '@agro/shared-backend/modules/dealerFinance/router';
+import { registerServices } from '@agro/shared-backend/modules/services/router';
 
 // Ortak admin moduller
 import { registerAudit } from '@agro/shared-backend/modules/audit/router';
@@ -26,46 +33,77 @@ import { registerCategoriesAdmin } from '@agro/shared-backend/modules/categories
 import { registerSubCategoriesAdmin } from '@agro/shared-backend/modules/subcategories/admin.routes';
 import { registerContactsAdmin } from '@agro/shared-backend/modules/contact/admin.routes';
 import { registerLibraryAdmin } from '@agro/shared-backend/modules/library/admin.routes';
+import { registerMenuItemsAdmin } from '@agro/shared-backend/modules/menuItems/admin.routes';
 import { registerProductsAdmin } from '@agro/shared-backend/modules/products/admin.routes';
 import { registerGalleryAdmin } from '@agro/shared-backend/modules/gallery/admin.routes';
 import { registerEmailTemplatesAdmin } from '@agro/shared-backend/modules/emailTemplates/admin.routes';
 import { registerNewsletterAdmin } from '@agro/shared-backend/modules/newsletter/admin.routes';
 import { registerThemeAdmin } from '@agro/shared-backend/modules/theme/admin.routes';
 import { registerReferencesAdmin } from '@agro/shared-backend/modules/references/admin.routes';
+import { registerCommentsAdmin } from '@agro/shared-backend/modules/comments/admin.routes';
+import { registerOfferAdmin } from '@agro/shared-backend/modules/offer/admin.routes';
+import { registerOrdersAdmin } from '@agro/shared-backend/modules/orders/admin.routes';
+import { registerDealerFinanceAdmin } from '@agro/shared-backend/modules/dealerFinance/admin.routes';
+import { registerServicesAdmin } from '@agro/shared-backend/modules/services/admin.routes';
+
+const sharedPublicRegistrars = [
+  registerAuth,
+  registerStorage,
+  registerCustomPages,
+  registerSiteSettings,
+  registerCategories,
+  registerSubCategories,
+  registerContacts,
+  registerLibrary,
+  registerMenuItems,
+  registerNewsletter,
+  registerNotifications,
+  registerProducts,
+  registerGallery,
+  registerReferences,
+  registerTheme,
+  registerCommentsPublic,
+  registerOffer,
+  registerOrders,
+  registerDealerFinance,
+  registerServices,
+] as const;
+
+const sharedAdminRegistrars = [
+  registerAudit,
+  registerAuditAdmin,
+  registerCustomPagesAdmin,
+  registerSiteSettingsAdmin,
+  registerUserAdmin,
+  registerStorageAdmin,
+  registerCategoriesAdmin,
+  registerSubCategoriesAdmin,
+  registerContactsAdmin,
+  registerLibraryAdmin,
+  registerMenuItemsAdmin,
+  registerProductsAdmin,
+  registerGalleryAdmin,
+  registerReferencesAdmin,
+  registerEmailTemplatesAdmin,
+  registerNewsletterAdmin,
+  registerThemeAdmin,
+  registerCommentsAdmin,
+  registerOfferAdmin,
+  registerOrdersAdmin,
+  registerDealerFinanceAdmin,
+  registerServicesAdmin,
+] as const;
 
 export async function registerSharedPublic(api: FastifyInstance) {
-  await registerAuth(api);
-  await registerStorage(api);
-  await registerCustomPages(api);
-  await registerSiteSettings(api);
-  await registerCategories(api);
-  await registerSubCategories(api);
-  await registerContacts(api);
-  await registerLibrary(api);
-  await registerNotifications(api);
-  await registerProducts(api);
-  await registerGallery(api);
-  await registerReferences(api);
-  await registerTheme(api);
+  for (const registerModule of sharedPublicRegistrars) {
+    await registerModule(api);
+  }
 }
 
 export async function registerSharedAdmin(api: FastifyInstance) {
-  await api.register(async (i) => registerAudit(i), { prefix: '/admin' });
-  await api.register(async (i) => registerAuditAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerCustomPagesAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerSiteSettingsAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerUserAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerStorageAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerCategoriesAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerSubCategoriesAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerContactsAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerLibraryAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerProductsAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerGalleryAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerReferencesAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerEmailTemplatesAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerNewsletterAdmin(i), { prefix: '/admin' });
-  await api.register(async (i) => registerThemeAdmin(i), { prefix: '/admin' });
+  for (const registerModule of sharedAdminRegistrars) {
+    await api.register(async (i) => registerModule(i), { prefix: '/admin' });
+  }
 
   const { aiContentAssist } = await import('@agro/shared-backend/modules/ai/content');
   api.post('/admin/ai/content', aiContentAssist);

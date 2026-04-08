@@ -1,6 +1,7 @@
 import api from '@/lib/axios';
 import type {
   DealerCatalogResponse,
+  DealerDirectCardInitResponse,
   FinanceSummary,
   OrderDetail,
   OrdersListResponse,
@@ -71,34 +72,46 @@ export type OrderIyzicoInitResponse = {
 export async function postOrderIyzicoInitiate(
   id: string,
   locale: string,
+  installment = 1,
 ): Promise<OrderIyzicoInitResponse> {
   const res = await api.post<OrderIyzicoInitResponse>(
     `/orders/${id}/payment/iyzico/initiate`,
     undefined,
-    { params: { locale } },
+    { params: { locale, installment } },
   );
   return res.data;
 }
 
-export type OrderCardInitResponse =
-  | { provider: 'craftgate'; pageUrl: string; checkoutId?: string }
-  | { provider: 'ziraatpay'; pageUrl: string }
-  | { provider: 'nestpay_isbank' | 'nestpay_halkbank' | 'ziraatpay'; formHtml: string };
+export type OrderCardInitResponse = DealerDirectCardInitResponse;
 
 export async function postOrderCardInitiate(
   id: string,
   locale: string,
+  installment = 1,
 ): Promise<OrderCardInitResponse> {
   const res = await api.post<OrderCardInitResponse>(
     `/orders/${id}/payment/card/initiate`,
     undefined,
-    { params: { locale } },
+    { params: { locale, installment } },
   );
   return res.data;
 }
 
 export async function fetchFinanceSummary(): Promise<FinanceSummary> {
   const res = await api.get<FinanceSummary>('/dealer/finance/summary');
+  return res.data;
+}
+
+export async function postDealerDirectCardInitiate(body: {
+  amount: number;
+  note: string;
+  locale: string;
+  installment?: number;
+}): Promise<DealerDirectCardInitResponse> {
+  const res = await api.post<DealerDirectCardInitResponse>(
+    '/dealer/finance/direct-payment/card/initiate',
+    body,
+  );
   return res.data;
 }
 

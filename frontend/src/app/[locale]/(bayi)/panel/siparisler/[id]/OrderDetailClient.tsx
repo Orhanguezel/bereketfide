@@ -36,6 +36,7 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
   const [msg, setMsg] = useState<{ kind: 'ok' | 'err'; text: string } | null>(null);
   const [checkoutHtml, setCheckoutHtml] = useState<string | null>(null);
   const [cardFormHtml, setCardFormHtml] = useState<string | null>(null);
+  const [installment, setInstallment] = useState(1);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -61,6 +62,8 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
       'order_cancelled',
       'only_pending_orders_can_be_cancelled',
       'order_not_found',
+      'payment_already_in_progress',
+      'installment_not_supported',
       'iyzico_feature_disabled',
       'iyzico_not_configured',
       'iyzico_init_failed',
@@ -95,7 +98,7 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
     setCheckoutHtml(null);
     setCardFormHtml(null);
     try {
-      const res = await postOrderIyzicoInitiate(order.id, locale);
+      const res = await postOrderIyzicoInitiate(order.id, locale, installment);
       setCheckoutHtml(res.checkoutFormContent);
     } catch (e) {
       setMsg({ kind: 'err', text: translateErr(e instanceof Error ? e.message : 'error') });
@@ -111,7 +114,7 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
     setCheckoutHtml(null);
     setCardFormHtml(null);
     try {
-      const res = await postOrderCardInitiate(order.id, locale);
+      const res = await postOrderCardInitiate(order.id, locale, installment);
       if ('pageUrl' in res) {
         window.location.href = res.pageUrl;
       } else {
@@ -274,6 +277,20 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
       <div className="flex flex-wrap gap-3">
         {showPay ? (
           <>
+            <label className="flex items-center gap-2 rounded-xl border px-3 py-2 text-sm" style={{ borderColor: 'var(--color-border)' }}>
+              <span className="text-(--color-text-muted)">{t('installment')}</span>
+              <select
+                value={installment}
+                onChange={(e) => setInstallment(Number(e.target.value) || 1)}
+                className="bg-transparent outline-none"
+              >
+                {[1, 2, 3, 6, 9, 12].map((n) => (
+                  <option key={n} value={n}>
+                    {t('installmentOption', { count: n })}
+                  </option>
+                ))}
+              </select>
+            </label>
             {showDealerBankCardPayment ? (
               <button
                 type="button"
@@ -291,7 +308,7 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
                 className="rounded-xl border border-(--color-brand) px-4 py-2 text-sm font-semibold text-(--color-brand) disabled:opacity-50"
                 onClick={() => void onIyzico()}
               >
-                {t('payCard')}
+                {installment > 1 ? t('payCardInstallment') : t('payCard')}
               </button>
             ) : null}
             <button

@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `total`           DECIMAL(12,2)  NOT NULL DEFAULT 0.00,
   `notes`           TEXT           DEFAULT NULL,
   `payment_method`  VARCHAR(32)    DEFAULT NULL,
-  `payment_status`  ENUM('unpaid','pending','paid','failed') NOT NULL DEFAULT 'unpaid',
+  `payment_status`  ENUM('unpaid','pending','paid','failed','refunded') NOT NULL DEFAULT 'unpaid',
   `payment_ref`     CHAR(36)       DEFAULT NULL,
   `created_at`      DATETIME(3)    NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `updated_at`      DATETIME(3)    NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),

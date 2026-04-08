@@ -1,7 +1,7 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 import { getAuthUserId } from '@agro/shared-backend/modules/_shared';
 import type { JwtUser } from '@agro/shared-backend/middleware/auth';
-import { repoGetDealerProfile } from '@/modules/dealerFinance/repository';
+import { repoGetDealerProfile } from '@agro/shared-backend/modules/dealerFinance/repository';
 
 function jwtUser(req: FastifyRequest): JwtUser | undefined {
   return (req as FastifyRequest & { user?: JwtUser }).user;

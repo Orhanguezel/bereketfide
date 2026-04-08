@@ -155,6 +155,8 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
       'only_pending_orders_can_be_cancelled',
       'order_not_found',
       'dealer_not_found',
+      'payment_already_in_progress',
+      'installment_not_supported',
     ] as const;
     if ((known as readonly string[]).includes(code)) {
       return t(`errors.${code}` as 'errors.insufficient_credit');

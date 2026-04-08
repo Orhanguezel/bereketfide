@@ -3,6 +3,15 @@ import { HR_LIST_PATH } from '@/lib/hr-page';
 
 type TranslateFn = (key: string) => string;
 
+function safeNavLabel(t: TranslateFn, key: string, fallback: string): string {
+  try {
+    const value = t(key);
+    return value || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 export interface MenuItemLike {
   title: string;
   url: string;
@@ -90,35 +99,36 @@ function isLegacyNavPath(key: string): boolean {
 export function buildDefaultMenu(locale: string, t: TranslateFn): MenuItemLike[] {
   const l = (path: string) => localizedPath(locale, path);
   return [
-    { title: t('home'), url: l('/') },
-    { title: t('products'), url: l('/urunler') },
+    { title: safeNavLabel(t, 'home', 'Ana Sayfa'), url: l('/') },
+    { title: safeNavLabel(t, 'products', 'Ürünler'), url: l('/urunler') },
     {
-      title: t('corporate'),
+      title: safeNavLabel(t, 'corporate', 'Kurumsal'),
       url: l('/hakkimizda'),
       children: [
-        { title: t('about'), url: l('/hakkimizda') },
-        { title: t('news'), url: l('/haberler') },
-        { title: t('catalogs'), url: l('/kataloglar') },
-        { title: t('career'), url: l(HR_LIST_PATH) },
+        { title: safeNavLabel(t, 'about', 'Hakkımızda'), url: l('/hakkimizda') },
+        { title: safeNavLabel(t, 'news', 'Haberler'), url: l('/haberler') },
+        { title: safeNavLabel(t, 'catalogs', 'Kataloglar'), url: l('/kataloglar') },
+        { title: safeNavLabel(t, 'career', 'Kariyer'), url: l(HR_LIST_PATH) },
       ],
     },
-    { title: t('services'), url: l('/hizmetler') },
+    { title: safeNavLabel(t, 'services', 'Faaliyetler'), url: l('/hizmetler') },
     {
-      title: t('knowledgeHub'),
+      title: safeNavLabel(t, 'knowledgeHub', 'Bilgi Merkezi'),
       url: l('/bilgi-bankasi'),
       children: [
-        { title: t('blog'), url: l('/bilgi-bankasi') },
-        { title: t('gallery'), url: l('/galeri') },
+        { title: safeNavLabel(t, 'blog', 'Bilgi Bankası'), url: l('/bilgi-bankasi') },
+        { title: safeNavLabel(t, 'gallery', 'Galeri'), url: l('/galeri') },
       ],
     },
-    { title: t('contact'), url: l('/iletisim') },
-    { title: t('offer'), url: l('/teklif') },
+    { title: safeNavLabel(t, 'contact', 'İletişim'), url: l('/iletisim') },
+    { title: safeNavLabel(t, 'offer', 'Teklif Al'), url: l('/teklif') },
     {
-      title: t('dealerNav'),
+      title: safeNavLabel(t, 'dealerNav', 'Bayi'),
       url: l('/bayi-agi'),
       children: [
-        { title: t('dealerNetwork'), url: l('/bayi-agi') },
-        { title: t('dealerRegister'), url: l('/bayi-kayit') },
+        { title: safeNavLabel(t, 'dealerNetwork', 'Bayi Ağı'), url: l('/bayi-agi') },
+        { title: safeNavLabel(t, 'dealerPayment', 'Doğrudan Ödeme'), url: l('/bayi-odeme') },
+        { title: safeNavLabel(t, 'dealerRegister', 'Bayi Başvurusu'), url: l('/bayi-kayit') },
       ],
     },
   ];

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { dealerPublicRegisterSchema } from '@/modules/dealerFinance/validation';
+import { dealerPublicRegisterSchema } from '@agro/shared-backend/modules/dealerFinance';
 
 describe('dealerPublicRegisterSchema', () => {
   it('accepts minimal valid payload', () => {

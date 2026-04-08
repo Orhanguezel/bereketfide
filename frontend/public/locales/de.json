@@ -17,6 +17,7 @@
     "dealerNav": "Händler",
     "dealerRegister": "Händler-Antrag",
     "dealerNetwork": "Händlernetz",
+    "dealerPayment": "Direktzahlung",
     "news": "Aktuelles",
     "residential": "Gemüse-Jungpflanzen",
     "commercial": "Obst-Jungpflanzen",
@@ -99,6 +100,55 @@
     "relatedGallery": "Verwandte Galerien",
     "relatedArticles": "Verwandte Artikel",
     "relatedKnowledgePosts": "Aus der Wissensdatenbank"
+  },
+  "dealerPayment": {
+    "metaTitle": "Händlerzahlung",
+    "metaDescription": "Schneller Zugriff auf direkte Altschulden-Zahlungen und Kontobewegungen für Händler.",
+    "eyebrow": "Zahlungszentrum für Händler",
+    "title": "Starten Sie Ihre Zahlung auf dem schnellsten Weg",
+    "subtitle": "Begleichen Sie ältere Salden direkt im Händler-Finanzbereich mit Betrag und Notiz, ohne einen Auftrag anzulegen.",
+    "ctaOrders": "Zur Auftragszahlung",
+    "ctaDirect": "Zur Direktzahlung",
+    "ctaBalance": "Kontostand anzeigen",
+    "stepOne": {
+      "title": "Mit Ihrem Händlerkonto anmelden",
+      "desc": "Nach der Anmeldung leiten wir Sie direkt zum passenden Zahlungsbildschirm weiter."
+    },
+    "stepTwo": {
+      "title": "Betrag und Zahlungsnotiz eingeben",
+      "desc": "Beschreiben Sie im Finanzbereich eindeutig, welche alte Schuld Sie begleichen."
+    },
+    "stepThree": {
+      "title": "Kartenzahlung abschließen",
+      "desc": "Beenden Sie die Zahlung auf dem Bankbildschirm; danach wird Ihr Kontostand automatisch aktualisiert."
+    },
+    "cardOrders": {
+      "eyebrow": "Auftragsbezogene Zahlung",
+      "title": "Offene Aufträge abschließen",
+      "desc": "Öffnen Sie die Auftragsdetails und starten Sie den Zahlungsablauf direkt aus dem offenen Saldo.",
+      "item1": "Offene Aufträge anzeigen",
+      "item2": "Karte, Überweisung oder Händlerkredit wählen",
+      "item3": "Zahlungsergebnis sofort im Auftrag sehen",
+      "cta": "Aus meinen Aufträgen zahlen"
+    },
+    "cardDirect": {
+      "eyebrow": "Direkte Zahlung",
+      "title": "Altschuld mit Notiz bezahlen",
+      "desc": "Betrag eingeben, Notiz zum alten Saldo hinzufügen und die Kartenzahlung ohne Auftrag starten.",
+      "item1": "Gewünschten Zahlungsbetrag eingeben",
+      "item2": "Im Notizfeld angeben, zu welcher alten Schuld die Zahlung gehört",
+      "item3": "Kontostand nach erfolgreicher Zahlung automatisch aktualisieren",
+      "cta": "Direkt bezahlen"
+    },
+    "cardBalance": {
+      "eyebrow": "Kontenübersicht",
+      "title": "Händler-Finanzansicht öffnen",
+      "desc": "Behalten Sie Ihr Limit, Ihre Bewegungen und zahlungsrelevanten Vorgänge an einem Ort im Blick.",
+      "item1": "Verfügbares Limit prüfen",
+      "item2": "Vergangene Bewegungen ansehen",
+      "item3": "Dieselben Daten wie das Finanzteam sehen",
+      "cta": "Kontostand öffnen"
+    }
   },
   "home": {
     "hero": {
@@ -479,6 +529,77 @@
       },
       "notLoggedIn": "Sie müssen sich anmelden, um diese Seite anzuzeigen.",
       "goToLogin": "Anmelden"
+    },
+    "panel": {
+      "finance": {
+        "title": "Konto / Finanzen",
+        "lead": "Kreditlimit, Saldo und aktuelle Bewegungen. Kontoauszug als PDF herunterladen.",
+        "loading": "Wird geladen…",
+        "downloadPdf": "Auszug herunterladen (PDF)",
+        "pdfWorking": "Wird vorbereitet…",
+        "directPayment": {
+          "eyebrow": "Direktzahlung",
+          "title": "Alte Salden auf diesem Bildschirm schließen",
+          "lead": "Betrag und Notiz eingeben, ohne einen Auftrag zu erstellen. Nach erfolgreicher Zahlung wird Ihr Kontostand automatisch reduziert.",
+          "amount": "Zahlungsbetrag",
+          "note": "Zahlungsnotiz",
+          "notePlaceholder": "Beispiel: Alter Versand-Saldo / Ausgleich früherer Schuld",
+          "installment": "Raten",
+          "installmentOption": "{count} Raten",
+          "outstanding": "Offener Saldo",
+          "useFullBalance": "Gesamten offenen Saldo verwenden",
+          "hint": "Nach dem Start werden Sie zum Bankbildschirm weitergeleitet.",
+          "disabled": "Kartenzahlung ist derzeit deaktiviert.",
+          "processing": "Weiterleitung…",
+          "cta": "Direkt mit Karte bezahlen",
+          "success": "Direktzahlung wurde erfolgreich erfasst und auf Ihr Konto angewendet.",
+          "redirectHint": "Der Bankbildschirm wurde unten geöffnet. Folgen Sie den Schritten der Bank, um die Zahlung abzuschließen."
+        },
+        "movements": "Bewegungen",
+        "noMovements": "Keine Bewegungen vorhanden.",
+        "totalsByType": "Summen nach Typ",
+        "meta": "{count} Bewegungen gesamt · Überfällig: {overdue}",
+        "cards": {
+          "limit": "Kreditlimit",
+          "balance": "Aktueller Saldo",
+          "available": "Verfügbar",
+          "discount": "Rabatt"
+        },
+        "col": {
+          "date": "Datum",
+          "type": "Typ",
+          "amount": "Betrag",
+          "balance": "Saldo danach"
+        },
+        "txType": {
+          "order": "Auftrag",
+          "payment": "Zahlung",
+          "adjustment": "Korrektur",
+          "refund": "Erstattung"
+        },
+        "warnings": {
+          "low_credit": "Ihr verfügbares Kreditlimit ist niedrig.",
+          "overdue_due": "Sie haben überfällige Einträge."
+        },
+        "errors": {
+          "load": "Zusammenfassung konnte nicht geladen werden.",
+          "pdf": "PDF konnte nicht heruntergeladen werden.",
+          "generic": "Während des Vorgangs ist ein Fehler aufgetreten ({code}).",
+          "invalidAmount": "Bitte geben Sie einen gültigen Zahlungsbetrag ein.",
+          "noteRequired": "Bitte notieren Sie, zu welcher alten Schuld diese Zahlung gehört.",
+          "bank_card_feature_disabled": "Direkte Kartenzahlung ist derzeit deaktiviert.",
+          "nestpay_not_configured": "Die Bankkarten-Einstellungen sind noch nicht abgeschlossen.",
+          "ziraatpay_not_configured": "Die ZiraatPay-Einstellungen sind noch nicht abgeschlossen.",
+          "craftgate_init_failed": "Die Kartenzahlungssitzung konnte nicht gestartet werden.",
+          "ziraatpay_init_failed": "Die ZiraatPay-Sitzung konnte nicht gestartet werden.",
+          "payment_failed": "Die Bank hat die Zahlung als fehlgeschlagen gemeldet.",
+          "hash_mismatch": "Die Callback-Prüfung ist fehlgeschlagen.",
+          "payment_not_found": "Der Zahlungseintrag wurde nicht gefunden.",
+          "amount_exceeds_balance": "Der eingegebene Betrag darf den offenen Saldo nicht übersteigen.",
+          "no_outstanding_balance": "Es gibt keinen offenen Saldo zur Zahlung.",
+          "invalid_payment_state": "Dieser Zahlungseintrag ist nicht mehr zahlbar."
+        }
+      }
     },
     "errors": {
       "user_exists": "Diese E-Mail-Adresse ist bereits registriert. Versuchen Sie sich anzumelden.",

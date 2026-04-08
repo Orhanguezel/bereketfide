@@ -2,11 +2,14 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { showDealerBankCardPayment } from '@/config/public-features';
+import { IyzicoCheckoutHost } from '@/modules/bayi/IyzicoCheckoutHost';
 import type { FinanceSummary, DealerTransactionRow } from '@/modules/bayi/types';
 import {
   downloadFinanceStatementPdf,
   fetchFinanceSummary,
   fetchTransactions,
+  postDealerDirectCardInitiate,
 } from '@/modules/bayi/services';
 
 function formatTry(n: number, locale: string) {
@@ -28,6 +31,12 @@ export default function FinansPageClient({ locale }: { locale: string }) {
   const [loading, setLoading] = useState(true);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [msg, setMsg] = useState<{ kind: 'ok' | 'err'; text: string } | null>(null);
+  const [payBusy, setPayBusy] = useState(false);
+  const [cardFormHtml, setCardFormHtml] = useState<string | null>(null);
+  const [amount, setAmount] = useState('');
+  const [note, setNote] = useState('');
+  const [installment, setInstallment] = useState(1);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -50,6 +59,37 @@ export default function FinansPageClient({ locale }: { locale: string }) {
     void load();
   }, [load]);
 
+  useEffect(() => {
+    if (!summary) return;
+    if (amount.trim()) return;
+    if (summary.current_balance > 0) {
+      setAmount(summary.current_balance.toFixed(2));
+    }
+  }, [summary, amount]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const u = new URLSearchParams(window.location.search);
+    const payment = u.get('payment');
+    if (payment === 'success') {
+      setMsg({ kind: 'ok', text: t('directPayment.success') });
+      setCardFormHtml(null);
+      void load();
+      window.history.replaceState(null, '', window.location.pathname);
+      return;
+    }
+    if (payment === 'fail') {
+      const reason = u.get('reason');
+      setMsg({ kind: 'err', text: translateErr(reason || 'payment_failed') });
+      window.history.replaceState(null, '', window.location.pathname);
+      return;
+    }
+    if (u.get('focus') === 'direct-payment') {
+      const el = document.getElementById('dealer-direct-payment');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [load, t]);
+
   async function onPdf() {
     setPdfBusy(true);
     setErr(null);
@@ -59,6 +99,60 @@ export default function FinansPageClient({ locale }: { locale: string }) {
       setErr(t('errors.pdf'));
     } finally {
       setPdfBusy(false);
+    }
+  }
+
+  function translateErr(code: string) {
+    const known = [
+      'bank_card_feature_disabled',
+      'nestpay_not_configured',
+      'ziraatpay_not_configured',
+      'craftgate_init_failed',
+      'ziraatpay_init_failed',
+      'payment_failed',
+      'hash_mismatch',
+      'payment_not_found',
+      'amount_exceeds_balance',
+      'no_outstanding_balance',
+      'invalid_payment_state',
+    ] as const;
+    if ((known as readonly string[]).includes(code)) {
+      return t(`errors.${code}` as 'errors.load');
+    }
+    return t('errors.generic', { code });
+  }
+
+  async function onDirectPayment() {
+    const numericAmount = Number.parseFloat(amount.replace(',', '.'));
+    if (!Number.isFinite(numericAmount) || numericAmount <= 0) {
+      setMsg({ kind: 'err', text: t('errors.invalidAmount') });
+      return;
+    }
+    if (!note.trim()) {
+      setMsg({ kind: 'err', text: t('errors.noteRequired') });
+      return;
+    }
+
+    setPayBusy(true);
+    setErr(null);
+    setMsg(null);
+    setCardFormHtml(null);
+    try {
+      const res = await postDealerDirectCardInitiate({
+        amount: numericAmount,
+        note: note.trim(),
+        locale,
+        installment,
+      });
+      if ('pageUrl' in res) {
+        window.location.href = res.pageUrl;
+      } else {
+        setCardFormHtml(res.formHtml);
+      }
+    } catch (e) {
+      setMsg({ kind: 'err', text: translateErr(e instanceof Error ? e.message : 'payment_failed') });
+    } finally {
+      setPayBusy(false);
     }
   }
 
@@ -83,12 +177,107 @@ export default function FinansPageClient({ locale }: { locale: string }) {
         </button>
       </div>
 
+      {msg ? (
+        <div className={`rounded-xl px-4 py-3 text-sm ${msg.kind === 'ok' ? 'bf-alert-success' : 'bf-alert-danger'}`}>{msg.text}</div>
+      ) : null}
+
       {err ? (
         <div className="bf-alert-danger rounded-xl px-4 py-3 text-sm">{err}</div>
       ) : null}
 
       {summary ? (
         <>
+          <section
+            id="dealer-direct-payment"
+            className="rounded-[28px] border p-6 shadow-sm"
+            style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg-secondary)' }}
+          >
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="max-w-2xl">
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-(--color-brand)">
+                  {t('directPayment.eyebrow')}
+                </div>
+                <h2 className="mt-2 text-2xl font-semibold text-(--color-text-primary)">
+                  {t('directPayment.title')}
+                </h2>
+                <p className="mt-2 text-sm leading-7 text-(--color-text-secondary)">
+                  {t('directPayment.lead')}
+                </p>
+              </div>
+              <button
+                type="button"
+                className="rounded-xl border px-4 py-2 text-sm font-medium"
+                style={{ borderColor: 'var(--color-border)' }}
+                onClick={() => setAmount(String((summary.current_balance || 0).toFixed(2)))}
+              >
+                {t('directPayment.useFullBalance')}
+              </button>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <label className="space-y-2">
+                <span className="text-sm font-medium text-(--color-text-primary)">{t('directPayment.amount')}</span>
+                <input
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder={String((summary.current_balance || 0).toFixed(2))}
+                  className="w-full rounded-xl border px-4 py-3 text-sm"
+                  style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="text-sm font-medium text-(--color-text-primary)">{t('directPayment.installment')}</span>
+                <select
+                  value={installment}
+                  onChange={(e) => setInstallment(Number(e.target.value) || 1)}
+                  className="w-full rounded-xl border px-4 py-3 text-sm"
+                  style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
+                >
+                  {[1, 2, 3, 6, 9, 12].map((n) => (
+                    <option key={n} value={n}>
+                      {t('directPayment.installmentOption', { count: n })}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <label className="mt-4 block space-y-2">
+              <span className="text-sm font-medium text-(--color-text-primary)">{t('directPayment.note')}</span>
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder={t('directPayment.notePlaceholder')}
+                className="min-h-28 w-full rounded-xl border px-4 py-3 text-sm"
+                style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
+              />
+            </label>
+
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm" style={{ borderColor: 'var(--color-border)' }}>
+              <div>
+                <div className="text-xs uppercase tracking-[0.16em] text-(--color-text-muted)">{t('directPayment.outstanding')}</div>
+                <div className="mt-1 font-semibold text-(--color-brand)">{formatTry(summary.current_balance, locale)}</div>
+              </div>
+              <div className="max-w-md text-(--color-text-secondary)">
+                {showDealerBankCardPayment ? t('directPayment.hint') : t('directPayment.disabled')}
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <button
+                type="button"
+                disabled={payBusy || !showDealerBankCardPayment || summary.current_balance <= 0}
+                className="rounded-xl bg-(--color-brand) px-5 py-3 text-sm font-semibold text-(--color-on-brand) disabled:opacity-50"
+                onClick={() => void onDirectPayment()}
+              >
+                {payBusy ? t('directPayment.processing') : t('directPayment.cta')}
+              </button>
+            </div>
+          </section>
+
           {summary.warnings.length > 0 ? (
             <ul className="space-y-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
               {summary.warnings.map((w) => (
@@ -137,6 +326,13 @@ export default function FinansPageClient({ locale }: { locale: string }) {
             </p>
           </div>
         </>
+      ) : null}
+
+      {cardFormHtml ? (
+        <div className="space-y-2">
+          <p className="text-xs text-(--color-text-muted)">{t('directPayment.redirectHint')}</p>
+          <IyzicoCheckoutHost html={cardFormHtml} />
+        </div>
       ) : null}
 
       <section>

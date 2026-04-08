@@ -32,6 +32,36 @@ export type AdminOrderItemRow = {
 
 export type AdminOrderDetail = AdminOrderRow & { items: AdminOrderItemRow[] };
 
+export type AdminPaymentAttemptRow = {
+  id: string;
+  order_id: string;
+  payment_ref: string;
+  provider: string;
+  status: 'pending' | 'succeeded' | 'failed' | 'expired';
+  amount: string;
+  request_payload: string | null;
+  response_payload: string | null;
+  callback_payload: string | null;
+  last_error: string | null;
+  created_at: string;
+  updated_at: string;
+  order_status: string;
+  order_payment_status: string;
+  order_payment_method: string | null;
+};
+
+export type AdminPaymentAttemptDetail = AdminPaymentAttemptRow & {
+  order_total: string;
+  dealer_id: string;
+};
+
+export type AdminPaymentAttemptsListResponse = {
+  data: AdminPaymentAttemptRow[];
+  total: number;
+  page: number;
+  limit: number;
+};
+
 export type AdminOrdersListResponse = {
   data: AdminOrderRow[];
   total: number;
@@ -156,6 +186,57 @@ export const b2bAdminApi = baseApi.injectEndpoints({
       ],
     }),
 
+    adminB2bOrderRefund: b.mutation<AdminOrderDetail, { id: string; reason?: string }>({
+      query: ({ id, reason }) => ({
+        url: `${ORDERS}/${encodeURIComponent(id)}/refund`,
+        method: 'POST',
+        body: reason?.trim() ? { reason: reason.trim() } : {},
+      }),
+      invalidatesTags: (_r, _e, arg) => [
+        { type: 'Orders' as const, id: arg.id },
+        { type: 'Orders' as const, id: 'B2B_LIST' },
+        { type: 'Payment' as const, id: 'ATTEMPTS_LIST' },
+      ],
+    }),
+
+    adminB2bPaymentAttemptsList: b.query<
+      AdminPaymentAttemptsListResponse,
+      {
+        page?: number;
+        limit?: number;
+        order_id?: string;
+        provider?: string;
+        status?: string;
+      } | void
+    >({
+      query: (params) => ({
+        url: `${ORDERS}/payment-attempts`,
+        method: 'GET',
+        params: {
+          page: params?.page ?? 1,
+          limit: params?.limit ?? 50,
+          order_id: params?.order_id || undefined,
+          provider: params?.provider || undefined,
+          status: params?.status || undefined,
+        },
+      }),
+      providesTags: (res) =>
+        res?.data?.length
+          ? [
+              ...res.data.map((a) => ({ type: 'Payment' as const, id: a.payment_ref })),
+              { type: 'Payment' as const, id: 'ATTEMPTS_LIST' },
+            ]
+          : [{ type: 'Payment' as const, id: 'ATTEMPTS_LIST' }],
+    }),
+
+    adminB2bPaymentAttemptDetail: b.query<AdminPaymentAttemptDetail, string>({
+      query: (paymentRef) => ({
+        url: `${ORDERS}/payment-attempts/${encodeURIComponent(paymentRef)}`,
+        method: 'GET',
+      }),
+      providesTags: (_r, _e, paymentRef) => [{ type: 'Payment' as const, id: paymentRef }],
+    }),
+
     adminB2bDealersList: b.query<
       AdminDealersListResponse,
       { page?: number; limit?: number; search?: string; is_approved?: number } | void
@@ -270,6 +351,9 @@ export const {
   useAdminB2bOrderStatusMutation,
   useAdminB2bOrderSellerMutation,
   useAdminB2bOrderDeleteMutation,
+  useAdminB2bOrderRefundMutation,
+  useAdminB2bPaymentAttemptsListQuery,
+  useAdminB2bPaymentAttemptDetailQuery,
   useAdminB2bDealersListQuery,
   useAdminB2bDealerDetailQuery,
   useAdminB2bDealerSummaryQuery,
