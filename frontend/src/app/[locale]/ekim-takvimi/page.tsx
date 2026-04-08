@@ -180,8 +180,8 @@ export default async function PlantingCalendarPage({
   const companyName = (profile?.value as any)?.company_name || 'Bereket Fide';
   const pageTitle = isEn ? 'Planting Calendar' : 'Ekim Takvimi';
 
-  const activeRegion = regions.find((r) => r.id === bolge) || regions[0];
-  const calendarData = CALENDAR[activeRegion.id] || {};
+  const activeRegion = regions.find((r) => r.id === bolge) ?? regions[0]!;
+  const calendarData = CALENDAR[activeRegion.id] ?? {};
 
   // Current month (1-based)
   const currentMonth = new Date().getMonth() + 1;
@@ -240,7 +240,7 @@ export default async function PlantingCalendarPage({
               url: localizedUrl(locale, '/ekim-takvimi'),
               temporalCoverage: String(new Date().getFullYear()),
               spatialCoverage: 'Turkey',
-              keywords: Object.keys(CALENDAR.akdeniz),
+              keywords: Object.keys(CALENDAR.akdeniz ?? {}),
               creator: 'Bereket Fide',
               variableMeasured: isEn ? 'Optimal seedling planting months by region' : 'Bölgeye göre optimum fide dikim ayları',
             }),
