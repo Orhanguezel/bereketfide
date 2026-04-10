@@ -16,7 +16,7 @@ import { loggerConfig } from '@agro/shared-backend/core/logger';
 import { registerSharedPublic, registerSharedAdmin, shouldSkipAuditLog, writeRequestAuditLog, startRetentionJob } from './routes/shared';
 import { registerProjectPublic, registerProjectAdmin } from './routes/project';
 import { startPaymentTimeoutJob } from '@agro/shared-backend/modules/orders/payment-timeout.service';
-import { jsonSchemaTransform, serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
+import { jsonSchemaTransform } from 'fastify-type-provider-zod';
 
 function parseCorsOrigins(v?: string | string[]): boolean | string[] {
   if (!v) return true;
@@ -31,9 +31,6 @@ export async function createApp() {
   };
 
   const app = buildFastify({ logger: loggerConfig }) as FastifyInstance;
-
-  app.setValidatorCompiler(validatorCompiler);
-  app.setSerializerCompiler(serializerCompiler);
 
   await app.register(cors, {
     origin: parseCorsOrigins(env.CORS_ORIGIN as any),

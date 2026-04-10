@@ -61,23 +61,29 @@ function buildRss(locale: string, items: Awaited<ReturnType<typeof getFeedItems>
 
   const itemsXml = items
     .map((item) => {
-      const moduleSlug = BLOG_MODULES.includes(item.module_key) ? item.module_key : 'blog';
-      const link = `${SITE_URL}/${locale}/${moduleSlug}/${item.slug}`;
+      const moduleKey = item.module_key as string;
+      const slug = item.slug as string;
+      const title = item.title as string;
+      const summary = item.summary as string | null;
+      const metaDesc = item.meta_description as string | null;
+      const createdAt = item.created_at as string | number | Date | null;
+      const featuredImage = item.featured_image as string | null;
+
+      const moduleSlug = BLOG_MODULES.includes(moduleKey) ? moduleKey : 'blog';
+      const link = `${SITE_URL}/${locale}/${moduleSlug}/${slug}`;
       const description = escapeXml(
-        stripHtml(item.summary || item.meta_description || '').slice(0, 300),
+        stripHtml(summary || metaDesc || '').slice(0, 300),
       );
-      const pubDate = item.created_at
-        ? new Date(item.created_at).toUTCString()
-        : now;
+      const pubDate = createdAt ? new Date(createdAt).toUTCString() : now;
 
       return `
     <item>
-      <title>${escapeXml(item.title)}</title>
+      <title>${escapeXml(title)}</title>
       <link>${link}</link>
       <guid isPermaLink="true">${link}</guid>
       <pubDate>${pubDate}</pubDate>
       ${description ? `<description>${description}</description>` : ''}
-      ${item.featured_image ? `<enclosure url="${escapeXml(item.featured_image)}" type="image/jpeg" length="0" />` : ''}
+      ${featuredImage ? `<enclosure url="${escapeXml(featuredImage)}" type="image/jpeg" length="0" />` : ''}
     </item>`;
     })
     .join('');
