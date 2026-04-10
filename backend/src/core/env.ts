@@ -130,7 +130,7 @@ export const env = {
   GROQ_API_BASE: process.env.GROQ_API_BASE || 'https://api.groq.com/openai/v1',
   GROQ_MODEL: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
 
-  /** Iyzico / kart */
+  /** Iyzico */
   FEATURE_IYZICO_PAYMENT: toBool(process.env.FEATURE_IYZICO_PAYMENT, false),
   IYZICO_API_KEY: process.env.IYZICO_API_KEY || '',
   IYZICO_SECRET_KEY: process.env.IYZICO_SECRET_KEY || '',
@@ -138,43 +138,17 @@ export const env = {
   IYZICO_SUB_MERCHANT_KEY: process.env.IYZICO_SUB_MERCHANT_KEY || '',
 
   // =========================================================
-  // Banka Sanal POS / Tarim Kart (Is Imece | Ziraat Basak | Halk Ode)
+  // Halk Ode Sanal POS
   // =========================================================
   FEATURE_BANK_CARD_PAYMENT: toBool(process.env.FEATURE_BANK_CARD_PAYMENT, false),
   PAYMENT_PENDING_TIMEOUT_MINUTES: toInt(process.env.PAYMENT_PENDING_TIMEOUT_MINUTES, 30),
   PAYMENT_CLEANUP_INTERVAL_MS: toInt(process.env.PAYMENT_CLEANUP_INTERVAL_MS, 60_000),
-  /** Aktif saglayici: craftgate | nestpay_isbank | halkode | ziraatpay */
-  PAYMENT_CARD_PROVIDER: process.env.PAYMENT_CARD_PROVIDER || 'craftgate',
 
-  // Craftgate — tek entegrasyonla 3 banka (sandbox hazır)
-  CRAFTGATE_API_KEY: process.env.CRAFTGATE_API_KEY || '',
-  CRAFTGATE_SECRET_KEY: process.env.CRAFTGATE_SECRET_KEY || '',
-  CRAFTGATE_BASE_URL:
-    process.env.CRAFTGATE_BASE_URL || 'https://sandbox-api.craftgate.io',
-
-  // NestPay — İş Bankası (sözleşme sonrası panel'den alınır)
-  NESTPAY_ISBANK_MERCHANT_ID: process.env.NESTPAY_ISBANK_MERCHANT_ID || '',
-  NESTPAY_ISBANK_API_USER: process.env.NESTPAY_ISBANK_API_USER || '',
-  NESTPAY_ISBANK_API_PASS: process.env.NESTPAY_ISBANK_API_PASS || '',
-  NESTPAY_ISBANK_STORE_KEY: process.env.NESTPAY_ISBANK_STORE_KEY || '',
-  NESTPAY_ISBANK_API_URL:
-    process.env.NESTPAY_ISBANK_API_URL || 'https://sanalpos.isbank.com.tr/fim/api',
-  NESTPAY_ISBANK_3D_URL:
-    process.env.NESTPAY_ISBANK_3D_URL || 'https://sanalpos.isbank.com.tr/fim/est3Dgate',
-
-  // Halk Ode
   HALKODE_MERCHANT_ID: process.env.HALKODE_MERCHANT_ID || '',
   HALKODE_API_USER: process.env.HALKODE_API_USER || '',
   HALKODE_API_PASS: process.env.HALKODE_API_PASS || '',
   HALKODE_STORE_KEY: process.env.HALKODE_STORE_KEY || '',
-  HALKODE_3D_URL: process.env.HALKODE_3D_URL || 'https://sanalpos.halkbank.com.tr/halk/est3Dgate',
-
-  // ZiraatPay REST API v2 (döküman: vpos.ziraatpay.com.tr/ziraatpay/api/v2/doc)
-  ZIRAATPAY_MERCHANT: process.env.ZIRAATPAY_MERCHANT || '',
-  ZIRAATPAY_MERCHANT_USER: process.env.ZIRAATPAY_MERCHANT_USER || '',
-  ZIRAATPAY_MERCHANT_PASSWORD: process.env.ZIRAATPAY_MERCHANT_PASSWORD || '',
-  ZIRAATPAY_BASE_URL:
-    process.env.ZIRAATPAY_BASE_URL || 'https://test.ziraatpay.com.tr/ziraatpay/api/v2',
+  HALKODE_3D_URL: process.env.HALKODE_3D_URL || 'https://app.halkode.com.tr/ccpayment',
 } as const;
 
 export type AppEnv = typeof env;

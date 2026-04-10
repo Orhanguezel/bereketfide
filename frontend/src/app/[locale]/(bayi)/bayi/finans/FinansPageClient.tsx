@@ -35,8 +35,6 @@ export default function FinansPageClient({ locale }: { locale: string }) {
   const [payBusy, setPayBusy] = useState(false);
   const [cardFormHtml, setCardFormHtml] = useState<string | null>(null);
   const [amount, setAmount] = useState('');
-  const [note, setNote] = useState('');
-  const [installment, setInstallment] = useState(1);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -128,11 +126,6 @@ export default function FinansPageClient({ locale }: { locale: string }) {
       setMsg({ kind: 'err', text: t('errors.invalidAmount') });
       return;
     }
-    if (!note.trim()) {
-      setMsg({ kind: 'err', text: t('errors.noteRequired') });
-      return;
-    }
-
     setPayBusy(true);
     setErr(null);
     setMsg(null);
@@ -140,9 +133,7 @@ export default function FinansPageClient({ locale }: { locale: string }) {
     try {
       const res = await postDealerDirectCardInitiate({
         amount: numericAmount,
-        note: note.trim(),
         locale,
-        installment,
       });
       if ('pageUrl' in res) {
         window.location.href = res.pageUrl;
@@ -204,17 +195,19 @@ export default function FinansPageClient({ locale }: { locale: string }) {
                   {t('directPayment.lead')}
                 </p>
               </div>
-              <button
-                type="button"
-                className="rounded-xl border px-4 py-2 text-sm font-medium"
-                style={{ borderColor: 'var(--color-border)' }}
-                onClick={() => setAmount(String((summary.current_balance || 0).toFixed(2)))}
-              >
-                {t('directPayment.useFullBalance')}
-              </button>
+              {summary.current_balance > 0 && (
+                <button
+                  type="button"
+                  className="rounded-xl border px-4 py-2 text-sm font-medium"
+                  style={{ borderColor: 'var(--color-border)' }}
+                  onClick={() => setAmount(String(summary.current_balance.toFixed(2)))}
+                >
+                  {t('directPayment.useFullBalance')}
+                </button>
+              )}
             </div>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <div className="mt-6">
               <label className="space-y-2">
                 <span className="text-sm font-medium text-(--color-text-primary)">{t('directPayment.amount')}</span>
                 <input
@@ -228,33 +221,7 @@ export default function FinansPageClient({ locale }: { locale: string }) {
                   style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
                 />
               </label>
-              <label className="space-y-2">
-                <span className="text-sm font-medium text-(--color-text-primary)">{t('directPayment.installment')}</span>
-                <select
-                  value={installment}
-                  onChange={(e) => setInstallment(Number(e.target.value) || 1)}
-                  className="w-full rounded-xl border px-4 py-3 text-sm"
-                  style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
-                >
-                  {[1, 2, 3, 6, 9, 12].map((n) => (
-                    <option key={n} value={n}>
-                      {t('directPayment.installmentOption', { count: n })}
-                    </option>
-                  ))}
-                </select>
-              </label>
             </div>
-
-            <label className="mt-4 block space-y-2">
-              <span className="text-sm font-medium text-(--color-text-primary)">{t('directPayment.note')}</span>
-              <textarea
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-                placeholder={t('directPayment.notePlaceholder')}
-                className="min-h-28 w-full rounded-xl border px-4 py-3 text-sm"
-                style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
-              />
-            </label>
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm" style={{ borderColor: 'var(--color-border)' }}>
               <div>
@@ -269,7 +236,7 @@ export default function FinansPageClient({ locale }: { locale: string }) {
             <div className="mt-5 flex flex-wrap gap-3">
               <button
                 type="button"
-                disabled={payBusy || !showDealerBankCardPayment || summary.current_balance <= 0}
+                disabled={payBusy || !showDealerBankCardPayment || !(Number.parseFloat(amount.replace(',', '.')) > 0)}
                 className="rounded-xl bg-(--color-brand) px-5 py-3 text-sm font-semibold text-(--color-on-brand) disabled:opacity-50"
                 onClick={() => void onDirectPayment()}
               >

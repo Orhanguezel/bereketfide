@@ -577,7 +577,7 @@ export default async function HomePage({
                 }}
               >
                 <div className="absolute top-0 left-0 h-1 w-32 bg-(--color-brand)" />
-                <BrandCarousel brands={references as any[]} />
+                <BrandCarousel brands={references.map((r: any) => ({ ...r, logo_url: resolveImageUrl(r.featured_image || r.logo_url || r.image_url) }))} />
                 <div className="absolute bottom-0 right-0 h-1 w-32 bg-(--color-brand)" />
               </div>
             </Reveal>

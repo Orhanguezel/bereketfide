@@ -123,6 +123,7 @@ const emptyNav: AdminNavCopy = {
     references: '',
     bereket_news: '',
     library: '',
+    b2b_payment_attempts: '',
   },
 };
 
@@ -188,6 +189,7 @@ export function normalizeAdminUiCopy(raw: unknown): AdminUiCopy {
     references: uiText(itemsRaw.references),
     bereket_news: uiText(itemsRaw.bereket_news),
     library: uiText(itemsRaw.library),
+    b2b_payment_attempts: uiText(itemsRaw.b2b_payment_attempts),
   };
 
   const commonRaw = parseJsonObject(o.common);

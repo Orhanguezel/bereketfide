@@ -71,7 +71,9 @@ Durum etiketleri:
 - `[~]` Banka timeout/init hatasinda bazi akislarda `payment_status = failed` yapiliyor, ama her senaryo icin retry/polling mekanizmasi yok.
 - `[x]` Callback hic gelmeyen dis odemeler icin timeout cleanup isi eklendi.
 - `[x]` Yari kalan odemeleri `expired` olarak isaretleyen ve siparisi `failed` durumuna ceken job eklendi.
-- `[ ]` Kullaniciya "odeme sureci yarim kaldi" icin ayrik bir ekran/aksiyon akisi yok.
+- `[x]` Kullaniciya "odeme sureci yarim kaldi" icin ayrik bir ekran/aksiyon akisi eklendi.
+  Kod: `frontend/src/app/[locale]/(bayi)/panel/siparisler/[id]/OrderDetailClient.tsx`
+  `payment_status === 'pending'` durumunda sarı uyarı banner + ödeme butonları gösterilir.
 
 ## 5. Loglama ve Izleme
 
@@ -79,8 +81,9 @@ Durum etiketleri:
   Kod: `backend/src/modules/orders/payment-callback.controller.ts`, `backend/src/modules/orders/payment-card-callback.controller.ts`
 - `[x]` Dis odeme init request bilgileri, callback payload'lari ve hata notlari `payment_attempts` tablosunda tutuluyor.
 - `[x]` Banka/odeme saglayicisi callback sonucuna dair temel audit trail artik kalici tutuluyor.
-- `[ ]` Odeme denemeleri icin ayri izleme paneli veya rapor ekranı yok.
-- `[ ]` "Hatalari nereden takip edecegiz?" sorusuna cevap veren payment-specific dashboard yok.
+- `[x]` Odeme denemeleri listesine ozet istatistik karti eklendi (basarili/basarisiz/zaman-asimi/bekliyor + saglayici dagilimi).
+  Kod: `admin_panel/src/app/(main)/(admin-pages)/(admin)/orders/payment-attempts/_components/admin-payment-attempts-list-client.tsx`
+- `[~]` Payment dashboard ilk surumu: mevcut veriden hesaplanir (max yuklu 50 kayit). Kapsamli dashboard icin `/admin/orders/payment-attempts/stats` backend endpoint'i gerekir.
 
 ## 6. Test Senaryolari Checklist
 
@@ -116,14 +119,18 @@ Durum etiketleri:
 
 ### 6.4 Iade
 
-- `[ ]` Teknik olarak payment provider tarafinda refund endpoint'i var mi teyit et.
-- `[x]` Backend'de ilk surum refund API/servisi eklendi.
-- `[ ]` Siparis, cari hareket ve stok etkisi tasarlandi mi kontrol et.
-- `[ ]` Iade test senaryosu yaz ve uygula.
+- `[x]` Kapsam karari verildi:
+  - `dealer_credit`: tam otomatik iade — cari bakiye geri alinir, `payment_status='refunded'`, `status='cancelled'`
+  - `bank_transfer`: manuel iade — otomatik bakiye degisikligi yok, admin el ile isler
+  - kart (iyzico/craftgate/halkode/ziraatpay/nestpay): Sprint 2, provider API entegrasyonu gerekiyor
+  - Stok etkisi: stok modul olmadigi icin kapsam disi
+- `[x]` Refund aninda `order.status='cancelled'` set edilmesi eklendi (`refund.service.ts`)
+- `[x]` Siparis + cari hareket etkisi: `dealerTransactions` type='refund', `current_balance -= total`
+- `[x]` Iade unit testleri yazildi ve gecti: `backend/src/test/payment-refund.test.ts` (9 test)
 
 Mevcut durum:
 
-- `[~]` Admin tarafinda `dealer_credit` odemeleri icin ilk surum refund akisi eklendi; banka/provider iadesi henuz yok.
+- `[x]` `dealer_credit` iadesi uretim hazir. Kart/havale iadesi Sprint 2.
 
 ### 6.5 Taksitli Odeme
 
@@ -131,7 +138,8 @@ Mevcut durum:
 - `[x]` NestPay/ZiraatPay icin taksit parametresi backend akisina eklendi.
 - `[x]` Halk Ode akisi secilen taksit bilgisini callback URL'leriyle birlikte uretiyor.
 - `[x]` Frontend'de taksit secim UI'i eklendi.
-- `[ ]` Taksitli odeme sonucu tutar/komisyon kaydi dogru mu kontrol et.
+- `[~]` Taksit bilgisi `payment_attempts.request_payload` JSON'inda tutuluyor — yeterli.
+  Komisyon provider tarafinda billing ediliyor; backend'de ayri komisyon kaydi gerekmiyor.
 
 Mevcut durum:
 
@@ -154,6 +162,8 @@ Mevcut durum:
 - `[x]` Yari kalan odemeler icin timeout/abandon cron tanimlandi.
 - `[x]` `payment_attempts` icin admin listeleme / filtreleme API'i eklendi.
 - `[x]` `payment_attempts` icin admin listeleme / filtreleme UI'i eklendi.
-- `[ ]` Refund ve taksit kapsam kararini netlestir.
-- `[ ]` Halk Ode panelinden gercek sandbox/canli teknik alanlari ile success/fail/refund senaryolarini tamamla.
-- `[ ]` Sandbox test verileri ile bu dokumandaki checklist'i adim adim doldur.
+- `[x]` Refund ve taksit kapsam karari verildi (bakimiz: 6.4 ve 6.5).
+- `[x]` `dealer_credit` refund unit testleri tamamlandi (9 test, hepsi gecti).
+- `[x]` Cari odeme (`finalizeOrderPaymentWithDealerCredit`) unit testleri tamamlandi (10 test, hepsi gecti).
+- `[ ]` Halk Ode panelinden gercek sandbox teknik alanlari ile success/fail/refund senaryolarini tamamla.
+- `[ ]` Sandbox test verileri ile 6.1-6.3 checklist'ini adim adim doldur (manuel E2E).

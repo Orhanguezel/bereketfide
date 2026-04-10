@@ -3639,6 +3639,33 @@
           "pending": "Zahlung ausstehend",
           "paid": "Bezahlt",
           "failed": "Fehlgeschlagen"
+        },
+        "attemptsTitle": "Zahlungsversuche",
+        "attemptsSubtitle": "Zahlungsinitiierungen, Callback-Ergebnisse und Fehler uberwachen.",
+        "statsTitle": "Zusammenfassung",
+        "statsTotal": "Versuche gesamt",
+        "statsSucceeded": "Erfolgreich",
+        "statsFailed": "Fehlgeschlagen",
+        "statsExpired": "Abgelaufen",
+        "statsPending": "Ausstehend",
+        "statsProviders": "Anbieter-Verteilung",
+        "statsNote": "Berechnet aus den letzten {count} Versuchen.",
+        "attemptsFilters": "Filter",
+        "attemptsOrderPlaceholder": "Nach Bestellungs-UUID filtern",
+        "attemptsProviderPlaceholder": "Nach Anbieter filtern",
+        "attemptsStatusAll": "Alle Versuche",
+        "attemptsColDate": "Datum",
+        "attemptsColOrder": "Bestellung",
+        "attemptsColProvider": "Anbieter",
+        "attemptsColAmount": "Betrag",
+        "attemptsColStatus": "Status",
+        "attemptsColError": "Fehler",
+        "attemptsLoadError": "Zahlungsversuche konnten nicht geladen werden.",
+        "attemptStatus": {
+          "pending": "Ausstehend",
+          "succeeded": "Erfolgreich",
+          "failed": "Fehlgeschlagen",
+          "expired": "Abgelaufen"
         }
       },
       "dealers": {

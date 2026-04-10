@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useGetSiteSettingByKeyQuery } from '@/integrations/hooks';
 
 const BRAND_PREFIX = process.env.NEXT_PUBLIC_BRAND_PREFIX || 'bereketfide__';
-const LOGO_FALLBACK = '/logo/bereket_logo_512.png';
+const LOGO_FALLBACK = '/admin/logo/bereket_logo_512.png';
 
 type Props = {
   heading: string;

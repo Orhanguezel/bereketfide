@@ -32,7 +32,7 @@ export function absoluteAssetUrl(value?: string | null): string | null {
   if (/^https?:\/\//i.test(value)) return encodeAssetLikeUrl(value);
   
   // Frontend'in kendi /public klasöründeki statik dosyalar (Görünür URL'de başında / olur)
-  const localStaticPaths = ['/media/', '/brands/', '/icons/', '/logo-', '/favicon'];
+  const localStaticPaths = ['/media/', '/icons/', '/logo-', '/favicon'];
   const normalized = value.startsWith('/') ? value : `/${value}`;
   
   if (localStaticPaths.some(path => normalized.startsWith(path))) {

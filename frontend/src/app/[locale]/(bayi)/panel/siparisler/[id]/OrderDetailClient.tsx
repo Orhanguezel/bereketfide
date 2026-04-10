@@ -173,6 +173,7 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
   }
 
   const showPay = order.payment_status === 'unpaid' && order.status === 'pending';
+  const showRetry = order.payment_status === 'pending' && order.status === 'pending';
   const showCancel = order.status === 'pending';
 
   return (
@@ -274,8 +275,19 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
         </div>
       ) : null}
 
+      {showRetry ? (
+        <div
+          role="status"
+          className="rounded-xl border px-4 py-3 text-sm"
+          style={{ borderColor: 'var(--color-warn, #d97706)', background: 'var(--color-warn-bg, #fffbeb)' }}
+        >
+          <p className="font-semibold text-(--color-text-primary)">{t('paymentAbandoned')}</p>
+          <p className="mt-1 text-(--color-text-secondary)">{t('paymentAbandonedHint')}</p>
+        </div>
+      ) : null}
+
       <div className="flex flex-wrap gap-3">
-        {showPay ? (
+        {(showPay || showRetry) ? (
           <>
             <label className="flex items-center gap-2 rounded-xl border px-3 py-2 text-sm" style={{ borderColor: 'var(--color-border)' }}>
               <span className="text-(--color-text-muted)">{t('installment')}</span>

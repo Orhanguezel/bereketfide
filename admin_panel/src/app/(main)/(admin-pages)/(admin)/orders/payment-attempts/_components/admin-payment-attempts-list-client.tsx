@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { RefreshCcw } from 'lucide-react';
+import { RefreshCcw, CheckCircle2, XCircle, Clock, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -57,6 +57,19 @@ export default function AdminPaymentAttemptsListClient() {
 
   const rows = q.data?.data ?? [];
 
+  const stats = React.useMemo(() => {
+    const counts = { succeeded: 0, failed: 0, expired: 0, pending: 0 };
+    const providerMap: Record<string, number> = {};
+    for (const r of rows) {
+      if (r.status in counts) counts[r.status as keyof typeof counts]++;
+      providerMap[r.provider] = (providerMap[r.provider] ?? 0) + 1;
+    }
+    const providers = Object.entries(providerMap)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5);
+    return { counts, providers, total: rows.length };
+  }, [rows]);
+
   return (
     <div className="space-y-6 p-4 md:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -69,6 +82,59 @@ export default function AdminPaymentAttemptsListClient() {
           {t('refresh')}
         </Button>
       </div>
+
+      {rows.length > 0 && (
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">{t('statsTitle')}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="flex items-center gap-2 rounded-lg border p-3">
+                <CheckCircle2 className="size-5 shrink-0 text-green-500" />
+                <div>
+                  <p className="text-lg font-bold leading-none">{stats.counts.succeeded}</p>
+                  <p className="text-muted-foreground mt-0.5 text-xs">{t('statsSucceeded')}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border p-3">
+                <XCircle className="size-5 shrink-0 text-red-500" />
+                <div>
+                  <p className="text-lg font-bold leading-none">{stats.counts.failed}</p>
+                  <p className="text-muted-foreground mt-0.5 text-xs">{t('statsFailed')}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border p-3">
+                <Clock className="size-5 shrink-0 text-amber-500" />
+                <div>
+                  <p className="text-lg font-bold leading-none">{stats.counts.expired}</p>
+                  <p className="text-muted-foreground mt-0.5 text-xs">{t('statsExpired')}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border p-3">
+                <AlertCircle className="size-5 shrink-0 text-blue-500" />
+                <div>
+                  <p className="text-lg font-bold leading-none">{stats.counts.pending}</p>
+                  <p className="text-muted-foreground mt-0.5 text-xs">{t('statsPending')}</p>
+                </div>
+              </div>
+            </div>
+            {stats.providers.length > 0 && (
+              <div className="mt-3">
+                <p className="text-muted-foreground mb-2 text-xs font-medium">{t('statsProviders')}</p>
+                <div className="flex flex-wrap gap-2">
+                  {stats.providers.map(([prov, cnt]) => (
+                    <span key={prov} className="bg-muted rounded-md px-2 py-0.5 text-xs">
+                      {prov}: {cnt}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            <p className="text-muted-foreground mt-3 text-xs">{t('statsNote', { count: stats.total })}</p>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader className="pb-3">
