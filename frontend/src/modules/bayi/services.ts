@@ -105,6 +105,11 @@ export async function fetchFinanceSummary(): Promise<FinanceSummary> {
 export async function postDealerDirectCardInitiate(body: {
   amount: number;
   locale: string;
+  cc_holder_name?: string;
+  cc_no?: string;
+  exp_month?: string;
+  exp_year?: string;
+  cvv?: string;
 }): Promise<DealerDirectCardInitResponse> {
   const res = await api.post<DealerDirectCardInitResponse>(
     '/dealer/finance/direct-payment/card/initiate',

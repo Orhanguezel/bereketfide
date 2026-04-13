@@ -71,7 +71,8 @@ export default function BayiPanelShell({
     return () => {
       cancelled = true;
     };
-  }, [locale, router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale]);
 
   const pathNoLocale = stripLocalePrefix(pathname, activeLocale);
 

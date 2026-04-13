@@ -10,7 +10,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 START TRANSACTION;
 
 -- =========================
--- STATIC IMAGES
+-- PRODUCT IMAGES
 -- =========================
 INSERT INTO `storage_assets`
 (`id`, `user_id`, `name`, `bucket`, `path`, `folder`, `mime`, `size`, `width`, `height`, `url`, `hash`, `provider`, `provider_public_id`, `provider_resource_type`, `provider_format`, `provider_version`, `etag`, `metadata`, `created_at`, `updated_at`)
@@ -91,6 +91,35 @@ VALUES
   ('bf-prd-img-0077', NULL, '23.28.37 (5).jpeg', 'products', 'products/23.28.37 (5).jpeg', 'products', 'image/jpeg', 252915, 800, 800, '/uploads/products/23.28.37 (5).jpeg', NULL, 'local', 'products/23.28.37 (5).jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
   ('bf-prd-img-0078', NULL, '23.28.37 (6).jpeg', 'products', 'products/23.28.37 (6).jpeg', 'products', 'image/jpeg', 250258, 800, 800, '/uploads/products/23.28.37 (6).jpeg', NULL, 'local', 'products/23.28.37 (6).jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
   ('bf-prd-img-0079', NULL, '23.28.37.jpeg', 'products', 'products/23.28.37.jpeg', 'products', 'image/jpeg', 411933, 800, 800, '/uploads/products/23.28.37.jpeg', NULL, 'local', 'products/23.28.37.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW())
+ON DUPLICATE KEY UPDATE
+  url = VALUES(url),
+  size = VALUES(size),
+  updated_at = NOW();
+
+-- =========================
+-- NEWS IMAGES
+-- =========================
+INSERT INTO `storage_assets`
+(`id`, `user_id`, `name`, `bucket`, `path`, `folder`, `mime`, `size`, `width`, `height`, `url`, `hash`, `provider`, `provider_public_id`, `provider_resource_type`, `provider_format`, `provider_version`, `etag`, `metadata`, `created_at`, `updated_at`)
+VALUES
+  ('bf-news-img-0001', NULL, 'bugem.jpeg',  'news', 'news/bugem.jpeg',  'news', 'image/jpeg', 321046, 1200, 800, '/uploads/news/bugem.jpeg',  NULL, 'local', 'news/bugem.jpeg',  'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0002', NULL, 'bugem2.jpeg', 'news', 'news/bugem2.jpeg', 'news', 'image/jpeg', 360066, 1200, 800, '/uploads/news/bugem2.jpeg', NULL, 'local', 'news/bugem2.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0003', NULL, 'aksu.jpeg',   'news', 'news/aksu.jpeg',   'news', 'image/jpeg', 316171, 1200, 800, '/uploads/news/aksu.jpeg',   NULL, 'local', 'news/aksu.jpeg',   'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0004', NULL, 'aksu2.jpeg',  'news', 'news/aksu2.jpeg',  'news', 'image/jpeg', 170888, 1200, 800, '/uploads/news/aksu2.jpeg',  NULL, 'local', 'news/aksu2.jpeg',  'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0005', NULL, 'aksu3.jpeg',  'news', 'news/aksu3.jpeg',  'news', 'image/jpeg', 273223, 1200, 800, '/uploads/news/aksu3.jpeg',  NULL, 'local', 'news/aksu3.jpeg',  'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0006', NULL, 'aksu4.jpeg',  'news', 'news/aksu4.jpeg',  'news', 'image/jpeg', 312237, 1200, 800, '/uploads/news/aksu4.jpeg',  NULL, 'local', 'news/aksu4.jpeg',  'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0007', NULL, 'aksu5.jpeg',  'news', 'news/aksu5.jpeg',  'news', 'image/jpeg', 281663, 1200, 800, '/uploads/news/aksu5.jpeg',  NULL, 'local', 'news/aksu5.jpeg',  'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0008', NULL, 'samsun.jpeg',  'news', 'news/samsun.jpeg',  'news', 'image/jpeg', 507283, 1200, 800, '/uploads/news/samsun.jpeg',  NULL, 'local', 'news/samsun.jpeg',  'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0009', NULL, 'samsun2.jpeg', 'news', 'news/samsun2.jpeg', 'news', 'image/jpeg', 217424, 1200, 800, '/uploads/news/samsun2.jpeg', NULL, 'local', 'news/samsun2.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0010', NULL, 'samsun3.jpeg', 'news', 'news/samsun3.jpeg', 'news', 'image/jpeg', 686649, 1200, 800, '/uploads/news/samsun3.jpeg', NULL, 'local', 'news/samsun3.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0011', NULL, 'samsun4.jpeg', 'news', 'news/samsun4.jpeg', 'news', 'image/jpeg', 379621, 1200, 800, '/uploads/news/samsun4.jpeg', NULL, 'local', 'news/samsun4.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0012', NULL, 'samsun5.jpeg', 'news', 'news/samsun5.jpeg', 'news', 'image/jpeg', 537420, 1200, 800, '/uploads/news/samsun5.jpeg', NULL, 'local', 'news/samsun5.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0013', NULL, 'samsun6.jpeg', 'news', 'news/samsun6.jpeg', 'news', 'image/jpeg', 241424, 1200, 800, '/uploads/news/samsun6.jpeg', NULL, 'local', 'news/samsun6.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0014', NULL, 'samsun7.jpeg', 'news', 'news/samsun7.jpeg', 'news', 'image/jpeg', 287820, 1200, 800, '/uploads/news/samsun7.jpeg', NULL, 'local', 'news/samsun7.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0015', NULL, 'samsun8.jpeg', 'news', 'news/samsun8.jpeg', 'news', 'image/jpeg', 503636, 1200, 800, '/uploads/news/samsun8.jpeg', NULL, 'local', 'news/samsun8.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0016', NULL, 'aksuj.jpeg',  'news', 'news/aksuj.jpeg',  'news', 'image/jpeg', 537420, 1200, 800, '/uploads/news/aksuj.jpeg',  NULL, 'local', 'news/aksuj.jpeg',  'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0017', NULL, 'aksuj2.jpeg', 'news', 'news/aksuj2.jpeg', 'news', 'image/jpeg', 241424, 1200, 800, '/uploads/news/aksuj2.jpeg', NULL, 'local', 'news/aksuj2.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-news-img-0018', NULL, 'aksuj3.jpeg', 'news', 'news/aksuj3.jpeg', 'news', 'image/jpeg', 287820, 1200, 800, '/uploads/news/aksuj3.jpeg', NULL, 'local', 'news/aksuj3.jpeg', 'image', 'jpg', NULL, NULL, '{}', NOW(), NOW())
 ON DUPLICATE KEY UPDATE
   url = VALUES(url),
   size = VALUES(size),

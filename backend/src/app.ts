@@ -66,13 +66,14 @@ export async function createApp() {
   await app.register(jwt, { secret: env.JWT_SECRET, cookie: { cookieName: 'access_token', signed: false } });
 
   await app.register(rateLimit, {
-    max: 100,
+    max: 200,
     timeWindow: '1 minute',
     allowList: (req) => {
+      const ip = req.ip ?? '';
       const path = (req.url ?? '').split('?')[0] ?? '';
-      return (
-        path === '/health' || path === '/api/health' || path.startsWith('/uploads/')
-      );
+      // SSR (Next.js) calls come from localhost — never rate-limit them
+      if (ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1') return true;
+      return path === '/health' || path === '/api/health' || path.startsWith('/uploads/');
     },
   });
 

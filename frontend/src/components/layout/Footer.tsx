@@ -133,20 +133,30 @@ export function Footer({
             {t('ecosystemLabel')}
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <a
-              href="https://www.vistaseed.com.tr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="surface-dark-link inline-flex items-center gap-1 text-sm transition-colors"
-            >
-              VistaSeed <span className="opacity-50">↗</span>
-            </a>
-            <span className="surface-dark-link text-sm opacity-40" aria-hidden>
-              Ziraat Haber (Yakında)
-            </span>
-            <span className="surface-dark-link text-sm opacity-40" aria-hidden>
-              Hal Fiyatları (Yakında)
-            </span>
+            {([
+              { label: 'VistaSeed',          href: 'https://vistaseeds.com.tr' },
+              { label: 'Tarımda Bugün',      href: 'https://tarimdabugun.com' },
+              { label: 'Hal Fiyatları',      href: 'https://haldefiyat.com' },
+              { label: 'Tarım Ansiklopedisi',href: 'https://tarimansiklopedisi.com' },
+              { label: 'ZiraiBilgim',        href: 'https://ziraibilgim.com' },
+              { label: 'TarMinGO',           href: 'https://www.bereketfide.com.tr/tr/quiz-site/index.html' },
+              { label: 'TarimIklim',         href: 'https://tarimiklim.com/tr' },
+            ] as { label: string; href: string }[]).map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="surface-dark-link inline-flex items-center gap-1 text-sm transition-colors"
+              >
+                {label} <span className="opacity-50">↗</span>
+              </a>
+            ))}
+            {(['B2B Pazaryeri', 'Sera SaaS'] as string[]).map((label) => (
+              <span key={label} className="surface-dark-text text-sm opacity-35">
+                {label} (Yakında)
+              </span>
+            ))}
           </div>
         </div>
 

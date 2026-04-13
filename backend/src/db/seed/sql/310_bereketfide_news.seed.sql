@@ -36,49 +36,77 @@ INSERT INTO `custom_pages`
   `sub_category_id`
 )
 VALUES
-  -- Haber 1: Özbekistan Tarım Bakanlığı ziyareti (canli site ile hizali baslik/icerik)
+  -- Haber 1: Bügem GMY İhsan Emiralioğlu ziyareti
   ('nw010001-5001-4001-9001-nnnnnnnn0001', 'news', 1, 1, 10, 10,
-   '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
-   '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
-   JSON_ARRAY('/uploads/products/23.28.37 (3).jpeg', '/uploads/products/23.28.37 (1).jpeg'),
-   JSON_ARRAY('d0829871-469a-46ae-b243-b537aff49ec0', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315'),
+   '/uploads/news/bugem.jpeg', 'bf-news-img-0001',
+   '/uploads/news/bugem.jpeg', 'bf-news-img-0001',
+   JSON_ARRAY('/uploads/news/bugem.jpeg', '/uploads/news/bugem2.jpeg'),
+   JSON_ARRAY('bf-news-img-0001', 'bf-news-img-0002'),
    'nccc0001-4001-4001-8001-nncccccc0001', NULL),
-  -- Haber 2: Antalya Valiligi / kurumsal ziyaret (yeni isletme binasi)
+  -- Haber 2: Türktob Başkanı Kayhan Yıldırım ziyareti
   ('nw010002-5002-4002-9002-nnnnnnnn0002', 'news', 1, 1, 20, 20,
-   '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
-   '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
-   JSON_ARRAY('/uploads/products/23.28.37 (1).jpeg'), JSON_ARRAY('33bfb1c6-6eeb-44a0-a351-1ed0ffab0315'),
+   '/uploads/news/bugem2.jpeg', 'bf-news-img-0002',
+   '/uploads/news/bugem2.jpeg', 'bf-news-img-0002',
+   JSON_ARRAY('/uploads/news/bugem2.jpeg', '/uploads/news/bugem.jpeg'),
+   JSON_ARRAY('bf-news-img-0002', 'bf-news-img-0001'),
    'nccc0003-4003-4003-8003-nncccccc0003', NULL),
-  -- Haber 3: Tarla gunleri
+  -- Haber 3: Antalya Valiliği / Aksu ziyareti
+  ('nw010006-5006-4006-9006-nnnnnnnn0006', 'news', 1, 1, 25, 25,
+   '/uploads/news/aksu.jpeg', 'bf-news-img-0003',
+   '/uploads/news/aksu.jpeg', 'bf-news-img-0003',
+   JSON_ARRAY('/uploads/news/aksu.jpeg','/uploads/news/aksu2.jpeg','/uploads/news/aksu3.jpeg','/uploads/news/aksu4.jpeg','/uploads/news/aksu5.jpeg'),
+   JSON_ARRAY('bf-news-img-0003','bf-news-img-0004','bf-news-img-0005','bf-news-img-0006','bf-news-img-0007'),
+   'nccc0003-4003-4003-8003-nncccccc0003', NULL),
+  -- Haber 4: Samsun Valisi ziyareti
+  ('nw010007-5007-4007-9007-nnnnnnnn0007', 'news', 1, 1, 27, 27,
+   '/uploads/news/samsun.jpeg', 'bf-news-img-0008',
+   '/uploads/news/samsun.jpeg', 'bf-news-img-0008',
+   JSON_ARRAY('/uploads/news/samsun.jpeg','/uploads/news/samsun2.jpeg','/uploads/news/samsun3.jpeg','/uploads/news/samsun4.jpeg','/uploads/news/samsun8.jpeg'),
+   JSON_ARRAY('bf-news-img-0008','bf-news-img-0009','bf-news-img-0010','bf-news-img-0011','bf-news-img-0015'),
+   'nccc0003-4003-4003-8003-nncccccc0003', NULL),
+  -- Haber 5: Aksu Protokolü ziyareti
+  ('nw010008-5008-4008-9008-nnnnnnnn0008', 'news', 1, 1, 28, 28,
+   '/uploads/news/aksuj.jpeg', 'bf-news-img-0016',
+   '/uploads/news/aksuj.jpeg', 'bf-news-img-0016',
+   JSON_ARRAY('/uploads/news/aksuj.jpeg','/uploads/news/aksuj2.jpeg','/uploads/news/aksuj3.jpeg'),
+   JSON_ARRAY('bf-news-img-0016','bf-news-img-0017','bf-news-img-0018'),
+   'nccc0003-4003-4003-8003-nncccccc0003', NULL),
+  -- Haber 6: Tarla günleri
   ('nw010003-5003-4003-9003-nnnnnnnn0003', 'news', 1, 0, 30, 30,
-   '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
-   '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
-   JSON_ARRAY('/uploads/products/23.28.37 (3).jpeg'), JSON_ARRAY('d0829871-469a-46ae-b243-b537aff49ec0'),
+   '/uploads/products/23.28.37 (3).jpeg', 'bf-prd-img-0075',
+   '/uploads/products/23.28.37 (3).jpeg', 'bf-prd-img-0075',
+   JSON_ARRAY('/uploads/products/23.28.37 (3).jpeg'),
+   JSON_ARRAY('bf-prd-img-0075'),
    'nccc0002-4002-4002-8002-nncccccc0002', NULL),
-  -- Haber 4: Kapasite / lojistik yatirimi
+  -- Haber 4: Kapasite / lojistik yatırımı
   ('nw010004-5004-4004-9004-nnnnnnnn0004', 'news', 1, 0, 40, 40,
-   '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
-   '/uploads/products/23.28.37 (1).jpeg', '33bfb1c6-6eeb-44a0-a351-1ed0ffab0315',
-   JSON_ARRAY('/uploads/products/23.28.37 (1).jpeg'), JSON_ARRAY('33bfb1c6-6eeb-44a0-a351-1ed0ffab0315'),
+   '/uploads/products/23.28.37 (1).jpeg', 'bf-prd-img-0073',
+   '/uploads/products/23.28.37 (1).jpeg', 'bf-prd-img-0073',
+   JSON_ARRAY('/uploads/products/23.28.37 (1).jpeg'),
+   JSON_ARRAY('bf-prd-img-0073'),
    'nccc0004-4004-4004-8004-nncccccc0004', NULL),
   -- Haber 5: Genç Çiftçiler
   ('nw010005-5005-4005-9005-nnnnnnnn0005', 'news', 1, 1, 50, 50,
-   '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
-   '/uploads/products/23.28.37 (3).jpeg', 'd0829871-469a-46ae-b243-b537aff49ec0',
-   JSON_ARRAY('/uploads/products/23.28.37 (3).jpeg'), JSON_ARRAY('d0829871-469a-46ae-b243-b537aff49ec0'),
+   '/uploads/products/23.28.37 (3).jpeg', 'bf-prd-img-0075',
+   '/uploads/products/23.28.37 (3).jpeg', 'bf-prd-img-0075',
+   JSON_ARRAY('/uploads/products/23.28.37 (3).jpeg'),
+   JSON_ARRAY('bf-prd-img-0075'),
    'nccc0005-4005-4005-8005-nncccccc0005', NULL)
 ON DUPLICATE KEY UPDATE
-  `module_key`   = VALUES(`module_key`),
-  `is_published` = VALUES(`is_published`),
-  `featured`     = VALUES(`featured`),
-  `display_order`= VALUES(`display_order`),
-  `featured_image` = VALUES(`featured_image`),
-  `image_url` = VALUES(`image_url`),
-  `images`       = VALUES(`images`),
-  `category_id`  = VALUES(`category_id`);
+  `module_key`              = VALUES(`module_key`),
+  `is_published`            = VALUES(`is_published`),
+  `featured`                = VALUES(`featured`),
+  `display_order`           = VALUES(`display_order`),
+  `featured_image`          = VALUES(`featured_image`),
+  `featured_image_asset_id` = VALUES(`featured_image_asset_id`),
+  `image_url`               = VALUES(`image_url`),
+  `storage_asset_id`        = VALUES(`storage_asset_id`),
+  `images`                  = VALUES(`images`),
+  `storage_image_ids`       = VALUES(`storage_image_ids`),
+  `category_id`             = VALUES(`category_id`);
 
 -- =========================
--- 2) CUSTOM PAGES I18N — TR
+-- 3) CUSTOM PAGES I18N — TR
 -- =========================
 INSERT INTO `custom_pages_i18n`
 (
@@ -98,25 +126,61 @@ VALUES
     'nw020001-6001-4001-a001-nnnnnnnn0001',
     'nw010001-5001-4001-9001-nnnnnnnn0001',
     'tr',
-    'Özbekistan Tarım Bakanlığı Heyetinin Bereket Fide Ziyareti',
-    'ozbekistan-tarim-bakanligi-heyetinin-bereket-fide-ziyareti',
-    JSON_OBJECT('html', '<p>Özbekistan Tarım Bakanlığı heyetinin Bereket Fidemizi ziyaret etmesinden dolayı teşekkür ederiz. İki ülke tarımı arasında bilgi paylaşımı ve iş birliği fırsatlarını değerlendirdiğimiz verimli bir görüşme gerçekleştirdik.</p><p>Ziyaret kapsamında modern fide üretim tesislerimizde sürdürülebilir üretim ve kalite süreçlerimiz hakkında karşılıklı fikir alışverişi yapıldı.</p>'),
-    'Özbekistan Tarım Bakanlığı heyetine nazik ziyaretleri için teşekkürler.',
-    'Özbekistan Heyeti Ziyareti | Bereket Fide',
-    'Özbekistan Tarım Bakanlığı heyetinin Bereket Fide tesislerini ziyareti ve tarımsal iş birliği.',
-    'özbekistan, tarım bakanlığı, ziyaret, bereket fide, uluslararası iş birliği'
+    'Tarım Bakanlığı BÜGEM GMY İhsan Emiralioğlu Bereket Fide''yi Ziyaret Etti',
+    'bugem-gmy-ihsan-emiralioglu-bereketfide-ziyareti',
+    JSON_OBJECT('html', '<p>Tarım ve Orman Bakanlığı Bitkisel Üretim Genel Müdürlüğü (BÜGEM) Genel Müdür Yardımcısı İhsan Emiralioğlu, Bereket Fide tesislerimizi ziyaret etti. Misafirimize modern fide üretim süreçlerimizi, bilgisayar kontrollü seralarımızı ve sektöre katkılarımızı tanıttık.</p><p>Ziyaret kapsamında yerli tohum ve fide üretiminin güçlendirilmesi, üretici destekleri ve sektörel iş birliği olanakları üzerine verimli bir görüşme gerçekleştirildi. Değerli ziyaretleri için Sayın Emiralioğlu''na teşekkür ederiz.</p>'),
+    'BÜGEM Genel Müdür Yardımcısı İhsan Emiralioğlu, Bereket Fide üretim tesislerini ziyaret etti.',
+    'BÜGEM GMY İhsan Emiralioğlu Ziyareti | Bereket Fide',
+    'Tarım Bakanlığı BÜGEM Genel Müdür Yardımcısı İhsan Emiralioğlu''nun Bereket Fide ziyareti ve sektörel değerlendirmeleri.',
+    'bügem, tarım bakanlığı, ihsan emiralioğlu, ziyaret, bereket fide, fide üretimi'
   ),
   (
     'nw020002-6002-4002-a002-nnnnnnnn0002',
     'nw010002-5002-4002-9002-nnnnnnnn0002',
     'tr',
-    'Antalya Valiliğinden Merkez Ofisimize Nazik Ziyaret',
-    'antalya-valiliginden-merkez-ofisimize-ziyaret',
-    JSON_OBJECT('html', '<p>Antalya Valimiz, Aksu Kaymakamımız, Aksu Belediye Başkanımız, İl Tarım ve Orman Müdürümüz, İlçe Tarım ve Orman Müdürümüz ve değerli ekiplerinin Bereket Fide bünyesinde yer alan yeni işletme binamıza gerçekleştirdikleri nazik ziyaret için teşekkür ederiz.</p><p>Misafirlerimize üretim planlarımız ve bölge tarımına katkılarımız hakkında bilgi sunduk; açık iletişim için teşekkür ederiz.</p>'),
-    'Vali, kaymakam, belediye ve tarım müdürlüklerinin yeni binamıza ziyareti.',
+    'Türktob Başkanı Kayhan Yıldırım ile Sektör Değerlendirmesi',
+    'turktob-baskani-kayhan-yildirim-bereketfide-ziyareti',
+    JSON_OBJECT('html', '<p>Türkiye Tohumcular Birliği (Türktob) Başkanı Kayhan Yıldırım, Bereket Fide''yi ziyaret etti. Türk tohumculuk sektörünün gündemine ilişkin görüşler paylaşıldı; yerli üretimin büyümesi, ihracat fırsatları ve sektörün karşılaştığı yapısal meseleler değerlendirildi.</p><p>Birliğin çalışmaları ve sektöre yönelik politika önerileri kapsamında gerçekleştirilen bu buluşmadan memnuniyet duyduk. Değerli ziyaretleri için Sayın Yıldırım''a teşekkür ederiz.</p>'),
+    'Türktob Başkanı Kayhan Yıldırım Bereket Fide ile bir araya gelerek sektörü değerlendirdi.',
+    'Türktob Başkanı Kayhan Yıldırım Ziyareti | Bereket Fide',
+    'Türkiye Tohumcular Birliği Başkanı Kayhan Yıldırım''ın Bereket Fide ziyareti ve tohumculuk sektörü değerlendirmesi.',
+    'türktob, kayhan yıldırım, tohumculuk, ziyaret, bereket fide, sektör'
+  ),
+  (
+    'nw020016-6016-4016-a016-nnnnnnnn0016',
+    'nw010006-5006-4006-9006-nnnnnnnn0006',
+    'tr',
+    'Bereket Fide''ye Ziyaret ve Sektörel Değerlendirme',
+    'antalya-valiligi-aksu-bereketfide-ziyareti',
+    JSON_OBJECT('html', '<p>Antalya Valimiz, Aksu Kaymakamımız, Aksu Belediye Başkanımız, İl Tarım ve Orman Müdürümüz ile İlçe Tarım ve Orman Müdürümüz ve beraberindeki heyet, Bereket Fide bünyesinde hizmete giren yeni işletme binamıza ziyarette bulunmuştur.</p><p>Gerçekleştirilen nazik ziyaret kapsamında, sektörümüzde karşılaşılan güncel sorunlar ve çözüm önerileri hakkında görüş alışverişinde bulunulmuş, aynı zamanda taleplerimiz ilgili yetkililere iletilmiştir. Program çerçevesinde üretim tesisimizde kısa bir tanıtım ve bilgilendirme gezisi de gerçekleştirilmiştir.</p><p>Ziyaretlerinden dolayı tüm sayın yetkililere teşekkür ederiz.</p>'),
+    'Antalya Valimiz ve Aksu yöneticileri, yeni işletme binamızı ziyaret ederek sektörel değerlendirmelerde bulundu.',
     'Antalya Valiliği Ziyareti | Bereket Fide',
-    'Antalya Valiliği ve ilgili kurumların Bereket Fide merkez ofis ziyareti duyurusu.',
-    'antalya, valilik, ziyaret, bereket fide, kurumsal'
+    'Antalya Valisi, Aksu Kaymakamı, Aksu Belediye Başkanı ve Tarım Orman Müdürlerinin Bereket Fide yeni binası ziyareti.',
+    'antalya, valilik, aksu, ziyaret, bereket fide, sektör değerlendirme'
+  ),
+  (
+    'nw020022-6022-4022-a022-nnnnnnnn0022',
+    'nw010008-5008-4008-9008-nnnnnnnn0008',
+    'tr',
+    'Aksu Protokolünden Bereket Fide''ye Ziyaret',
+    'aksu-protokolu-bereketfide-ziyareti',
+    JSON_OBJECT('html', '<p>Aksu Kaymakamımız Sayın Ahmet Hikmet Şahin, Aksu İlçe Komutanı Jandarma Teğmen Hulusi Mehmet Müdük ve Aksu İlçe Tarım ve Orman Müdürü İhsan İnal, işletmemizi ziyaret etmiştir.</p><p>Gerçekleştirilen nazik ziyaret dolayısıyla kendilerine teşekkür ederiz.</p>'),
+    'Aksu Kaymakamı, İlçe Komutanı ve Tarım Müdürü, Bereket Fide işletmesini ziyaret etti.',
+    'Aksu Protokolü Ziyareti | Bereket Fide',
+    'Aksu Kaymakamı Ahmet Hikmet Şahin ve Aksu protokolünün Bereket Fide ziyareti.',
+    'aksu, kaymakamlık, jandarma, tarım orman müdürü, ziyaret, bereket fide'
+  ),
+  (
+    'nw020019-6019-4019-a019-nnnnnnnn0019',
+    'nw010007-5007-4007-9007-nnnnnnnn0007',
+    'tr',
+    'Samsun Heyetinden Bereket Fide''ye Ziyaret',
+    'samsun-valisi-heyeti-bereketfide-ziyareti',
+    JSON_OBJECT('html', '<p>Samsun Valimiz Sayın Doç. Dr. Zülkif Dağlı, beraberinde Bafra Kaymakamı Cevdet Ertürkmen, Bafra Belediye Başkanı Hamit Kılıç, Bafra Ticaret ve Sanayi Odası, Bafra Ticaret Borsası, Bafra Ziraat Odası, Bafra Sera OSB yöneticileri ile Antalya İl Tarım ve Orman Müdürlüğü İl Müdür Yardımcısı Gökhan Karaca, Aksu İlçe Tarım ve Orman Müdürü İhsan İnal ve emniyet mensuplarından oluşan heyet, Bereket Fide üretim tesisimizi ziyaret etmiştir.</p><p>Gerçekleştirilen ziyaret kapsamında, genel yetiştiricilik faaliyetlerimiz ve ihracat çalışmalarımız hakkında karşılıklı bilgi alışverişinde bulunulmuş, sektörün mevcut durumu üzerine istişareler yapılmıştır.</p><p>Nazik ziyaretlerinden dolayı kendilerine teşekkür ederiz.</p>'),
+    'Samsun Valisi Doç. Dr. Zülkif Dağlı ve Bafra heyeti, Bereket Fide üretim tesisini ziyaret ederek sektörel istişarelerde bulundu.',
+    'Samsun Valisi Ziyareti | Bereket Fide',
+    'Samsun Valisi Zülkif Dağlı ve Bafra heyetinin Bereket Fide üretim tesisi ziyareti ve sektörel değerlendirmesi.',
+    'samsun, valilik, bafra, ziyaret, bereket fide, ihracat, sera osb'
   ),
   (
     'nw020003-6003-4003-a003-nnnnnnnn0003',
@@ -164,7 +228,7 @@ ON DUPLICATE KEY UPDATE
   `tags`             = VALUES(`tags`);
 
 -- =========================
--- 3) CUSTOM PAGES I18N — EN
+-- 4) CUSTOM PAGES I18N — EN
 -- =========================
 INSERT INTO `custom_pages_i18n`
 (
@@ -184,25 +248,61 @@ VALUES
     'nw020006-6006-4006-a006-nnnnnnnn0006',
     'nw010001-5001-4001-9001-nnnnnnnn0001',
     'en',
-    'Delegation from Uzbekistan Ministry of Agriculture Visits Bereket Fide',
-    'uzbekistan-agriculture-ministry-delegation-visits-bereket-fide',
-    JSON_OBJECT('html', '<p>We thank the delegation from the Ministry of Agriculture of Uzbekistan for visiting Bereket Fide. We held a productive meeting to exchange knowledge and explore cooperation between our agricultural communities.</p><p>During the visit we shared insights on sustainable seedling production and quality processes at our modern facilities.</p>'),
-    'Thanking the Uzbekistan Ministry of Agriculture delegation for their visit.',
-    'Uzbekistan Delegation Visit | Bereket Fide',
-    'Visit of the Uzbekistan Ministry of Agriculture delegation to Bereket Fide and agricultural cooperation.',
-    'uzbekistan, agriculture ministry, visit, bereket fide, international cooperation'
+    'BÜGEM Deputy Director General İhsan Emiralioğlu Visits Bereket Fide',
+    'bugem-deputy-director-ihsan-emiralioglu-bereketfide-visit',
+    JSON_OBJECT('html', '<p>İhsan Emiralioğlu, Deputy Director General of the Directorate General of Plant Production (BÜGEM) under the Ministry of Agriculture and Forestry, visited Bereket Fide. We presented our modern seedling production processes, computer-controlled greenhouses and contributions to the sector.</p><p>The meeting covered strengthening domestic seed and seedling production, producer support schemes, and opportunities for sectoral cooperation. We thank Mr. Emiralioğlu for his valuable visit.</p>'),
+    'BÜGEM Deputy Director General İhsan Emiralioğlu visited Bereket Fide production facilities.',
+    'BÜGEM Deputy Director Emiralioğlu Visit | Bereket Fide',
+    'Visit of Ministry of Agriculture BÜGEM Deputy Director General İhsan Emiralioğlu to Bereket Fide and sectoral assessments.',
+    'bügem, ministry of agriculture, ihsan emiralioglu, visit, bereket fide, seedling production'
   ),
   (
     'nw020007-6007-4007-a007-nnnnnnnn0007',
     'nw010002-5002-4002-9002-nnnnnnnn0002',
     'en',
-    'Courtesy Visit from Antalya Governorship to Our Headquarters',
-    'antalya-governorship-visits-bereket-fide-headquarters',
-    JSON_OBJECT('html', '<p>We thank the Governor of Antalya, the District Governor of Aksu, the Mayor of Aksu, our provincial and district directors of agriculture and forestry, and their teams for their kind visit to our new headquarters building within Bereket Fide.</p><p>We presented our production plans and contributions to regional agriculture; we appreciate the open dialogue.</p>'),
-    'Governor, district governor, mayor and agriculture directors visited our new building.',
+    'Türktob President Kayhan Yıldırım and Bereket Fide on the Sector',
+    'turktob-president-kayhan-yildirim-bereketfide-visit',
+    JSON_OBJECT('html', '<p>Kayhan Yıldırım, President of the Turkish Seedsmen Association (Türktob), visited Bereket Fide. Views were shared on the agenda of the Turkish seed sector, including the growth of domestic production, export opportunities and structural challenges facing the industry.</p><p>We were pleased to host this meeting in the context of the association''s work and policy recommendations for the sector. We thank Mr. Yıldırım for his valuable visit.</p>'),
+    'Türktob President Kayhan Yıldırım met with Bereket Fide to assess the seedsmen sector.',
+    'Türktob President Kayhan Yıldırım Visit | Bereket Fide',
+    'Visit of Turkish Seedsmen Association President Kayhan Yıldırım to Bereket Fide and seed sector assessment.',
+    'türktob, kayhan yildirim, seed sector, visit, bereket fide'
+  ),
+  (
+    'nw020017-6017-4017-a017-nnnnnnnn0017',
+    'nw010006-5006-4006-9006-nnnnnnnn0006',
+    'en',
+    'A Visit to Bereket Fide and Sectoral Assessment',
+    'antalya-governorship-aksu-bereketfide-visit',
+    JSON_OBJECT('html', '<p>The Governor of Antalya, the District Governor of Aksu, the Mayor of Aksu, the Provincial and District Directors of Agriculture and Forestry, and their accompanying delegation visited our new headquarters building that has recently entered service at Bereket Fide.</p><p>During the courtesy visit, opinions were exchanged on current challenges facing our sector and proposed solutions, and our requests were conveyed to the relevant authorities. As part of the programme, a brief introductory tour of our production facility was also conducted.</p><p>We sincerely thank all distinguished officials for their visit.</p>'),
+    'The Governor of Antalya and Aksu officials visited our new headquarters and assessed the sector.',
     'Antalya Governorship Visit | Bereket Fide',
-    'Courtesy visit by Antalya Governorship and related institutions to Bereket Fide headquarters.',
-    'antalya, governorship, visit, bereket fide, corporate'
+    'Visit of the Governor of Antalya, District Governor of Aksu, Mayor of Aksu and Agriculture Directors to the new Bereket Fide building.',
+    'antalya, governorship, aksu, visit, bereket fide, sector assessment'
+  ),
+  (
+    'nw020023-6023-4023-a023-nnnnnnnn0023',
+    'nw010008-5008-4008-9008-nnnnnnnn0008',
+    'en',
+    'A Visit from Aksu Protocol to Bereket Fide',
+    'aksu-protocol-bereketfide-visit',
+    JSON_OBJECT('html', '<p>Aksu District Governor Ahmet Hikmet Şahin, Aksu District Commander Gendarmerie Lieutenant Hulusi Mehmet Müdük, and Aksu District Director of Agriculture and Forestry İhsan İnal visited our facility.</p><p>We sincerely thank all distinguished guests for their kind visit.</p>'),
+    'Aksu District Governor, District Commander and Agriculture Director visited Bereket Fide.',
+    'Aksu Protocol Visit | Bereket Fide',
+    'Visit of Aksu District Governor Ahmet Hikmet Şahin and the Aksu protocol delegation to Bereket Fide.',
+    'aksu, district governor, gendarmerie, agriculture director, visit, bereket fide'
+  ),
+  (
+    'nw020020-6020-4020-a020-nnnnnnnn0020',
+    'nw010007-5007-4007-9007-nnnnnnnn0007',
+    'en',
+    'A Delegation from Samsun Visits Bereket Fide',
+    'samsun-governor-delegation-bereketfide-visit',
+    JSON_OBJECT('html', '<p>Governor of Samsun Assoc. Prof. Dr. Zülkif Dağlı, accompanied by District Governor of Bafra Cevdet Ertürkmen, Mayor of Bafra Hamit Kılıç, the boards of the Bafra Chamber of Commerce and Industry, Bafra Commodity Exchange, Bafra Chamber of Agriculture, Bafra Greenhouse OSB, as well as the Deputy Provincial Director of Agriculture and Forestry of Antalya Gökhan Karaca, District Director of Agriculture and Forestry of Aksu İhsan İnal, and security personnel, visited our Bereket Fide production facility.</p><p>During the visit, information was exchanged on our cultivation activities and export efforts, and consultations were held on the current state of the sector.</p><p>We sincerely thank all distinguished guests for their kind visit.</p>'),
+    'Governor of Samsun Assoc. Prof. Dr. Zülkif Dağlı and the Bafra delegation visited Bereket Fide and consulted on sector developments.',
+    'Samsun Governor Visit | Bereket Fide',
+    'Visit of Samsun Governor Zülkif Dağlı and the Bafra delegation to Bereket Fide production facility and sectoral assessment.',
+    'samsun, governorship, bafra, visit, bereket fide, export, greenhouse osb'
   ),
   (
     'nw020008-6008-4008-a008-nnnnnnnn0008',
@@ -250,7 +350,7 @@ ON DUPLICATE KEY UPDATE
   `tags`             = VALUES(`tags`);
 
 -- =========================
--- 4) CUSTOM PAGES I18N — DE
+-- 5) CUSTOM PAGES I18N — DE
 -- =========================
 INSERT INTO `custom_pages_i18n`
 (
@@ -270,25 +370,61 @@ VALUES
     'nw020011-6011-4011-a011-nnnnnnnn0011',
     'nw010001-5001-4001-9001-nnnnnnnn0001',
     'de',
-    'Besuch einer Delegation des usbekischen Landwirtschaftsministeriums bei Bereket Fide',
-    'usbekistan-landwirtschaftsministerium-besuch-bereket-fide',
-    JSON_OBJECT('html', '<p>Wir danken der Delegation des Landwirtschaftsministeriums Usbekistans für den Besuch bei Bereket Fide. In einem produktiven Gespräch tauschten wir Erfahrungen aus und sprachen über Kooperationsmöglichkeiten im Agrarsektor.</p><p>Im Mittelpunkt standen nachhaltige Jungpflanzenproduktion und Qualitätsprozesse in unseren modernen Anlagen.</p>'),
-    'Dank an die Delegation des usbekischen Landwirtschaftsministeriums.',
-    'Besuch Usbekistan | Bereket Fide',
-    'Besuch einer Delegation des usbekischen Landwirtschaftsministeriums bei Bereket Fide.',
-    'Usbekistan, Landwirtschaftsministerium, Besuch, Bereket Fide, Kooperation'
+    'BÜGEM-Vizedirektor İhsan Emiralioğlu besucht Bereket Fide',
+    'bugem-vizedirektor-ihsan-emiralioglu-bereketfide-besuch',
+    JSON_OBJECT('html', '<p>İhsan Emiralioğlu, Vizedirektor der Generaldirektion für pflanzliche Produktion (BÜGEM) im türkischen Landwirtschaftsministerium, besuchte Bereket Fide. Wir stellten unsere modernen Jungpflanzenproduktionsprozesse, computergesteuerten Gewächshäuser und Beiträge zum Sektor vor.</p><p>Im Mittelpunkt des Gesprächs standen die Stärkung der inländischen Samen- und Jungpflanzenproduktion, Erzeugerförderprogramme sowie Möglichkeiten der sektoralen Zusammenarbeit. Wir danken Herrn Emiralioğlu für seinen wertvollen Besuch.</p>'),
+    'BÜGEM-Vizedirektor İhsan Emiralioğlu besuchte die Produktionsstätten von Bereket Fide.',
+    'BÜGEM-Besuch Emiralioğlu | Bereket Fide',
+    'Besuch des BÜGEM-Vizedirektors İhsan Emiralioğlu bei Bereket Fide und sektorale Einschätzungen.',
+    'bügem, Landwirtschaftsministerium, ihsan emiralioglu, Besuch, bereket fide, Jungpflanzen'
   ),
   (
     'nw020012-6012-4012-a012-nnnnnnnn0012',
     'nw010002-5002-4002-9002-nnnnnnnn0002',
     'de',
-    'Höflicher Besuch der Provinzregierung Antalya in unserer neuen Zentrale',
-    'antalya-regierungsbesuch-hauptquartier-bereket-fide',
-    JSON_OBJECT('html', '<p>Wir danken dem Gouverneur von Antalya, dem Bezirksgouverneur von Aksu, dem Bürgermeister von Aksu, den Leitungen der Provinz- und Bezirkslandwirtschaftsämter sowie ihren Teams für den freundlichen Besuch in unserem neuen Verwaltungsgebäude von Bereket Fide.</p><p>Wir informierten über Produktionsplanung und unseren Beitrag zur regionalen Landwirtschaft.</p>'),
-    'Besuch von Gouverneur, Bezirksverwaltung, Gemeinde und Landwirtschaftsämtern.',
-    'Besuch Antalya | Bereket Fide',
-    'Höflicher Besuch der Provinzregierung Antalya und weiterer Institutionen bei Bereket Fide.',
-    'Antalya, Regierung, Besuch, Bereket Fide, Unternehmen'
+    'Türktob-Präsident Kayhan Yıldırım und Bereket Fide zur Branchenlage',
+    'turktob-praesident-kayhan-yildirim-bereketfide-besuch',
+    JSON_OBJECT('html', '<p>Kayhan Yıldırım, Präsident des Türkischen Saatgutverbandes (Türktob), besuchte Bereket Fide. Es wurden Ansichten zur Agenda der türkischen Saatgutbranche ausgetauscht, darunter das Wachstum der Inlandsproduktion, Exportchancen und strukturelle Herausforderungen des Sektors.</p><p>Wir freuten uns, dieses Treffen im Rahmen der Verbandsarbeit und der politischen Empfehlungen für den Sektor zu empfangen. Wir danken Herrn Yıldırım für seinen wertvollen Besuch.</p>'),
+    'Türktob-Präsident Kayhan Yıldırım traf Bereket Fide zur Bewertung der Saatgutbranche.',
+    'Türktob-Präsident Yıldırım Besuch | Bereket Fide',
+    'Besuch des Türktob-Präsidenten Kayhan Yıldırım bei Bereket Fide und Einschätzung der Saatgutbranche.',
+    'türktob, kayhan yildirim, Saatgutbranche, Besuch, bereket fide'
+  ),
+  (
+    'nw020018-6018-4018-a018-nnnnnnnn0018',
+    'nw010006-5006-4006-9006-nnnnnnnn0006',
+    'de',
+    'Besuch bei Bereket Fide und sektorale Bewertung',
+    'antalya-regierung-aksu-bereketfide-besuch',
+    JSON_OBJECT('html', '<p>Der Gouverneur von Antalya, der Bezirksgouverneur von Aksu, der Bürgermeister von Aksu, die Leitungen der Provinz- und Bezirkslandwirtschaftsämter sowie ihre Delegation besuchten unser neues Verwaltungsgebäude, das bei Bereket Fide seinen Betrieb aufgenommen hat.</p><p>Im Rahmen des freundlichen Besuchs wurden aktuelle Herausforderungen der Branche und Lösungsvorschläge erörtert; gleichzeitig wurden unsere Anliegen an die zuständigen Behörden übermittelt. Im Programm war auch ein kurzer Informationsrundgang durch unsere Produktionsanlage enthalten.</p><p>Wir danken allen geschätzten Offiziellen herzlich für ihren Besuch.</p>'),
+    'Der Gouverneur von Antalya und die Verwaltung Aksu besuchten unsere neue Zentrale und bewerteten die Branchenlage.',
+    'Besuch der Antalya-Regierung | Bereket Fide',
+    'Besuch des Gouverneurs von Antalya, des Bezirksgouverneurs von Aksu, des Bürgermeisters von Aksu und der Landwirtschaftsdirektoren im neuen Bereket Fide Gebäude.',
+    'Antalya, Regierung, Aksu, Besuch, Bereket Fide, Branchenbewertung'
+  ),
+  (
+    'nw020024-6024-4024-a024-nnnnnnnn0024',
+    'nw010008-5008-4008-9008-nnnnnnnn0008',
+    'de',
+    'Besuch des Aksu-Protokolls bei Bereket Fide',
+    'aksu-protokoll-bereketfide-besuch',
+    JSON_OBJECT('html', '<p>Der Bezirksgouverneur von Aksu, Ahmet Hikmet Şahin, der Bezirkskommandant der Gendarmerie Leutnant Hulusi Mehmet Müdük und der Bezirksdirektor für Landwirtschaft und Forsten von Aksu, İhsan İnal, besuchten unseren Betrieb.</p><p>Wir danken allen geschätzten Gästen herzlich für ihren freundlichen Besuch.</p>'),
+    'Bezirksgouverneur, Bezirkskommandant und Landwirtschaftsdirektor von Aksu besuchten Bereket Fide.',
+    'Besuch des Aksu-Protokolls | Bereket Fide',
+    'Besuch des Aksu-Bezirksgouverneurs Ahmet Hikmet Şahin und des Aksu-Protokolls bei Bereket Fide.',
+    'Aksu, Bezirksgouverneur, Gendarmerie, Landwirtschaftsdirektor, Besuch, Bereket Fide'
+  ),
+  (
+    'nw020021-6021-4021-a021-nnnnnnnn0021',
+    'nw010007-5007-4007-9007-nnnnnnnn0007',
+    'de',
+    'Eine Delegation aus Samsun besucht Bereket Fide',
+    'samsun-gouverneur-delegation-bereketfide-besuch',
+    JSON_OBJECT('html', '<p>Der Gouverneur von Samsun, Doz. Dr. Zülkif Dağlı, besuchte zusammen mit dem Bezirksgouverneur von Bafra Cevdet Ertürkmen, dem Bürgermeister von Bafra Hamit Kılıç, den Vorständen der Bafra Industrie- und Handelskammer, der Bafra Warenbörse, der Bafra Landwirtschaftskammer, der Bafra Gewächshaus-OSB sowie dem stellvertretenden Provinzdirektor für Landwirtschaft und Forsten in Antalya, Gökhan Karaca, dem Bezirksdirektor für Landwirtschaft und Forsten in Aksu, İhsan İnal, und Sicherheitspersonal unsere Produktionsanlage bei Bereket Fide.</p><p>Im Rahmen des Besuchs wurden Informationen über unsere Anbauaktivitäten und Exportbemühungen ausgetauscht sowie Beratungen zur aktuellen Lage des Sektors durchgeführt.</p><p>Wir danken allen geschätzten Gästen herzlich für ihren freundlichen Besuch.</p>'),
+    'Samsun-Gouverneur Doz. Dr. Zülkif Dağlı und die Bafra-Delegation besuchten Bereket Fide und berieten über Sektorentwicklungen.',
+    'Besuch des Samsun-Gouverneurs | Bereket Fide',
+    'Besuch des Samsun-Gouverneurs Zülkif Dağlı und der Bafra-Delegation in der Bereket Fide Produktionsstätte.',
+    'Samsun, Gouverneur, Bafra, Besuch, Bereket Fide, Export, Gewächshaus-OSB'
   ),
   (
     'nw020013-6013-4013-a013-nnnnnnnn0013',

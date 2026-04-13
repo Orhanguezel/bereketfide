@@ -130,6 +130,14 @@ export const env = {
   GROQ_API_BASE: process.env.GROQ_API_BASE || 'https://api.groq.com/openai/v1',
   GROQ_MODEL: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
 
+  // =========================================================
+  // Weather / Frost Warning (Open-Meteo — ücretsiz, API key yok)
+  // =========================================================
+  WEATHER_LAT: parseFloat(process.env.WEATHER_LAT ?? '36.8969'),   // Antalya
+  WEATHER_LON: parseFloat(process.env.WEATHER_LON ?? '30.7133'),   // Antalya
+  WEATHER_LOCATION_NAME: process.env.WEATHER_LOCATION_NAME ?? 'Antalya',
+  WEATHER_TIMEZONE: process.env.WEATHER_TIMEZONE ?? 'Europe/Istanbul',
+
   /** Iyzico */
   FEATURE_IYZICO_PAYMENT: toBool(process.env.FEATURE_IYZICO_PAYMENT, false),
   IYZICO_API_KEY: process.env.IYZICO_API_KEY || '',

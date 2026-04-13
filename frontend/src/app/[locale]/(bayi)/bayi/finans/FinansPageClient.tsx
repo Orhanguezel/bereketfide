@@ -47,11 +47,12 @@ export default function FinansPageClient({ locale }: { locale: string }) {
       setSummary(s);
       setTx(tr.data);
     } catch {
-      setErr(t('errors.load'));
+      setErr('load_error');
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     void load();
@@ -86,7 +87,8 @@ export default function FinansPageClient({ locale }: { locale: string }) {
       const el = document.getElementById('dealer-direct-payment');
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [load, t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [load]);
 
   async function onPdf() {
     setPdfBusy(true);
@@ -131,13 +133,12 @@ export default function FinansPageClient({ locale }: { locale: string }) {
     setMsg(null);
     setCardFormHtml(null);
     try {
-      const res = await postDealerDirectCardInitiate({
-        amount: numericAmount,
-        locale,
-      });
+      const res = await postDealerDirectCardInitiate({ amount: numericAmount, locale });
       if ('pageUrl' in res) {
         window.location.href = res.pageUrl;
-      } else {
+      } else if ('redirectUrl' in res) {
+        window.location.href = res.redirectUrl;
+      } else if ('formHtml' in res) {
         setCardFormHtml(res.formHtml);
       }
     } catch (e) {
@@ -173,7 +174,9 @@ export default function FinansPageClient({ locale }: { locale: string }) {
       ) : null}
 
       {err ? (
-        <div className="bf-alert-danger rounded-xl px-4 py-3 text-sm">{err}</div>
+        <div className="bf-alert-danger rounded-xl px-4 py-3 text-sm">
+          {err === 'load_error' ? t('errors.load') : err}
+        </div>
       ) : null}
 
       {summary ? (
@@ -229,20 +232,22 @@ export default function FinansPageClient({ locale }: { locale: string }) {
                 <div className="mt-1 font-semibold text-(--color-brand)">{formatTry(summary.current_balance, locale)}</div>
               </div>
               <div className="max-w-md text-(--color-text-secondary)">
-                {showDealerBankCardPayment ? t('directPayment.hint') : t('directPayment.disabled')}
+                {t('directPayment.hint')}
               </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-3">
-              <button
-                type="button"
-                disabled={payBusy || !showDealerBankCardPayment || !(Number.parseFloat(amount.replace(',', '.')) > 0)}
-                className="rounded-xl bg-(--color-brand) px-5 py-3 text-sm font-semibold text-(--color-on-brand) disabled:opacity-50"
-                onClick={() => void onDirectPayment()}
-              >
-                {payBusy ? t('directPayment.processing') : t('directPayment.cta')}
-              </button>
-            </div>
+            {showDealerBankCardPayment && (
+              <div className="mt-5 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  disabled={payBusy || !(Number.parseFloat(amount.replace(',', '.')) > 0)}
+                  className="rounded-xl bg-(--color-brand) px-5 py-3 text-sm font-semibold text-(--color-on-brand) disabled:opacity-50"
+                  onClick={() => void onDirectPayment()}
+                >
+                  {payBusy ? t('directPayment.processing') : t('directPayment.cta')}
+                </button>
+              </div>
+            )}
           </section>
 
           {summary.warnings.length > 0 ? (

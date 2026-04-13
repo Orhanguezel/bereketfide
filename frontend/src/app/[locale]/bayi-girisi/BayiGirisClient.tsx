@@ -26,7 +26,8 @@ export function BayiGirisClient({ locale }: { locale: string }) {
     if (searchParams.get('durum') === 'beklemede') {
       setError(t('pendingApproval'));
     }
-  }, [searchParams, t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function resolveNextPath() {
     const raw = searchParams.get('next');

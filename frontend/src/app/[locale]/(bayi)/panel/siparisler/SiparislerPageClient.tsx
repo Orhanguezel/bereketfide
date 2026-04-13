@@ -67,7 +67,8 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
       setBanner({ kind: 'err', text: t('iyzicoPaymentFail') });
       window.history.replaceState(null, '', window.location.pathname);
     }
-  }, [t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const id = window.setTimeout(() => setDebouncedQ(q), 320);
@@ -98,7 +99,8 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
     return () => {
       cancelled = true;
     };
-  }, [debouncedQ, locale, t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedQ, locale]);
 
   async function loadMoreCatalog() {
     setCatalogLoading(true);
@@ -129,7 +131,8 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
     } finally {
       setOrdersLoading(false);
     }
-  }, [t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     void refreshOrders();

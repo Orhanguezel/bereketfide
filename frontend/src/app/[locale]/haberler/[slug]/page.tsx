@@ -136,7 +136,11 @@ export default async function NewsDetailPage({
   const org = organizationJsonLd(locale);
   const imageSrc = resolveNewsImage(post);
   const shareUrl = `${SITE_URL}/${locale}/haberler/${slug}`;
-  const rawImages: string[] = Array.isArray(post.images) ? post.images : [];
+  const rawImages: string[] = Array.isArray(post.images)
+    ? post.images
+    : typeof post.images === 'string'
+      ? (() => { try { const p = JSON.parse(post.images); return Array.isArray(p) ? p : []; } catch { return []; } })()
+      : [];
   const galleryImages = rawImages
     .map((img, i) => {
       const resolved = absoluteAssetUrl(img) || img;

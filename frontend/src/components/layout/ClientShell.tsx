@@ -47,6 +47,14 @@ const FloatingWidgets = dynamic(
   { ssr: false },
 );
 
+const FrostWarningWidget = dynamic(
+  () =>
+    import('@/components/widgets/FrostWarningWidget').then(
+      (m) => m.FrostWarningWidget,
+    ),
+  { ssr: false },
+);
+
 export function ClientShell({ 
   companyName, 
   tagline,
@@ -73,6 +81,7 @@ export function ClientShell({
       <GoogleTagManager />
       <WhatsAppButton number={whatsappNumber} />
       <FloatingWidgets socials={socials} contactInfo={contactInfo} activeLocales={activeLocales} />
+      <FrostWarningWidget />
     </>
   );
 }

@@ -117,7 +117,9 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
       const res = await postOrderCardInitiate(order.id, locale, installment);
       if ('pageUrl' in res) {
         window.location.href = res.pageUrl;
-      } else {
+      } else if ('redirectUrl' in res) {
+        window.location.href = res.redirectUrl;
+      } else if ('formHtml' in res) {
         setCardFormHtml(res.formHtml);
       }
     } catch (e) {

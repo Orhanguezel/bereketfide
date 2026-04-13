@@ -77,4 +77,5 @@ export type TransactionsListResponse = {
 export type DealerDirectCardInitResponse =
   | { provider: 'craftgate'; pageUrl: string; checkoutId?: string }
   | { provider: 'ziraatpay'; pageUrl: string }
-  | { provider: 'nestpay_isbank' | 'halkode' | 'ziraatpay'; formHtml: string };
+  | { provider: 'nestpay_isbank' | 'halkode' | 'ziraatpay'; formHtml: string }
+  | { provider: 'halkode'; redirectUrl: string };
