@@ -73,7 +73,7 @@ export function BrandCarousel({ brands }: { brands: BrandItem[] }) {
                     alt={brand.title}
                     fill
                     sizes="(max-width: 768px) 176px, 208px"
-                    className="object-contain p-4 md:p-5 opacity-75 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+                    className="object-contain p-4 md:p-5 transition-all duration-500 group-hover:scale-105"
                     unoptimized
                   />
                 </div>
