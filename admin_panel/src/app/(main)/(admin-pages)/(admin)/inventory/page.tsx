@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
-import AdminServicesClient from './_components/admin-services-client';
+import AdminInventoryClient from './admin-inventory-client';
 
 export default function Page() {
   return (
     <Suspense>
-      <AdminServicesClient />
+      <AdminInventoryClient />
     </Suspense>
   );
 }

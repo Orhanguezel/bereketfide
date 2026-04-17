@@ -45,6 +45,8 @@ import { registerOfferAdmin } from '@agro/shared-backend/modules/offer/admin.rou
 import { registerOrdersAdmin } from '@agro/shared-backend/modules/orders/admin.routes';
 import { registerDealerFinanceAdmin } from '@agro/shared-backend/modules/dealerFinance/admin.routes';
 import { registerServicesAdmin } from '@agro/shared-backend/modules/services/admin.routes';
+import { registerTelegram } from '@agro/shared-backend/modules/telegram/router';
+import { registerTelegramAdmin } from '@agro/shared-backend/modules/telegram/admin.routes';
 
 const sharedPublicRegistrars = [
   registerAuth,
@@ -67,6 +69,7 @@ const sharedPublicRegistrars = [
   registerOrders,
   registerDealerFinance,
   registerServices,
+  registerTelegram,
 ] as const;
 
 const sharedAdminRegistrars = [
@@ -92,6 +95,7 @@ const sharedAdminRegistrars = [
   registerOrdersAdmin,
   registerDealerFinanceAdmin,
   registerServicesAdmin,
+  registerTelegramAdmin,
 ] as const;
 
 export async function registerSharedPublic(api: FastifyInstance) {

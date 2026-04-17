@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
-import AdminServicesClient from './_components/admin-services-client';
+import AdminTelegramClient from './_components/admin-telegram-client';
 
 export default function Page() {
   return (
     <Suspense>
-      <AdminServicesClient />
+      <AdminTelegramClient />
     </Suspense>
   );
 }

@@ -13,8 +13,11 @@ START TRANSACTION;
 -- ============================================================
 
 CREATE TABLE IF NOT EXISTS `email_templates` (
-  `id`           CHAR(36)     NOT NULL,
-  `template_key` VARCHAR(100) NOT NULL,
+  `id`            CHAR(36)     NOT NULL,
+  `template_key`  VARCHAR(100) NOT NULL,
+  `template_name` VARCHAR(255) DEFAULT NULL,
+  `subject`       VARCHAR(500) DEFAULT NULL,
+  `content_html`  LONGTEXT     DEFAULT NULL,
 
   `variables` LONGTEXT
     CHARACTER SET utf8mb4 COLLATE utf8mb4_bin

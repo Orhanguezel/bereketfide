@@ -9,6 +9,7 @@ import {
   BarChart,
   Bell,
   Palette,
+  PackageSearch,
   BookOpen,
   Bot,
   Briefcase,
@@ -117,7 +118,8 @@ export type AdminNavItemKey =
   | 'library'
   | 'newsletter'
   | 'email_templates'
-  | 'cache';
+  | 'cache'
+  | 'inventory';
 
 export type AdminNavGroupKey = 'general' | 'content' | 'bereket_fide' | 'bereket_content' | 'marketing' | 'communication' | 'system';
 
@@ -150,6 +152,7 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
       { key: 'services', url: '/services', icon: Briefcase },
       { key: 'bereket_offers', url: '/offer?module=bereketfide', icon: DollarSign },
       { key: 'contacts', url: '/contacts', icon: Contact2 },
+      { key: 'inventory', url: '/inventory', icon: PackageSearch },
       { key: 'b2b_orders', url: '/orders', icon: ShoppingBag },
       { key: 'b2b_payment_attempts', url: '/orders/payment-attempts', icon: ClipboardList },
       { key: 'b2b_dealers', url: '/dealers', icon: Store },
@@ -186,6 +189,13 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
     key: 'marketing',
     items: [
       { key: 'newsletter', url: '/newsletter', icon: Mail },
+    ],
+  },
+  {
+    id: 6,
+    key: 'communication',
+    items: [
+      { key: 'telegram', url: '/telegram', icon: Send },
     ],
   },
 ];
@@ -243,6 +253,7 @@ const FALLBACK_TITLES: Record<AdminNavItemKey, string> = {
   library: 'Kataloglar',
   newsletter: 'Bülten Aboneleri',
   cache: 'Cache Yönetimi',
+  inventory: 'Envanter İzleme',
 };
 
 export function buildAdminSidebarItems(

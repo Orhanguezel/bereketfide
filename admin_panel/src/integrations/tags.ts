@@ -190,7 +190,9 @@ export const tags = [
   'AdminGalleryImages',
   'IpBlocklistEntry',
   'AdminLibrary',
-  'AdminLibraryFiles'
+  'AdminLibraryFiles',
+  'InventoryCache',
+  'InventorySyncLog',
 ] as const;
 
 export type tag = typeof tags[number];

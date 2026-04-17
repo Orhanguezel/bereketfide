@@ -7,6 +7,7 @@ import { registerWeather } from '@/modules/weather/router';
 
 // Proje-spesifik admin moduller
 import { registerDashboardAdmin } from '@/modules/dashboard/admin.routes';
+import { registerInventoryAdmin } from '@/modules/inventorySync/admin.routes';
 
 export async function registerProjectPublic(api: FastifyInstance) {
   await registerFeed(api);
@@ -16,4 +17,5 @@ export async function registerProjectPublic(api: FastifyInstance) {
 
 export async function registerProjectAdmin(api: FastifyInstance) {
   await api.register(async (i) => registerDashboardAdmin(i), { prefix: '/admin' });
+  await api.register(async (i) => registerInventoryAdmin(i), { prefix: '/admin' });
 }

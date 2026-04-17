@@ -873,7 +873,8 @@
         "gallery": "Galeri",
         "cache": "Cache Yönetimi",
         "theme": "Tema Ayarları",
-        "references": "İş Birliği Firmaları"
+        "references": "İş Birliği Firmaları",
+        "inventory": "Envanter İzleme"
       },
       "stats": {
         "deliveredOrders": "Teslim Edilen Sipariş",
@@ -3471,7 +3472,8 @@
     "telegram": {
       "header": {
         "title": "Telegram",
-        "description": "Telegram bildirimlerini ve otomatik yanıtları yapılandırın"
+        "description": "Telegram bildirimlerini ve otomatik yanıtları yapılandırın",
+        "test": "Test Mesajı Gönder"
       },
       "tabs": {
         "settings": "Ayarlar",
@@ -3494,7 +3496,8 @@
           "newContact": "Yeni İletişim Mesajı",
           "newTicket": "Yeni Destek Talebi",
           "ticketReplied": "Destek Talebine Yanıt",
-          "newNewsletterSubscription": "Yeni Bülten Aboneliği"
+          "newNewsletterSubscription": "Yeni Bülten Aboneliği",
+          "newOrder": "Yeni Sipariş"
         },
         "templates": {
           "title": "Mesaj Şablonları",

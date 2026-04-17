@@ -1,7 +1,10 @@
-// src/app/(main)/admin/users/page.tsx
-
+import { Suspense } from 'react';
 import UsersListClient from './_components/users-list-client';
 
 export default function Page() {
-  return <UsersListClient />;
+  return (
+    <Suspense>
+      <UsersListClient />
+    </Suspense>
+  );
 }

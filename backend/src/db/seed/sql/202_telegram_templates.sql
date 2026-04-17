@@ -1,8 +1,6 @@
 -- =============================================================
 -- Telegram notification settings + templates (Bereket Fide)
--- NOTE:
---   1) Set telegram_notifications_enabled=true to activate
---   2) Fill telegram_bot_token and telegram_default_chat_id
+-- NOTE: Credentials set — admin panelden güncellenebilir (site_settings)
 -- =============================================================
 
 -- Base switches

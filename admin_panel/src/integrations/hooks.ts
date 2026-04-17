@@ -74,3 +74,4 @@ export * from '@/integrations/endpoints/admin/ip_blocklist_admin.endpoints';
 export * from '@/integrations/endpoints/admin/comments_admin.endpoints';
 export * from '@/integrations/endpoints/admin/library_admin.endpoints';
 export * from '@/integrations/endpoints/admin/b2b_admin.endpoints';
+export * from '@/integrations/endpoints/admin/inventory_admin.endpoints';

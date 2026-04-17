@@ -39,7 +39,7 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO `site_settings` (`id`, `key`, `locale`, `value`, `created_at`, `updated_at`)
-SELECT UUID(), 'telegram_autoreply_template', '*', 'Vielen Dank für Ihre Nachricht! Wir werden uns schnellstmöglich bei Ihnen melden.\n\nMesajınız için teşekkür ederiz. En kısa sürede size dönüş yapacağız.\n\n- Bereket Fide Team', NOW(), NOW()
+SELECT UUID(), 'telegram_autoreply_template', '*', 'Mesajınız alındı. En kısa sürede size dönüş yapacağız.', NOW(), NOW()
 WHERE NOT EXISTS (
   SELECT 1 FROM `site_settings` WHERE `key` = 'telegram_autoreply_template' AND `locale` = '*'
 );

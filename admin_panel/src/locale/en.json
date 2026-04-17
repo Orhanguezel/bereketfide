@@ -1297,7 +1297,8 @@
         "gallery": "Gallery",
         "cache": "Cache Management",
         "theme": "Theme Settings",
-        "references": "Partner Companies"
+        "references": "Partner Companies",
+        "inventory": "Inventory Monitor"
       },
       "stats": {
         "deliveredOrders": "Delivered Orders",
@@ -3368,7 +3369,8 @@
     "telegram": {
       "header": {
         "title": "Telegram",
-        "description": "Configure Telegram notifications and auto-reply"
+        "description": "Configure Telegram notifications and auto-reply",
+        "test": "Send Test Message"
       },
       "tabs": {
         "settings": "Settings",
@@ -3391,7 +3393,8 @@
           "newContact": "New Contact Message",
           "newTicket": "New Support Ticket",
           "ticketReplied": "Support Ticket Reply",
-          "newNewsletterSubscription": "New Newsletter Subscription"
+          "newNewsletterSubscription": "New Newsletter Subscription",
+          "newOrder": "New Order"
         },
         "templates": {
           "title": "Message Templates",

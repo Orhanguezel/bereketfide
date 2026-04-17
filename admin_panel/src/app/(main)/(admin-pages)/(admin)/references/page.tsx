@@ -1,5 +1,10 @@
+import { Suspense } from 'react';
 import AdminReferencesClient from './_components/admin-references-client';
 
-export default function AdminReferencesPage() {
-  return <AdminReferencesClient />;
+export default function Page() {
+  return (
+    <Suspense>
+      <AdminReferencesClient />
+    </Suspense>
+  );
 }

@@ -16,7 +16,8 @@
     "db:seed:full": "bun src/db/seed/index.ts",
     "db:seed:full:nodrop": "bun src/db/seed/index.ts --no-drop",
     "db:seed:bereketfide": "bun src/db/seed/index.ts --profile=bereketfide --no-drop",
-    "db:seed:bereketfide:fresh": "bun src/db/seed/index.ts --profile=bereketfide"
+    "db:seed:bereketfide:fresh": "bun src/db/seed/index.ts --profile=bereketfide",
+    "sync:inventory": "bun src/scripts/sync-inventory.ts"
   },
   "dependencies": {
     "@agro/shared-backend": "workspace:*",
