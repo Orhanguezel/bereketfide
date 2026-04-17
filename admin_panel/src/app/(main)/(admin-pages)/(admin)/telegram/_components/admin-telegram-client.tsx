@@ -47,6 +47,7 @@ function TelegramSettingsTab() {
   const t = useAdminT('admin.telegram.settings');
   const { data: rawSettings, isLoading } = useListSiteSettingsAdminQuery({
     prefix: 'telegram_',
+    locale: '*',
     limit: 50,
   });
   const [bulkUpsert, { isLoading: isSaving }] = useBulkUpsertSiteSettingsAdminMutation();
