@@ -24,7 +24,7 @@ export * from '@/integrations/endpoints/admin/users/auth_admin.endpoints';
 export * from '@/integrations/endpoints/admin/users/roles_admin.endpoints';
 
 export * from '@/integrations/endpoints/admin/dashboard_admin.endpoints';
-export * from '@/integrations/endpoints/admin/db_admin.endpoints';
+export * from '@/integrations/endpoints/admin/db-admin-endpoints';
 export * from '@/integrations/endpoints/admin/email_templates_admin.endpoints';
 
 // Content / CMS

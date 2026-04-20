@@ -178,6 +178,7 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
       { key: 'email_templates', url: '/email-templates', icon: Mail },
       { key: 'notifications', url: '/notifications', icon: Bell },
       { key: 'storage', url: '/storage', icon: HardDrive },
+      { key: 'db', url: '/db-admin', icon: Database },
       { key: 'audit', url: '/audit', icon: FileSearch },
       { key: 'cache', url: '/cache', icon: RefreshCcw },
       { key: 'theme', url: '/theme', icon: Palette },
@@ -232,7 +233,7 @@ const FALLBACK_TITLES: Record<AdminNavItemKey, string> = {
   notifications: 'Notifications',
   support: 'Support Tickets',
   storage: 'Storage',
-  db: 'Database',
+  db: 'Veritabanı Yönetimi',
   audit: 'Audit',
 
   reports: 'Reports',

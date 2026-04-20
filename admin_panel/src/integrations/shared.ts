@@ -34,7 +34,7 @@ export * from '@/integrations/shared/locales';
 export * from '@/integrations/shared/menu_items.types';
 export * from '@/integrations/shared/menu.runtime';
 export * from '@/integrations/shared/dashboard.types';
-export * from '@/integrations/shared/db_admin';
+export * from '@/integrations/shared/db-admin';
 export * from '@/integrations/shared/review_admin.types';
 export * from '@/integrations/shared/review.types';
 export * from '@/integrations/shared/projects';
