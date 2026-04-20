@@ -12,6 +12,8 @@ import { registerInventoryAdmin } from '@/modules/inventorySync/admin.routes';
 // Ortak db_admin (manifest-driven)
 import { createDbAdminRoutes } from '@agro/shared-backend/modules/db_admin';
 import { BEREKETFIDE_DB_MODULES } from '@/modules/db_admin/manifest';
+import { requireAuth } from '@agro/shared-backend/middleware/auth';
+import { requireAdmin } from '@agro/shared-backend/middleware/roles';
 
 export async function registerProjectPublic(api: FastifyInstance) {
   await registerFeed(api);
@@ -22,5 +24,9 @@ export async function registerProjectPublic(api: FastifyInstance) {
 export async function registerProjectAdmin(api: FastifyInstance) {
   await api.register(async (i) => registerDashboardAdmin(i), { prefix: '/admin' });
   await api.register(async (i) => registerInventoryAdmin(i), { prefix: '/admin' });
-  await api.register(createDbAdminRoutes(BEREKETFIDE_DB_MODULES), { prefix: '/admin' });
+  await api.register(async (i) => {
+    i.addHook('onRequest', requireAuth);
+    i.addHook('onRequest', requireAdmin);
+    await createDbAdminRoutes(BEREKETFIDE_DB_MODULES)(i);
+  }, { prefix: '/admin' });
 }
