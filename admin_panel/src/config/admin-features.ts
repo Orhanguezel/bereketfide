@@ -9,7 +9,6 @@ function envTruthy(v: string | undefined): boolean {
  * Varsayilan: kapali. Acmak icin ilgili NEXT_PUBLIC_ADMIN_NAV_*=1.
  */
 const OPTIONAL_ADMIN_NAV_ENV: Partial<Record<AdminNavItemKey, string>> = {
-  references: 'NEXT_PUBLIC_ADMIN_NAV_REFERENCES',
   bereket_gallery: 'NEXT_PUBLIC_ADMIN_NAV_GALLERY',
   newsletter: 'NEXT_PUBLIC_ADMIN_NAV_NEWSLETTER',
   bereket_blog_comments: 'NEXT_PUBLIC_ADMIN_NAV_COMMENTS',
