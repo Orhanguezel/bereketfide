@@ -17,7 +17,7 @@ INSERT INTO `references` (
   ('c1000007-1111-4111-8111-c10000000007', 1, 1, 70, '/uploads/brand_references/genetika.png',      'https://www.genetikatohum.com',     NULL),
   ('c1000008-1111-4111-8111-c10000000008', 1, 1, 80, '/uploads/brand_references/yukseltohum.jpg',   'https://www.yukseltohum.com.tr',    NULL),
   ('c1000009-1111-4111-8111-c10000000009', 1, 1, 90, '/uploads/brand_references/anamas.jpeg',       'https://www.anamas.com.tr',         NULL),
-  ('c1000010-1111-4111-8111-c10000000010', 1, 1,100, '/uploads/brand_references/vistaseed_logo.png','https://www.vistaseeds.com.tr',     NULL)
+  ('c1000010-1111-4111-8111-c10000000010', 1, 1,100, '/uploads/brand_references/vistaseed_logo_black.png','https://www.vistaseeds.com.tr',     NULL)
 ON DUPLICATE KEY UPDATE
   `is_published`  = VALUES(`is_published`),
   `is_featured`   = VALUES(`is_featured`),

@@ -125,5 +125,28 @@ ON DUPLICATE KEY UPDATE
   size = VALUES(size),
   updated_at = NOW();
 
+-- =========================
+-- BRAND REFERENCES (is birligi firma logolari)
+-- =========================
+INSERT INTO `storage_assets`
+(`id`, `user_id`, `name`, `bucket`, `path`, `folder`, `mime`, `size`, `width`, `height`, `url`, `hash`, `provider`, `provider_public_id`, `provider_resource_type`, `provider_format`, `provider_version`, `etag`, `metadata`, `created_at`, `updated_at`)
+VALUES
+  ('bf-brand-img-0001', NULL, 'enzazaden.jpg',              'brand_references', 'brand_references/enzazaden.jpg',              'brand_references', 'image/jpeg', 24613, NULL, NULL, '/uploads/brand_references/enzazaden.jpg',              NULL, 'local', 'brand_references/enzazaden.jpg',              'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0002', NULL, 'rijkzwaan.jpg',              'brand_references', 'brand_references/rijkzwaan.jpg',              'brand_references', 'image/jpeg', 23825, NULL, NULL, '/uploads/brand_references/rijkzwaan.jpg',              NULL, 'local', 'brand_references/rijkzwaan.jpg',              'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0003', NULL, 'seminis.jpg',                'brand_references', 'brand_references/seminis.jpg',                'brand_references', 'image/jpeg', 39834, NULL, NULL, '/uploads/brand_references/seminis.jpg',                NULL, 'local', 'brand_references/seminis.jpg',                'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0004', NULL, 'sakata.png',                 'brand_references', 'brand_references/sakata.png',                 'brand_references', 'image/png',  54667,  750, 215, '/uploads/brand_references/sakata.png',                 NULL, 'local', 'brand_references/sakata.png',                 'image', 'png', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0005', NULL, 'nunhems.png',                'brand_references', 'brand_references/nunhems.png',                'brand_references', 'image/png',   8882,  253, 199, '/uploads/brand_references/nunhems.png',                NULL, 'local', 'brand_references/nunhems.png',                'image', 'png', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0006', NULL, 'hmclause.png',               'brand_references', 'brand_references/hmclause.png',               'brand_references', 'image/png',  27298, 2000, 571, '/uploads/brand_references/hmclause.png',               NULL, 'local', 'brand_references/hmclause.png',               'image', 'png', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0007', NULL, 'genetika.png',               'brand_references', 'brand_references/genetika.png',               'brand_references', 'image/png',   2076,  225, 225, '/uploads/brand_references/genetika.png',               NULL, 'local', 'brand_references/genetika.png',               'image', 'png', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0008', NULL, 'yukseltohum.jpg',            'brand_references', 'brand_references/yukseltohum.jpg',            'brand_references', 'image/jpeg', 86327, NULL, NULL, '/uploads/brand_references/yukseltohum.jpg',            NULL, 'local', 'brand_references/yukseltohum.jpg',            'image', 'jpg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0009', NULL, 'anamas.jpeg',                'brand_references', 'brand_references/anamas.jpeg',                'brand_references', 'image/jpeg',  8213, NULL, NULL, '/uploads/brand_references/anamas.jpeg',                NULL, 'local', 'brand_references/anamas.jpeg',                'image', 'jpeg', NULL, NULL, '{}', NOW(), NOW()),
+  ('bf-brand-img-0010', NULL, 'vistaseed_logo_black.png',   'brand_references', 'brand_references/vistaseed_logo_black.png',   'brand_references', 'image/png',  38607, 2014, 494, '/uploads/brand_references/vistaseed_logo_black.png',   NULL, 'local', 'brand_references/vistaseed_logo_black.png',   'image', 'png', NULL, NULL, '{}', NOW(), NOW())
+ON DUPLICATE KEY UPDATE
+  url = VALUES(url),
+  size = VALUES(size),
+  width = VALUES(width),
+  height = VALUES(height),
+  updated_at = NOW();
+
 COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;
