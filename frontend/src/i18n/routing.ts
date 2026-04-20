@@ -4,7 +4,7 @@ import { AVAILABLE_LOCALES, FALLBACK_LOCALE } from './locales';
 export const routing = defineRouting({
   locales: AVAILABLE_LOCALES as [string, ...string[]],
   defaultLocale: FALLBACK_LOCALE,
-  localePrefix: 'as-needed',
+  localePrefix: 'always',
 });
 
 export type Locale = (typeof routing.locales)[number];
