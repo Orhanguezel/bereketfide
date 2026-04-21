@@ -3,7 +3,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { Snowflake, Thermometer, ChevronUp, ChevronDown, MapPin, Droplets } from 'lucide-react';
-import { API_BASE_URL } from '@/lib/utils';
+
+const BASE_URL = typeof window === 'undefined'
+  ? (process.env.INTERNAL_API_URL ?? 'http://127.0.0.1:8086')
+  : (process.env.NEXT_PUBLIC_API_URL ?? '').replace(/\/$/, '');
 
 // ──────────────────────────────────────────────
 // Types
@@ -83,7 +86,7 @@ export function FrostWarningWidget() {
 
   const fetchData = useCallback(async () => {
     try {
-      let url = `${API_BASE_URL}/weather/frost`;
+      let url = `${BASE_URL}/weather/frost`;
       if (coords) {
         url += `?lat=${coords.lat}&lon=${coords.lon}`;
       }
