@@ -182,12 +182,12 @@ export function FrostWarningWidget() {
           <div className={`px-4 py-2 border-t border-white/10 text-[10px] flex justify-between items-center opacity-50 ${styles.text}`}>
             <span>{t('poweredBy')} · {formatTime(data.updated_at)}</span>
             <a 
-              href="https://www.bereketfide.com.tr" 
+              href="https://tarimiklim.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:opacity-100 transition-opacity underline decoration-white/20"
             >
-              bereketfide.com.tr
+              tarimiklim.com
             </a>
           </div>
         </div>
