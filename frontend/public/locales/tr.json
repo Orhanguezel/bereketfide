@@ -897,7 +897,7 @@
     "watchDesc": "Sıcaklık düşüyor, sera ve fideleri izleyin.",
     "warningDesc": "Don riski var! Fideleri koru altına alın.",
     "dangerDesc": "Don! Acil koruma tedbirleri alın.",
-    "poweredBy": "Open-Meteo verileri",
+    "poweredBy": "Tarımİklim verileri",
     "loadError": "Hava durumu alınamadı"
   }
 }

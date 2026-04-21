@@ -81,16 +81,18 @@ const nextConfig = {
 
     const prodDomain = 'https://www.bereketfide.com.tr';
     const prodDomainAlt = 'https://www.bereketfide.com';
+    // KatalogAI ekosistem helper — PDF/asset'ler bu domainden serve edilir.
+    const katalogaiDomain = 'https://thecatalogia.com';
 
     const csp = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      `img-src 'self' blob: data: https://res.cloudinary.com ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${frontendUrl} ${apiBase} http://localhost:8086 http://127.0.0.1:8086`,
-      `connect-src 'self' ${apiBase} ${frontendUrl} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 https://cdn.jsdelivr.net https://api.cloudinary.com`,
+      `img-src 'self' blob: data: https://res.cloudinary.com ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${frontendUrl} ${apiBase} ${katalogaiDomain} http://localhost:8086 http://127.0.0.1:8086`,
+      `connect-src 'self' ${apiBase} ${frontendUrl} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${katalogaiDomain} https://cdn.jsdelivr.net https://api.cloudinary.com`,
       "font-src 'self' https://fonts.gstatic.com data:",
-      `object-src 'self' ${apiBase} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 http://localhost:8086 http://127.0.0.1:8086`,
-      `frame-src 'self' blob: ${apiBase} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 http://localhost:8086 http://127.0.0.1:8086`,
+      `object-src 'self' ${apiBase} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${katalogaiDomain} http://localhost:8086 http://127.0.0.1:8086`,
+      `frame-src 'self' blob: ${apiBase} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${katalogaiDomain} http://localhost:8086 http://127.0.0.1:8086`,
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'none'",
