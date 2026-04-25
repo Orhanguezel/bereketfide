@@ -2421,7 +2421,21 @@
         "globalList": "Liste (Global *)",
         "locales": "Diller",
         "branding": "Marka",
-        "apiServices": "API & Servisler"
+        "apiServices": "API & Servisler",
+        "halTicker": "Hal Fiyat Şeridi"
+      },
+      "halTicker": {
+        "title": "Hal Fiyat Şeridi — Ürün Seçimi",
+        "description": "Anasayfada gösterilecek hal fiyatı ürünlerini seçin. Seçim bereketfide__hal_ticker_slugs ayarına kaydedilir.",
+        "loading": "Yükleniyor...",
+        "save": "Kaydet",
+        "saved": "Seçim kaydedildi",
+        "saveError": "Kayıt başarısız",
+        "loadingProducts": "Ürünler yükleniyor...",
+        "noProducts": "Ürün listesi alınamadı.",
+        "selectedCount": "{count} ürün seçili",
+        "clearAll": "Temizle",
+        "previewLabel": "Kaydedilecek slug listesi:"
       },
       "filters": {
         "title": "Filtreler",

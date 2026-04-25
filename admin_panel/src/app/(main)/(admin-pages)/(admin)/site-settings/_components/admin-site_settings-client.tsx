@@ -40,6 +40,7 @@ import { BrandMediaTab } from '../tabs/brand-media-tab';
 import { ApiSettingsTab } from '../tabs/api-settings-tab';
 import { LocalesSettingsTab } from '../tabs/locales-settings-tab';
 import { BrandingSettingsTab } from '../tabs/branding-settings-tab';
+import { HalTickerSettingsTab } from '../tabs/hal-ticker-settings-tab';
 
 import type { SiteSetting } from '@/integrations/shared';
 import {
@@ -59,7 +60,8 @@ type SettingsTab =
   | 'brand_media'
   | 'api'
   | 'locales'
-  | 'branding';
+  | 'branding'
+  | 'hal_ticker';
 
 type LocaleOption = { value: string; label: string; isDefault?: boolean; isActive?: boolean };
 
@@ -270,7 +272,7 @@ export default function AdminSiteSettingsClient() {
   };
 
   const localeReady = Boolean(locale && locale.trim());
-  const isGlobalTab = tab === 'global_list' || tab === 'smtp' || tab === 'locales';
+  const isGlobalTab = tab === 'global_list' || tab === 'smtp' || tab === 'locales' || tab === 'hal_ticker';
 
   return (
     <div className="w-full min-w-0 space-y-4 overflow-hidden pb-6 sm:space-y-6">
@@ -417,6 +419,9 @@ export default function AdminSiteSettingsClient() {
                   <TabsTrigger value="branding" className="whitespace-nowrap text-xs sm:text-sm">
                     {t('admin.siteSettings.tabs.branding')}
                   </TabsTrigger>
+                  <TabsTrigger value="hal_ticker" className="whitespace-nowrap text-xs sm:text-sm">
+                    {t('admin.siteSettings.tabs.halTicker')}
+                  </TabsTrigger>
                 </TabsList>
               </div>
 
@@ -454,6 +459,10 @@ export default function AdminSiteSettingsClient() {
 
               <TabsContent value="branding" className="mt-3 sm:mt-4">
                 <BrandingSettingsTab locale={locale} />
+              </TabsContent>
+
+              <TabsContent value="hal_ticker" className="mt-3 sm:mt-4">
+                <HalTickerSettingsTab locale={locale} />
               </TabsContent>
             </Tabs>
           )}

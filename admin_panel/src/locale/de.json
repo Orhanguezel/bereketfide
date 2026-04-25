@@ -2288,7 +2288,21 @@
         "list": "Liste (Sprache)",
         "globalList": "Liste (Global *)",
         "locales": "Sprachen",
-        "branding": "Branding"
+        "branding": "Branding",
+        "halTicker": "Marktpreis-Ticker"
+      },
+      "halTicker": {
+        "title": "Marktpreis-Ticker — Produktauswahl",
+        "description": "Produkte für den Marktpreis-Ticker auf der Startseite auswählen.",
+        "loading": "Lädt...",
+        "save": "Speichern",
+        "saved": "Auswahl gespeichert",
+        "saveError": "Speichern fehlgeschlagen",
+        "loadingProducts": "Produkte werden geladen...",
+        "noProducts": "Produktliste konnte nicht geladen werden.",
+        "selectedCount": "{count} Produkte ausgewählt",
+        "clearAll": "Alle entfernen",
+        "previewLabel": "Zu speichernde Slugs:"
       },
       "filters": {
         "title": "Filter",

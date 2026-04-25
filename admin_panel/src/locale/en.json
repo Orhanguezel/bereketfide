@@ -1971,7 +1971,21 @@
         "globalList": "List (Global *)",
         "locales": "Locales",
         "branding": "Branding",
-        "apiServices": "API & Services"
+        "apiServices": "API & Services",
+        "halTicker": "Market Price Ticker"
+      },
+      "halTicker": {
+        "title": "Market Price Ticker — Product Selection",
+        "description": "Select the products shown in the homepage market price ticker. Saved to bereketfide__hal_ticker_slugs.",
+        "loading": "Loading...",
+        "save": "Save",
+        "saved": "Selection saved",
+        "saveError": "Save failed",
+        "loadingProducts": "Loading products...",
+        "noProducts": "Could not load product list.",
+        "selectedCount": "{count} products selected",
+        "clearAll": "Clear all",
+        "previewLabel": "Slugs to be saved:"
       },
       "filters": {
         "title": "Filters",
