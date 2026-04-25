@@ -23,6 +23,7 @@ import { fetchReferences, fetchSetting } from '@/i18n/server';
 import { fetchSeoPage } from '@/seo/server';
 import { ScrollBackground } from '@/components/sections/ScrollBackground';
 import { HeroBackgroundVideo } from '@/components/ui/HeroBackgroundVideo';
+import { HalPriceTicker } from '@/components/sections/HalPriceTicker';
 
 function resolveImageUrl(value?: string | null): string {
   if (!value) return '';
@@ -340,6 +341,8 @@ export default async function HomePage({
         {/* Bottom indicator line */}
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-(--color-brand)" />
       </section>
+
+      <HalPriceTicker />
 
       {homeStats.length > 0 ? <StatsHighlightSection items={homeStats} /> : null}
 
