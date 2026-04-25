@@ -108,5 +108,9 @@ export const normalizeNotification = (raw: unknown): NotificationView => {
   };
 };
 
-export const normalizeNotificationsList = (raw: unknown): NotificationView[] =>
-  Array.isArray(raw) ? raw.map(normalizeNotification) : [];
+export const normalizeNotificationsList = (raw: unknown): NotificationView[] => {
+  if (Array.isArray(raw)) return raw.map(normalizeNotification);
+  const r = (raw ?? {}) as any;
+  if (Array.isArray(r.data)) return r.data.map(normalizeNotification);
+  return [];
+};
