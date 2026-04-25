@@ -2142,7 +2142,9 @@
         "order_failed": "Sipariş Başarısız",
         "system": "Sistem",
         "custom": "Özel",
-        "password_changed": "Şifre Değiştirildi"
+        "password_changed": "Şifre Değiştirildi",
+        "contact_created": "Yeni İletişim Mesajı",
+        "offer_created": "Yeni Teklif Talebi"
       },
       "list": {
         "empty": "Henüz bildirim yok"

@@ -134,12 +134,12 @@ export function Footer({
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {([
-              { label: 'VistaSeed',          href: 'https://vistaseeds.com.tr' },
+              { label: 'VistaSeeds',          href: 'https://vistaseeds.com.tr' },
               { label: 'Tarımda Bugün',      href: 'https://tarimdabugun.com' },
               { label: 'Hal Fiyatları',      href: 'https://haldefiyat.com' },
               { label: 'Tarım Ansiklopedisi',href: 'https://tarimansiklopedisi.com' },
               { label: 'ZiraiBilgim',        href: 'https://ziraibilgim.com' },
-              { label: 'TarMinGO',           href: 'https://www.bereketfide.com.tr/tr/quiz-site/index.html' },
+              { label: 'TarMinGO',           href: 'https://tarmingo.com' },
               { label: 'TarimIklim',         href: 'https://tarimiklim.com/tr' },
             ] as { label: string; href: string }[]).map(({ label, href }) => (
               <a
