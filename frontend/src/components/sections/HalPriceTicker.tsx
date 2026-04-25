@@ -6,7 +6,7 @@ const DEFAULT_SLUGS = 'domates,biber,patlican,salatalik,kabak,havuc,sogan,marul,
 
 async function getTickerSlugs(): Promise<string> {
   try {
-    const row = await fetchSetting('bereketfide__hal_ticker_slugs', '*', { revalidate: 3600 });
+    const row = await fetchSetting('bereketfide__hal_ticker_slugs', '*', { revalidate: 60 });
     const val = (row as any)?.value;
     if (Array.isArray(val) && val.length) return val.join(',');
     if (typeof val === 'string' && val.trim()) return val.trim();
