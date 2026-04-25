@@ -89,7 +89,7 @@ const nextConfig = {
       "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       `img-src 'self' blob: data: https://res.cloudinary.com ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${frontendUrl} ${apiBase} ${katalogaiDomain} http://localhost:8086 http://127.0.0.1:8086`,
-      `connect-src 'self' ${apiBase} ${frontendUrl} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${katalogaiDomain} https://cdn.jsdelivr.net https://api.cloudinary.com`,
+      `connect-src 'self' ${apiBase} ${frontendUrl} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${katalogaiDomain} https://cdn.jsdelivr.net https://api.cloudinary.com https://haldefiyat.com`,
       "font-src 'self' https://fonts.gstatic.com data:",
       `object-src 'self' ${apiBase} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${katalogaiDomain} http://localhost:8086 http://127.0.0.1:8086`,
       `frame-src 'self' blob: ${apiBase} ${prodDomain} ${prodDomainAlt} ${prodDomain}:8086 ${prodDomainAlt}:8086 ${katalogaiDomain} http://localhost:8086 http://127.0.0.1:8086`,
