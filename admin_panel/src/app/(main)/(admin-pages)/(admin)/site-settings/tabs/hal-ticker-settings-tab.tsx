@@ -61,15 +61,23 @@ export const HalTickerSettingsTab: React.FC<HalTickerSettingsTabProps> = () => {
     }
   }, [settings]);
 
-  // Fetch available products from haldefiyat API
+  // Fetch available products via widget endpoint (has CORS: Access-Control-Allow-Origin: *)
+  // /prices/products does not set CORS headers, so we use the widget with limit=50
   React.useEffect(() => {
     let cancelled = false;
     setProductsLoading(true);
-    fetch('https://haldefiyat.com/api/v1/prices/products?category=sebze')
+    fetch('https://haldefiyat.com/api/v1/prices/widget?limit=50')
       .then((r) => r.json())
       .then((data) => {
         if (cancelled) return;
-        const items: HalProduct[] = Array.isArray(data?.items) ? data.items : [];
+        const raw = Array.isArray(data?.items) ? data.items : [];
+        const seen = new Set<string>();
+        const items: HalProduct[] = [];
+        for (const item of raw) {
+          if (!item?.productSlug || seen.has(item.productSlug)) continue;
+          seen.add(item.productSlug);
+          items.push({ slug: item.productSlug, nameTr: item.productName, categorySlug: item.categorySlug ?? '' });
+        }
         setProducts(items);
       })
       .catch(() => {
