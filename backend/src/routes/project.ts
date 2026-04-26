@@ -21,7 +21,7 @@ export async function registerProjectPublic(api: FastifyInstance) {
   await registerFeed(api);
   await registerEcosystem(api);
   await registerWeather(api);
-  await registerExtrasDealer(api);
+  await api.register(registerExtrasDealer);
 }
 
 export async function registerProjectAdmin(api: FastifyInstance) {
