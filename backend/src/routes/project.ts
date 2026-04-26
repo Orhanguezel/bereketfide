@@ -8,6 +8,8 @@ import { registerWeather } from '@/modules/weather/router';
 // Proje-spesifik admin moduller
 import { registerDashboardAdmin } from '@/modules/dashboard/admin.routes';
 import { registerInventoryAdmin } from '@/modules/inventorySync/admin.routes';
+import { registerExtrasAdmin } from '@/modules/extras/admin.routes';
+import { registerExtrasDealer } from '@/modules/extras/dealer.routes';
 
 // Ortak db_admin (manifest-driven)
 import { createDbAdminRoutes } from '@agro/shared-backend/modules/db_admin';
@@ -19,11 +21,13 @@ export async function registerProjectPublic(api: FastifyInstance) {
   await registerFeed(api);
   await registerEcosystem(api);
   await registerWeather(api);
+  await registerExtrasDealer(api);
 }
 
 export async function registerProjectAdmin(api: FastifyInstance) {
   await api.register(async (i) => registerDashboardAdmin(i), { prefix: '/admin' });
   await api.register(async (i) => registerInventoryAdmin(i), { prefix: '/admin' });
+  await api.register(async (i) => registerExtrasAdmin(i), { prefix: '/admin' });
   await api.register(async (i) => {
     i.addHook('onRequest', requireAuth);
     i.addHook('onRequest', requireAdmin);

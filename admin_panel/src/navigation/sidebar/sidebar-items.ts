@@ -10,6 +10,7 @@ import {
   Bell,
   Palette,
   PackageSearch,
+  Sprout,
   BookOpen,
   Bot,
   Briefcase,
@@ -119,7 +120,8 @@ export type AdminNavItemKey =
   | 'newsletter'
   | 'email_templates'
   | 'cache'
-  | 'inventory';
+  | 'inventory'
+  | 'extras';
 
 export type AdminNavGroupKey = 'general' | 'content' | 'bereket_fide' | 'bereket_content' | 'marketing' | 'communication' | 'system';
 
@@ -153,6 +155,7 @@ export const adminNavConfig: AdminNavConfigGroup[] = [
       { key: 'bereket_offers', url: '/offer?module=bereketfide', icon: DollarSign },
       { key: 'contacts', url: '/contacts', icon: Contact2 },
       { key: 'inventory', url: '/inventory', icon: PackageSearch },
+      { key: 'extras', url: '/extras', icon: Sprout },
       { key: 'b2b_orders', url: '/orders', icon: ShoppingBag },
       { key: 'b2b_payment_attempts', url: '/orders/payment-attempts', icon: ClipboardList },
       { key: 'b2b_dealers', url: '/dealers', icon: Store },
@@ -255,6 +258,7 @@ const FALLBACK_TITLES: Record<AdminNavItemKey, string> = {
   newsletter: 'Bülten Aboneleri',
   cache: 'Cache Yönetimi',
   inventory: 'Envanter İzleme',
+  extras: 'Ekstra Fideler',
 };
 
 export function buildAdminSidebarItems(

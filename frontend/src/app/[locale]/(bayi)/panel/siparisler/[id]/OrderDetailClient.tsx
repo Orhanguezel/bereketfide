@@ -254,7 +254,9 @@ export default function OrderDetailClient({ locale, orderId }: { locale: string;
                   <td className="px-4 py-3 text-(--color-text-primary)">
                     {it.product_title ?? it.product_id.slice(0, 8)}
                   </td>
-                  <td className="px-4 py-3 text-(--color-text-secondary)">{it.quantity} g</td>
+                  <td className="px-4 py-3 text-(--color-text-secondary)">
+                    {it.quantity.toLocaleString(locale === 'en' ? 'en-US' : 'tr-TR')}
+                  </td>
                   <td className="px-4 py-3">{formatTry(parseMoney(it.total_price), locale)}</td>
                 </tr>
               ))}

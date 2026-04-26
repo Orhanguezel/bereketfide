@@ -75,3 +75,5 @@ export * from '@/integrations/endpoints/admin/comments_admin.endpoints';
 export * from '@/integrations/endpoints/admin/library_admin.endpoints';
 export * from '@/integrations/endpoints/admin/b2b_admin.endpoints';
 export * from '@/integrations/endpoints/admin/inventory_admin.endpoints';
+export * from '@/integrations/endpoints/admin/extras_admin.endpoints';
+export * from '@/integrations/endpoints/dealer/extras_dealer.endpoints';

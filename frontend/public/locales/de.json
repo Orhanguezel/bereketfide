@@ -531,6 +531,152 @@
       "goToLogin": "Anmelden"
     },
     "panel": {
+      "nav": {
+        "overview": "Übersicht",
+        "orders": "Bestellungen",
+        "extras": "Extras",
+        "finance": "Konto / Finanzen",
+        "account": "Konto",
+        "logout": "Abmelden",
+        "dealerPortal": "Händlerportal",
+        "limitLabel": "Verfügbares Limit"
+      },
+      "dashboard": {
+        "title": "Händlerportal",
+        "lead": "Bestellungen, Extras und Kontoaktivitäten in einem Panel verwalten.",
+        "cards": {
+          "orders": {
+            "title": "Produktbestellung",
+            "body": "Setzlinge aus dem Händlerkatalog nach Stückzahl bestellen.",
+            "cta": "Bestellung starten"
+          },
+          "extras": {
+            "title": "Extras",
+            "body": "Überschussproduktion nach Tray-Typ, Datum und Menge anfragen.",
+            "cta": "Extras ansehen"
+          },
+          "finance": {
+            "title": "Konto / Finanzen",
+            "body": "Limit, Saldo und Zahlungen verfolgen.",
+            "cta": "Konto öffnen"
+          }
+        }
+      },
+      "orders": {
+        "title": "Bestellungen",
+        "lead": "Produkte aus dem Händlerkatalog wählen, Menge eingeben und bestellen.",
+        "catalog": "Produktkatalog",
+        "searchPlaceholder": "Nach Produkt suchen…",
+        "loading": "Wird geladen…",
+        "loadMore": "Mehr anzeigen",
+        "addToCart": "In den Warenkorb",
+        "cart": "Warenkorb",
+        "emptyCart": "Noch keine Produkte hinzugefügt.",
+        "quantity": "Menge (Stück)",
+        "remove": "Entfernen",
+        "notes": "Bestellnotiz",
+        "cartTotal": "Geschätzter Betrag",
+        "submitOrder": "Bestellung erstellen",
+        "submitting": "Wird gesendet…",
+        "created": "Bestellung gespeichert. Zahlungsart wählen.",
+        "nextStep": "Zahlung",
+        "orderRef": "Bestellung: {id}…",
+        "payBank": "Per Überweisung zahlen",
+        "payBankCard": "Mit Karte zahlen",
+        "payCard": "Mit Karte zahlen",
+        "payCardInstallment": "In Raten zahlen",
+        "payCredit": "Über Konto zahlen",
+        "installment": "Raten",
+        "installmentOption": "{count} Raten",
+        "iyzicoIframeHint": "Das Zahlungsformular wird unten geladen.",
+        "cardRedirectHint": "Weiterleitung zur Bank.",
+        "iyzicoPaymentSuccess": "Zahlung erfolgreich.",
+        "iyzicoPaymentFail": "Zahlung konnte nicht abgeschlossen werden.",
+        "cancelOrder": "Bestellung stornieren",
+        "openDetail": "Details öffnen",
+        "confirmCancel": "Diese Bestellung stornieren?",
+        "cancelled": "Bestellung storniert.",
+        "bankMarked": "Überweisung ausgewählt.",
+        "creditPaid": "Bestellung wurde dem Konto belastet.",
+        "paymentAbandoned": "Zahlung unvollständig",
+        "paymentAbandonedHint": "Bitte erneut versuchen.",
+        "recent": "Letzte Bestellungen",
+        "refresh": "Aktualisieren",
+        "noOrders": "Noch keine Bestellungen.",
+        "detail": "Detail",
+        "detailTitle": "Bestelldetail",
+        "notFound": "Bestellung nicht gefunden.",
+        "backList": "← Zurück",
+        "lines": "Positionen",
+        "col": {
+          "date": "Datum",
+          "total": "Betrag",
+          "status": "Status",
+          "payment": "Zahlung",
+          "product": "Produkt",
+          "qty": "Menge",
+          "lineTotal": "Zeile"
+        },
+        "status": {
+          "pending": "Ausstehend",
+          "confirmed": "Bestätigt",
+          "shipped": "Versendet",
+          "completed": "Abgeschlossen",
+          "cancelled": "Storniert"
+        },
+        "pay": {
+          "unpaid": "Unbezahlt",
+          "pending": "Zahlung ausstehend",
+          "paid": "Bezahlt",
+          "failed": "Fehlgeschlagen",
+          "refunded": "Erstattet"
+        },
+        "errors": {
+          "loadCatalog": "Katalog konnte nicht geladen werden.",
+          "loadOrders": "Bestellungen konnten nicht geladen werden.",
+          "loadOrder": "Bestellung konnte nicht geladen werden.",
+          "generic": "Vorgang fehlgeschlagen ({code}).",
+          "insufficient_credit": "Verfügbares Limit reicht nicht aus.",
+          "already_paid": "Diese Bestellung ist bereits bezahlt.",
+          "order_cancelled": "Bestellung wurde storniert.",
+          "products_not_found": "Einige Produkte wurden nicht gefunden.",
+          "only_pending_orders_can_be_cancelled": "Nur ausstehende Bestellungen können storniert werden.",
+          "order_not_found": "Bestellung nicht gefunden.",
+          "dealer_not_found": "Händlerprofil nicht gefunden.",
+          "payment_already_in_progress": "Eine Zahlung läuft bereits.",
+          "installment_not_supported": "Ratenzahlung wird nicht unterstützt.",
+          "iyzico_feature_disabled": "Kartenzahlung ist deaktiviert.",
+          "iyzico_not_configured": "Zahlungsanbieter ist nicht eingerichtet.",
+          "iyzico_init_failed": "Zahlung konnte nicht gestartet werden.",
+          "basket_total_mismatch": "Warenkorb stimmt nicht überein.",
+          "order_has_no_items": "Keine Positionen vorhanden."
+        }
+      },
+      "extras": {
+        "title": "Extras",
+        "lead": "Verfügbare, nicht verkaufte Setzlinge nach Tray-Typ, Datum und Menge anfragen.",
+        "loading": "Wird geladen…",
+        "empty": "Keine Extras gefunden.",
+        "allCategories": "Alle Gruppen",
+        "allTrayTypes": "Alle Tray-Typen",
+        "trayType": "{tray}er Tray",
+        "tray": "Tray",
+        "stock": "Stück",
+        "add": "Zur Anfrage",
+        "requestBox": "Extra-Anfrage",
+        "emptyRequest": "Noch keine Extras ausgewählt.",
+        "requestedQuantity": "Angefragte Menge",
+        "remove": "Entfernen",
+        "note": "Notiz",
+        "totalRequested": "Gesamtmenge",
+        "submit": "Anfrage senden",
+        "submitting": "Wird gesendet…",
+        "created": "Ihre Anfrage wurde empfangen.",
+        "errors": {
+          "load": "Extras konnten nicht geladen werden.",
+          "generic": "Anfrage konnte nicht gesendet werden ({code})."
+        }
+      },
       "finance": {
         "title": "Konto / Finanzen",
         "lead": "Kreditlimit, Saldo und aktuelle Bewegungen. Kontoauszug als PDF herunterladen.",

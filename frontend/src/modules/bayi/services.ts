@@ -2,6 +2,8 @@ import api from '@/lib/axios';
 import type {
   DealerCatalogResponse,
   DealerDirectCardInitResponse,
+  DealerExtraRequest,
+  DealerExtrasResponse,
   FinanceSummary,
   OrderDetail,
   OrdersListResponse,
@@ -138,4 +140,26 @@ export async function downloadFinanceStatementPdf(): Promise<void> {
   a.download = 'cari-ekstre.pdf';
   a.click();
   URL.revokeObjectURL(url);
+}
+
+export async function fetchDealerExtras(params?: {
+  category?: string;
+  tray_type?: number;
+}): Promise<DealerExtrasResponse> {
+  const res = await api.get<DealerExtrasResponse>('/dealer/extras', {
+    params: {
+      category: params?.category || undefined,
+      tray_type: params?.tray_type || undefined,
+    },
+  });
+  return res.data;
+}
+
+export async function createDealerExtraRequest(body: {
+  extra_seedling_id: string;
+  requested_quantity: number;
+  note?: string | null;
+}): Promise<{ request: DealerExtraRequest }> {
+  const res = await api.post<{ request: DealerExtraRequest }>('/dealer/extras/requests', body);
+  return res.data;
 }

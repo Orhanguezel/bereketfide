@@ -579,6 +579,7 @@
       "nav": {
         "overview": "Overview",
         "orders": "Orders",
+        "extras": "Extras",
         "finance": "Account / Finance",
         "account": "Account",
         "logout": "Log out",
@@ -587,11 +588,28 @@
       },
       "dashboard": {
         "title": "Dealer portal",
-        "lead": "Use the menu for orders and finance."
+        "lead": "Manage orders, extras and account activity from one panel.",
+        "cards": {
+          "orders": {
+            "title": "Product orders",
+            "body": "Create piece-based orders from the dealer seedling catalog.",
+            "cta": "Start an order"
+          },
+          "extras": {
+            "title": "Extras",
+            "body": "Request excess production by tray type, ready date and quantity.",
+            "cta": "View extras"
+          },
+          "finance": {
+            "title": "Account / Finance",
+            "body": "Track limit, balance and payment activity.",
+            "cta": "Open account"
+          }
+        }
       },
       "orders": {
         "title": "Orders",
-        "lead": "Pick products from the dealer catalog, enter quantity in grams, then place your order. Pay by bank transfer or on account.",
+        "lead": "Pick products from the dealer catalog, enter quantity, then place your order. Pay by bank transfer or on account.",
         "catalog": "Product catalog",
         "searchPlaceholder": "Search by product name…",
         "loading": "Loading…",
@@ -599,7 +617,7 @@
         "addToCart": "Add to cart",
         "cart": "Cart",
         "emptyCart": "Your cart is empty.",
-        "quantityGrams": "Quantity (grams)",
+        "quantity": "Quantity (pieces)",
         "remove": "Remove",
         "notes": "Order notes",
         "cartTotal": "Estimated total",
@@ -680,6 +698,31 @@
           "iyzico_init_failed": "Could not start the payment session.",
           "basket_total_mismatch": "Basket total does not match the order; contact support.",
           "order_has_no_items": "This order has no line items."
+        }
+      },
+      "extras": {
+        "title": "Extras",
+        "lead": "Request available unsold seedlings with tray type, ready date and quantity information.",
+        "loading": "Loading…",
+        "empty": "No extras match these filters.",
+        "allCategories": "All product groups",
+        "allTrayTypes": "All tray types",
+        "trayType": "{tray}-cell tray",
+        "tray": "Tray",
+        "stock": "Pieces",
+        "add": "Add to request",
+        "requestBox": "Extra request",
+        "emptyRequest": "No extras selected yet.",
+        "requestedQuantity": "Requested quantity",
+        "remove": "Remove",
+        "note": "Request note",
+        "totalRequested": "Total quantity",
+        "submit": "Submit request",
+        "submitting": "Submitting…",
+        "created": "Your extra request was received. The team will contact you to confirm availability.",
+        "errors": {
+          "load": "Could not load extras.",
+          "generic": "Could not submit request ({code})."
         }
       },
       "finance": {

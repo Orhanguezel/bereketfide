@@ -160,6 +160,13 @@ export default function BayiPanelShell({
                 {t('nav.orders')}
               </Link>
               <Link
+                href={localizedPath(locale, '/panel/ekstralar')}
+                className={navCls(pathNoLocale.startsWith('/panel/ekstralar'))}
+                style={navStyle(pathNoLocale.startsWith('/panel/ekstralar'))}
+              >
+                {t('nav.extras')}
+              </Link>
+              <Link
                 href={localizedPath(locale, '/bayi/finans')}
                 className={navCls(pathNoLocale.startsWith('/bayi/finans'))}
                 style={navStyle(pathNoLocale.startsWith('/bayi/finans'))}

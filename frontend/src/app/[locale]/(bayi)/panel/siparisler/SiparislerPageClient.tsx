@@ -17,7 +17,7 @@ import {
 
 type CartLine = {
   product: DealerCatalogProduct;
-  quantityGrams: number;
+  quantity: number;
 };
 
 function formatTry(n: number, locale: string) {
@@ -33,7 +33,7 @@ function parseMoney(s: string) {
 }
 
 function productThumb(p: DealerCatalogProduct): string | null {
-  const first = p.images?.[0];
+  const first = p.image_url ?? p.images?.[0];
   return absoluteAssetUrl(first ?? null);
 }
 
@@ -144,7 +144,7 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
     let sum = 0;
     for (const line of cartLines) {
       const unit = parseMoney(line.product.unit_price);
-      sum += (unit * line.quantityGrams) / 1000;
+      sum += unit * line.quantity;
     }
     return sum;
   }, [cartLines]);
@@ -172,18 +172,18 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
       ...prev,
       [p.id]: {
         product: p,
-        quantityGrams: prev[p.id]?.quantityGrams ?? 1000,
+        quantity: prev[p.id]?.quantity ?? 1000,
       },
     }));
     setBanner(null);
   }
 
-  function setLineQty(productId: string, grams: number) {
-    const g = Math.max(1, Math.floor(grams));
+  function setLineQty(productId: string, quantity: number) {
+    const qty = Math.max(1, Math.floor(quantity));
     setCart((prev) => {
       const cur = prev[productId];
       if (!cur) return prev;
-      return { ...prev, [productId]: { ...cur, quantityGrams: g } };
+      return { ...prev, [productId]: { ...cur, quantity: qty } };
     });
   }
 
@@ -203,7 +203,7 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
       const created = await createOrder({
         items: cartLines.map((l) => ({
           product_id: l.product.id,
-          quantity: l.quantityGrams,
+          quantity: l.quantity,
         })),
         notes: notes.trim() || null,
       });
@@ -375,7 +375,7 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
                       <span className="line-through">{formatTry(parseMoney(p.list_price), locale)}</span>
                       <span className="ml-2 font-semibold text-(--color-brand)">
                         {formatTry(parseMoney(p.unit_price), locale)}
-                        <span className="font-normal text-(--color-text-secondary)"> / kg</span>
+                        <span className="font-normal text-(--color-text-secondary)"> / fide</span>
                       </span>
                     </div>
                     <button
@@ -422,12 +422,12 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
                 <li key={line.product.id} className="border-b pb-4 last:border-0" style={{ borderColor: 'var(--color-border)' }}>
                   <div className="text-sm font-medium text-(--color-text-primary)">{line.product.title}</div>
                   <label className="mt-2 block text-xs text-(--color-text-muted)">
-                    {t('quantityGrams')}
+                    {t('quantity')}
                     <input
                       type="number"
                       min={1}
                       step={100}
-                      value={line.quantityGrams}
+                      value={line.quantity}
                       onChange={(e) => setLineQty(line.product.id, Number(e.target.value))}
                       className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
                       style={{ borderColor: 'var(--color-border)' }}
@@ -435,7 +435,7 @@ export default function SiparislerPageClient({ locale }: { locale: string }) {
                   </label>
                   <div className="mt-2 flex items-center justify-between text-sm">
                     <span className="text-(--color-text-secondary)">
-                      {formatTry((parseMoney(line.product.unit_price) * line.quantityGrams) / 1000, locale)}
+                      {formatTry(parseMoney(line.product.unit_price) * line.quantity, locale)}
                     </span>
                     <button
                       type="button"

@@ -125,6 +125,7 @@ const emptyNav: AdminNavCopy = {
     library: '',
     b2b_payment_attempts: '',
     inventory: '',
+    extras: '',
   },
 };
 
@@ -192,6 +193,7 @@ export function normalizeAdminUiCopy(raw: unknown): AdminUiCopy {
     library: uiText(itemsRaw.library),
     b2b_payment_attempts: uiText(itemsRaw.b2b_payment_attempts),
     inventory: uiText(itemsRaw.inventory),
+    extras: uiText(itemsRaw.extras),
   };
 
   const commonRaw = parseJsonObject(o.common);

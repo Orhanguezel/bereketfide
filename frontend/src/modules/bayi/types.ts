@@ -2,11 +2,17 @@ export type DealerCatalogProduct = {
   id: string;
   title: string;
   slug: string;
+  image_url?: string | null;
   images?: string[];
   list_price: string;
   unit_price: string;
   discount_percent: number;
   product_code?: string | null;
+  category?: {
+    id?: string | null;
+    name?: string | null;
+    slug?: string | null;
+  } | null;
 };
 
 export type DealerCatalogResponse = {
@@ -79,3 +85,34 @@ export type DealerDirectCardInitResponse =
   | { provider: 'ziraatpay'; pageUrl: string }
   | { provider: 'nestpay_isbank' | 'halkode' | 'ziraatpay'; formHtml: string }
   | { provider: 'halkode'; redirectUrl: string };
+
+export type DealerExtraSeedling = {
+  id: string;
+  category: string;
+  product_name: string;
+  tray_type: number;
+  quantity: number;
+  available_on: string | null;
+  availability_label: string | null;
+  status: 'draft' | 'published' | 'reserved' | 'sold_out' | 'archived';
+  image_url: string | null;
+  note: string | null;
+  source_date: string | null;
+  created_at?: string;
+  updated_at?: string;
+};
+
+export type DealerExtrasResponse = {
+  items: DealerExtraSeedling[];
+};
+
+export type DealerExtraRequest = {
+  id: string;
+  extra_seedling_id: string;
+  dealer_user_id: string | null;
+  dealer_name: string | null;
+  dealer_phone: string | null;
+  requested_quantity: number;
+  note: string | null;
+  status: 'new' | 'contacted' | 'approved' | 'rejected' | 'cancelled';
+};

@@ -594,6 +594,7 @@
       "nav": {
         "overview": "Özet",
         "orders": "Siparişler",
+        "extras": "Ekstralar",
         "finance": "Cari / Finans",
         "account": "Hesap",
         "logout": "Çıkış",
@@ -602,11 +603,28 @@
       },
       "dashboard": {
         "title": "Bayi paneli",
-        "lead": "Sipariş ve cari işlemleriniz için menüyü kullanın."
+        "lead": "Sipariş, ekstralar ve cari işlemlerinizi tek panelden yönetin.",
+        "cards": {
+          "orders": {
+            "title": "Ürün siparişi",
+            "body": "Bayi kataloğundaki fide ürünlerinden adet bazlı sipariş oluşturun.",
+            "cta": "Siparişe geç"
+          },
+          "extras": {
+            "title": "Ekstralar",
+            "body": "Sezon içinde hazır olacak fazla üretimleri viol tipi, tarih ve miktara göre talep edin.",
+            "cta": "Ekstraları gör"
+          },
+          "finance": {
+            "title": "Cari / Finans",
+            "body": "Limit, bakiye ve ödeme hareketlerinizi takip edin.",
+            "cta": "Cariyi aç"
+          }
+        }
       },
       "orders": {
         "title": "Siparişler",
-        "lead": "Bayi kataloğundan ürün seçin, gram cinsinden miktar girin ve siparişi oluşturun. Ödeme: havale bildirimi veya cari hesap.",
+        "lead": "Bayi kataloğundan ürün seçin, adet girin ve siparişi oluşturun. Ödeme: havale bildirimi veya cari hesap.",
         "catalog": "Ürün kataloğu",
         "searchPlaceholder": "Ürün adında ara…",
         "loading": "Yükleniyor…",
@@ -614,7 +632,7 @@
         "addToCart": "Sepete ekle",
         "cart": "Sepet",
         "emptyCart": "Henüz ürün eklemediniz.",
-        "quantityGrams": "Miktar (gram)",
+        "quantity": "Miktar (adet)",
         "remove": "Kaldır",
         "notes": "Sipariş notu",
         "cartTotal": "Tahmini tutar",
@@ -695,6 +713,31 @@
           "iyzico_init_failed": "Ödeme oturumu başlatılamadı.",
           "basket_total_mismatch": "Sepet tutarı siparişle uyuşmuyor; destek ile iletişime geçin.",
           "order_has_no_items": "Siparişte ürün satırı yok."
+        }
+      },
+      "extras": {
+        "title": "Ekstralar",
+        "lead": "Siparişe bağlanmamış hazır fide fırsatlarını viol tipi, tarih ve adet bilgisiyle talep edin.",
+        "loading": "Yükleniyor…",
+        "empty": "Bu filtrelere uygun ekstra görünmüyor.",
+        "allCategories": "Tüm ürün grupları",
+        "allTrayTypes": "Tüm viol tipleri",
+        "trayType": "{tray}'lik viol",
+        "tray": "Viol",
+        "stock": "Adet",
+        "add": "Talebe ekle",
+        "requestBox": "Ekstra talebi",
+        "emptyRequest": "Henüz ekstra eklemediniz.",
+        "requestedQuantity": "Talep edilen adet",
+        "remove": "Kaldır",
+        "note": "Talep notu",
+        "totalRequested": "Toplam adet",
+        "submit": "Talebi gönder",
+        "submitting": "Gönderiliyor…",
+        "created": "Ekstra talebiniz alındı. Ekip uygunluğu teyit etmek için sizinle iletişime geçecek.",
+        "errors": {
+          "load": "Ekstralar yüklenemedi.",
+          "generic": "Talep gönderilemedi ({code})."
         }
       },
       "finance": {

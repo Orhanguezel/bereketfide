@@ -33,6 +33,8 @@ const ALLOWED_PREFIXES = [
   '/cache',
   '/theme',
   '/newsletter',
+  '/inventory',
+  '/extras',
   '/unauthorized',
 ] as const;
 
