@@ -31,3 +31,41 @@ CREATE TABLE IF NOT EXISTS inventory_sync_log (
   status       ENUM('ok','error') NOT NULL DEFAULT 'ok',
   error_msg    TEXT           NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS inventory_image_map (
+  malzeme_kodu     VARCHAR(20) NOT NULL PRIMARY KEY,
+  front_asset_id   CHAR(36)    NULL,
+  back_asset_id    CHAR(36)    NULL,
+  front_image_path VARCHAR(255) NOT NULL,
+  back_image_path  VARCHAR(255) NOT NULL,
+  image_pair_no    VARCHAR(10)  NOT NULL,
+  manual_price     DECIMAL(15,2) NULL,
+  confidence       ENUM('guvenli','manuel_kontrol') NOT NULL DEFAULT 'guvenli',
+  note             TEXT NULL,
+  updated_at       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_inventory_image_confidence (confidence),
+  KEY idx_inventory_image_front_asset (front_asset_id),
+  KEY idx_inventory_image_back_asset (back_asset_id),
+  CONSTRAINT fk_inventory_image_front_asset
+    FOREIGN KEY (front_asset_id) REFERENCES storage_assets(id)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_inventory_image_back_asset
+    FOREIGN KEY (back_asset_id) REFERENCES storage_assets(id)
+    ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+SET @inventory_image_map_manual_price_exists := (
+  SELECT COUNT(*)
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE()
+    AND TABLE_NAME = 'inventory_image_map'
+    AND COLUMN_NAME = 'manual_price'
+);
+SET @inventory_image_map_manual_price_sql := IF(
+  @inventory_image_map_manual_price_exists = 0,
+  'ALTER TABLE inventory_image_map ADD COLUMN manual_price DECIMAL(15,2) NULL AFTER image_pair_no',
+  'SELECT 1'
+);
+PREPARE inventory_image_map_manual_price_stmt FROM @inventory_image_map_manual_price_sql;
+EXECUTE inventory_image_map_manual_price_stmt;
+DEALLOCATE PREPARE inventory_image_map_manual_price_stmt;

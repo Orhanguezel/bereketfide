@@ -29,4 +29,17 @@ export const inventorySyncLog = mysqlTable('inventory_sync_log', {
   error_msg:    text('error_msg'),
 });
 
+export const inventoryImageMap = mysqlTable('inventory_image_map', {
+  malzeme_kodu:     varchar('malzeme_kodu', { length: 20 }).primaryKey(),
+  front_asset_id:   varchar('front_asset_id', { length: 36 }),
+  back_asset_id:    varchar('back_asset_id', { length: 36 }),
+  front_image_path: varchar('front_image_path', { length: 255 }).notNull(),
+  back_image_path:  varchar('back_image_path', { length: 255 }).notNull(),
+  image_pair_no:    varchar('image_pair_no', { length: 10 }).notNull(),
+  manual_price:     decimal('manual_price', { precision: 15, scale: 2 }),
+  confidence:       mysqlEnum('confidence', ['guvenli', 'manuel_kontrol']).notNull().default('guvenli'),
+  note:             text('note'),
+  updated_at:       datetime('updated_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
 export type InventoryRow = typeof inventoryCache.$inferSelect;

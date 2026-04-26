@@ -52,20 +52,40 @@ function parseGridHtml(html: string): RawInventoryRow[] {
   return rows;
 }
 
-async function fetchPage1(): Promise<{ html: string; scriptCaseInit: string }> {
+function buildCookieHeader(raw: string | null): string {
+  if (!raw) return '';
+  return raw
+    .split(/, (?=[^ ;]+=)/)
+    .map((part) => part.split(';')[0]?.trim())
+    .filter(Boolean)
+    .join('; ');
+}
+
+function dedupeByMaterialCode(rows: RawInventoryRow[]): RawInventoryRow[] {
+  const seen = new Set<string>();
+  return rows.filter((row) => {
+    if (seen.has(row.malzeme_kodu)) return false;
+    seen.add(row.malzeme_kodu);
+    return true;
+  });
+}
+
+async function fetchPage1(): Promise<{ html: string; scriptCaseInit: string; cookie: string }> {
   const res = await fetch(BASE_URL, { signal: AbortSignal.timeout(20_000) });
+  const cookie = buildCookieHeader(res.headers.get('set-cookie'));
   const html = await res.text();
   const initMatch = html.match(/script_case_init.*?value="(\d+)"/);
   const scriptCaseInit = initMatch?.[1] ?? '1';
-  return { html, scriptCaseInit };
+  return { html, scriptCaseInit, cookie };
 }
 
-async function fetchPageAjax(scriptCaseInit: string, recStart: number): Promise<string> {
+async function fetchPageAjax(scriptCaseInit: string, recStart: number, cookie: string): Promise<string> {
   const res = await fetch(BASE_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'X-Requested-With': 'XMLHttpRequest',
+      ...(cookie ? { Cookie: cookie } : {}),
     },
     body: new URLSearchParams({
       nmgp_opcao: 'ajax_navigate',
@@ -81,11 +101,11 @@ async function fetchPageAjax(scriptCaseInit: string, recStart: number): Promise<
 }
 
 export async function scrapeAllInventory(): Promise<RawInventoryRow[]> {
-  const { html: page1Html, scriptCaseInit } = await fetchPage1();
+  const { html: page1Html, scriptCaseInit, cookie } = await fetchPage1();
   const allRows: RawInventoryRow[] = parseGridHtml(page1Html);
 
   for (let recStart = PAGE_SIZE + 1; recStart < 2000; recStart += PAGE_SIZE) {
-    const gridHtml = await fetchPageAjax(scriptCaseInit, recStart);
+    const gridHtml = await fetchPageAjax(scriptCaseInit, recStart, cookie);
     if (!gridHtml) break;
     const rows = parseGridHtml(gridHtml);
     if (!rows.length) break;
@@ -93,5 +113,5 @@ export async function scrapeAllInventory(): Promise<RawInventoryRow[]> {
     if (rows.length < PAGE_SIZE) break;
   }
 
-  return allRows;
+  return dedupeByMaterialCode(allRows);
 }

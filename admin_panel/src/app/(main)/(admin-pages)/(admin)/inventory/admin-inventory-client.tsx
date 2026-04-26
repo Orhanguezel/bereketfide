@@ -9,10 +9,14 @@
 
 import * as React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
+import { toast } from 'sonner';
 import {
   PackageSearch,
   RefreshCcw,
   Search,
+  ImageIcon,
+  Pencil,
   CheckCircle2,
   XCircle,
   Clock,
@@ -29,13 +33,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger }         from '@/components/ui/tabs';
 import { Skeleton }                                         from '@/components/ui/skeleton';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Label } from '@/components/ui/label';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
-import { useAdminT } from '@/app/(main)/(admin-pages)/_components/common/useAdminT';
+import { AdminImageUploadField } from '@/app/(main)/(admin-pages)/_components/common/AdminImageUploadField';
 import {
   useGetInventoryStatsAdminQuery,
   useListInventoryAdminQuery,
   useListInventorySyncLogsAdminQuery,
+  useUpdateInventoryManualAdminMutation,
 } from '@/integrations/hooks';
+import type { InventoryItem } from '@/integrations/endpoints/admin/inventory_admin.endpoints';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -52,9 +67,233 @@ function fmtNum(v: number | string | null | undefined) {
   return Number(v).toLocaleString('tr-TR');
 }
 
+function fmtMoney(v: number | string | null | undefined) {
+  if (v == null || v === '') return '—';
+  const n = Number(v);
+  if (!Number.isFinite(n)) return '—';
+  return n.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 function fmtMs(ms: number) {
   if (ms < 1000) return `${ms}ms`;
   return `${(ms / 1000).toFixed(1)}s`;
+}
+
+function getFileBase(): string {
+  const envBase = (process.env.NEXT_PUBLIC_FILE_BASE_URL || '').trim().replace(/\/+$/, '');
+  if (envBase) return envBase;
+
+  if (typeof window !== 'undefined' && window.location) {
+    const { hostname, protocol } = window.location;
+
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || '').trim().replace(/\/+$/, '');
+      if (apiUrl) {
+        try {
+          return new URL(apiUrl).origin;
+        } catch {
+          return apiUrl.replace(/\/api\/v?\d*\/?$/i, '');
+        }
+      }
+      return `${protocol}//${hostname}:8086`;
+    }
+
+    return window.location.origin.replace(/\/+$/, '');
+  }
+
+  return '';
+}
+
+function buildUploadUrl(path: string | null | undefined) {
+  const raw = String(path ?? '').trim();
+  if (!raw) return '';
+  if (/^https?:\/\//i.test(raw)) return raw;
+  const normalized = raw.startsWith('/') ? raw : `/${raw}`;
+  if (!normalized.startsWith('/uploads/')) return normalized;
+  const base = getFileBase();
+  return base ? `${base}${normalized}` : normalized;
+}
+
+function normalizePriceInput(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const numeric = Number(trimmed.replace(',', '.'));
+  if (!Number.isFinite(numeric) || numeric < 0) return undefined;
+  return numeric.toFixed(2);
+}
+
+function InventoryImages({ item }: { item: { image: { front_image_path: string; back_image_path: string; confidence: 'guvenli' | 'manuel_kontrol' } | null } }) {
+  const image = item.image;
+  const urls = image
+    ? [image.front_image_path, image.back_image_path]
+        .map((path) => buildUploadUrl(path))
+        .filter(Boolean)
+    : [];
+
+  if (!image || urls.length === 0) {
+    return (
+      <div className="flex h-12 w-16 items-center justify-center rounded-md border bg-muted/30 text-muted-foreground">
+        <ImageIcon className="h-4 w-4" />
+      </div>
+    );
+  }
+
+  const ring = image.confidence === 'guvenli' ? 'ring-emerald-500/50' : 'ring-amber-500/60';
+
+  return (
+    <div className="flex items-center gap-1.5">
+      {urls.map((src, index) => (
+        <a
+          key={`${src}-${index}`}
+          href={src}
+          target="_blank"
+          rel="noreferrer"
+          title={index === 0 ? 'Ön yüz' : 'Arka yüz'}
+          className={`block h-12 w-9 overflow-hidden rounded border bg-background ring-1 ${ring}`}
+        >
+          <Image
+            src={src}
+            alt={index === 0 ? 'Ürün ön yüz' : 'Ürün arka yüz'}
+            width={36}
+            height={48}
+            className="h-full w-full object-cover"
+            loading="lazy"
+            unoptimized
+          />
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function InventoryEditDialog({
+  item,
+  open,
+  onOpenChange,
+}: {
+  item: InventoryItem | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const [updateInventory, updateState] = useUpdateInventoryManualAdminMutation();
+  const [price, setPrice] = React.useState('');
+  const [frontImagePath, setFrontImagePath] = React.useState('');
+  const [backImagePath, setBackImagePath] = React.useState('');
+  const [frontAssetId, setFrontAssetId] = React.useState<string | null>(null);
+  const [backAssetId, setBackAssetId] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (!item) return;
+    setPrice(item.image?.manual_price ?? '');
+    setFrontImagePath(item.image?.front_image_path ?? '');
+    setBackImagePath(item.image?.back_image_path ?? '');
+    setFrontAssetId(item.image?.front_asset_id ?? null);
+    setBackAssetId(item.image?.back_asset_id ?? null);
+  }, [item]);
+
+  if (!item) return null;
+  const currentItem = item;
+
+  const busy = updateState.isLoading;
+
+  async function save() {
+    const manualPrice = normalizePriceInput(price);
+    if (manualPrice === undefined) {
+      toast.error('Fiyat geçerli bir sayı olmalı.');
+      return;
+    }
+
+    try {
+      await updateInventory({
+        code: currentItem.malzeme_kodu,
+        payload: {
+          manual_price: manualPrice,
+          front_asset_id: frontAssetId,
+          back_asset_id: backAssetId,
+          front_image_path: frontImagePath.trim() || null,
+          back_image_path: backImagePath.trim() || null,
+          note: 'Admin panelden manuel düzenlendi',
+        },
+      }).unwrap();
+      toast.success('Envanter bilgisi güncellendi.');
+      onOpenChange(false);
+    } catch {
+      toast.error('Envanter bilgisi güncellenemedi.');
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="flex max-h-[90vh] max-w-5xl flex-col overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>{item.malzeme_adi}</DialogTitle>
+          <DialogDescription>
+            {currentItem.malzeme_kodu} için fiyat ve görsel bilgilerini düzenleyin.
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <div className="space-y-2">
+            <Label htmlFor="inventory-manual-price">Fiyat</Label>
+            <Input
+              id="inventory-manual-price"
+              inputMode="decimal"
+              placeholder="0,00"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              disabled={busy}
+            />
+            <div className="text-xs text-muted-foreground">
+              Boş bırakırsanız manuel fiyat gösterilmez.
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <AdminImageUploadField
+              label="Ön Görsel"
+              bucket="public"
+              folder="inventory/manual"
+              metadata={{ module: 'inventory', code: currentItem.malzeme_kodu, side: 'front' }}
+              value={frontImagePath}
+              onChange={(url) => {
+                setFrontImagePath(url);
+                setFrontAssetId(null);
+              }}
+              disabled={busy}
+              openLibraryHref="/storage"
+              previewAspect="4x3"
+              previewObjectFit="contain"
+            />
+            <AdminImageUploadField
+              label="Arka Görsel"
+              bucket="public"
+              folder="inventory/manual"
+              metadata={{ module: 'inventory', code: currentItem.malzeme_kodu, side: 'back' }}
+              value={backImagePath}
+              onChange={(url) => {
+                setBackImagePath(url);
+                setBackAssetId(null);
+              }}
+              disabled={busy}
+              openLibraryHref="/storage"
+              previewAspect="4x3"
+              previewObjectFit="contain"
+            />
+          </div>
+        </div>
+
+        <DialogFooter>
+          <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={busy}>
+            Vazgeç
+          </Button>
+          <Button type="button" onClick={save} disabled={busy}>
+            {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+            Kaydet
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
 }
 
 // ─── Stats Cards ─────────────────────────────────────────────────────────────
@@ -141,6 +380,7 @@ function InventoryListTab() {
   const [search, setSearch] = React.useState(sp.get('search') ?? '');
   const [submitted, setSubmitted] = React.useState(sp.get('search') ?? '');
   const offset = parseInt(sp.get('offset') ?? '0');
+  const [editingItem, setEditingItem] = React.useState<InventoryItem | null>(null);
 
   const params = {
     search:  submitted || undefined,
@@ -156,7 +396,9 @@ function InventoryListTab() {
 
   function push(next: Record<string, string | number>) {
     const p = new URLSearchParams(sp.toString());
-    Object.entries(next).forEach(([k, v]) => p.set(k, String(v)));
+    for (const [k, v] of Object.entries(next)) {
+      p.set(k, String(v));
+    }
     router.push(`?${p.toString()}`);
   }
 
@@ -211,27 +453,47 @@ function InventoryListTab() {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="w-[90px]">Resim</TableHead>
                   <TableHead className="w-[120px]">Kod</TableHead>
                   <TableHead>Ürün Adı</TableHead>
+                  <TableHead className="text-right">Fiyat</TableHead>
                   <TableHead className="text-right">Giriş</TableHead>
                   <TableHead className="text-right">Çıkış</TableHead>
                   <TableHead className="text-right font-semibold">Stok</TableHead>
                   <TableHead className="text-right hidden md:table-cell">Son Sync</TableHead>
+                  <TableHead className="w-[72px]" />
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {q.isLoading
                   ? [...Array(8)].map((_, i) => (
                       <TableRow key={i}>
-                        {[...Array(6)].map((_, j) => (
+                        {[...Array(9)].map((_, j) => (
                           <TableCell key={j}><Skeleton className="h-4 w-full" /></TableCell>
                         ))}
                       </TableRow>
                     ))
                   : items.map((item) => (
                       <TableRow key={item.malzeme_kodu}>
+                        <TableCell>
+                          <InventoryImages item={item} />
+                        </TableCell>
                         <TableCell className="font-mono text-xs">{item.malzeme_kodu}</TableCell>
-                        <TableCell className="max-w-[200px] truncate text-sm">{item.malzeme_adi}</TableCell>
+                        <TableCell className="max-w-[240px] text-sm">
+                          <div className="truncate">{item.malzeme_adi}</div>
+                          {item.image?.confidence === 'manuel_kontrol' ? (
+                            <Badge variant="outline" className="mt-1 border-amber-300 text-[10px] text-amber-700">
+                              Görsel kontrol
+                            </Badge>
+                          ) : null}
+                        </TableCell>
+                        <TableCell className="text-right text-sm tabular-nums">
+                          {item.image?.manual_price != null && item.image.manual_price !== '' ? (
+                            <span className="font-medium">{fmtMoney(item.image.manual_price)}</span>
+                          ) : (
+                            <span className="text-muted-foreground">—</span>
+                          )}
+                        </TableCell>
                         <TableCell className="text-right text-sm tabular-nums">{fmtNum(item.girisler)}</TableCell>
                         <TableCell className="text-right text-sm tabular-nums">{fmtNum(item.cikislar)}</TableCell>
                         <TableCell className="text-right font-semibold tabular-nums">
@@ -241,6 +503,17 @@ function InventoryListTab() {
                         </TableCell>
                         <TableCell className="text-right text-xs text-muted-foreground hidden md:table-cell">
                           {fmtDate(item.synced_at)}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setEditingItem(item)}
+                            title="Fiyat ve görsel düzenle"
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))
@@ -265,6 +538,14 @@ function InventoryListTab() {
           )}
         </CardContent>
       </Card>
+
+      <InventoryEditDialog
+        item={editingItem}
+        open={!!editingItem}
+        onOpenChange={(open) => {
+          if (!open) setEditingItem(null);
+        }}
+      />
     </div>
   );
 }

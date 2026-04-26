@@ -27,6 +27,15 @@ type RawRow = Record<string, string>;
 
 // ─── Scraper ─────────────────────────────────────────────────────────────────
 
+function buildCookieHeader(raw: string | null): string {
+  if (!raw) return '';
+  return raw
+    .split(/, (?=[^ ;]+=)/)
+    .map((part) => part.split(';')[0]?.trim())
+    .filter(Boolean)
+    .join('; ');
+}
+
 function parseGridHtml(html: string): RawRow[] {
   const re = /class="[^"]*css_(\w+)_grid_line[^"]*"[^>]*>([\s\S]*?)<\/TD>/g;
   const cells: Array<[string, string]> = [];
@@ -54,19 +63,21 @@ function parseGridHtml(html: string): RawRow[] {
   return rows;
 }
 
-async function getScriptCaseInit(): Promise<{ html: string; init: string }> {
+async function getScriptCaseInit(): Promise<{ html: string; init: string; cookie: string }> {
   const res  = await fetch(SOURCE_URL, { signal: AbortSignal.timeout(25_000) });
+  const cookie = buildCookieHeader(res.headers.get('set-cookie'));
   const html = await res.text();
   const init = html.match(/script_case_init.*?value="(\d+)"/)?.[1] ?? '1';
-  return { html, init };
+  return { html, init, cookie };
 }
 
-async function fetchAjaxPage(init: string, rec: number): Promise<string> {
+async function fetchAjaxPage(init: string, rec: number, cookie: string): Promise<string> {
   const res = await fetch(SOURCE_URL, {
     method:  'POST',
     headers: {
       'Content-Type':     'application/x-www-form-urlencoded',
       'X-Requested-With': 'XMLHttpRequest',
+      ...(cookie ? { Cookie: cookie } : {}),
     },
     body: new URLSearchParams({ nmgp_opcao: 'ajax_navigate', script_case_init: init, opc: 'rec', parm: String(rec) }),
     signal: AbortSignal.timeout(25_000),
@@ -85,10 +96,10 @@ function dedup(rows: RawRow[]): RawRow[] {
 }
 
 async function scrapeAll(): Promise<RawRow[]> {
-  const { html, init } = await getScriptCaseInit();
+  const { html, init, cookie } = await getScriptCaseInit();
   const all: RawRow[] = [...parseGridHtml(html)];
   for (let rec = PAGE_SIZE + 1; rec < 5000; rec += PAGE_SIZE) {
-    const grid = await fetchAjaxPage(init, rec);
+    const grid = await fetchAjaxPage(init, rec, cookie);
     if (!grid) break;
     const rows = parseGridHtml(grid);
     if (!rows.length) break;

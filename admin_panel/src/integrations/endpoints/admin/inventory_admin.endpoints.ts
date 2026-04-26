@@ -20,6 +20,16 @@ export type InventoryItem = {
   envanter_tutari:  string;
   synced_at:        string;
   updated_at:       string;
+  image: {
+    front_asset_id: string | null;
+    back_asset_id: string | null;
+    front_image_path: string;
+    back_image_path: string;
+    image_pair_no: string;
+    manual_price: string | null;
+    confidence: 'guvenli' | 'manuel_kontrol';
+    note: string | null;
+  } | null;
 };
 
 export type InventorySyncLog = {
@@ -46,6 +56,15 @@ export type InventoryListParams = {
   offset?: number;
 };
 
+export type InventoryManualUpdatePayload = {
+  manual_price?: string | number | null;
+  front_asset_id?: string | null;
+  back_asset_id?: string | null;
+  front_image_path?: string | null;
+  back_image_path?: string | null;
+  note?: string | null;
+};
+
 const B = '/admin/inventory';
 
 export const inventoryAdminApi = baseApi.injectEndpoints({
@@ -62,6 +81,18 @@ export const inventoryAdminApi = baseApi.injectEndpoints({
       providesTags: [{ type: 'InventoryCache' as const, id: 'LIST' }],
     }),
 
+    updateInventoryManualAdmin: build.mutation<{ ok: true }, { code: string; payload: InventoryManualUpdatePayload }>({
+      query: ({ code, payload }) => ({
+        url: `${B}/${encodeURIComponent(code)}/manual`,
+        method: 'PATCH',
+        body: payload,
+      }),
+      invalidatesTags: [
+        { type: 'InventoryCache' as const, id: 'LIST' },
+        { type: 'InventoryCache' as const, id: 'STATS' },
+      ],
+    }),
+
     listInventorySyncLogsAdmin: build.query<{ items: InventorySyncLog[] }, { limit?: number; offset?: number } | void>({
       query: (params) => ({ url: `${B}/sync-logs`, params: params ?? undefined }),
       providesTags: [{ type: 'InventorySyncLog' as const, id: 'LIST' }],
@@ -73,5 +104,6 @@ export const inventoryAdminApi = baseApi.injectEndpoints({
 export const {
   useGetInventoryStatsAdminQuery,
   useListInventoryAdminQuery,
+  useUpdateInventoryManualAdminMutation,
   useListInventorySyncLogsAdminQuery,
 } = inventoryAdminApi;
