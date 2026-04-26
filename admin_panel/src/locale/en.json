@@ -1298,7 +1298,8 @@
         "cache": "Cache Management",
         "theme": "Theme Settings",
         "references": "Partner Companies",
-        "inventory": "Inventory Monitor"
+        "inventory": "Inventory Monitor",
+        "extras": "Extra Seedlings"
       },
       "stats": {
         "deliveredOrders": "Delivered Orders",

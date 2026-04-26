@@ -874,7 +874,8 @@
         "cache": "Cache Yönetimi",
         "theme": "Tema Ayarları",
         "references": "İş Birliği Firmaları",
-        "inventory": "Envanter İzleme"
+        "inventory": "Envanter İzleme",
+        "extras": "Ekstra Fideler"
       },
       "stats": {
         "deliveredOrders": "Teslim Edilen Sipariş",

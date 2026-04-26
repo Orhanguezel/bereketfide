@@ -156,7 +156,7 @@ function ExtraFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[92vh] max-w-5xl overflow-y-auto">
+      <DialogContent className="max-h-[92vh] w-full max-w-5xl sm:max-w-5xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{row ? 'Ekstra Düzenle' : 'Yeni Ekstra'}</DialogTitle>
         </DialogHeader>

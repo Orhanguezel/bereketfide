@@ -869,7 +869,8 @@
         "cache": "Cache-Verwaltung",
         "theme": "Theme-Einstellungen",
         "references": "Partnerfirmen",
-        "inventory": "Lagerbestand"
+        "inventory": "Lagerbestand",
+        "extras": "Setzlinge Extra"
       },
       "stats": {
         "deliveredOrders": "Gelieferte Bestellungen",
