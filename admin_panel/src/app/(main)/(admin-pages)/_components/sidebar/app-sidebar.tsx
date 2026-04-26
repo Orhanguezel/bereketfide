@@ -70,8 +70,9 @@ export function AppSidebar({
   const { data: logoSetting } = useGetSiteSettingByKeyQuery(`${BRAND_PREFIX}site_logo`);
   const { data: logoSettingGlobal } = useGetSiteSettingByKeyQuery('site_logo');
   const logoVal = (logoSetting?.value || logoSettingGlobal?.value) as any;
-  const rawLogoUrl: string = logoVal?.logo_url || logoVal?.url || '/admin/logo/bereket_logo_512.png';
-  const logoAlt: string = logoVal?.logo_alt || logoVal?.alt || 'Logo';
+  // basePath="/admin" → Next.js Image prepends it; fallback must NOT include /admin prefix
+  const rawLogoUrl: string = logoVal?.logo_url || logoVal?.url || '/logo/bereket_logo_512.png';
+  const logoAlt: string = logoVal?.logo_alt || logoVal?.alt || 'Bereket Fide';
 
   // Admin settings override for page titles
   const { pageMeta } = useAdminSettings();
@@ -124,20 +125,33 @@ export function AppSidebar({
   return (
     <Sidebar {...props} variant={variant} collapsible={collapsible}>
       <SidebarHeader>
-        <Link prefetch={false} href="/dashboard" className="flex items-center gap-3 px-3 py-4 hover:bg-sidebar-accent/50 transition-colors overflow-hidden">
-          <div className="flex aspect-square size-8 shrink-0 items-center justify-center rounded-lg overflow-hidden bg-primary/10">
+        <Link
+          prefetch={false}
+          href="/dashboard"
+          className="flex flex-col items-center gap-0 px-3 py-3 hover:bg-sidebar-accent/50 transition-colors"
+        >
+          {/* Expanded: logo tek başına, tam genişlik */}
+          <div className="group-data-[collapsible=icon]:hidden w-full flex justify-center items-center py-2">
             <Image
               src={rawLogoUrl}
               alt={logoAlt}
-              width={32}
-              height={32}
-              className="object-contain size-8"
+              width={160}
+              height={52}
+              className="object-contain max-h-14 w-auto"
               unoptimized
             />
           </div>
-          <div className="flex flex-col gap-0.5 leading-none min-w-0 group-data-[collapsible=icon]:hidden">
-            <span className="font-bold text-lg tracking-tight truncate">{label || 'BEREKET FIDE'}</span>
-            <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">Admin Panel</span>
+
+          {/* Collapsed (icon mod): favicon */}
+          <div className="hidden group-data-[collapsible=icon]:flex items-center justify-center py-1">
+            <Image
+              src="/favicon/favicon-32.png"
+              alt="BF"
+              width={28}
+              height={28}
+              className="object-contain"
+              unoptimized
+            />
           </div>
         </Link>
       </SidebarHeader>
