@@ -232,23 +232,25 @@ function InventoryEditDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
-          <div className="space-y-2">
-            <Label htmlFor="inventory-manual-price">Fiyat</Label>
-            <Input
-              id="inventory-manual-price"
-              inputMode="decimal"
-              placeholder="0,00"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              disabled={busy}
-            />
-            <div className="text-xs text-muted-foreground">
-              Boş bırakırsanız manuel fiyat gösterilmez.
+        <div className="space-y-4">
+          <div className="flex items-end gap-4">
+            <div className="space-y-2 max-w-xs">
+              <Label htmlFor="inventory-manual-price">Manuel Fiyat (₺)</Label>
+              <Input
+                id="inventory-manual-price"
+                inputMode="decimal"
+                placeholder="0,00"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                disabled={busy}
+              />
+              <div className="text-xs text-muted-foreground">
+                Boş bırakırsanız manuel fiyat gösterilmez.
+              </div>
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             <AdminImageUploadField
               label="Ön Görsel"
               bucket="public"
