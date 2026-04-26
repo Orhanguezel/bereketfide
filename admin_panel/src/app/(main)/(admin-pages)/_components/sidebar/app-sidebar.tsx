@@ -34,6 +34,18 @@ import { NavMain } from './nav-main';
 import { NavUser } from './nav-user';
 import { useAdminSettings } from '../admin-settings-provider';
 
+/** site_settings value alanından URL çeker — string, {url:...} veya {logo_url:...} */
+function extractMediaUrl(val: unknown): string | null {
+  if (!val) return null;
+  if (typeof val === 'string') return val.startsWith('http') || val.startsWith('/') ? val : null;
+  if (typeof val === 'object') {
+    const v = val as Record<string, unknown>;
+    const u = v.logo_url ?? v.url ?? v.favicon_url ?? v.src ?? null;
+    return typeof u === 'string' ? u : null;
+  }
+  return null;
+}
+
 type Role = 'admin' | string;
 
 type SidebarMe = {
@@ -65,14 +77,13 @@ export function AppSidebar({
   const t = useAdminT();
   const label = (copy.app_name || appName || '').trim();
 
-  // Dynamic logo from site settings
-  const BRAND_PREFIX = process.env.NEXT_PUBLIC_BRAND_PREFIX || 'bereketfide__';
-  const { data: logoSetting } = useGetSiteSettingByKeyQuery(`${BRAND_PREFIX}site_logo`);
-  const { data: logoSettingGlobal } = useGetSiteSettingByKeyQuery('site_logo');
-  const logoVal = (logoSetting?.value || logoSettingGlobal?.value) as any;
-  // basePath="/admin" → Next.js Image prepends it; fallback must NOT include /admin prefix
-  const rawLogoUrl: string = logoVal?.logo_url || logoVal?.url || '/logo/bereket_logo_512.png';
-  const logoAlt: string = logoVal?.logo_alt || logoVal?.alt || 'Bereket Fide';
+  // Dynamic logo/favicon from site settings (global keys — DB'de tanımlı olmalı)
+  const { data: logoSetting }    = useGetSiteSettingByKeyQuery('site_logo');
+  const { data: faviconSetting } = useGetSiteSettingByKeyQuery('site_favicon');
+
+  const logoUrl    = extractMediaUrl(logoSetting?.value) ?? null;
+  const faviconUrl = extractMediaUrl(faviconSetting?.value) ?? null;
+  const logoAlt    = (label || 'Bereket Fide');
 
   // Admin settings override for page titles
   const { pageMeta } = useAdminSettings();
@@ -130,28 +141,40 @@ export function AppSidebar({
           href="/dashboard"
           className="flex flex-col items-center gap-0 px-3 py-3 hover:bg-sidebar-accent/50 transition-colors"
         >
-          {/* Expanded: logo tek başına, tam genişlik */}
+          {/* Expanded: logo site settings'ten, yoksa site adı metni */}
           <div className="group-data-[collapsible=icon]:hidden w-full flex justify-center items-center py-2">
-            <Image
-              src={rawLogoUrl}
-              alt={logoAlt}
-              width={160}
-              height={52}
-              className="object-contain max-h-14 w-auto"
-              unoptimized
-            />
+            {logoUrl ? (
+              <Image
+                src={logoUrl}
+                alt={logoAlt}
+                width={160}
+                height={52}
+                className="object-contain max-h-14 w-auto"
+                unoptimized
+              />
+            ) : (
+              <span className="font-bold text-base tracking-tight text-sidebar-foreground truncate px-1">
+                {label || 'Bereket Fide'}
+              </span>
+            )}
           </div>
 
-          {/* Collapsed (icon mod): favicon */}
+          {/* Collapsed (icon mod): favicon site settings'ten, yoksa baş harfler */}
           <div className="hidden group-data-[collapsible=icon]:flex items-center justify-center py-1">
-            <Image
-              src="/favicon/favicon-32.png"
-              alt="BF"
-              width={28}
-              height={28}
-              className="object-contain"
-              unoptimized
-            />
+            {faviconUrl ? (
+              <Image
+                src={faviconUrl}
+                alt={logoAlt}
+                width={28}
+                height={28}
+                className="object-contain size-7 rounded"
+                unoptimized
+              />
+            ) : (
+              <span className="flex size-7 items-center justify-center rounded bg-primary/15 text-xs font-bold text-primary">
+                BF
+              </span>
+            )}
           </div>
         </Link>
       </SidebarHeader>
