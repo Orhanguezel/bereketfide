@@ -172,6 +172,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/insan-kaynaklari', changeFrequency: 'monthly' as const, priority: 0.55 },
     { path: '/iletisim', changeFrequency: 'monthly' as const, priority: 0.7 },
     { path: '/teklif', changeFrequency: 'monthly' as const, priority: 0.8 },
+    { path: '/kampanya/sebze-tohumu-biber-tohumu', changeFrequency: 'monthly' as const, priority: 0.75 },
   ];
 
   for (const locale of locales) {

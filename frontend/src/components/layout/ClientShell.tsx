@@ -10,20 +10,6 @@ const WebVitals = dynamic(
   () => import('@/components/analytics/WebVitals').then((m) => m.WebVitals),
   { ssr: false },
 );
-const GoogleAnalytics = dynamic(
-  () =>
-    import('@/components/analytics/GoogleAnalytics').then(
-      (m) => m.GoogleAnalytics,
-    ),
-  { ssr: false },
-);
-const GoogleTagManager = dynamic(
-  () =>
-    import('@/components/analytics/GoogleAnalytics').then(
-      (m) => m.GoogleTagManager,
-    ),
-  { ssr: false },
-);
 const WhatsAppButton = dynamic<{ number?: string }>(
   () =>
     import('@/components/widgets/WhatsAppButton').then(
@@ -77,8 +63,6 @@ export function ClientShell({
       <SplashScreen companyName={companyName} tagline={tagline} logoUrl={logoUrl} />
       <ScrollToTop />
       <WebVitals />
-      <GoogleAnalytics />
-      <GoogleTagManager />
       <WhatsAppButton number={whatsappNumber} />
       <FloatingWidgets socials={socials} contactInfo={contactInfo} activeLocales={activeLocales} />
       <FrostWarningWidget />

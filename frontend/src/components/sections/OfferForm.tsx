@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import api from '@/lib/axios';
+import { trackGoogleAdsConversion } from '@/lib/google-ads';
 
 export function OfferFormClient({
   locale,
@@ -36,6 +37,7 @@ export function OfferFormClient({
           preferred_deadline: fd.get('deadline'),
         },
       });
+      trackGoogleAdsConversion('offer_submit');
       toast.success(t('success'));
       (e.target as HTMLFormElement).reset();
     } catch {

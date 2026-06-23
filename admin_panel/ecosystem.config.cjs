@@ -7,7 +7,7 @@ module.exports = {
   apps: [
     {
       name: 'bereketfide-admin-panel',
-      cwd: '/var/www/bereketfide/admin_panel',
+      cwd: '/var/www/tarim-dijital-ekosistem/projects/bereketfide/admin_panel',
       script: '/home/orhan/.bun/bin/bun',
       args: 'run start -- -p 3004 -H 127.0.0.1',
       exec_mode: 'fork',

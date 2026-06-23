@@ -41,8 +41,6 @@ export function Footer({
   locale,
   socials,
   companyProfile,
-  logoUrl,
-  logoDarkUrl,
 }: {
   sections: Record<string, unknown>[];
   locale: string;
@@ -71,15 +69,23 @@ export function Footer({
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
           <div className="space-y-4">
-            <div>
+            <div className="flex items-center gap-3">
               <Image
-                src={logoDarkUrl || logoUrl || '/logo/bereket-logo-dark.png'}
+                src="/logo/bereket-favicon.png"
                 alt={companyProfile?.company_name || 'Bereket Fide'}
-                width={200}
-                height={70}
-                style={{ height: '60px', width: 'auto', maxWidth: '200px' }}
-                unoptimized={(logoDarkUrl || logoUrl || '').startsWith('/uploads/')}
+                width={52}
+                height={52}
+                className="object-contain shrink-0"
+                style={{ height: 48, width: 48 }}
               />
+              <span className="flex flex-col leading-tight">
+                <span className="font-bold tracking-[0.06em] uppercase text-(--color-brand-light)" style={{ fontSize: 15 }}>
+                  {companyProfile?.company_name || 'Bereket Fide'}
+                </span>
+                <span className="surface-dark-text font-medium uppercase" style={{ fontSize: 9, letterSpacing: '0.08em' }}>
+                  Ltd. Şti.
+                </span>
+              </span>
             </div>
             <p className="surface-dark-text text-sm leading-relaxed">
               {companyProfile?.about || t('description')}

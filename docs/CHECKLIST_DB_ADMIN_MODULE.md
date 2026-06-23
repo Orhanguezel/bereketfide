@@ -174,7 +174,7 @@ kod tekrarı sıfır.
 
 ### 7.2 VPS Deploy
 - [ ] packages/shared-backend source scp (controller.ts, helpers.ts, etc.)
-- [ ] VPS'te `cd /var/www/packages/shared-backend && bun x tsc -p tsconfig.build.json`
+- [ ] VPS'te `cd /var/www/tarim-dijital-ekosistem/packages/shared-backend && bun x tsc -p tsconfig.build.json`
 - [ ] Bereketfide: git pull + build + `pm2 restart bereketfide-backend bereketfide-admin`
 - [ ] VistaSeeds: git pull + build + `pm2 restart vistaseed-backend vistaseed-admin-panel`
 

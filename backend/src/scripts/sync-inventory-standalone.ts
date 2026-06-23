@@ -1,6 +1,6 @@
 /**
  * Self-contained inventory sync script (VPS'te doğrudan Bun ile çalışır)
- * Çalıştırma: bun /var/www/bereketfide/backend/src/scripts/sync-inventory-standalone.ts
+ * Çalıştırma: bun /var/www/tarim-dijital-ekosistem/projects/bereketfide/backend/src/scripts/sync-inventory-standalone.ts
  * Cron: 10 dakikada bir
  *
  * Bağımlılık: bun built-in (mysql2 node_modules'dan)

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import api from '@/lib/axios';
+import { trackGoogleAdsConversion } from '@/lib/google-ads';
 
 export function ContactFormClient({ locale }: { locale: string }) {
   const t = useTranslations('contact.form');
@@ -25,6 +26,7 @@ export function ContactFormClient({ locale }: { locale: string }) {
         source: 'bereketfide',
         locale,
       });
+      trackGoogleAdsConversion('contact_submit');
       toast.success(t('success'));
       (e.target as HTMLFormElement).reset();
     } catch {

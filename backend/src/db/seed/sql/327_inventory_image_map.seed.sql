@@ -30,7 +30,14 @@ VALUES
   ('TŞ00872', 'bf-inv-seed-img-0012', 'bf-inv-seed-img-0011', '/uploads/inventory-seeds/urun-06-on.jpg', '/uploads/inventory-seeds/urun-06-arka.jpg', '06', 'manuel_kontrol', 'SHERVİNA DOMATES TOHUMU - fotoğraftaki HTP Tomatoes 10-686 SH F1 etiketi manuel kontrol edilmeli'),
   ('TŞ00927', 'bf-inv-seed-img-0068', 'bf-inv-seed-img-0067', '/uploads/inventory-seeds/urun-34-on.jpg', '/uploads/inventory-seeds/urun-34-arka.jpg', '34', 'manuel_kontrol', 'KUZU KAVUN TOHUMU - fotoğraf listesinde tür Soğan yazdığı için manuel kontrol edilmeli'),
   ('TŞ00708', 'bf-inv-seed-img-0084', 'bf-inv-seed-img-0083', '/uploads/inventory-seeds/urun-42-on.jpg', '/uploads/inventory-seeds/urun-42-arka.jpg', '42', 'manuel_kontrol', 'BEYONSE BİBER TOHUMU - fotoğraf listesinde tür Fasulye yazdığı için manuel kontrol edilmeli'),
-  ('TY00815', 'bf-inv-seed-img-0086', 'bf-inv-seed-img-0085', '/uploads/inventory-seeds/urun-43-on.jpg', '/uploads/inventory-seeds/urun-43-arka.jpg', '43', 'manuel_kontrol', 'VEGASTAR KARPUZ TOHUMU - fotoğraf listesinde tür Hıyar yazdığı için manuel kontrol edilmeli')
+  ('TY00815', 'bf-inv-seed-img-0086', 'bf-inv-seed-img-0085', '/uploads/inventory-seeds/urun-43-on.jpg', '/uploads/inventory-seeds/urun-43-arka.jpg', '43', 'manuel_kontrol', 'VEGASTAR KARPUZ TOHUMU - fotoğraf listesinde tür Hıyar yazdığı için manuel kontrol edilmeli'),
+  ('TŞ00379', 'bf-inv-seed-img-0016', 'bf-inv-seed-img-0015', '/uploads/inventory-seeds/urun-08-on.jpg', '/uploads/inventory-seeds/urun-08-arka.jpg', '08', 'manuel_kontrol', 'SERENAD BİBER TOHUMU - fotoğraf listesinde tür Domates yazdığı için manuel kontrol edilmeli'),
+  ('TŞ00899', 'bf-inv-seed-img-0018', 'bf-inv-seed-img-0017', '/uploads/inventory-seeds/urun-09-on.jpg', '/uploads/inventory-seeds/urun-09-arka.jpg', '09', 'guvenli', 'ŞENOL DOMATES TOHUMU'),
+  ('TŞ00411', 'bf-inv-seed-img-0024', 'bf-inv-seed-img-0023', '/uploads/inventory-seeds/urun-12-on.jpg', '/uploads/inventory-seeds/urun-12-arka.jpg', '12', 'guvenli', 'ÇİĞDEM DOMATES TOHUMU'),
+  ('TŞ00081', 'bf-inv-seed-img-0026', 'bf-inv-seed-img-0025', '/uploads/inventory-seeds/urun-13-on.jpg', '/uploads/inventory-seeds/urun-13-arka.jpg', '13', 'manuel_kontrol', 'SAZAK DOMATES TOHUMU - tür etiketten kontrol edilmeli'),
+  ('TŞ00186', 'bf-inv-seed-img-0030', 'bf-inv-seed-img-0029', '/uploads/inventory-seeds/urun-15-on.jpg', '/uploads/inventory-seeds/urun-15-arka.jpg', '15', 'guvenli', 'TAYFUN DOMATES TOHUMU'),
+  ('TŞ00150', 'bf-inv-seed-img-0032', 'bf-inv-seed-img-0031', '/uploads/inventory-seeds/urun-16-on.jpg', '/uploads/inventory-seeds/urun-16-arka.jpg', '16', 'manuel_kontrol', 'ALKIŞ DOMATES TOHUMU - malzeme kodu kontrol edilmeli'),
+  ('TŞ00089', 'bf-inv-seed-img-0080', 'bf-inv-seed-img-0079', '/uploads/inventory-seeds/urun-40-on.jpg', '/uploads/inventory-seeds/urun-40-arka.jpg', '40', 'guvenli', 'ZARURİ BİBER TOHUMU')
 ON DUPLICATE KEY UPDATE
   front_asset_id = VALUES(front_asset_id),
   back_asset_id = VALUES(back_asset_id),

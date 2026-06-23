@@ -78,7 +78,7 @@ VistaSeed'de var, Bereketfide'de yok. Ekosistem icin kritik.
 - [x] Bolgesel secim (7 bolge: Akdeniz, Ege, Marmara, Ic/Dogu/Guneydogu Anadolu, Karadeniz) — 8 Nisan 2026
 - [x] Aylik gorunum: hangi fide ne zaman dikilir — 12 sutunlu ay tablosu
 - [x] Her fide turune link (urun sayfasi) — slug eslesmesi ile API'den cekiliyor
-- [ ] Bu veri gelecekte Sera SaaS ve Verim Tahmini motorunu besleyecek — P3
+- [ ] Bu veri gelecekte Sera SaaS ve Tahmin Motoru'nu besleyecek — P3
 - [ ] JSON-LD: `Event` veya `Schedule` schema — eksik, eklenecek
 
 ---
@@ -182,7 +182,7 @@ Mevcut urun modulu standart e-ticaret yapisi. Tarimsal metadata eklenmeli.
   ```
 - [ ] Admin panelde urun formuna "Tarimsal Bilgiler" tab'i ekle
 - [ ] Frontend urun detay sayfasinda bu bilgileri goster
-- [ ] Bu veriler gelecekte Sera SaaS ve Verim Tahmini motorunda kullanilacak
+- [ ] Bu veriler gelecekte Sera SaaS ve Tahmin Motoru'nda kullanilacak
 
 #### 2.9 Ortak Auth Hazirlik
 

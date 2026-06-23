@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
 
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -40,6 +41,41 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      {
+        source: '/Default',
+        destination: '/tr',
+        permanent: true,
+      },
+      {
+        source: '/default',
+        destination: '/tr',
+        permanent: true,
+      },
+      {
+        source: '/:locale/Default',
+        destination: '/:locale',
+        permanent: true,
+      },
+      {
+        source: '/:locale/default',
+        destination: '/:locale',
+        permanent: true,
+      },
+      {
+        source: '/neden-biz',
+        destination: '/tr/hakkimizda',
+        permanent: true,
+      },
+      {
+        source: '/:locale/neden-biz',
+        destination: '/:locale/hakkimizda',
+        permanent: true,
+      },
+      {
+        source: '/kataloglar',
+        destination: '/tr/kataloglar',
+        permanent: true,
+      },
       {
         source: '/:locale/projeler',
         destination: '/:locale/urunler',

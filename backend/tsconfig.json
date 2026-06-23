@@ -23,7 +23,6 @@
     "noEmitOnError": true,
     "verbatimModuleSyntax": true,
     "types": ["node"],
-    "typeRoots": ["./node_modules/@types"],
     "ignoreDeprecations": "5.0"
   },
   "include": [

@@ -11,8 +11,9 @@ module.exports = {
         'http://127.0.0.1:3122/tr/galeri',
         'http://127.0.0.1:3122/tr/iletisim',
       ],
-      startServerCommand: 'node scripts/prepare-standalone.mjs && PORT=3122 HOSTNAME=127.0.0.1 node .next/standalone/bereketfide/server.js',
+      startServerCommand: 'NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3122 bun run build && node scripts/prepare-standalone.mjs && NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3122 PORT=3122 HOSTNAME=127.0.0.1 node .next/standalone/projects/bereketfide/frontend/server.js',
       startServerReadyPattern: 'Ready in',
+      startServerReadyTimeout: 120000,
       numberOfRuns: 2,
       settings: {
         preset: 'desktop',

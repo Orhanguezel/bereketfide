@@ -10,7 +10,7 @@ module.exports = {
   apps: [
     {
       name: 'bereketfide-backend',
-      cwd: '/var/www/bereketfide/backend',
+      cwd: '/var/www/tarim-dijital-ekosistem/projects/bereketfide/backend',
 
       script: '/home/orhan/.bun/bin/bun',
       args: 'dist/index.js',

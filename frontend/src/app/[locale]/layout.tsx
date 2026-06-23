@@ -16,6 +16,7 @@ import { ensureFooterSections, ensureMenuItems } from '@/lib/navigation-fallback
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ClientShell } from '@/components/layout/ClientShell';
+import { GoogleTagScripts, GtmNoscript } from '@/components/analytics/GoogleTagScripts';
 import { THEME_INTENT, THEME_TEMPLATE } from '@/theme/templates';
 import { ThemeBootScript } from '@/scripts/theme-boot';
 
@@ -189,12 +190,14 @@ export default async function LocaleLayout({
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <ThemeBootScript />
+        <GoogleTagScripts />
       </head>
       <body
         className="min-h-screen bg-(--color-bg) text-(--color-text-primary) antialiased"
         data-theme-mode="light"
         suppressHydrationWarning
       >
+        <GtmNoscript />
         {/* SSR Splash Screen: inline overlay that hides content until client takes over */}
         <div
           id="bereket-splash-ssr"

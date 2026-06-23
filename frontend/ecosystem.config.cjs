@@ -10,7 +10,7 @@ module.exports = {
   apps: [
     {
       name: 'bereketfide-frontend',
-      cwd: '/var/www/bereketfide/frontend',
+      cwd: '/var/www/tarim-dijital-ekosistem/projects/bereketfide/frontend',
       script: '/home/orhan/.bun/bin/bun',
       args: 'run start:standalone',
       exec_mode: 'fork',

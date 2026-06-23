@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <title>Bereket Fide Ziyaretçi ve Kampanya Başlangıç Raporu</title>
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #17231c;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.45;
+      background: #fff;
+    }
+    .cover {
+      border-bottom: 3px solid #1f8f4d;
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      color: #1f8f4d;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 26px;
+      line-height: 1.15;
+      color: #0f3b22;
+    }
+    h2 {
+      margin: 22px 0 10px;
+      font-size: 17px;
+      color: #0f3b22;
+      border-bottom: 1px solid #d8e5dc;
+      padding-bottom: 5px;
+    }
+    h3 {
+      margin: 14px 0 8px;
+      font-size: 13px;
+      color: #1b4d31;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .meta div, .note, .metric, .callout {
+      border: 1px solid #d8e5dc;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #f7fbf8;
+    }
+    .meta strong, .metric strong {
+      display: block;
+      color: #5b6b61;
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .metric span {
+      display: block;
+      font-size: 20px;
+      color: #103d25;
+      font-weight: 700;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px;
+    }
+    th, td {
+      border: 1px solid #dce7df;
+      padding: 7px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eaf5ee;
+      color: #123c25;
+      font-size: 11px;
+    }
+    tr:nth-child(even) td { background: #fafdfb; }
+    .chart {
+      margin: 10px 0 18px;
+      border: 1px solid #d8e5dc;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 70px 1fr 48px;
+      gap: 10px;
+      align-items: center;
+      margin: 7px 0;
+    }
+    .bar-track {
+      height: 14px;
+      background: #edf3ef;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar {
+      height: 100%;
+      background: linear-gradient(90deg, #1f8f4d, #64b777);
+      border-radius: 999px;
+    }
+    .muted { color: #627369; }
+    .good { color: #14733b; font-weight: 700; }
+    .warn { color: #a46200; font-weight: 700; }
+    ul { margin: 8px 0 12px 18px; padding: 0; }
+    li { margin: 4px 0; }
+    .callout {
+      background: #fff9ea;
+      border-color: #efd38e;
+      margin: 12px 0;
+    }
+    .footer {
+      margin-top: 26px;
+      padding-top: 10px;
+      border-top: 1px solid #d8e5dc;
+      color: #6a7a70;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="eyebrow">Bereket Fide Dijital Ekosistem</div>
+    <h1>Ziyaretçi Grafikleri ve Kampanya Başlangıç Raporu</h1>
+    <p class="muted">
+      Bu rapor, 12 Mayıs 2026 - 18 Mayıs 2026 tarihleri arasındaki canlı nginx erişim loglarından hazırlanmıştır.
+      GA4/GTM kurulumu 18 Mayıs 2026 tarihinde temizlendiği için geçmiş hafta analizinde ana kaynak server loglarıdır.
+    </p>
+    <div class="meta">
+      <div><strong>Rapor tarihi</strong>18 Mayıs 2026</div>
+      <div><strong>Kapsam</strong>Son 7 gün</div>
+      <div><strong>Alan adı</strong>www.bereketfide.com.tr</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Yönetici Özeti</h2>
+    <div class="summary">
+      <div class="metric"><strong>Toplam temiz sayfa görüntüleme</strong><span>4.309</span></div>
+      <div class="metric"><strong>En yüksek gün</strong><span>869</span>12 Mayıs</div>
+      <div class="metric"><strong>Teklif sayfası</strong><span>78</span>haftalık toplam</div>
+      <div class="metric"><strong>Paid Ads izi</strong><span>74</span>gclid/gbraid izi</div>
+    </div>
+    <p>
+      Kampanya öncesi ve kampanya başlangıcına yakın dönemde trafik ağırlığı ana sayfa ve yönlendirme URL'lerinde toplanmıştır.
+      18 Mayıs tarihinde <strong>/tr/teklif</strong> sayfası belirgin biçimde yükselmiş ve Google Ads kaynaklı iniş izleri görülmüştür.
+      Bu rapor kampanya başlangıç baseline'ı olarak kullanılabilir.
+    </p>
+    <div class="callout">
+      <strong class="warn">Log ayrımı notu:</strong>
+      Bereket Fide için geçmiş nginx access loglarında host alanı ayrı tutulmadığı için analiz, Bereket Fide URL yapısı,
+      teklif landing sayfası, referrer ve kampanya parametreleri üzerinden temizlenmiştir. Sonraki dönemlerde daha net rapor için
+      ayrı <strong>bereketfide.access.log</strong> açılması önerilir.
+    </div>
+  </section>
+
+  <section>
+    <h2>Son 7 Gün Ziyaretçi Grafiği</h2>
+    <div class="chart">
+      <div class="bar-row"><strong>12 May</strong><div class="bar-track"><div class="bar" style="width:100%"></div></div><span>869</span></div>
+      <div class="bar-row"><strong>13 May</strong><div class="bar-track"><div class="bar" style="width:71.9%"></div></div><span>625</span></div>
+      <div class="bar-row"><strong>14 May</strong><div class="bar-track"><div class="bar" style="width:67%"></div></div><span>582</span></div>
+      <div class="bar-row"><strong>15 May</strong><div class="bar-track"><div class="bar" style="width:57.4%"></div></div><span>499</span></div>
+      <div class="bar-row"><strong>16 May</strong><div class="bar-track"><div class="bar" style="width:51.4%"></div></div><span>447</span></div>
+      <div class="bar-row"><strong>17 May</strong><div class="bar-track"><div class="bar" style="width:77.3%"></div></div><span>672</span></div>
+      <div class="bar-row"><strong>18 May</strong><div class="bar-track"><div class="bar" style="width:70.8%"></div></div><span>615</span></div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Tarih</th>
+          <th>Sayfa görüntüleme</th>
+          <th>Tekil ziyaretçi/IP</th>
+          <th>Bot sayfa isteği</th>
+          <th>Teklif sayfası</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>12 Mayıs 2026</td><td>869</td><td>431</td><td>256</td><td>3</td></tr>
+        <tr><td>13 Mayıs 2026</td><td>625</td><td>260</td><td>236</td><td>0</td></tr>
+        <tr><td>14 Mayıs 2026</td><td>582</td><td>213</td><td>314</td><td>7</td></tr>
+        <tr><td>15 Mayıs 2026</td><td>499</td><td>231</td><td>218</td><td>2</td></tr>
+        <tr><td>16 Mayıs 2026</td><td>447</td><td>231</td><td>238</td><td>3</td></tr>
+        <tr><td>17 Mayıs 2026</td><td>672</td><td>254</td><td>383</td><td>1</td></tr>
+        <tr><td>18 Mayıs 2026</td><td>615</td><td>260</td><td>265</td><td>64</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Trafik ve Sayfa Performansı</h2>
+    <h3>En çok görüntülenen sayfalar</h3>
+    <table>
+      <thead><tr><th>Sayfa</th><th>Görüntüleme</th><th>Not</th></tr></thead>
+      <tbody>
+        <tr><td>/</td><td>3.570</td><td>Kök URL ve yönlendirme trafiği</td></tr>
+        <tr><td>/tr</td><td>450</td><td>Ana sayfa</td></tr>
+        <tr><td>/tr/teklif</td><td>78</td><td>Kampanya hedef sayfası</td></tr>
+        <tr><td>/iletisim</td><td>41</td><td>Eski/direkt iletişim yolu</td></tr>
+        <tr><td>/tr/iletisim</td><td>22</td><td>İletişim niyeti</td></tr>
+        <tr><td>/hakkimizda</td><td>20</td><td>Eski/direkt kurumsal yol</td></tr>
+        <tr><td>/tr/hakkimizda</td><td>19</td><td>Kurumsal güven sayfası</td></tr>
+        <tr><td>/tr/haberler</td><td>12</td><td>İçerik trafiği</td></tr>
+        <tr><td>/tr/hizmetler</td><td>10</td><td>Hizmet keşfi</td></tr>
+        <tr><td>/tr/blog</td><td>10</td><td>Bilgi bankası / blog trafiği</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Trafik kaynakları</h3>
+    <table>
+      <thead><tr><th>Kaynak sinyali</th><th>Sayfa görüntüleme</th><th>Not</th></tr></thead>
+      <tbody>
+        <tr><td>Direkt / boş referrer</td><td>3.362</td><td>Tarayıcıdan direkt, yönlendirme veya referrer gizlenen trafik</td></tr>
+        <tr><td>Diğer referrer</td><td>677</td><td>Tarvista, Bereket Fide eski domainleri ve diğer dış yönlendirmeler dahil</td></tr>
+        <tr><td>Google referrer</td><td>165</td><td>Organik Google sinyali</td></tr>
+        <tr><td>Paid Ads / gclid</td><td>74</td><td>18 Mayıs ağırlıklı; içinde Google Ads kontrol/tracking istekleri de olabilir</td></tr>
+        <tr><td>Instagram UTM/referrer</td><td>31</td><td>Sosyal kaynak izi</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Cihaz kırılımı</h3>
+    <table>
+      <thead><tr><th>Cihaz grubu</th><th>Sayfa görüntüleme</th><th>Pay</th></tr></thead>
+      <tbody>
+        <tr><td>Masaüstü / Tablet</td><td>3.439</td><td>%79,8</td></tr>
+        <tr><td>Mobil</td><td>870</td><td>%20,2</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Kampanya Başlangıç Durumu</h2>
+    <div class="callout">
+      <strong class="good">Ücretli trafik izi alındı.</strong>
+      18 Mayıs 2026 tarihinde <strong>/tr/teklif</strong> sayfasına gclid/gbraid parametreleriyle inişler görülmüştür.
+      Bu, Google Ads landing URL erişiminin çalıştığını gösterir. Google Ads arayüzündeki gerçek tıklama ve maliyet metrikleriyle
+      24 saat sonra yeniden karşılaştırılmalıdır.
+    </div>
+    <ul>
+      <li>Kampanya hedef sayfası: <strong>/tr/teklif</strong></li>
+      <li>Haftalık teklif sayfası temiz görüntüleme: <strong>78</strong></li>
+      <li>18 Mayıs teklif sayfası görüntüleme: <strong>64</strong></li>
+      <li>Paid landing sinyali: <strong>74</strong></li>
+      <li>GTM kurulumu temizlendi: <strong>GTM-W6GL2RB9</strong></li>
+      <li>Çift sayım riski azaltıldı: site tarafında doğrudan GA4/Ads yerine GTM merkezli yapı kullanılıyor.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Teknik Sağlık Notları</h2>
+    <ul>
+      <li>GA4/Google Ads doğrudan script yüklemesi kapatıldı; frontend yalnızca GTM container basıyor.</li>
+      <li>Tag Assistant kontrolünde canlı sayfalarda yalnızca <strong>GTM-W6GL2RB9</strong> görünüyor.</li>
+      <li>PDF ve eski dosya indeksleme riski azaltıldı; ilgili upload alanlarına noindex header eklendi.</li>
+      <li>Eski non-locale URL'ler için 301 yönlendirmeleri düzenlendi.</li>
+      <li>Haftalık loglarda bazı 404 izleri var; özellikle eski ürün detay URL'leri ve kök URL hataları kampanya sonrası tekrar izlenmeli.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Sonraki Takip Planı</h2>
+    <ul>
+      <li>24 saat sonra aynı rapor yenilenecek.</li>
+      <li>/tr/teklif ziyaretleri, form gönderimleri ve Google Ads dönüşümleri birlikte karşılaştırılacak.</li>
+      <li>Google Ads arama terimleri raporu kontrol edilip fide dışı kelimeler negatife alınacak.</li>
+      <li>Yeni kampanya için maliyet / dönüşüm, telefon araması ve teklif formu ayrı ayrı izlenecek.</li>
+      <li>Bereket Fide için ayrı nginx access log açılarak sonraki haftalarda domain ayrımı netleştirilecek.</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    Rapor kaynağı: Bereket Fide canlı nginx erişim logları ve canlı site etiket kontrolü, 12-18 Mayıs 2026.
+    Filtreleme: bot, statik dosya, API, _rsc ve GTM debug trafiği hariç tutulmuştur. Geçmiş nginx log formatında host alanı bulunmadığı için domain ayrımı URL/referrer sinyalleriyle yapılmıştır.
+  </div>
+</body>
+</html>

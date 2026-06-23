@@ -15,7 +15,7 @@ START TRANSACTION;
 -- TABLE
 -- =============================================================
 CREATE TABLE IF NOT EXISTS `site_settings` (
-  `id`         CHAR(36)      NOT NULL,
+  `id` VARCHAR(64)      NOT NULL,
   `key`        VARCHAR(100)  NOT NULL,
   `locale`     VARCHAR(8)    NOT NULL,
   `value`      TEXT          NOT NULL,
