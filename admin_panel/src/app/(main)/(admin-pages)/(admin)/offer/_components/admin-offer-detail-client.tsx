@@ -694,6 +694,7 @@ export default function AdminOfferDetailClient({ id }: { id: string }) {
 function DirectEmailButton({ offerId, email, disabled }: { offerId: string; email: string; disabled: boolean }) {
   const [sending, setSending] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
+  const [subject, setSubject] = React.useState('');
   const [message, setMessage] = React.useState('');
 
   const handleSend = async () => {
@@ -701,18 +702,23 @@ function DirectEmailButton({ offerId, email, disabled }: { offerId: string; emai
       toast.error('Müşteri e-postası gerekli');
       return;
     }
+    if (!message.trim()) {
+      toast.error('Mesaj boş olamaz');
+      return;
+    }
     setSending(true);
     try {
-      const res = await fetch(`/api/admin/offers/${encodeURIComponent(offerId)}/direct-email`, {
+      const res = await fetch(`/api/v1/admin/offers/${encodeURIComponent(offerId)}/direct-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ message: message.trim() || undefined }),
+        body: JSON.stringify({ subject: subject.trim() || undefined, message: message.trim() }),
       });
       const data = await res.json();
       if (res.ok && data.ok) {
         toast.success(data.message || 'E-posta gönderildi');
         setShowModal(false);
+        setSubject('');
         setMessage('');
       } else {
         toast.error(data?.error?.message || 'Gönderim hatası');
@@ -745,13 +751,23 @@ function DirectEmailButton({ offerId, email, disabled }: { offerId: string; emai
         <h3 className="text-sm font-medium">Müşteriye E-posta Gönder</h3>
         <p className="text-xs text-muted-foreground">Alıcı: {email}</p>
         <div className="space-y-1.5">
-          <label className="text-xs text-muted-foreground">Ek Mesaj (opsiyonel)</label>
+          <label className="text-xs text-muted-foreground">Konu (opsiyonel)</label>
+          <input
+            className="w-full rounded-md border bg-background px-3 py-2 text-sm"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="Bereket Fide — Teklif Talebiniz Hk."
+            disabled={sending}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <label className="text-xs text-muted-foreground">Mesaj *</label>
           <textarea
             className="w-full rounded-md border bg-background px-3 py-2 text-sm"
-            rows={3}
+            rows={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Teklif ile birlikte iletmek istediğiniz mesaj..."
+            placeholder="Müşteriye iletmek istediğiniz mesaj..."
             disabled={sending}
           />
         </div>
@@ -759,7 +775,7 @@ function DirectEmailButton({ offerId, email, disabled }: { offerId: string; emai
           <Button variant="outline" size="sm" onClick={() => setShowModal(false)} disabled={sending}>
             İptal
           </Button>
-          <Button size="sm" onClick={handleSend} disabled={sending}>
+          <Button size="sm" onClick={handleSend} disabled={sending || !message.trim()}>
             {sending ? 'Gönderiliyor...' : 'Gönder'}
           </Button>
         </div>
