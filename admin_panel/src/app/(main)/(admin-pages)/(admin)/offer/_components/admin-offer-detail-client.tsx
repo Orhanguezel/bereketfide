@@ -596,8 +596,8 @@ export default function AdminOfferDetailClient({ id }: { id: string }) {
                   <Textarea value={form.message} onChange={(e) => setField('message', e.target.value)} rows={3} disabled={busy} />
                 </div>
                 <div className="space-y-1.5 sm:col-span-2">
-                  <Label className="text-xs text-muted-foreground">Dahili Notlar</Label>
-                  <Textarea value={form.admin_notes} onChange={(e) => setField('admin_notes', e.target.value)} rows={2} disabled={busy} placeholder="Sadece yöneticiler görür" />
+                  <Label className="text-xs text-muted-foreground">Dahili Notlar / Gönderilen Yanıtlar</Label>
+                  <Textarea value={form.admin_notes} onChange={(e) => setField('admin_notes', e.target.value)} rows={6} disabled={busy} placeholder="Sadece yöneticiler görür. Gönderilen e-posta yanıtları buraya otomatik eklenir." />
                 </div>
               </div>
             </CardContent>
