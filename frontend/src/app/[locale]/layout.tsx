@@ -7,7 +7,10 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Toaster } from 'sonner';
 
+import { notFound } from 'next/navigation';
+
 import { getLocaleSettings } from '@/i18n/locale-settings';
+import { hasLocale } from '@/i18n/locales';
 import { fetchSetting, fetchMenuItems, fetchFooterSections, fetchActiveLocales, fetchActiveLocaleConfigs, fetchCategories, fetchServices, fetchNews } from '@/i18n/server';
 import { getTranslations } from 'next-intl/server';
 import { siteUrlBase, asStr, asObj, readSettingValue } from '@/seo';
@@ -53,6 +56,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  // Desteklenmeyen locale icin veri cekme: /1996.php, /ads.txt gibi tarayici
+  // istekleri middleware matcher'inin nokta filtresinden gecip buraya dusuyor
+  // ve her biri ayri cache anahtariyla tam bir SSR render tetikliyordu.
+  if (!hasLocale(locale)) notFound();
+
   const siteUrl = siteUrlBase();
 
   const [seo, siteLogo, legacyLogo, siteOgDefaultImage] = await Promise.all([
@@ -137,6 +145,8 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
+
   setRequestLocale(locale);
   const messages = await getMessages({ locale });
   const navT = await getTranslations({ locale, namespace: 'nav' });

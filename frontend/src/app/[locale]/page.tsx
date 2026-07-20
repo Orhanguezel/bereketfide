@@ -19,7 +19,10 @@ import { BrandCarousel } from '@/components/sections/BrandCarousel';
 import { StatsHighlightSection } from '@/components/sections/StatsHighlightSection';
 
 import { ProjectFeed } from '@/components/sections/ProjectFeed';
+import { notFound } from 'next/navigation';
+
 import { fetchReferences, fetchSetting } from '@/i18n/server';
+import { hasLocale } from '@/i18n/locales';
 import { fetchSeoPage } from '@/seo/server';
 import { ScrollBackground } from '@/components/sections/ScrollBackground';
 import { HeroBackgroundVideo } from '@/components/ui/HeroBackgroundVideo';
@@ -174,6 +177,8 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
+
   const seo = await fetchSeoPage(locale, 'home');
   const t = await getTranslations({ locale });
 
@@ -193,6 +198,10 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  // Layout ve page paralel render edildigi icin layout'taki guard page'in
+  // veri cekmesini durdurmuyor; kontrol burada tekrar ediliyor.
+  if (!hasLocale(locale)) notFound();
+
   const t = await getTranslations({ locale });
 
   const [products, blogPosts, newsPosts, catalogs, latestProducts, references, heroVideoSetting, heroConfigSetting, homeBackgroundsSetting, homeStatsSetting, socialsSetting] = await Promise.all([
