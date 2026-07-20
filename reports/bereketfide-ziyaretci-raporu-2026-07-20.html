@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <title>Bereket Fide Ziyaretçi Raporu — 7-20 Temmuz 2026</title>
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #17231c;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.45;
+      background: #fff;
+    }
+    .cover {
+      border-bottom: 3px solid #1f8f4d;
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      color: #1f8f4d;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 26px;
+      line-height: 1.15;
+      color: #0f3b22;
+    }
+    h2 {
+      margin: 22px 0 10px;
+      font-size: 17px;
+      color: #0f3b22;
+      border-bottom: 1px solid #d8e5dc;
+      padding-bottom: 5px;
+    }
+    h3 {
+      margin: 14px 0 8px;
+      font-size: 13px;
+      color: #1b4d31;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .meta div, .note, .metric, .callout {
+      border: 1px solid #d8e5dc;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #f7fbf8;
+    }
+    .meta strong, .metric strong {
+      display: block;
+      color: #5b6b61;
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .metric span {
+      display: block;
+      font-size: 20px;
+      color: #103d25;
+      font-weight: 700;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px;
+    }
+    th, td {
+      border: 1px solid #dce7df;
+      padding: 7px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eaf5ee;
+      color: #123c25;
+      font-size: 11px;
+    }
+    tr:nth-child(even) td { background: #fafdfb; }
+    .chart {
+      margin: 10px 0 18px;
+      border: 1px solid #d8e5dc;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 70px 1fr 48px;
+      gap: 10px;
+      align-items: center;
+      margin: 7px 0;
+    }
+    .bar-track {
+      height: 14px;
+      background: #edf3ef;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar {
+      height: 100%;
+      background: linear-gradient(90deg, #1f8f4d, #64b777);
+      border-radius: 999px;
+    }
+    .muted { color: #627369; }
+    .good { color: #14733b; font-weight: 700; }
+    .warn { color: #a46200; font-weight: 700; }
+    .bad { color: #a32a2a; font-weight: 700; }
+    ul { margin: 8px 0 12px 18px; padding: 0; }
+    li { margin: 4px 0; }
+    .callout {
+      background: #fff9ea;
+      border-color: #efd38e;
+      margin: 12px 0;
+    }
+    .callout.alert { background: #fdf1f1; border-color: #e8b4b4; }
+    .footer {
+      margin-top: 26px;
+      padding-top: 10px;
+      border-top: 1px solid #d8e5dc;
+      color: #6a7a70;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="eyebrow">Bereket Fide Dijital Ekosistem</div>
+    <h1>Ziyaretçi Raporu — Son İki Hafta</h1>
+    <p class="muted">
+      Bu rapor, 7 Temmuz 2026 - 20 Temmuz 2026 tarihleri arasındaki canlı nginx erişim loglarından hazırlanmıştır.
+      18 Mayıs 2026'da açılan ayrı <strong>bereketfide.access.log</strong> dosyası kullanıldığı için domain ayrımı
+      bu raporda kesindir; Mayıs raporundaki referrer tahmini yöntemine gerek kalmamıştır.
+    </p>
+    <div class="meta">
+      <div><strong>Rapor tarihi</strong>20 Temmuz 2026</div>
+      <div><strong>Kapsam</strong>Son 14 gün</div>
+      <div><strong>Alan adı</strong>www.bereketfide.com.tr</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Yönetici Özeti</h2>
+    <div class="summary">
+      <div class="metric"><strong>Toplam temiz sayfa görüntüleme</strong><span>611</span>14 günde</div>
+      <div class="metric"><strong>Günlük ortalama</strong><span>44</span>sayfa görüntüleme</div>
+      <div class="metric"><strong>En yüksek gün</strong><span>77</span>14 Temmuz</div>
+      <div class="metric"><strong>Teklif sayfası</strong><span>22</span>iki haftalık toplam</div>
+    </div>
+    <p>
+      Site istikrarlı ancak düşük hacimli bir trafik seyrinde. İki hafta arasında belirgin bir kırılma yok:
+      ilk hafta (7-13 Tem) <strong>298</strong>, ikinci hafta (14-20 Tem) <strong>313</strong> temiz sayfa görüntüleme —
+      yaklaşık <strong>%5 artış</strong>. Trafiğin <strong>%56'sı ana sayfada</strong> toplanıyor ve iç sayfalara
+      geçiş zayıf. Teklif sayfası iki haftada yalnızca <strong>22</strong> kez görüntülenmiş; ücretli kampanya
+      izi ise <strong>5</strong> iniş ile neredeyse durmuş durumda.
+    </p>
+    <div class="callout">
+      <strong class="warn">Kampanya durmuş görünüyor:</strong>
+      Mayıs raporunda tek günde 45 adet gclid/gbraid izi görülmüştü. Bu iki haftada toplam
+      <strong>5</strong> ücretli iniş var (7, 13, 14 ve 16 Temmuz'da dağınık). Google Ads kampanyası
+      duraklatıldıysa beklenen tablo budur; duraklatılmadıysa bütçe/onay durumu acilen kontrol edilmelidir.
+    </div>
+  </section>
+
+  <section>
+    <h2>Son 14 Gün Ziyaretçi Grafiği</h2>
+    <div class="chart">
+      <div class="bar-row"><strong>7 Tem</strong><div class="bar-track"><div class="bar" style="width:67.5%"></div></div><span>52</span></div>
+      <div class="bar-row"><strong>8 Tem</strong><div class="bar-track"><div class="bar" style="width:62.3%"></div></div><span>48</span></div>
+      <div class="bar-row"><strong>9 Tem</strong><div class="bar-track"><div class="bar" style="width:50.6%"></div></div><span>39</span></div>
+      <div class="bar-row"><strong>10 Tem</strong><div class="bar-track"><div class="bar" style="width:59.7%"></div></div><span>46</span></div>
+      <div class="bar-row"><strong>11 Tem</strong><div class="bar-track"><div class="bar" style="width:58.4%"></div></div><span>45</span></div>
+      <div class="bar-row"><strong>12 Tem</strong><div class="bar-track"><div class="bar" style="width:33.8%"></div></div><span>26</span></div>
+      <div class="bar-row"><strong>13 Tem</strong><div class="bar-track"><div class="bar" style="width:54.5%"></div></div><span>42</span></div>
+      <div class="bar-row"><strong>14 Tem</strong><div class="bar-track"><div class="bar" style="width:100%"></div></div><span>77</span></div>
+      <div class="bar-row"><strong>15 Tem</strong><div class="bar-track"><div class="bar" style="width:75.3%"></div></div><span>58</span></div>
+      <div class="bar-row"><strong>16 Tem</strong><div class="bar-track"><div class="bar" style="width:53.2%"></div></div><span>41</span></div>
+      <div class="bar-row"><strong>17 Tem</strong><div class="bar-track"><div class="bar" style="width:44.2%"></div></div><span>34</span></div>
+      <div class="bar-row"><strong>18 Tem</strong><div class="bar-track"><div class="bar" style="width:49.4%"></div></div><span>38</span></div>
+      <div class="bar-row"><strong>19 Tem</strong><div class="bar-track"><div class="bar" style="width:41.6%"></div></div><span>32</span></div>
+      <div class="bar-row"><strong>20 Tem</strong><div class="bar-track"><div class="bar" style="width:42.9%"></div></div><span>33</span></div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Tarih</th>
+          <th>Sayfa görüntüleme</th>
+          <th>Tekil ziyaretçi/IP</th>
+          <th>Bot isteği</th>
+          <th>Teklif sayfası</th>
+          <th>Paid iniş</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>7 Temmuz 2026</td><td>52</td><td>41</td><td>836</td><td>4</td><td>2</td></tr>
+        <tr><td>8 Temmuz 2026</td><td>48</td><td>44</td><td>1157</td><td>0</td><td>0</td></tr>
+        <tr><td>9 Temmuz 2026</td><td>39</td><td>37</td><td>406</td><td>2</td><td>0</td></tr>
+        <tr><td>10 Temmuz 2026</td><td>46</td><td>35</td><td>429</td><td>0</td><td>0</td></tr>
+        <tr><td>11 Temmuz 2026</td><td>45</td><td>39</td><td>774</td><td>1</td><td>0</td></tr>
+        <tr><td>12 Temmuz 2026</td><td>26</td><td>24</td><td>502</td><td>2</td><td>0</td></tr>
+        <tr><td>13 Temmuz 2026</td><td>42</td><td>34</td><td>630</td><td>1</td><td>1</td></tr>
+        <tr><td>14 Temmuz 2026</td><td>77</td><td>45</td><td>626</td><td>5</td><td>1</td></tr>
+        <tr><td>15 Temmuz 2026</td><td>58</td><td>39</td><td>465</td><td>1</td><td>0</td></tr>
+        <tr><td>16 Temmuz 2026</td><td>41</td><td>26</td><td>675</td><td>1</td><td>1</td></tr>
+        <tr><td>17 Temmuz 2026</td><td>34</td><td>28</td><td>539</td><td>0</td><td>0</td></tr>
+        <tr><td>18 Temmuz 2026</td><td>38</td><td>31</td><td>632</td><td>1</td><td>0</td></tr>
+        <tr><td>19 Temmuz 2026</td><td>32</td><td>24</td><td>447</td><td>2</td><td>0</td></tr>
+        <tr><td>20 Temmuz 2026</td><td>33</td><td>24</td><td>418</td><td>2</td><td>0</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">
+      Not: Bot isteği sütunu tüm bot/tarayıcı trafiğini (arama motoru botları, SEO tarayıcıları, veri merkezi IP'leri)
+      kapsar ve sayfa görüntüleme rakamına dahil <em>değildir</em>. İki haftalık toplam bot isteği <strong>8.536</strong>;
+      yani her 1 gerçek sayfa görüntülemesine karşılık yaklaşık 14 bot isteği düşüyor.
+    </p>
+  </section>
+
+  <section>
+    <h2>Trafik ve Sayfa Performansı</h2>
+    <h3>En çok görüntülenen sayfalar</h3>
+    <table>
+      <thead><tr><th>Sayfa</th><th>Görüntüleme</th><th>Not</th></tr></thead>
+      <tbody>
+        <tr><td>/tr</td><td>344</td><td>Ana sayfa — toplam trafiğin %56'sı</td></tr>
+        <tr><td>/tr/iletisim</td><td>54</td><td>İletişim niyeti; ana sayfadan sonra en güçlü sinyal</td></tr>
+        <tr><td>/tr/teklif</td><td>20</td><td>Kampanya hedef sayfası</td></tr>
+        <tr><td>/tr/hakkimizda</td><td>14</td><td>Kurumsal güven sayfası</td></tr>
+        <tr><td>/tr/blog/modern-seralarimizda-gunes-enerjisi-ile-surdurulebilir-uretim</td><td>14</td><td>En çok okunan içerik</td></tr>
+        <tr><td>/tr/urunler</td><td>13</td><td>Ürün keşfi</td></tr>
+        <tr><td>/tr/legal/terms</td><td>8</td><td>Yasal sayfa</td></tr>
+        <tr><td>/tr/insan-kaynaklari</td><td>8</td><td>İş başvurusu ilgisi</td></tr>
+        <tr><td>/tr/legal/privacy</td><td>6</td><td>Yasal sayfa</td></tr>
+        <tr><td>/tr/haberler/mhp-milletvekili-hilmi-durgun-ve-tarim-temsilcileri-bereket-fideyi-ziyaret-etti</td><td>6</td><td>Haber içeriği</td></tr>
+        <tr><td>/en/blog</td><td>5</td><td>İngilizce içerik</td></tr>
+        <tr><td>/tr/blog/2025-sezonu-asili-fide-dikim-rehberi</td><td>5</td><td>Rehber içeriği</td></tr>
+        <tr><td>/tr/urunler/asili-patlican-fidesi</td><td>4</td><td>Ürün detay</td></tr>
+        <tr><td>/tr/urunler/duz-domates-fidesi</td><td>4</td><td>Ürün detay</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong class="warn">Dikkat — iç sayfa geçişi zayıf:</strong>
+      344 ana sayfa görüntülemesine karşılık ürün sayfalarının tamamı toplam ~30 görüntüleme alıyor.
+      Ziyaretçi ana sayfaya geliyor ama ürün kataloğuna inmiyor. Ana sayfadaki ürün blokları ve
+      "Teklif Al" çağrısının konumu/görünürlüğü gözden geçirilmelidir.
+    </div>
+
+    <h3>Trafik kaynakları</h3>
+    <table>
+      <thead><tr><th>Kaynak sinyali</th><th>Sayfa görüntüleme</th><th>Pay</th><th>Not</th></tr></thead>
+      <tbody>
+        <tr><td>Direkt / boş referrer</td><td>324</td><td>%53,0</td><td>Doğrudan giriş, yer imi, uygulama içi tıklama</td></tr>
+        <tr><td>Site içi gezinme</td><td>148</td><td>%24,2</td><td>Sayfadan sayfaya geçiş</td></tr>
+        <tr><td>Google referrer</td><td>110</td><td>%18,0</td><td>Organik arama trafiği</td></tr>
+        <tr><td>Diğer referrer</td><td>8</td><td>%1,3</td><td>Dış yönlendirmeler</td></tr>
+        <tr><td>Diğer arama motoru</td><td>7</td><td>%1,1</td><td>Bing, DuckDuckGo</td></tr>
+        <tr><td>Paid Ads / gclid</td><td>5</td><td>%0,8</td><td>Ücretli kampanya inişi</td></tr>
+        <tr><td>UTM: ig (Instagram)</td><td>5</td><td>%0,8</td><td>Etiketli sosyal medya trafiği</td></tr>
+        <tr><td>Sosyal (Instagram/Facebook)</td><td>4</td><td>%0,7</td><td>Etiketsiz sosyal yönlendirme</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Organik Google trafiği <strong>%18</strong> ile sağlıklı bir taban oluşturuyor. Ücretli ve sosyal kanallar
+      neredeyse yok. Sosyal medya paylaşımlarında UTM etiketi kullanımı düzenli değil — 9 sosyal ziyaretin
+      yalnızca 5'i etiketli geldi.
+    </p>
+
+    <h3>Cihaz kırılımı</h3>
+    <table>
+      <thead><tr><th>Cihaz</th><th>Sayfa görüntüleme</th><th>Pay</th></tr></thead>
+      <tbody>
+        <tr><td>Masaüstü</td><td>494</td><td>%80,9</td></tr>
+        <tr><td>Mobil</td><td>116</td><td>%19,0</td></tr>
+        <tr><td>Tablet</td><td>1</td><td>%0,1</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">
+      Ayrı log dosyası sayesinde cihaz kırılımı Mayıs raporundan farklı olarak bu sürümde güvenilir biçimde verilebiliyor.
+      Masaüstü ağırlığının bu kadar yüksek olması B2B/kurumsal ziyaretçi profiliyle uyumludur; ancak ücretli kampanya
+      yeniden açıldığında mobil payının yükselmesi beklenir.
+    </p>
+  </section>
+
+  <section>
+    <h2>Güvenlik ve Altyapı Bulgusu</h2>
+    <div class="callout alert">
+      <strong class="bad">Tarayıcı botu, sitenin kendi altyapısını 46 katına katlayarak yoruyor.</strong>
+      Dışarıdan gelen bir WordPress zafiyet tarayıcısı, dönem boyunca <strong>~7.000</strong> adet
+      <code>/wp-admin/*.php</code>, <code>/wp-login.php</code> ve kök seviyede <code>/&lt;rastgele&gt;.php</code>
+      isteği göndermiş. Sorun isteklerin kendisi değil, sitenin bunlara verdiği <em>yanıt</em>.
+    </div>
+    <h3>Zincir nasıl işliyor</h3>
+    <ul>
+      <li><code>/wp-admin/...</code> yolları doğru şekilde <strong>404</strong> dönüyor — burada sorun yok.</li>
+      <li>Ancak <strong>kök seviyedeki</strong> <code>/1996.php</code> gibi yollar Next.js'in <code>[locale]</code>
+          dinamik route'una düşüyor. Site bunu "locale = 1996.php" sanıp <strong>tam sayfa SSR render'ı</strong> yapıyor.</li>
+      <li>Ölçülen sonuç: tek bir çöp istek → <strong>~46 backend API çağrısı</strong> ve
+          <strong>200 OK + 182 KB</strong> yanıt. Yani tarayıcı botu için 46 kat kuvvetlendirme.</li>
+      <li>Bu yüzden backend loglarında <code>locale=1996.php</code> gibi tuhaf parametreler görülüyor —
+          bunlar saldırganın doğrudan API'ye attığı istekler değil, <strong>sitenin kendi SSR'ının</strong>
+          çöp locale'i backend'e taşımasıdır.</li>
+    </ul>
+    <div class="callout">
+      <strong class="warn">Önemli not — 187.124.166.65 sunucunun kendi IP'sidir.</strong>
+      Loglardaki en yoğun kaynak (62.391 istek, user-agent "node") dış bir saldırgan değil,
+      <strong>sitenin kendi Next.js SSR katmanının kendi API'sine yaptığı çağrılardır</strong>.
+      Bu IP <em>kesinlikle engellenmemelidir</em> — engellenirse site tamamen çalışmaz.
+    </div>
+    <h3>Güvenlik değerlendirmesi</h3>
+    <ul>
+      <li><strong>Enjeksiyon açığı yok.</strong> <code>/api/v1/categories</code> uç noktası <code>?locale=</code>
+          parametresini hiç okumuyor; dili <code>x-locale</code> / <code>accept-language</code> başlığından ve
+          desteklenen diller listesinden (<code>isSupported</code>) çözüyor. Çöp değer sessizce yok sayılıyor.</li>
+      <li><strong>SQL enjeksiyonu yok.</strong> <code>siteSettings</code> gibi query locale'i okuyan modüllerde
+          değer Drizzle ORM'in parametreli sorgusuna gidiyor; string olarak SQL'e gömülmüyor.</li>
+      <li><strong>Veri sızıntısı yok.</strong> Denemelerin çoğu boş dizi (2 byte), bir kısmı 400/404 döndü.</li>
+      <li>Yani bu <em>bir güvenlik açığı değil</em>, bir <strong>kaynak israfı ve SEO sorunudur</strong>.</li>
+    </ul>
+    <h3>SEO riski</h3>
+    <p>
+      Kök seviyedeki <code>.php</code> yollarının <strong>200 OK</strong> dönmesi, arama motorları için
+      "soft 404" anlamına gelir: var olmayan sayfalar geçerli içerik gibi görünür. Dönem içinde
+      <strong>180</strong> böyle istek 200 aldı. Bu URL'ler indekslenirse site kalitesi sinyali zarar görür.
+    </p>
+    <h3>Önerilen aksiyon</h3>
+    <ul>
+      <li><strong>Nginx'te <code>.php</code> yollarını kenarda 404'le.</strong> Site tamamen Next.js;
+          hiçbir PHP kaynağı yok. Bu tek değişiklik hem 46 kat kuvvetlendirmeyi hem soft-404 riskini bitirir.
+          Hazır konfigürasyon yaması repo içinde: <code>reports/nginx-php-block.conf</code>.</li>
+      <li><strong>SSR çağrı sayısı gözden geçirilsin.</strong> Tek sayfa render'ının ~46 API çağrısı yapması
+          normal ziyaretçiler için de maliyetlidir; site ayarları ve menü gibi sabit veriler önbelleğe alınabilir.</li>
+      <li>Bu önlemler ziyaretçi rakamlarını etkilemez; rapor bu trafiği zaten tamamen filtrelemektedir.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Mayıs Raporuyla Karşılaştırma</h2>
+    <table>
+      <thead><tr><th>Ölçüt</th><th>12-18 Mayıs (7 gün)</th><th>14-20 Temmuz (7 gün)</th><th>Değişim</th></tr></thead>
+      <tbody>
+        <tr><td>Temiz sayfa görüntüleme</td><td>175</td><td>313</td><td class="good">+%79</td></tr>
+        <tr><td>Günlük ortalama</td><td>25</td><td>45</td><td class="good">+%80</td></tr>
+        <tr><td>Teklif sayfası</td><td>74</td><td>12</td><td class="bad">-%84</td></tr>
+        <tr><td>Paid Ads izi</td><td>45</td><td>2</td><td class="bad">-%96</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong class="warn">Karşılaştırma uyarısı:</strong>
+      İki rapor farklı yöntemlerle üretildi. Mayıs raporu ortak log dosyası nedeniyle yalnızca "Bereket Fide sinyali
+      taşıyan" kayıtları sayabildiği için <em>eksik</em> ölçmüştür; Temmuz raporu ayrı log dosyasıyla <em>tam</em> ölçmektedir.
+      Bu nedenle genel trafikteki +%79 artışın bir kısmı gerçek büyüme değil, ölçüm kapsamının genişlemesidir.
+      Buna karşılık <strong>teklif sayfası ve ücretli trafikteki düşüş gerçektir</strong> — bu iki metrik Mayıs'ta da
+      doğrudan ve güvenilir biçimde ölçülüyordu.
+    </div>
+  </section>
+
+  <section>
+    <h2>Öne Çıkan Bulgular</h2>
+    <ul>
+      <li><strong>Organik taban sağlam:</strong> Kampanya olmadan günde ~44 sayfa görüntüleme ve %18 Google organik payı sürüyor.</li>
+      <li><strong>Ücretli kanal fiilen kapalı:</strong> İki haftada 5 ücretli iniş. Kampanya durumu Google Ads panelinden doğrulanmalı.</li>
+      <li><strong>Dönüşüm hunisi dar:</strong> Ana sayfa %56 pay alıyor, ürün ve teklif sayfalarına geçiş çok düşük.</li>
+      <li><strong>İletişim sayfası güçlü:</strong> 54 görüntüleme ile ikinci sırada — ziyaretçi ilgisi var, teklif formuna yönlendirme zayıf.</li>
+      <li><strong>İçerik çalışıyor:</strong> Güneş enerjisi blog yazısı tek başına 14 görüntüleme aldı; içerik üretimi organik trafiği besliyor.</li>
+      <li><strong>Bot yükü yüksek:</strong> Gerçek trafiğin 14 katı bot isteği var; büyük bölümü arama motoru ve SEO tarayıcılarından geliyor.</li>
+      <li><strong>Çöp <code>.php</code> istekleri 200 dönüyor:</strong> Tek bir tarayıcı isteği ~46 API çağrısı tetikliyor. Nginx'te tek satırlık düzeltmeyle kapatılabilir.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Sonraki Takip Planı</h2>
+    <ul>
+      <li>Google Ads kampanya durumu (bütçe, onay, ödeme) kontrol edilecek; ücretli trafiğin neden durduğu netleştirilecek.</li>
+      <li>Nginx'e <code>.php</code> / WordPress probe engeli uygulanacak (<code>reports/nginx-php-block.conf</code>).</li>
+      <li>SSR'ın sayfa başına yaptığı ~46 API çağrısı incelenip sabit veriler önbelleğe alınacak.</li>
+      <li>Ana sayfadan ürün ve teklif sayfalarına geçişi artıracak CTA düzenlemesi yapılacak.</li>
+      <li>İletişim sayfasına teklif formu yönlendirmesi eklenecek.</li>
+      <li>Sosyal medya paylaşımlarında UTM etiketi kullanımı standartlaştırılacak.</li>
+      <li>Bir sonraki rapor 3 Ağustos 2026'da, yine iki haftalık kapsamla alınacak.</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    Rapor kaynağı: Bereket Fide canlı nginx erişim logları (<strong>/var/log/nginx/bereketfide.access.log</strong> ve arşivleri), 7-20 Temmuz 2026 — toplam 84.211 log satırı incelenmiştir.
+    Filtreleme: bot ve tarayıcı user-agent'ları, veri merkezi IP blokları (AWS/Azure/GCP/Googlebot), statik dosyalar, /api istekleri, Next.js <code>_rsc</code> ön-yükleme istekleri, yönlendirme (3xx) ve 404 yanıtları ile saldırı/probe yolları hariç tutulmuştur.
+    Ayrı log dosyası kullanıldığı için domain ayrımı kesindir.
+  </div>
+</body>
+</html>
