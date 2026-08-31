@@ -30,9 +30,28 @@ CREATE TABLE IF NOT EXISTS `audit_request_logs` (
 
   `user_id`          VARCHAR(64)  DEFAULT NULL,
   `is_admin`         INT          NOT NULL DEFAULT 0,
+  `api_key_id`       INT UNSIGNED DEFAULT NULL,
+
+  -- Ziyaretci siniflandirmasi: shared-backend'in audit yazicisi bu iki kolonu
+  -- HER kayitta doldurur (isBotUserAgent / isInternalIpValue). Kolonlar yoksa
+  -- INSERT tamamen dusuyor ve denetim gunlugu sessizce bos kaliyor.
+  -- (2026-08-31: bereketfide'de tam bu yasandi — sema paylasimli koddan geride
+  --  kalmisti, backend yeniden baslayinca her istek "Unknown column 'is_bot'"
+  --  ile hata verdi. Site calisiyordu, yalnizca audit yazimi kirikti.)
+  `is_bot`           INT          NOT NULL DEFAULT 0,
+  `is_internal`      INT          NOT NULL DEFAULT 0,
 
   `country`          VARCHAR(8)   DEFAULT NULL,
   `city`             VARCHAR(64)  DEFAULT NULL,
+
+  -- Kampanya atifi (Ads / UTM). Analitik modulu bu kolonlar varsa reklam
+  -- kirilimini gosterir, yoksa o bolumu atlar.
+  `gclid`            VARCHAR(255) DEFAULT NULL,
+  `utm_source`       VARCHAR(255) DEFAULT NULL,
+  `utm_medium`       VARCHAR(255) DEFAULT NULL,
+  `utm_campaign`     VARCHAR(255) DEFAULT NULL,
+  `utm_content`      VARCHAR(255) DEFAULT NULL,
+  `utm_term`         VARCHAR(255) DEFAULT NULL,
 
   `error_message`    VARCHAR(512) DEFAULT NULL,
   `error_code`       VARCHAR(64)  DEFAULT NULL,
@@ -47,7 +66,12 @@ CREATE TABLE IF NOT EXISTS `audit_request_logs` (
   KEY `audit_request_logs_path_idx` (`path`),
   KEY `audit_request_logs_ip_idx` (`ip`),
   KEY `audit_request_logs_status_idx` (`status_code`),
-  KEY `audit_request_logs_method_idx` (`method`)
+  KEY `audit_request_logs_method_idx` (`method`),
+  KEY `audit_request_logs_api_key_idx` (`api_key_id`),
+  KEY `audit_request_logs_bot_idx` (`is_bot`),
+  KEY `audit_request_logs_internal_idx` (`is_internal`),
+  KEY `audit_request_logs_gclid_idx` (`gclid`),
+  KEY `audit_request_logs_utm_source_idx` (`utm_source`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -------------------------------------------------------------
