@@ -3,6 +3,7 @@ import type { FastifyInstance } from 'fastify';
 // Proje-spesifik public moduller
 import { registerFeed } from '@/modules/feed/router';
 import { registerEcosystem } from '@/modules/ecosystem/router';
+import { registerTanitioContent } from '@/modules/tanitioContent/router';
 import { registerWeather } from '@/modules/weather/router';
 
 // Proje-spesifik admin moduller
@@ -20,6 +21,7 @@ import { requireAdmin } from '@agro/shared-backend/middleware/roles';
 export async function registerProjectPublic(api: FastifyInstance) {
   await registerFeed(api);
   await registerEcosystem(api);
+  await registerTanitioContent(api);
   await registerWeather(api);
   await api.register(registerExtrasDealer);
 }
